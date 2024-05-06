@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeaveRequestController;
@@ -62,6 +63,11 @@ Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])
 Route::post('/update-leavetype', [LeaveTypeController::class, 'update_leavetype'])->name('update-leavetype');
 // LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->middleware(['auth','admin'])->name('all-leaverequest');
+
+//Attendance
+Route::get('/all-attendance', [EmployeeAttendanceController::class, 'all_attendance'])->middleware(['auth','admin'])->name('all-attendance');
+Route::get('/add-attendance', [EmployeeAttendanceController::class, 'add_attendance'])->middleware(['auth','admin'])->name('add-attendance');
+
 
 
 Route::middleware('auth')->group(function () {
