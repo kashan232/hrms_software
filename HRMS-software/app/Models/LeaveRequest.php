@@ -10,4 +10,17 @@ class LeaveRequest extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $fillable = [
+        'admin_or_user_id',
+        'department',
+        'designation',
+        'Employee',
+        'leave_type',
+        'leave_from_date',
+        'leave_to_date',
+        'leave_reason',
+        'leave_approve'
+    ];
+
 }

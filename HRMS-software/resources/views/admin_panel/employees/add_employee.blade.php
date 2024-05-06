@@ -55,7 +55,7 @@
                                         {{-- <div class="mb-3 col-md-6">
                                             <label>Department</label>
                                             <select name="department" id="" class="form-control">
-                                                <option value="" selected disabled>Select One</option>
+                                                <option selected disabled>Select One</option>
                                                 @foreach ($all_department as $department)
                                                     <option value="{{ $department->department }}">
                                                         {{ $department->department }}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2024 at 08:07 AM
+-- Generation Time: May 05, 2024 at 02:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -104,10 +104,10 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `admin_or_user_id`, `first_name`, `last_name`, `email`, `joining_date`, `phone`, `department`, `designation`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 'Kashan', 'Shaikh', 'shaikhkashan670@gmail.com', '2024-02-01', '03173859647', 'Web Development', 'Web Designer', '2024-05-03 12:37:35', '2024-05-03 15:21:46', NULL),
-(2, 1, 'huhu', 'feref', 'ali12@gmail.com', '2024-05-14', '03173839002', 'Web Development', 'Web Developer', '2024-05-03 14:01:07', '2024-05-03 14:02:16', NULL),
+(2, 1, 'huhu', 'feref', 'ali12@gmail.com', '2024-05-14', '03173839002', 'Web Development', 'Web Developer', '2024-05-03 14:01:07', '2024-05-04 16:25:02', '2024-05-04 16:25:02'),
 (3, 1, 'Zachery', 'Vazquez', 'admin@gmail.com', '2024-05-15', '03173839002', 'Web Development', 'Web Designer', '2024-05-03 14:06:06', '2024-05-03 14:06:15', NULL),
 (4, 1, 'Zachery', 'Vazquez', 'admin@gmail.com', '2024-05-15', '03173839002', 'Web Development', 'Web Developer', '2024-05-03 14:12:03', '2024-05-03 14:12:13', NULL),
-(5, 1, 'Zachery', 'Vazquez', 'admin@gmail.com', '2024-05-21', '03173839002', 'Web Development', 'Web Developer', '2024-05-03 14:13:12', '2024-05-03 14:13:21', NULL);
+(5, 1, 'Zachery', 'Vazquez', 'admin@gmail.com', '2024-05-21', '03173839002', 'Web Development', 'Web Developer', '2024-05-03 14:13:12', '2024-05-05 07:24:33', '2024-05-05 07:24:33');
 
 -- --------------------------------------------------------
 
@@ -124,6 +124,62 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leave_requests`
+--
+
+CREATE TABLE `leave_requests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `admin_or_user_id` int(11) NOT NULL,
+  `department` text DEFAULT NULL,
+  `designation` text DEFAULT NULL,
+  `Employee` text DEFAULT NULL,
+  `leave_type` text DEFAULT NULL,
+  `leave_from_date` text DEFAULT NULL,
+  `leave_to_date` text DEFAULT NULL,
+  `leave_reason` text DEFAULT NULL,
+  `leave_approve` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `leave_requests`
+--
+
+INSERT INTO `leave_requests` (`id`, `admin_or_user_id`, `department`, `designation`, `Employee`, `leave_type`, `leave_from_date`, `leave_to_date`, `leave_reason`, `leave_approve`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'Web Development', 'Web Designer', 'Kashan', 'Sick Leave', '2024-05-05', '2024-05-07', 'Sick Leave', 'Approve', '2024-05-05 07:06:09', '2024-05-05 07:06:09', NULL),
+(2, 1, 'Web Development', 'Web Designer', 'Zachery', 'Casual Leave', '2024-05-07', '2024-05-09', 'testing leave', 'Reject', '2024-05-05 07:20:04', '2024-05-05 07:20:04', NULL),
+(3, 1, 'Web Development', 'Web Designer', 'Zachery', 'Medical Leave', '2024-05-13', '2024-05-15', 'testing leave request', 'Approve', '2024-05-05 07:26:07', '2024-05-05 07:26:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leave_types`
+--
+
+CREATE TABLE `leave_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `admin_or_user_id` int(11) DEFAULT NULL,
+  `leave_type` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `leave_types`
+--
+
+INSERT INTO `leave_types` (`id`, `admin_or_user_id`, `leave_type`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'Casual Leave', '2024-05-04 15:57:53', '2024-05-04 15:57:53', NULL),
+(2, 1, 'Medical Leave', '2024-05-04 16:07:26', '2024-05-04 16:12:45', NULL),
+(3, 1, 'Sick Leave', '2024-05-04 16:12:54', '2024-05-04 16:12:54', NULL),
+(4, 1, 'Testing leave', '2024-05-05 07:25:04', '2024-05-05 07:25:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -147,7 +203,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2024_05_03_103420_create_departments_table', 2),
-(6, '2024_05_03_170349_create_designations_table', 3);
+(6, '2024_05_03_170349_create_designations_table', 3),
+(7, '2024_05_03_171602_create_employees_table', 4),
+(8, '2024_05_04_203316_create_leave_types_table', 4),
+(9, '2024_05_04_212238_create_leave_requests_table', 5);
 
 -- --------------------------------------------------------
 
@@ -235,6 +294,18 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `leave_requests`
+--
+ALTER TABLE `leave_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leave_types`
+--
+ALTER TABLE `leave_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -290,10 +361,22 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `leave_requests`
+--
+ALTER TABLE `leave_requests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `leave_types`
+--
+ALTER TABLE `leave_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

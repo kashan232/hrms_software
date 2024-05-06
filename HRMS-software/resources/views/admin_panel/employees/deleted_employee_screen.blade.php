@@ -18,14 +18,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Deleted Employees</h4>
-                            <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New designation">
-                                    <a href="{{ route('add-employee') }}" style="color: white;">
-                                    <i class="las la-plus"></i>Add New </a>
-                                </button>
-                            </div>
+                            <h4 class="card-title"> Employees History</h4>
                         </div>
                         <div class="card-body">
                             @if (session()->has('delete-message'))
