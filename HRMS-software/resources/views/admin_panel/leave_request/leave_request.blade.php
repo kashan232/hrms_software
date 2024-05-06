@@ -6,7 +6,7 @@
 
     @include('admin_panel.include.navbar_include')
 
-   
+
     @include('admin_panel.include.sidebar_include')
     <!--**********************************
             Content body start
@@ -14,57 +14,46 @@
     <div class="content-body ">
         <!-- row -->
         <div class="container">
-           
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Leave Type</h4>
+                            <h4 class="card-title">Leave Request</h4>
                             <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New Department">
-                                    <i class="las la-plus"></i>Add New 
+                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New Department">
+                                    <i class="las la-plus"></i>Add New
                                 </button>
                             </div>
                         </div>
                         <div class="card-body">
-                            
+
                             <div class="table-responsive">
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>
                                         <tr>
-                                            <th>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkAll" required="">
-                                                    <label class="custom-control-label" for="checkAll"></label>
-                                                </div>
-                                            </th>
-                                            <th>ID</th>
-                                            <th>Department</th>
+                                            <th>Sno</th>
+                                            <th>Department | Designation</th>
+                                            <th>Employee | LeaveType</th>
+                                            <th>From | To</th>
+                                            <th>Reason</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($LeaveTypes as $LeaveTypes)
+                                    @foreach ($LeaveRequests as $LeaveRequest)
                                             <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheckBox2" required="">
-                                                        <label class="custom-control-label" for="customCheckBox2"></label>
-                                                    </div>
-                                                </td>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $LeaveTypes->leave_type }}</td>
+                                                <td>{{ $LeaveRequest->department }} <br>{{ $LeaveRequest->designation }} </td>
+                                                <td>{{ $LeaveRequest->Employee }} <br> {{ $LeaveRequest->leave_type }}</td>
+                                                <td>{{ $LeaveRequest->leave_from_date }} <br> {{ $LeaveRequest->leave_to_date }}</td>
+                                                <td>{{ $LeaveRequest->leave_reason }}</td>
                                                 <td>
-                                                    <div class="button--group">
-                                                        <button type="button" class="btn btn-primary editleaveBtn" data-toggle="modal"
-                                                            data-modal_title="Edit Department" data-has_status="1"
-                                                            data-target="#editdepartment" data-department-id="{{ $LeaveTypes->id }}" data-department-name="{{ $LeaveTypes->leave_type }}">
-                                                            <i class="la la-pencil"></i>Edit </button>
-                                                        {{-- <button type="button"
-                                                        class="btn btn-danger" data-question="Are you sure to delete this Department?">
-                                                            <i class="la la-trash"></i>Delete </button> --}}
-                                                    </div>
+                                                    @if($LeaveRequest->leave_approve == 'Approve')
+                                                        <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
+                                                    @else
+                                                        <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -74,28 +63,102 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
-             <!--Create Modal -->
-             <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
+            <!--Create Modal -->
+            <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"><span class="type"></span> <span>Add Leave Type</span></h5>
+                            <h5 class="modal-title"><span class="type"></span> <span>Add Leave Request</span></h5>
                             <!-- Adjusted close button with custom styling -->
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
-                        <form action="{{ route('store-leavetype') }}" method="POST">
+                        <form action="{{ route('store-leaverequest') }}" method="POST">
                             @csrf
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Leave Type</label>
-                                    <input type="text" name="leave_type" class="form-control" required>
+                                <div class="row">
+
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Employee</label>
+                                            <select name="Employee" id="employeeSelect" class="form-control">
+                                                <option selected disabled>Select One</option>
+                                                @foreach ($Employees as $employee)
+                                                <option value="{{ $employee->first_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
+                                                    {{ $employee->id }} | {{ $employee->first_name }}&nbsp;{{ $employee->last_name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Departments</label>
+                                            <input type="text" name="department" id="department" class="form-control" readonly required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Designation</label>
+                                            <input type="text" name="designation" id="designation" class="form-control" readonly required>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Select Leave type</label>
+                                            <select name="leave_type" id="" class="form-control">
+                                                <option selected disabled>Select One</option>
+                                                @foreach ($LeaveTypes as $LeaveType)
+                                                <option value="{{ $LeaveType->leave_type }}">
+                                                    {{ $LeaveType->leave_type }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Leave From Date</label>
+                                            <input type="date" name="leave_from_date" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Leave to Date</label>
+                                            <input type="date" name="leave_to_date" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Leave Reason</label>
+                                            <textarea name="leave_reason" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Approve</label>
+                                            <select name="leave_approve" id="leave_approve" class="form-control">
+                                                <option value="Approve"> Approve </option>
+                                                <option value="Reject"> Reject </option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -105,7 +168,7 @@
             </div>
 
             <!--Edit Modal -->
-            <div  id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editleaveLabel" aria-hidden="true">
+            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editleaveLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -146,7 +209,7 @@
         </div>
     </div>
      <!--********************************** --}}
-            {{-- Footer end
+    {{-- Footer end
         ***********************************--> --}}
 
 
@@ -158,8 +221,8 @@
 @include('admin_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
-    $(document).ready(function(){
-        $('#addNewButton').click(function(){
+    $(document).ready(function() {
+        $('#addNewButton').click(function() {
             $('#cuModal').modal('show');
         });
     });
@@ -167,25 +230,32 @@
 
 <script>
     // JavaScript/jQuery code to trigger modal
-    $(document).ready(function(){
-        $('.editleaveBtn').click(function(){
+    $(document).ready(function() {
+        $('.editleaveBtn').click(function() {
             $('#editbtn').modal('show');
         });
     });
+
+    $('#employeeSelect').on('change', function() {
+        var department = $(this).find(':selected').data('department');
+        var designation = $(this).find(':selected').data('designation');
+
+        $('#department').val(department);
+        $('#designation').val(designation);
+    });
 </script>
+
 
 <script>
     $(document).ready(function() {
-    // Edit category button click event
-    $('.editleaveBtn').click(function() {
-        // Extract department ID and name from data attributes
-        var departmentId = $(this).data('department-id');
-        var departmentName = $(this).data('department-name');
-        // Set the extracted values in the modal fields
-        $('#editleaveid').val(departmentId);
-        $('#editleavetype').val(departmentName);
+        // Edit category button click event
+        $('.editleaveBtn').click(function() {
+            // Extract department ID and name from data attributes
+            var departmentId = $(this).data('department-id');
+            var departmentName = $(this).data('department-name');
+            // Set the extracted values in the modal fields
+            $('#editleaveid').val(departmentId);
+            $('#editleavetype').val(departmentName);
+        });
     });
-});
 </script>
-
-

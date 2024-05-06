@@ -30,7 +30,7 @@
                  <ul aria-expanded="false">
                      <li><a href="{{ route('add-employee') }}">Add Employee</a></li>
                      <li><a href="{{ route('all-employee') }}">List Employee</a></li>
-                     <li><a href="{{ route('deleted-employee-screen') }}">Deleted Employee</a></li>
+                     <li><a href="{{ route('deleted-employee-screen') }}">Employees History</a></li>
                  </ul>
              </li>
 
@@ -40,13 +40,16 @@
                  </a>
              </li>
 
+             <li><a href="{{ route('all-leaverequest') }}" aria-expanded="false">
+                     <i class="fas fa-check-circle"></i>
+
+                     <span class="nav-text">Leave Request</span>
+                 </a>
+             </li>
+
 
          </ul>
 
-         {{-- <div class="copyright">
-                    <p><strong>Jobie Dashboard</strong> © 2023 All Rights Reserved</p>
-                    <p>by DexignZone</p>
-                </div> --}}
      </div>
  </div> <!--**********************************
                     Sidebar end
