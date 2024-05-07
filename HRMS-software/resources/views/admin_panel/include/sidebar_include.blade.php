@@ -47,6 +47,18 @@
                      <span class="nav-text">Leave Request</span>
                  </a>
              </li>
+
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Attendance</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('add-attendance') }}">Create Attendance</a></li>
+                     <li><a href="{{ route('daily-attendance') }}">Daily Attendance</a></li>
+                 </ul>
+
+             </li>
              
          </ul>
 
