@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Project;
 use App\Models\Task;
@@ -19,33 +21,40 @@ class TaskController extends Controller
             $all_project = Project::where('admin_or_user_id', '=', $userId)->get();
             $all_employee = Employee::where('admin_or_user_id', '=', $userId)->get();
             $all_task = Task::where('admin_or_user_id', '=', $userId)->get();
+            $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+            $all_designation = Designation::where('admin_or_user_id', '=', $userId)->get();
             return view('admin_panel.task.task', [
                 'all_project' => $all_project,
                 'all_employee' => $all_employee,
                 'all_task' => $all_task,
+                'all_department' => $all_department,
+                'all_designation' => $all_designation,
             ]);
         } else {
             return redirect()->back();
         }
     }
-    public function store_project(Request $request)
+    
+    public function store_task(Request $request)
     {
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
-            Project::create([
+            Task::create([
                 'admin_or_user_id'    => $userId,
                 'project_name'          => $request->project_name,
-                'project_category'          => $request->project_category,
-                'project_start_date'          => $request->project_start_date,
-                'project_end_date'          => $request->project_end_date,
-                'budget'          => $request->budget,
-                'priority'          => $request->priority,
+                'task_category'          => $request->task_category,
+                'start_date'          => $request->start_date,
+                'end_date'          => $request->end_date,
+                'department'          => $request->department,
+                'designation'          => $request->designation,
+                'task_assign_person'          => $request->task_assign_person,
+                'task_priority'          => $request->task_priority,
                 'description'          => $request->description,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
-            return redirect()->back()->with('project-added', 'Projects Added Successfully');
+            return redirect()->back()->with('task added', 'task Added Successfully');
         } else {
             return redirect()->back();
         }

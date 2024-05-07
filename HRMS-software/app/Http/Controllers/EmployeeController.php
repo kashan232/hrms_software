@@ -117,9 +117,15 @@ class EmployeeController extends Controller
         }
     }
     public function getDesignations(Request $request)
-{
-    $department = $request->input('department');
-    $designations = Designation::where('department', $department)->pluck('designation')->toArray();
-    return response()->json($designations);
-}
+    {
+        $department = $request->input('department');
+        $designations = Designation::where('department', $department)->pluck('designation')->toArray();
+        return response()->json($designations);
+    }
+    public function getEmployees(Request $request)
+    {
+        $designation = $request->input('designation');
+        $employees = Employee::where('designation', $designation)->get();
+        return response()->json($employees);
+    }
 }
