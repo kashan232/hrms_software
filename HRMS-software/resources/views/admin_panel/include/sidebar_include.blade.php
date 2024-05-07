@@ -57,7 +57,18 @@
                      <span class="nav-text">Leave Request</span>
                  </a>
              </li>
-             
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     <i class="flaticon-381-television"></i>
+                     <span class="nav-text">Evaluation Management</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a class="" href="{{ route('project') }}" aria-expanded="false">Project</a>
+                     </li>
+                     <li><a class="" href="{{ route('task') }}" aria-expanded="false">Task</a>
+                    </li>
+                 </ul>
+             </li>
+
          </ul>
 
          {{-- <div class="copyright">

@@ -19,7 +19,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Department</h4>
+                            <h4 class="card-title">Project</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New Department">
@@ -32,37 +32,32 @@
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>
                                         <tr>
-                                            <th>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkAll" required="">
-                                                    <label class="custom-control-label" for="checkAll"></label>
-                                                </div>
-                                            </th>
-                                            <th>ID</th>
-                                            <th>Department</th>
+                                            <th>Sno</th>
+                                            <th>Project Name</th>
+                                            <th>Project Category</th>
+                                            <th>Project Start Date <br> Project End Date</th>
+                                            <th>Budget</th>
+                                            <th>Priority</th>
+                                            <th>Description</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_department as $department)
+                                        @foreach ($all_project as $project)
                                         <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheckBox2" required="">
-                                                    <label class="custom-control-label" for="customCheckBox2"></label>
-                                                </div>
-                                            </td>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $department->department }}</td>
+                                            <td>{{ $project->project_name }}</td>
+                                            <td>{{ $project->project_category }}</td>
+                                            <td>{{ $project->project_start_date }} <br>{{ $project->project_end_date }}</td>
+                                            <td>{{ $project->budget }}</td>
+                                            <td>{{ $project->priority }}</td>
+                                            <td>{{ $project->description }}</td>
                                             <td>
                                                 <div class="button--group">
-                                                    <button type="button" class="btn btn-primary editdepartmentBtn" data-toggle="modal"
-                                                        data-modal_title="Edit Department" data-has_status="1"
-                                                        data-target="#editdepartment" data-department-id="{{ $department->id }}" data-department-name="{{ $department->department }}">
-                                                        <i class="la la-pencil"></i>Edit </button>
-                                                    {{-- <button type="button"
-                                                    class="btn btn-danger" data-question="Are you sure to delete this Department?">
-                                                        <i class="la la-trash"></i>Delete </button> --}}
+                                                    <button type="button" class="btn btn-primary editprojectBtn" data-toggle="modal"
+                                                        data-modal_title="Edit Project" data-has_status="1"
+                                                        data-target="#editproject">
+                                                        <i class="la la-pencil"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -81,18 +76,47 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"><span class="type"></span> <span>Add Department</span></h5>
+                            <h5 class="modal-title"><span class="type"></span> <span>Add Project</span></h5>
                             <!-- Adjusted close button with custom styling -->
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
-                        <form action="{{ route('store-department') }}" method="POST">
+                        <form action="{{ route('store-project') }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Department</label>
-                                    <input type="text" name="department" class="form-control" required>
+                                    <label>Project Name</label>
+                                    <input type="text" name="project_name" class="form-control" required>
+                                    <label>Project Category</label>
+                                    <input type="text" name="project_category" class="form-control" required>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Project Start Date</label>
+                                            <input type="date" name="project_start_date" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Project End Date</label>
+                                            <input type="date" name="project_end_date" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Budget</label>
+                                            <input type="number" name="budget" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Priority</label>
+                                            <select name="priority" id="" class="form-control" required>
+                                                <option value="">Highest</option>
+                                                <option value="">Medium</option>
+                                                <option value="">Low</option>
+                                                <option value="">Lowest</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control" required></textarea>
                                 </div>
                             </div> 
                             <div class="modal-footer">
@@ -108,13 +132,13 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit Department</span></h5>
+                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit project</span></h5>
                             <!-- Adjusted close button with custom styling -->
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
-                        <form action="{{ route('update-department') }}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">

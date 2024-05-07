@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use App\Models\LeaveRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -56,7 +58,6 @@ Route::get('/deleted-employee-screen', [EmployeeController::class, 'deleted_empl
 Route::get('/get-designations', [EmployeeController::class, 'getDesignations'])->name('get-designations');
 
 
-
 //LeaveType
 Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->middleware(['auth','admin'])->name('all-leavetype');
 Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
@@ -70,6 +71,15 @@ Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaver
 Route::get('/all-attendance', [EmployeeAttendanceController::class, 'all_attendance'])->middleware(['auth','admin'])->name('all-attendance');
 Route::get('/add-attendance', [EmployeeAttendanceController::class, 'add_attendance'])->middleware(['auth','admin'])->name('add-attendance');
 
+
+//Project
+Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');
+Route::post('/store-project', [ProjectController::class, 'store_project'])->name('store-project');
+
+
+//Task
+Route::get('/task', [TaskController::class, 'task'])->middleware(['auth','admin'])->name('task');
+Route::post('/store-task', [ProjectController::class, 'store_task'])->name('store-task');
 
 
 Route::middleware('auth')->group(function () {
