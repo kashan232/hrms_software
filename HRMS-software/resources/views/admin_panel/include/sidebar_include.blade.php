@@ -59,6 +59,17 @@
                  </ul>
 
              </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                {{-- <i class="flaticon-381-controls-3"></i> --}}
+                <i class="fa-solid fa-user"></i>
+                <span class="nav-text">Evaluation Management</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="{{ route('project') }}">Project</a></li>
+                <li><a href="{{ route('task') }}">Task</a></li>
+            </ul>
+
+        </li>
              
          </ul>
 
