@@ -33,17 +33,7 @@
                      <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li>
                  </ul>
              </li>
-             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fa-solid fa-user"></i>
-                     <span class="nav-text">Attendance</span>
-                 </a>
-                 <ul aria-expanded="false">
-                     <li><a href="{{ route('add-employee') }}">Add Attendance</a></li>
-                     <li><a href="{{ route('all-employee') }}">List Attendance</a></li>
-                 </ul>
-
-             </li>
+             
 
              <li><a href="{{ route('all-leavetype') }}" aria-expanded="false">
                      <i class="fas fa-envelope"></i>
@@ -57,18 +47,7 @@
                      <span class="nav-text">Leave Request</span>
                  </a>
              </li>
-             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     <i class="flaticon-381-television"></i>
-                     <span class="nav-text">Evaluation Management</span>
-                 </a>
-                 <ul aria-expanded="false">
-                     <li><a class="" href="{{ route('project') }}" aria-expanded="false">Project</a>
-                     </li>
-                     <li><a class="" href="{{ route('task') }}" aria-expanded="false">Task</a>
-                    </li>
-                 </ul>
-             </li>
-
+             
          </ul>
 
          {{-- <div class="copyright">
