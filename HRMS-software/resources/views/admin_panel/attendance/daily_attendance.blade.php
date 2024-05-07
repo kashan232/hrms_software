@@ -18,11 +18,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Create Attendance</h4>
+                            <h4 class="card-title">Daily Attendance</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form class="new-added-form" method="GET" action="{{ route('mark-attendance') }}">
+                                <form class="new-added-form" method="GET" action="{{ route('fetch-daily-employee-attendance-record') }}">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
