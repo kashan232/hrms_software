@@ -58,11 +58,16 @@
                                                 <td>{{ $task->description }}</td>
                                                 <td>
                                                     <div class="button--group">
-                                                        <button type="button" class="btn btn-primary "  >
+                                                        <button type="button" class="btn btn-primary">
                                                             Completed</button>
                                                     </div>
                                                 </td>
-                                                <td></td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                                      </div>
+                                                </td>
                                                 <td>
                                                     <div class="button--group">
                                                         <button type="button" class="btn btn-primary edittaskBtn"

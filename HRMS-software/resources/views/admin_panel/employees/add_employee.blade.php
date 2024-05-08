@@ -1,4 +1,5 @@
 @include('admin_panel.include.header_include')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -43,6 +44,19 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Email</label>
                                             <input type="email" name="email" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">user_name</label>
+                                            <input type="text" name="email" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Password</label>
+                                            <div class="input-group">
+                                                <input type="password" id="passwordInput" name="password" class="form-control">
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                    <i class="fas fa-eye-slash"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label>Joining Date</label>
@@ -132,4 +146,16 @@
             }
         });
     });
+</script>
+<script>
+    document.getElementById("togglePassword").addEventListener("click", function() {
+    var passwordInput = document.getElementById("passwordInput");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
+    } else {
+        passwordInput.type = "password";
+        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
+    }
+});
 </script>
