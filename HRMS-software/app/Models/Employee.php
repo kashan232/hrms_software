@@ -19,6 +19,8 @@ class Employee extends Model
         'joining_date',
         'phone',
         'department',
-        'designation'
+        'designation',
+        'username',
+        'password'
     ];
 }

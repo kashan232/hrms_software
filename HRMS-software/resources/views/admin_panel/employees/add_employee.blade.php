@@ -77,6 +77,14 @@
                                             <label>Designation</label>
                                             <select name="designation" id="designation" class="form-control"></select>
                                         </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Username</label>
+                                            <input type="text" name="username" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control">
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
