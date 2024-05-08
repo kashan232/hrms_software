@@ -56,6 +56,7 @@ Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit_employee'])-
 Route::post('/update-employee/{id}', [EmployeeController::class, 'update_employee'])->name('update-employee');
 Route::get('/deleted-employee-screen', [EmployeeController::class, 'deleted_employee_screen'])->middleware(['auth','admin'])->name('deleted-employee-screen');
 Route::get('/get-designations', [EmployeeController::class, 'getDesignations'])->name('get-designations');
+Route::get('/get-employees', [EmployeeController::class, 'getEmployees' ])->name('get-employees');
 
 
 //LeaveType
@@ -83,7 +84,7 @@ Route::post('/store-project', [ProjectController::class, 'store_project'])->name
 
 //Task
 Route::get('/task', [TaskController::class, 'task'])->middleware(['auth','admin'])->name('task');
-Route::post('/store-task', [ProjectController::class, 'store_task'])->name('store-task');
+Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-task');
 
 
 Route::middleware('auth')->group(function () {

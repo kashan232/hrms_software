@@ -50,7 +50,39 @@
                                             <td>{{ $project->project_category }}</td>
                                             <td>{{ $project->project_start_date }} <br>{{ $project->project_end_date }}</td>
                                             <td>{{ $project->budget }}</td>
-                                            <td>{{ $project->priority }}</td>
+                                            {{-- <td>{{ $project->priority }}</td> --}}
+                                            <td>
+                                                {{ $project->priority }}
+                                                @php
+                                                    $progress = 0;
+                                                    $color = '';
+                                                    switch($project->priority) {
+                                                        case 'Highest':
+                                                            $progress = 100;
+                                                            $color = 'bg-success';
+                                                            break;
+                                                        case 'Medium':
+                                                            $progress = 75;
+                                                            $color = 'bg-info';
+                                                            break;
+                                                        case 'Low':
+                                                            $progress = 50;
+                                                            $color = 'bg-warning';
+                                                            break;
+                                                        case 'Lowest':
+                                                            $progress = 25;
+                                                            $color = 'bg-danger';
+                                                            break;
+                                                    }
+                                                @endphp
+                                                <div class="progress" style="height: 20px;">
+                                                    <div class="progress-bar {{ $color }}" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span>{{ $progress }}%</span>
+                                            </td>
+                                            
+                                            
+                                            
                                             <td>{{ $project->description }}</td>
                                             <td>
                                                 <div class="button--group">
@@ -108,10 +140,11 @@
                                         <div class="col-md-6">
                                             <label>Priority</label>
                                             <select name="priority" id="" class="form-control" required>
-                                                <option value="">Highest</option>
-                                                <option value="">Medium</option>
-                                                <option value="">Low</option>
-                                                <option value="">Lowest</option>
+                                                <option value="" selected disabled>Select One</option>
+                                                <option value="Highest">Highest</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Low">Low</option>
+                                                <option value="Lowest">Lowest</option>
                                             </select>
                                         </div>
                                     </div>

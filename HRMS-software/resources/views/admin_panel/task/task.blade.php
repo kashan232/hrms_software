@@ -36,31 +36,42 @@
                                             <th>Project Name</th>
                                             <th>Task Category</th>
                                             <th>Start Date <br> End Date</th>
+                                            <th>Employee Department <br>Employee Designation</th>
                                             <th>Task Assign Person</th>
                                             <th>Task Priority</th>
                                             <th>Description</th>
+                                            <th>Completion Status</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($all_task as $task)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $task->project_name }}</td>
-                                            <td>{{ $task->task_category }}</td>
-                                            <td>{{ $task->start_date }} <br> {{ $task->end_date }} </td>
-                                            <td>{{ $task->task_assign_person }}</td>
-                                            <td>{{ $task->task_priority }}</td>
-                                            <td>{{ $task->description }}</td>
-                                            <td>
-                                                <div class="button--group">
-                                                    <button type="button" class="btn btn-primary edittaskBtn" data-toggle="modal"
-                                                        data-modal_title="Edit task" data-has_status="1"
-                                                        data-target="#edittask">
-                                                        <i class="la la-pencil"></i></button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $task->project_name }}</td>
+                                                <td>{{ $task->task_category }}</td>
+                                                <td>{{ $task->start_date }} <br> {{ $task->end_date }} </td>
+                                                <td>{{ $task->department }} <br> {{ $task->designation }} </td>
+                                                <td>{{ $task->task_assign_person }}</td>
+                                                <td>{{ $task->task_priority }}</td>
+                                                <td>{{ $task->description }}</td>
+                                                <td>
+                                                    <div class="button--group">
+                                                        <button type="button" class="btn btn-primary "  >
+                                                            Completed</button>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="button--group">
+                                                        <button type="button" class="btn btn-primary edittaskBtn"
+                                                            data-toggle="modal" data-modal_title="Edit task"
+                                                            data-has_status="1" data-target="#edittask">
+                                                            <i class="la la-pencil"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -101,12 +112,29 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Task Start Date</label>
-                                            <input type="date" name="start_date" class="form-control"
-                                                required>
+                                            <input type="date" name="start_date" class="form-control" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Task End Date</label>
                                             <input type="date" name="end_date" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Employee Department</label>
+                                            <select name="department" id="editDepartmentName" class="form-control"
+                                                required>
+                                                <option value="" selected disabled>Select One</option>
+                                                @foreach ($all_department as $department)
+                                                    <option value="{{ $department->department }}">
+                                                        {{ $department->department }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <label>Designation</label>
+                                                <select name="designation" id="designation" class="form-control"></select>
                                         </div>
                                     </div>
                                     <label>Task Assign Person</label>
@@ -195,6 +223,58 @@
     ***********************************-->
 
 @include('admin_panel.include.footer_include')
+
+<script>
+    $(document).ready(function() {
+        $('select[name="department"]').on('change', function() {
+            var department = $(this).val();
+            if (department) {
+                $.ajax({
+                    url: '{{ route("get-designations") }}',
+                    type: 'GET',
+                    data: { department: department },
+                    success: function(data) {
+                        $('select[name="designation"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="designation"]').empty();
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Function to load employees based on designation
+        function loadEmployees(designation) {
+            if (designation) {
+                $.ajax({
+                    url: '{{ route("get-employees") }}',
+                    type: 'GET',
+                    data: { designation: designation },
+                    success: function(data) {
+                        $('select[name="task_assign_person"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="task_assign_person"]').append('<option value="' + value.first_name + ' ' + value.last_name + '">' + value.first_name + ' ' + value.last_name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="task_assign_person"]').empty();
+            }
+        }
+
+        // Trigger function on change of designation
+        $('#designation').on('change', function() {
+            var designation = $(this).val();
+            loadEmployees(designation);
+        });
+    });
+</script>
+
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {
@@ -204,16 +284,16 @@
     });
 </script>
 
-<script>
+{{-- <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {
         $('.editdepartmentBtn').click(function() {
             $('#editbtn').modal('show');
         });
     });
-</script>
+</script> --}}
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         // Edit category button click event
         $('.editdepartmentBtn').click(function() {
@@ -225,4 +305,4 @@
             $('#editdepartmentName').val(departmentName);
         });
     });
-</script>
+</script> --}}

@@ -23,26 +23,27 @@ class ProjectController extends Controller
             return redirect()->back();
         }
     }
-    public function store_task(Request $request)
+    public function store_project(Request $request)
     {
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
-            Task::create([
+            Project::create([
                 'admin_or_user_id'    => $userId,
                 'project_name'          => $request->project_name,
-                'task_category'          => $request->task_category,
-                'start_date'          => $request->start_date,
-                'end_date'          => $request->end_date,
-                'task_assign_person'          => $request->task_assign_person,
-                'task_priority'          => $request->task_priority,
+                'project_category'          => $request->project_category,
+                'project_start_date'          => $request->project_start_date,
+                'project_end_date'          => $request->project_end_date,
+                'budget'          => $request->budget,
+                'priority'          => $request->priority,
                 'description'          => $request->description,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
-            return redirect()->back()->with('task added', 'task Added Successfully');
+            return redirect()->back()->with('project-added', 'Projects Added Successfully');
         } else {
             return redirect()->back();
         }
     }
+    
 }

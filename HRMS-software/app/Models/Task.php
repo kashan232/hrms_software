@@ -17,6 +17,8 @@ class Task extends Model
         'task_category',
         'start_date',
         'end_date',
+        'department',
+        'designation',
         'task_assign_person',
         'task_priority',
         'description'
