@@ -23,6 +23,17 @@
                  </a>
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                {{-- <i class="flaticon-381-controls-3"></i> --}}
+                <i class="fa-solid fa-user"></i>
+                <span class="nav-text">Create HR</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="{{ route('add-hr') }}">Add HR</a></li>
+                <li><a href="{{ route('all-employee') }}">List HR</a></li>
+                {{-- <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li> --}}
+            </ul>
+        </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fa-solid fa-user"></i>
                      <span class="nav-text">Employee</span>

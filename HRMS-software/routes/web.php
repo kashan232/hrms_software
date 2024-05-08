@@ -5,6 +5,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HRController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProfileController;
@@ -46,6 +47,11 @@ Route::post('/update-department', [DepartmentController::class, 'update_departme
 Route::get('/designation', [DesignationController::class, 'designation'])->middleware(['auth','admin'])->name('designation');
 Route::post('/store-designation', [DesignationController::class, 'store_designation'])->name('store-designation');
 Route::post('/update-designation', [DesignationController::class, 'update_designation'])->name('update-designation');
+
+//HR
+Route::get('/add-hr', [HRController::class, 'add_hr'])->middleware(['auth','admin'])->name('add-hr');
+Route::post('/store-hr', [HRController::class, 'store_hr'])->name('store-hr');
+
 
 //Employees
 Route::get('/all-employee', [EmployeeController::class, 'all_employee'])->middleware(['auth','admin'])->name('all-employee');
