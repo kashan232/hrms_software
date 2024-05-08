@@ -21,6 +21,10 @@ class HomeController extends Controller
             {
                 return view('admin_panel.admin_dashboard');
             }
+            else if($usertype=='employee')
+            {
+                return view('employee_panel.employee_dashboard');
+            }
         }
         else
         {

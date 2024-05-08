@@ -72,8 +72,8 @@
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                <i class="fa-solid fa-user"></i>
-                <span class="nav-text">Evaluation Management</span>
+                <i class="fas fa-calendar"></i>
+                <span class="nav-text">Create Task</span>
             </a>
             <ul aria-expanded="false">
                 <li><a href="{{ route('project') }}">Project</a></li>
