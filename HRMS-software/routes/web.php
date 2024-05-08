@@ -51,6 +51,9 @@ Route::post('/update-designation', [DesignationController::class, 'update_design
 //HR
 Route::get('/add-hr', [HRController::class, 'add_hr'])->middleware(['auth','admin'])->name('add-hr');
 Route::post('/store-hr', [HRController::class, 'store_hr'])->name('store-hr');
+Route::get('/all-hr', [HRController::class, 'all_hr'])->middleware(['auth','admin'])->name('all-hr');
+Route::get('/edit-hr/{id}', [HRController::class, 'edit_hr'])->middleware(['auth','admin'])->name('edit-hr');
+Route::post('/update-hr/{id}', [HRController::class, 'update_hr'])->name('update-hr');
 
 
 //Employees

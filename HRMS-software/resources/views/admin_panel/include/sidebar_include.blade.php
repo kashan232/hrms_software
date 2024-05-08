@@ -29,7 +29,7 @@
             </a>
             <ul aria-expanded="false">
                 <li><a href="{{ route('add-hr') }}">Add HR</a></li>
-                <li><a href="{{ route('all-employee') }}">List HR</a></li>
+                <li><a href="{{ route('all-hr') }}">List HR</a></li>
                 {{-- <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li> --}}
             </ul>
         </li>
