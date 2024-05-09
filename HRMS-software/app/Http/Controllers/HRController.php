@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hr;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,15 @@ class HRController extends Controller
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
+
+            // Create a user record with the same credentials and usertype 'employee'
+            $user = User::create([
+                'name' => $request->first_name . ' ' . $request->last_name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password), // Make sure to hash the password
+                'usertype' => 'hr', // Set the usertype to 'employee'
+            ]);
+
             return redirect()->back()->with('hr-added', 'HR Added Successfully');
         } else {
             return redirect()->back();
