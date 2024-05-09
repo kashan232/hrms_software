@@ -10,6 +10,12 @@
                      <span class="nav-text">Dashboard</span>
                  </a>
              </li>
+             <li><a href="{{ route('all-leaverequest') }}" aria-expanded="false">
+                <i class="fas fa-check-circle"></i>
+
+                <span class="nav-text">Leave Request</span>
+            </a>
+        </li>
          </ul>
 
      </div>

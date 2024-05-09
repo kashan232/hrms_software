@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('employee_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('employee_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('employee_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -33,26 +33,39 @@
                                     <thead>
                                         <tr>
                                             <th>Sno</th>
-                                            <th>Department | Designation</th>
-                                            <th>Employee | LeaveType</th>
+                                            <th>LeaveType</th>
                                             <th>From | To</th>
                                             <th>Reason</th>
-                                            <th>Action</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($LeaveRequests as $LeaveRequest)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $LeaveRequest->department }} <br>{{ $LeaveRequest->designation }} </td>
-                                                <td>{{ $LeaveRequest->Employee }} <br> {{ $LeaveRequest->leave_type }}</td>
+                                                <td>{{ $LeaveRequest->leave_type }}</td>
                                                 <td>{{ $LeaveRequest->leave_from_date }} <br> {{ $LeaveRequest->leave_to_date }}</td>
                                                 <td>{{ $LeaveRequest->leave_reason }}</td>
-                                                <td>
+                                                {{-- <td>
                                                     @if($LeaveRequest->leave_approve == 'Approve')
                                                         <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
                                                     @else
                                                         <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
+                                                    @endif
+                                                </td> --}}
+                                                <td>
+                                                    @if($LeaveRequest->leave_approve == 'Approve')
+                                                        <button type="button" class="btn btn-success">
+                                                            Approved
+                                                        </button>
+                                                    @elseif($LeaveRequest->leave_approve == 'Reject')
+                                                        <button type="button" class="btn btn-danger">
+                                                            Rejected
+                                                        </button>
+                                                    @else
+                                                        <button type="button" class="btn btn-primary">
+                                                            Pending
+                                                        </button>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -63,9 +76,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <!--Create Modal -->
             <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -84,37 +95,6 @@
 
                                     <div class="col-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Employee</label>
-                                            <select name="Employee" id="employeeSelect" class="form-control">
-                                                <option selected disabled>Select One</option>
-                                                @foreach ($Employees as $employee)
-                                                <option value="{{ $employee->first_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
-                                                    {{ $employee->id }} | {{ $employee->first_name }}&nbsp;{{ $employee->last_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Departments</label>
-                                            <input type="text" name="department" id="department" class="form-control" readonly required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 col-md-6">
-                                        <div class="form-group">
-                                            <label>Designation</label>
-                                            <input type="text" name="designation" id="designation" class="form-control" readonly required>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-12 col-md-12">
-                                        <div class="form-group">
                                             <label>Select Leave type</label>
                                             <select name="leave_type" id="" class="form-control">
                                                 <option selected disabled>Select One</option>
@@ -126,7 +106,6 @@
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="col-6 col-md-6">
                                         <div class="form-group">
                                             <label>Leave From Date</label>
@@ -145,16 +124,6 @@
                                         <div class="form-group">
                                             <label>Leave Reason</label>
                                             <textarea name="leave_reason" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-md-12">
-                                        <div class="form-group">
-                                            <label>Approve</label>
-                                            <select name="leave_approve" id="leave_approve" class="form-control">
-                                                <option value="Approve"> Approve </option>
-                                                <option value="Reject"> Reject </option>
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +187,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('employee_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {

@@ -23,16 +23,16 @@
                  </a>
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                {{-- <i class="flaticon-381-controls-3"></i> --}}
-                <i class="fa-solid fa-user"></i>
-                <span class="nav-text">Create HR</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="{{ route('add-hr') }}">Add HR</a></li>
-                <li><a href="{{ route('all-hr') }}">List HR</a></li>
-                {{-- <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li> --}}
-            </ul>
-        </li>
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Create HR</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('add-hr') }}">Add HR</a></li>
+                     <li><a href="{{ route('all-hr') }}">List HR</a></li>
+                     {{-- <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li> --}}
+                 </ul>
+             </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fa-solid fa-user"></i>
@@ -44,21 +44,6 @@
                      <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li>
                  </ul>
              </li>
-             
-
-             <li><a href="{{ route('all-leavetype') }}" aria-expanded="false">
-                     <i class="fas fa-envelope"></i>
-                     <span class="nav-text">Leave Type</span>
-                 </a>
-             </li>
-
-             <li><a href="{{ route('all-leaverequest') }}" aria-expanded="false">
-                     <i class="fas fa-check-circle"></i>
-
-                     <span class="nav-text">Leave Request</span>
-                 </a>
-             </li>
-
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fa-solid fa-user"></i>
@@ -71,17 +56,23 @@
 
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-calendar"></i>
+                     <span class="nav-text">Create Task</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('project') }}">Project</a></li>
+                     <li><a href="{{ route('task') }}">Task</a></li>
+                 </ul>
+
+             </li>
+             <li><a class="has-arrow ai-icon" href="{{ route('leaves') }}" aria-expanded="false">
                 {{-- <i class="flaticon-381-controls-3"></i> --}}
                 <i class="fas fa-calendar"></i>
-                <span class="nav-text">Create Task</span>
+                <span class="nav-text">Leaves</span>
             </a>
-            <ul aria-expanded="false">
-                <li><a href="{{ route('project') }}">Project</a></li>
-                <li><a href="{{ route('task') }}">Task</a></li>
-            </ul>
-
         </li>
-             
+
          </ul>
 
          {{-- <div class="copyright">

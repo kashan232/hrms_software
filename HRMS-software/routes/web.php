@@ -4,9 +4,12 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeLeaveRequestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HRController;
+use App\Http\Controllers\HRLeavesController;
 use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -36,6 +39,8 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('home');
 Route::get('/admin-dashboard', [HomeController::class, 'adminpage'])->middleware(['auth','admin'])->name('admin-dashboard');
+
+//Admin Panel
 
 //DEpartment
 Route::get('/department', [DepartmentController::class, 'department'])->middleware(['auth','admin'])->name('department');
@@ -68,15 +73,6 @@ Route::get('/get-designations', [EmployeeController::class, 'getDesignations'])-
 Route::get('/get-employees', [EmployeeController::class, 'getEmployees' ])->name('get-employees');
 
 
-//LeaveType
-Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->middleware(['auth','admin'])->name('all-leavetype');
-Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
-Route::post('/update-leavetype', [LeaveTypeController::class, 'update_leavetype'])->name('update-leavetype');
-
-// LeaveRequest
-Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->middleware(['auth','admin'])->name('all-leaverequest');
-Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
-
 //Attendance
 Route::get('/all-attendance', [EmployeeAttendanceController::class, 'all_attendance'])->middleware(['auth','admin'])->name('all-attendance');
 Route::get('/add-attendance', [EmployeeAttendanceController::class, 'add_attendance'])->middleware(['auth','admin'])->name('add-attendance');
@@ -94,6 +90,32 @@ Route::post('/store-project', [ProjectController::class, 'store_project'])->name
 //Task
 Route::get('/task', [TaskController::class, 'task'])->middleware(['auth','admin'])->name('task');
 Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-task');
+
+//leaves record
+Route::get('/leaves', [LeavesRecordController::class, 'leaves'])->name('leaves');
+
+
+                     // Employee Panel
+
+// LeaveRequest
+Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
+Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
+
+
+                      //HR panel
+
+//LeaveType
+Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->name('all-leavetype');
+Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
+Route::post('/update-leavetype', [LeaveTypeController::class, 'update_leavetype'])->name('update-leavetype');
+
+//Approve Leaves
+Route::get('/all-leave', [HRLeavesController::class, 'all_leave'])->name('all-leave');
+Route::get('/pending-leave', [HRLeavesController::class, 'pending_leave'])->name('pending-leave');
+Route::get('/approve-leave', [HRLeavesController::class, 'approve_leave'])->name('approve-leave');
+Route::get('/reject-leave', [HRLeavesController::class, 'reject_leave'])->name('reject-leave');
+Route::post('/update-leave-approve', [HRLeavesController::class,'updateLeaveApprove'])->name('update-leave-approve');
+
 
 
 Route::middleware('auth')->group(function () {

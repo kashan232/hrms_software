@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
    
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -40,7 +40,7 @@
                                                 </div>
                                             </th>
                                             <th>ID</th>
-                                            <th>Department</th>
+                                            <th>Leave Type</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -155,7 +155,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('hr_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function(){
