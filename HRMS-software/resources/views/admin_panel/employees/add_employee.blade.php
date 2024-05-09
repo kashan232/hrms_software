@@ -46,8 +46,8 @@
                                             <input type="email" name="email" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">user_name</label>
-                                            <input type="text" name="email" class="form-control">
+                                            <label class="form-label">User Name</label>
+                                            <input type="text" name="username" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Password</label>
@@ -66,17 +66,6 @@
                                             <label>Phone</label>
                                             <input type="number" name="phone" class="form-control">
                                         </div>
-                                        {{-- <div class="mb-3 col-md-6">
-                                            <label>Department</label>
-                                            <select name="department" id="" class="form-control">
-                                                <option selected disabled>Select One</option>
-                                                @foreach ($all_department as $department)
-                                                    <option value="{{ $department->department }}">
-                                                        {{ $department->department }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div> --}}
 
                                         <div class="mb-3 col-md-6">
                                             <label>Department</label>
@@ -90,14 +79,6 @@
                                         <div class="mb-3 col-md-6">
                                             <label>Designation</label>
                                             <select name="designation" id="designation" class="form-control"></select>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" name="username" class="form-control">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
