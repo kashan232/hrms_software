@@ -23,28 +23,28 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-employee') }}" method="post">
+                                <form action="{{ route('store-employee-cmr-add-experience') }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Organization</label>
-                                            <input type="text" name="organization" class="form-control">
+                                            <input type="text" name="Organization" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Designation</label>
-                                            <input type="text" name="designation" class="form-control">
+                                            <input type="text" name="Designation" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Start Date</label>
-                                            <input type="date" name="start_date" class="form-control">
+                                            <input type="date" name="Start_Date" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">End Date</label>
-                                            <input type="date" name="end_date" class="form-control">
+                                            <input type="date" name="End_Date" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Total Experience</label>
-                                            <input type="text" name="total_experience" class="form-control">
+                                            <input type="text" name="Total_Experience" class="form-control">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

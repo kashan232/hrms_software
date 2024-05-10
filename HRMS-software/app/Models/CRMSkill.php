@@ -10,4 +10,6 @@ class CRMSkill extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $guarded = [];
 }

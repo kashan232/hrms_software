@@ -23,28 +23,28 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-employee') }}" method="post">
+                                <form action="{{ route('store-employee-cmr-add-training') }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Training Name</label>
-                                            <input type="text" name="training_name" class="form-control">
+                                            <input type="text" name="Training" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Purpose</label>
-                                            <input type="text" name="purpose" class="form-control">
+                                            <input type="text" name="Purpose" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Start Date</label>
-                                            <input type="date" name="start_date" class="form-control">
+                                            <input type="date" name="Start_Date" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">End Date</label>
-                                            <input type="date" name="end_date" class="form-control">
+                                            <input type="date" name="End_Date" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Results</label>
-                                            <input type="text" name="results" class="form-control">
+                                            <input type="text" name="Results" class="form-control">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

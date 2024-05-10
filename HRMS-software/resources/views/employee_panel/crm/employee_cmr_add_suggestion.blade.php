@@ -19,49 +19,37 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Add Employee</h4>
+                            <h4 class="card-title">Add Suggestions</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-employee') }}" method="post">
+                                <form action="{{ route('store-employee-cmr-add-suggestion') }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">First Name</label>
-                                            <input type="text" name="first_name" class="form-control">
+                                            <label class="form-label">Subject</label>
+                                            <input type="text" name="Subject" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" name="last_name" class="form-control">
+                                            <label class="form-label">Complaints</label>
+                                            <input type="text" name="Complains" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control">
+                                            <label class="form-label">Reference</label>
+                                            <input type="text" name="Reference" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">User Name</label>
-                                            <input type="text" name="username" class="form-control">
+                                            <label class="form-label">Status</label>
+                                            <input type="text" name="Status" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Password</label>
-                                            <div class="input-group">
-                                                <input type="password" id="passwordInput" name="password" class="form-control">
-                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                                    <i class="fas fa-eye-slash"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label>Joining Date</label>
-                                            <input type="date" name="joining_date" class="form-control">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label>Phone</label>
-                                            <input type="number" name="phone" class="form-control">
+                                            <label class="form-label">Solution</label>
+                                            <input type="text" name="Solution" class="form-control">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
+
                             </div>
                         </div>
                     </div>

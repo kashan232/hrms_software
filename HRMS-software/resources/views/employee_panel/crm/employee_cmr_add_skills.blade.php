@@ -23,28 +23,28 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                            <form action="{{ route('store-employee') }}" method="post">
+                            <form action="{{ route('store-employee-cmr-add-skills') }}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Skill Name</label>
-                                        <input type="text" name="skill_name" class="form-control">
+                                        <input type="text" name="Skills" class="form-control">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Level</label>
-                                        <input type="text" name="level" class="form-control">
+                                        <input type="text" name="Level" class="form-control">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Years of Experience</label>
-                                        <input type="text" name="years_of_experience" class="form-control">
+                                        <input type="text" name="Experience" class="form-control">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Certification</label>
-                                        <input type="text" name="certification" class="form-control">
+                                        <input type="text" name="Certification" class="form-control">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Institution</label>
-                                        <input type="text" name="institution" class="form-control">
+                                        <input type="text" name="Institution" class="form-control">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
