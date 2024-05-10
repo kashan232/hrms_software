@@ -12,16 +12,14 @@
              </li>
              <li>
                  <a href="{{ route('all-leaverequest') }}" aria-expanded="false">
-                     <i class="fas fa-check-circle"></i>
-
+                     <i class="fas fa-envelope-open"></i>
                      <span class="nav-text">Leave Request</span>
                  </a>
              </li>
 
              <li>
                  <a href="{{ route('employee-cmr') }}" aria-expanded="false">
-                     <i class="fas fa-check-circle"></i>
-
+                     <i class="fas fa-boxes"></i>
                      <span class="nav-text">CMR</span>
                  </a>
              </li>

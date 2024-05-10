@@ -17,7 +17,7 @@
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                <i class="fa-solid fa-user"></i>
+                <i class="fas fa-calendar"></i>
                 <span class="nav-text">All Leaves</span>
             </a>
             <ul aria-expanded="false">
@@ -30,7 +30,7 @@
         </li>
         <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
             {{-- <i class="flaticon-381-controls-3"></i> --}}
-            <i class="fa-solid fa-user"></i>
+            <i class="fas fa-money-bill-wave"></i>
             <span class="nav-text">Expense</span>
         </a>
         <ul aria-expanded="false">
@@ -41,7 +41,7 @@
     </li>
     <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
         {{-- <i class="flaticon-381-controls-3"></i> --}}
-        <i class="fa-solid fa-user"></i>
+        <i class="fas fa-graduation-cap"></i>
         <span class="nav-text">Hiring</span>
     </a>
     <ul aria-expanded="false">
