@@ -5,6 +5,8 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLeaveRequestController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\HiringController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HRController;
 use App\Http\Controllers\HRLeavesController;
@@ -96,14 +98,12 @@ Route::get('/leaves', [LeavesRecordController::class, 'leaves'])->name('leaves')
 
 
                      // Employee Panel
-
 // LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
 
 
                       //HR panel
-
 //LeaveType
 Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->name('all-leavetype');
 Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
@@ -116,7 +116,15 @@ Route::get('/approve-leave', [HRLeavesController::class, 'approve_leave'])->name
 Route::get('/reject-leave', [HRLeavesController::class, 'reject_leave'])->name('reject-leave');
 Route::post('/update-leave-approve', [HRLeavesController::class,'updateLeaveApprove'])->name('update-leave-approve');
 
+//Expense
+Route::get('/all-expense', [ExpenseController::class, 'all_expense'])->name('all-expense');
+Route::get('/add-expense', [ExpenseController::class, 'add_expense'])->name('add-expense');
+Route::post('/store-expense', [ExpenseController::class, 'store_expense'])->name('store-expense');
 
+//Hiring
+Route::get('/all-hiring', [HiringController::class, 'all_hiring'])->name('all-hiring');
+Route::get('/add-hiring', [HiringController::class, 'add_hiring'])->name('add-hiring');
+Route::post('/store-hiring', [HiringController::class, 'store_hiring'])->name('store-hiring');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
