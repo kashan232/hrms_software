@@ -23,6 +23,11 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
+                            @if (session('Suggestion-added'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Congratulations!</strong> {{ session('Suggestion-added') }}.
+                                    </div>
+                                @endif
                                 <form action="{{ route('store-employee-cmr-add-suggestion') }}" method="post">
                                     @csrf
                                     <div class="row">

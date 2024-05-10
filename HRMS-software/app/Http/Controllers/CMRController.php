@@ -18,9 +18,26 @@ class CMRController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
+            $employee_name = Auth()->user()->name;
+
             // dd($userId);
+            $CRMSkills = CRMSkill::where('admin_or_user_id', '=', $userId)->where('employee_name', '=', $employee_name)->get();
+            $CRMSalaires = CRMSalaire::where('admin_or_user_id', '=', $userId)->where('employee_name', '=', $employee_name)->get();
+            $CRMInsurances = CRMInsurance::where('admin_or_user_id', '=', $userId)->where('employee_name', '=', $employee_name)->get();
+            $CRMTraininges = CRMTraininge::where('admin_or_user_id', '=', $userId)->where('employee_name', '=', $employee_name)->get();
+            $CRMExperiences = CRMExperience::where('admin_or_user_id', '=', $userId)->where('employee_name', '=', $employee_name)->get();
+            $CRMSuggestions = CRMSuggestion::where('admin_or_user_id', '=', $userId)->where('employee_name', '=', $employee_name)->get();
+
             return view('employee_panel.crm.employee_crm', [
+                'CRMSkills' => $CRMSkills,
+                'CRMSalaires' => $CRMSalaires,
+                'CRMInsurances' => $CRMInsurances,
+                'CRMTraininges' => $CRMTraininges,
+                'CRMExperiences' => $CRMExperiences,
+                'CRMSuggestions' => $CRMSuggestions,
             ]);
+            
+
         } else {
             return redirect()->back();
         }
@@ -31,8 +48,7 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            return view('employee_panel.crm.employee_cmr_add_skills', [
-            ]);
+            return view('employee_panel.crm.employee_cmr_add_skills', []);
         } else {
             return redirect()->back();
         }
@@ -59,7 +75,6 @@ class CMRController extends Controller
         } else {
             return redirect()->back();
         }
-
     }
 
     public function employee_cmr_add_insurance()
@@ -67,8 +82,7 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            return view('employee_panel.crm.employee_cmr_add_insurance', [
-            ]);
+            return view('employee_panel.crm.employee_cmr_add_insurance', []);
         } else {
             return redirect()->back();
         }
@@ -103,8 +117,7 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            return view('employee_panel.crm.employee_cmr_add_training', [
-            ]);
+            return view('employee_panel.crm.employee_cmr_add_training', []);
         } else {
             return redirect()->back();
         }
@@ -139,8 +152,7 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            return view('employee_panel.crm.employee_cmr_add_experience', [
-            ]);
+            return view('employee_panel.crm.employee_cmr_add_experience', []);
         } else {
             return redirect()->back();
         }
@@ -175,8 +187,7 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            return view('employee_panel.crm.employee_cmr_add_salaires', [
-            ]);
+            return view('employee_panel.crm.employee_cmr_add_salaires', []);
         } else {
             return redirect()->back();
         }
@@ -211,13 +222,12 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            return view('employee_panel.crm.employee_cmr_add_suggestion', [
-            ]);
+            return view('employee_panel.crm.employee_cmr_add_suggestion', []);
         } else {
             return redirect()->back();
         }
     }
-    
+
     public function store_employee_cmr_add_suggestion(Request $request)
     {
         if (Auth::id()) {
@@ -240,5 +250,4 @@ class CMRController extends Controller
             return redirect()->back();
         }
     }
-
 }

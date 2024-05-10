@@ -36,10 +36,10 @@
                                     <a href="#experience-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Experience</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#salaries-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Salaries and Fines</a>
+                                    <a href="#salaries-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Salaries</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#suggestions-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Suggestions and Complaints</a>
+                                    <a href="#suggestions-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Suggestions</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -69,7 +69,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        @foreach ($CRMSkills as $CRMSkill)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMSkill->Skills }}</td>
+                                                            <td>{{ $CRMSkill->Level }}</td>
+                                                            <td>{{ $CRMSkill->Experience }}</td>
+                                                            <td>{{ $CRMSkill->Certification }}</td>
+                                                            <td>{{ $CRMSkill->Institution }}</td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -102,7 +111,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        @foreach ($CRMInsurances as $CRMInsurance)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMInsurance->Insurance }}</td>
+                                                            <td>{{ $CRMInsurance->Coverage }}</td>
+                                                            <td>{{ $CRMInsurance->Start_Date }}</td>
+                                                            <td>{{ $CRMInsurance->End_Date }}</td>
+                                                            <td>{{ $CRMInsurance->Amount }}</td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -135,7 +153,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        @foreach ($CRMTraininges as $CRMTraininges)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMTraininges->Training }}</td>
+                                                            <td>{{ $CRMTraininges->Purpose }}</td>
+                                                            <td>{{ $CRMTraininges->Start_Date }}</td>
+                                                            <td>{{ $CRMTraininges->End_Date }}</td>
+                                                            <td>{{ $CRMTraininges->Results }}</td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -170,6 +197,16 @@
                                                     </thead>
                                                     <tbody>
 
+                                                        @foreach ($CRMExperiences as $CRMExperience)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMExperience->Organization }}</td>
+                                                            <td>{{ $CRMExperience->Designation }}</td>
+                                                            <td>{{ $CRMExperience->Start_Date }}</td>
+                                                            <td>{{ $CRMExperience->End_Date }}</td>
+                                                            <td>{{ $CRMExperience->Total_Experience }}</td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -203,7 +240,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        @foreach ($CRMSalaires as $CRMSalaire)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMSalaire->Month }}</td>
+                                                            <td>{{ $CRMSalaire->Salaries }}</td>
+                                                            <td>{{ $CRMSalaire->Other_Income }}</td>
+                                                            <td>{{ $CRMSalaire->Fines }}</td>
+                                                            <td>{{ $CRMSalaire->Total_Salaries }}</td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -230,13 +276,22 @@
                                                             <th>Sno</th>
                                                             <th>Subject</th>
                                                             <th>Complains</th>
-                                                            <th>Rerence</th>
+                                                            <th>Reference</th>
                                                             <th>Status</th>
                                                             <th>Solution</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
+                                                        @foreach ($CRMSuggestions as $CRMSuggestion)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMSuggestion->Subject }}</td>
+                                                            <td>{{ $CRMSuggestion->Complains }}</td>
+                                                            <td>{{ $CRMSuggestion->Reference }}</td>
+                                                            <td>{{ $CRMSuggestion->Status }}</td>
+                                                            <td>{{ $CRMSuggestion->Solution }}</td>
+                                                        </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -23,28 +23,33 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
+                            @if (session('salaires-added'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Congratulations!</strong> {{ session('salaires-added') }}.
+                                    </div>
+                                @endif
                                 <form action="{{ route('store-employee-cmr-add-salaires') }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Month</label>
-                                            <input type="text" name="month" class="form-control">
+                                            <input type="text" name="Month" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Salaries</label>
-                                            <input type="text" name="salaries" class="form-control">
+                                            <input type="text" name="Salaries" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Other Income</label>
-                                            <input type="text" name="other_income" class="form-control">
+                                            <input type="text" name="Other_Income" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Fines</label>
-                                            <input type="text" name="fines" class="form-control">
+                                            <input type="text" name="Fines" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Total Salaries</label>
-                                            <input type="text" name="total_salaries" class="form-control">
+                                            <input type="text" name="Total_Salaries" class="form-control">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

@@ -23,6 +23,11 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
+                            @if (session('Training-added'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Congratulations!</strong> {{ session('Training-added') }}.
+                                    </div>
+                                @endif
                                 <form action="{{ route('store-employee-cmr-add-training') }}" method="post">
                                     @csrf
                                     <div class="row">
