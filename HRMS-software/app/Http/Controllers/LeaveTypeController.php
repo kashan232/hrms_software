@@ -34,7 +34,6 @@ class LeaveTypeController extends Controller
 
         LeaveType::create([
             'admin_or_user_id' => $userId,
-            'usertype' => $userType,
             'leave_type' => $request->leave_type,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
