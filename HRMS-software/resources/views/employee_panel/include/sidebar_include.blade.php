@@ -18,6 +18,20 @@
              </li>
 
              <li>
+                 <a href="{{ route('employee-attendance-create') }}" aria-expanded="false">
+                     <i class="fas fa-check-circle"></i>
+                     <span class="nav-text">Create Attendance</span>
+                 </a>
+             </li>
+
+             <li>
+                 <a href="#" aria-expanded="false">
+                     <i class="fas fa-check-circle"></i>
+                     <span class="nav-text">Check Attendance</span>
+                 </a>
+             </li>
+
+             <li>
                  <a href="{{ route('employee-cmr') }}" aria-expanded="false">
                      <i class="fas fa-boxes"></i>
                      <span class="nav-text">CMR</span>
