@@ -24,7 +24,7 @@
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fa-solid fa-user"></i>
+                     <i class="fas fa-user-cog"></i>
                      <span class="nav-text">Create HR</span>
                  </a>
                  <ul aria-expanded="false">
@@ -46,7 +46,8 @@
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fa-solid fa-user"></i>
+                     <i class="fas fa-check-circle"></i>
+
                      <span class="nav-text">Attendance</span>
                  </a>
                  <ul aria-expanded="false">
@@ -64,7 +65,7 @@
              <li><a class="has-arrow ai-icon" href="{{ route('employee-task-update') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-calendar"></i>
-                     <span class="nav-text">Task Update</span>
+                     <span class="nav-text">Create Task</span>
                  </a>
              </li>
              <li><a class="has-arrow ai-icon" href="{{ route('leaves') }}" aria-expanded="false">

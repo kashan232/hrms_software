@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CMRController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
@@ -102,6 +103,20 @@ Route::get('/leaves', [LeavesRecordController::class, 'leaves'])->name('leaves')
 // LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
+
+Route::get('/employee-cmr', [CMRController::class, 'employee_cmr'])->name('employee-cmr');
+Route::get('/employee-cmr-add-skills', [CMRController::class, 'employee_cmr_add_skills'])->name('employee-cmr-add-skills');
+Route::post('/store-employee-cmr-add-skills', [CMRController::class, 'store_employee_cmr_add_skills'])->name('store-employee-cmr-add-skills');
+Route::get('/employee-cmr-add-insurance', [CMRController::class, 'employee_cmr_add_insurance'])->name('employee-cmr-add-insurance');
+Route::post('/store-employee-cmr-add-insurance', [CMRController::class, 'store_employee_cmr_add_insurance'])->name('store-employee-cmr-add-insurance');
+Route::get('/employee-cmr-add-training', [CMRController::class, 'employee_cmr_add_training'])->name('employee-cmr-add-training');
+Route::post('/store-employee-cmr-add-training', [CMRController::class, 'store_employee_cmr_add_training'])->name('store-employee-cmr-add-training');
+Route::get('/employee-cmr-add-experience', [CMRController::class, 'employee_cmr_add_experience'])->name('employee-cmr-add-experience');
+Route::post('/store-employee-cmr-add-experience', [CMRController::class, 'store_employee_cmr_add_experience'])->name('store-employee-cmr-add-experience');
+Route::get('/employee-cmr-add-salaires', [CMRController::class, 'employee_cmr_add_salaires'])->name('employee-cmr-add-salaires');
+Route::post('/store-employee-cmr-add-salaires', [CMRController::class, 'store_employee_cmr_add_salaires'])->name('store-employee-cmr-add-salaires');
+Route::get('/employee-cmr-add-suggestion', [CMRController::class, 'employee_cmr_add_suggestion'])->name('employee-cmr-add-suggestion');
+Route::post('/store-employee-cmr-add-suggestion', [CMRController::class, 'store_employee_cmr_add_suggestion'])->name('store-employee-cmr-add-suggestion');
 
 
 //MyTask

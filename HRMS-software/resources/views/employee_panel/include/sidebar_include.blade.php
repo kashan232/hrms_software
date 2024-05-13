@@ -15,13 +15,29 @@
 
                      <span class="nav-text">Leave Request</span>
                  </a>
-             </li>
-             <li><a class="has-arrow ai-icon" href="{{ route('mytask') }}" aria-expanded="false">
-                <i class="fa-solid fa-user"></i>
-                <span class="nav-text">My task</span>
-            </a>
+                 </li>
+                 <li><a class="has-arrow ai-icon" href="{{ route('mytask') }}" aria-expanded="false">
+                         <i class="fa-solid fa-user"></i>
+                         <span class="nav-text">My task</span>
+                     </a>
 
-        </li>
+                 </li>
+                
+                 <li>
+                     <a href="{{ route('all-leaverequest') }}" aria-expanded="false">
+                         <i class="fas fa-envelope-open"></i>
+                         <span class="nav-text">Leave Request</span>
+                     </a>
+                 </li>
+
+                 <li>
+                     <a href="{{ route('employee-cmr') }}" aria-expanded="false">
+                         <i class="fas fa-boxes"></i>
+                         <span class="nav-text">CMR</span>
+                     </a>
+                 </li>
+
+                 >>>>>>> 3d599e664f402b3daffd8be72da18dc9c00763e4
          </ul>
 
      </div>

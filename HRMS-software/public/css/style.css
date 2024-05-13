@@ -23622,8 +23622,7 @@ code {
 
 .nav-pills.light .nav-link.active,
 .nav-pills.light .show > .nav-link {
-  background: var(--rgba-primary-1);
-  color: var(--primary);
+  
   box-shadow: none; }
   [data-theme-version="dark"] .nav-pills.light .nav-link.active, [data-theme-version="dark"]
   .nav-pills.light .show > .nav-link {

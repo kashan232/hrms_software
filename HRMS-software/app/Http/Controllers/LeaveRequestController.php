@@ -29,47 +29,47 @@ class LeaveRequestController extends Controller
         }
     }
     public function store_leaverequest(Request $request)
-{
-    if (Auth::check()) {
-        $userId = Auth::id(); // Get the authenticated user's ID
+    {
+        if (Auth::check()) {
+            $userId = Auth::id(); // Get the authenticated user's ID
 
-        // Fetch employee details from the authenticated user
-        $employee = Employee::find($userId);
+            // Fetch employee details from the authenticated user
+            $employee = Employee::find($userId);
 
-        // Check if employee exists
-        if ($employee) {
-            // Fetch employee details
-            $employeeName = $employee->first_name . ' ' . $employee->last_name;
-            $department = $employee->department;
-            $designation = $employee->designation;
+            // Check if employee exists
+            if ($employee) {
+                // Fetch employee details
+                $employeeName = $employee->first_name . ' ' . $employee->last_name;
+                $department = $employee->department;
+                $designation = $employee->designation;
 
-            // Create the leave request with default status as 'Pending'
-            LeaveRequest::create([
-                'admin_or_user_id' => $userId,
-                'leave_type' => $request->leave_type,
-                'leave_from_date' => $request->leave_from_date,
-                'leave_to_date' => $request->leave_to_date,
-                'leave_reason' => $request->leave_reason,
-                'Employee' => $employeeName,
-                'department' => $department,
-                'designation' => $designation,
-                'leave_approve' => 'Pending', // Set the default status to "Pending"
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+                // Create the leave request with default status as 'Pending'
+                LeaveRequest::create([
+                    'admin_or_user_id' => $userId,
+                    'leave_type' => $request->leave_type,
+                    'leave_from_date' => $request->leave_from_date,
+                    'leave_to_date' => $request->leave_to_date,
+                    'leave_reason' => $request->leave_reason,
+                    'Employee' => $employeeName,
+                    'department' => $department,
+                    'designation' => $designation,
+                    'leave_approve' => 'Pending', // Set the default status to "Pending"
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-            // Redirect back with success message
-            return redirect()->back()->with('Leave-req-added', 'Leave Request Is Successfully');
+                // Redirect back with success message
+                return redirect()->back()->with('Leave-req-added', 'Leave Request Is Successfully');
+            } else {
+                // Handle case when employee record not found
+                return redirect()->back()->with('error', 'Employee record not found.');
+            }
         } else {
-            // Handle case when employee record not found
-            return redirect()->back()->with('error', 'Employee record not found.');
+            return redirect()->back();
         }
-    } else {
-        return redirect()->back();
     }
-}
 
-    
+
 
     // public function store_leaverequest(Request $request)
     // {
