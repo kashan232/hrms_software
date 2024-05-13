@@ -11,10 +11,16 @@
                  </a>
              </li>
              <li><a href="{{ route('all-leaverequest') }}" aria-expanded="false">
-                <i class="fas fa-check-circle"></i>
+                     <i class="fas fa-check-circle"></i>
 
-                <span class="nav-text">Leave Request</span>
+                     <span class="nav-text">Leave Request</span>
+                 </a>
+             </li>
+             <li><a class="has-arrow ai-icon" href="{{ route('mytask') }}" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+                <span class="nav-text">My task</span>
             </a>
+
         </li>
          </ul>
 

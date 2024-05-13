@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('employee_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('employee_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('employee_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -19,11 +19,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Project</h4>
+                            <h4 class="card-title">My Task</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New Department">
-                                    <i class="las la-plus"></i>Add New
+                                    data-modal_title="Add Completion Status">
+                                    <i class="las la-plus"></i>Add Completion Status
                                 </button>
                             </div>
                         </div>
@@ -34,31 +34,27 @@
                                         <tr>
                                             <th>Sno</th>
                                             <th>Project Name</th>
-                                            <th>Project Category</th>
-                                            <th>Project Start Date <br> Project End Date</th>
-                                            <th>Budget</th>
-                                            <th>Priority</th>
+                                            <th>Task Category</th>
+                                            <th>Start Date <br> End Date</th>
+                                            <th>Task Priority</th>
                                             <th>Description</th>
-                                            <th>Status</th>
+                                            <th>Completion Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_project as $project)
+                                        @foreach ($employeetasks as $task)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $project->project_name }}</td>
-                                                <td>{{ $project->project_category }}</td>
-                                                <td>{{ $project->project_start_date }}
-                                                    <br>{{ $project->project_end_date }}</td>
-                                                <td>{{ $project->budget }}</td>
-                                                {{-- <td>{{ $project->priority }}</td> --}}
+                                                <td>{{ $task->project_name }}</td>
+                                                <td>{{ $task->task_category }}</td>
+                                                <td>{{ $task->start_date }} <br> {{ $task->end_date }} </td>
                                                 <td>
-                                                    {{ $project->priority }}
+                                                    {{ $task->task_priority }}
                                                     @php
                                                         $progress = 0;
                                                         $color = '';
-                                                        switch ($project->priority) {
+                                                        switch ($task->task_priority) {
                                                             case 'Highest':
                                                                 $progress = 100;
                                                                 $color = 'bg-success';
@@ -85,19 +81,34 @@
                                                     </div>
                                                     <span>{{ $progress }}%</span>
                                                 </td>
-                                                <td>{{ $project->description }}</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary">
-                                                        Pending</button>
-                                                </td>
+                                                <td>{{ $task->description }}</td>
                                                 <td>
                                                     <div class="button--group">
-                                                        <button type="button" class="btn btn-primary editprojectBtn"
-                                                            data-toggle="modal" data-modal_title="Edit Project"
-                                                            data-has_status="1" data-target="#editproject">
-                                                            <i class="la la-pencil"></i></button>
+                                                        <button type="button" class="btn btn-primary">
+                                                            {{ $task->status }} </button>
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    @if(strtotime($task->end_date) < strtotime(now()))
+                                                        <input type="radio" name="status" value="Complete" disabled>
+                                                        Complete<br>
+                                                        <input type="radio" name="status" value="Incomplete" disabled>
+                                                        Incomplete<br>
+                                                    @else
+                                                        <input type="radio" name="status" value="Complete" onclick="updateStatus('{{ $task->id }}', 'Complete')">
+                                                        Complete<br>
+                                                        <input type="radio" name="status" value="Incomplete" onclick="updateStatus('{{ $task->id }}', 'Incomplete')">
+                                                        Incomplete<br>
+                                                    @endif
+                                                </td>
+                                                {{-- <td>
+                                                    <div class="button--group">
+                                                        <button type="button" class="btn btn-primary edittaskBtn"
+                                                            data-toggle="modal" data-modal_title="Edit task"
+                                                            data-has_status="1" data-target="#edittask">
+                                                            <i class="la la-pencil"></i></button>
+                                                    </div>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -109,55 +120,28 @@
 
             </div>
 
-            <!--Create Modal -->
+            {{-- <!--Create Modal -->
             <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"><span class="type"></span> <span>Add Project</span></h5>
+                            <h5 class="modal-title"><span class="type"></span> <span>Add Completion Status</span></h5>
                             <!-- Adjusted close button with custom styling -->
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
                                 style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
-                        <form action="{{ route('store-project') }}" method="POST">
+                        <form action="{{ route('store-mytask') }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Project Name</label>
-                                    <input type="text" name="project_name" class="form-control" required>
-                                    <label>Project Category</label>
-                                    <input type="text" name="project_category" class="form-control" required>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Project Start Date</label>
-                                            <input type="date" name="project_start_date" class="form-control"
-                                                required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Project End Date</label>
-                                            <input type="date" name="project_end_date" class="form-control" required>
+                                        <div class="col-md-12">
+                                            <label>Completion Status</label>
+                                            <input type="text" name="status" id="status" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Budget</label>
-                                            <input type="number" name="budget" class="form-control" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Priority</label>
-                                            <select name="priority" id="" class="form-control" required>
-                                                <option value="" selected disabled>Select One</option>
-                                                <option value="Highest">Highest</option>
-                                                <option value="Medium">Medium</option>
-                                                <option value="Low">Low</option>
-                                                <option value="Lowest">Lowest</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <label>Description</label>
-                                    <textarea name="description" class="form-control" required></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -166,9 +150,9 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <!--Edit Modal -->
+            {{-- <!--Edit Modal -->
             <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -199,7 +183,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!--**********************************
@@ -224,35 +208,38 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('employee_panel.include.footer_include')
 <script>
-    // JavaScript/jQuery code to trigger modal
-    $(document).ready(function() {
-        $('#addNewButton').click(function() {
-            $('#cuModal').modal('show');
+    function updateStatus(taskId, status) {
+        // Send AJAX request to update task status
+        $.ajax({
+            url: "{{ route('update-status') }}",
+            method: "POST",
+            data: {
+                task_id: taskId,
+                status: status,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                // Handle success response
+                console.log(response);
+                // Reload the page after 3 seconds
+                setTimeout(function() {
+                    location.reload();
+                }, 1000); // 1 seconds delay
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
         });
-    });
+    }
 </script>
 
-<script>
-    // JavaScript/jQuery code to trigger modal
-    $(document).ready(function() {
-        $('.editdepartmentBtn').click(function() {
-            $('#editbtn').modal('show');
-        });
-    });
-</script>
 
-<script>
-    $(document).ready(function() {
-        // Edit category button click event
-        $('.editdepartmentBtn').click(function() {
-            // Extract department ID and name from data attributes
-            var departmentId = $(this).data('department-id');
-            var departmentName = $(this).data('department-name');
-            // Set the extracted values in the modal fields
-            $('#editdepartmentId').val(departmentId);
-            $('#editdepartmentName').val(departmentName);
-        });
-    });
-</script>
+
+
+
+
+
+

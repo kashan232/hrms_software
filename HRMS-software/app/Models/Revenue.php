@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class Revenue extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
+   protected $fillable = [
         'admin_or_user_id',
-        'project_name',
-        'project_category',
-        'project_start_date',
-        'project_end_date',
-        'budget',
-        'priority',
+        'date',
         'description',
-        'status'
-        
+        'Customer',
+        'amount',
+        'tax',
+        'total_paid',
+        'status',
     ];
+
 }

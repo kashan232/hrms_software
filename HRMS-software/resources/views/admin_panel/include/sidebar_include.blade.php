@@ -55,23 +55,24 @@
                  </ul>
 
              </li>
-             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+             <li><a class="has-arrow ai-icon" href="{{ route('project') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-calendar"></i>
-                     <span class="nav-text">Create Task</span>
+                     <span class="nav-text">Create Project</span>
                  </a>
-                 <ul aria-expanded="false">
-                     <li><a href="{{ route('project') }}">Project</a></li>
-                     <li><a href="{{ route('task') }}">Task</a></li>
-                 </ul>
-
+             </li>
+             <li><a class="has-arrow ai-icon" href="{{ route('employee-task-update') }}" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-calendar"></i>
+                     <span class="nav-text">Task Update</span>
+                 </a>
              </li>
              <li><a class="has-arrow ai-icon" href="{{ route('leaves') }}" aria-expanded="false">
-                {{-- <i class="flaticon-381-controls-3"></i> --}}
-                <i class="fas fa-calendar"></i>
-                <span class="nav-text">Leaves</span>
-            </a>
-        </li>
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-calendar"></i>
+                     <span class="nav-text">Leaves</span>
+                 </a>
+             </li>
 
          </ul>
 

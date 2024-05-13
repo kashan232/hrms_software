@@ -5,6 +5,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLeaveRequestController;
+use App\Http\Controllers\EmployeeTaskUpdateController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HiringController;
 use App\Http\Controllers\HomeController;
@@ -13,8 +14,11 @@ use App\Http\Controllers\HRLeavesController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectListingController;
+use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TaskController;
 use App\Models\LeaveRequest;
 use Illuminate\Support\Facades\Route;
@@ -72,7 +76,6 @@ Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit_employee'])-
 Route::post('/update-employee/{id}', [EmployeeController::class, 'update_employee'])->name('update-employee');
 Route::get('/deleted-employee-screen', [EmployeeController::class, 'deleted_employee_screen'])->middleware(['auth','admin'])->name('deleted-employee-screen');
 Route::get('/get-designations', [EmployeeController::class, 'getDesignations'])->name('get-designations');
-Route::get('/get-employees', [EmployeeController::class, 'getEmployees' ])->name('get-employees');
 
 
 //Attendance
@@ -88,22 +91,25 @@ Route::get('/fetch-daily-employee-attendance-record', [EmployeeAttendanceControl
 Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');
 Route::post('/store-project', [ProjectController::class, 'store_project'])->name('store-project');
 
-
-//Task
-Route::get('/task', [TaskController::class, 'task'])->middleware(['auth','admin'])->name('task');
-Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-task');
+//done task list
+Route::get('/employee-task-update', [EmployeeTaskUpdateController::class, 'employee_task_update'])->middleware(['auth','admin'])->name('employee-task-update');
 
 //leaves record
 Route::get('/leaves', [LeavesRecordController::class, 'leaves'])->name('leaves');
 
+// Employee Panel
 
-                     // Employee Panel
 // LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
 
 
-                      //HR panel
+//MyTask
+Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');
+Route::post('/update-status', [MyTaskController::class, 'update_status'])->name('update-status');
+
+//HR panel
+
 //LeaveType
 Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->name('all-leavetype');
 Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
@@ -125,6 +131,21 @@ Route::post('/store-expense', [ExpenseController::class, 'store_expense'])->name
 Route::get('/all-hiring', [HiringController::class, 'all_hiring'])->name('all-hiring');
 Route::get('/add-hiring', [HiringController::class, 'add_hiring'])->name('add-hiring');
 Route::post('/store-hiring', [HiringController::class, 'store_hiring'])->name('store-hiring');
+
+//Revenue
+Route::get('/all-revenue', [RevenueController::class, 'all_revenue'])->name('all-revenue');
+Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add-revenue');
+Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
+
+//projects
+Route::get('/project-listing-to-hr', [ProjectListingController::class, 'project_listing_to_hr'])->name('project-listing-to-hr');
+
+//Task
+Route::get('/task', [TaskController::class, 'task'])->name('task');
+Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-task');
+//Route::get('/get-employees', [TaskController::class, 'getEmployees'])->name('get-employees');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

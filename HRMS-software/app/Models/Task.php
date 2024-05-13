@@ -13,6 +13,7 @@ class Task extends Model
 
     protected $fillable = [
         'admin_or_user_id',
+        'emp_id',
         'project_name',
         'task_category',
         'start_date',
@@ -21,6 +22,7 @@ class Task extends Model
         'designation',
         'task_assign_person',
         'task_priority',
-        'description'
+        'description',
+        'status'
     ];  
 }

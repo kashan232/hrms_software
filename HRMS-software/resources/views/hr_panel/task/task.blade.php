@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -36,12 +36,11 @@
                                             <th>Project Name</th>
                                             <th>Task Category</th>
                                             <th>Start Date <br> End Date</th>
-                                            <th>Employee Department <br>Employee Designation</th>
+                                            <th>Emp Department <br>Emp Designation</th>
                                             <th>Task Assign Person</th>
                                             <th>Task Priority</th>
                                             <th>Description</th>
                                             <th>Completion Status</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -59,15 +58,15 @@
                                                 <td>
                                                     <div class="button--group">
                                                         <button type="button" class="btn btn-primary">
-                                                            Completed</button>
+                                                            {{ $task->status }} </button>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                       </div>
-                                                </td>
+                                                </td> --}}
                                                 <td>
                                                     <div class="button--group">
                                                         <button type="button" class="btn btn-primary edittaskBtn"
@@ -104,16 +103,18 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Project Name</label>
-                                    <select name="project_name" id="editprojectName" class="form-control">
+                                    <select name="project_name" id="projectName" class="form-control">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($all_project as $project)
-                                            <option value="{{ $project->project_name }}">
+                                            <option value="{{ $project->project_name }}"
+                                                data-category="{{ $project->project_category }}">
                                                 {{ $project->project_name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label>Task Category</label>
-                                    <input type="text" name="task_category" class="form-control" required>
+                                    <label>Project Category</label>
+                                    <input type="text" name="task_category" id="taskCategory" class="form-control"
+                                        required>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Task Start Date</label>
@@ -138,12 +139,13 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                                <label>Designation</label>
-                                                <select name="designation" id="designation" class="form-control"></select>
+                                            <label>Designation</label>
+                                            <select name="designation" id="designation" class="form-control"></select>
                                         </div>
                                     </div>
                                     <label>Task Assign Person</label>
-                                    <select name="task_assign_person" id="editprojectName" class="form-control">
+                                    <select name="task_assign_person" id="editprojectName" class="form-control"
+                                        onchange="populateEmployeeID()">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($all_employee as $employee)
                                             <option value="{{ $employee->first_name }} {{ $employee->last_name }}">
@@ -151,6 +153,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+
+                                    {{-- emp_id --}}
+
                                     <label>Task Priority</label>
                                     <select name="task_priority" id="" class="form-control" required>
                                         <option value="" selected disabled>Select One</option>
@@ -227,7 +232,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('hr_panel.include.footer_include')
 
 <script>
     $(document).ready(function() {
@@ -235,13 +240,17 @@
             var department = $(this).val();
             if (department) {
                 $.ajax({
-                    url: '{{ route("get-designations") }}',
+                    url: '{{ route('get-designations') }}',
                     type: 'GET',
-                    data: { department: department },
+                    data: {
+                        department: department
+                    },
                     success: function(data) {
                         $('select[name="designation"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
+                            $('select[name="designation"]').append(
+                                '<option value="' + value + '">' + value +
+                                '</option>');
                         });
                     }
                 });
@@ -252,39 +261,70 @@
     });
 </script>
 <script>
-    $(document).ready(function() {
-        // Function to load employees based on designation
-        function loadEmployees(designation) {
-            if (designation) {
-                $.ajax({
-                    url: '{{ route("get-employees") }}',
-                    type: 'GET',
-                    data: { designation: designation },
-                    success: function(data) {
-                        $('select[name="task_assign_person"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="task_assign_person"]').append('<option value="' + value.first_name + ' ' + value.last_name + '">' + value.first_name + ' ' + value.last_name + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('select[name="task_assign_person"]').empty();
-            }
-        }
+    function populateEmployeeID() {
+        // Get the selected employee's name
+        var employeeName = document.getElementById("editprojectName").value;
 
-        // Trigger function on change of designation
-        $('#designation').on('change', function() {
-            var designation = $(this).val();
-            loadEmployees(designation);
-        });
-    });
+        // Loop through all employees to find the matching one
+        @foreach ($all_employee as $employee)
+            var fullName = "{{ $employee->first_name }} {{ $employee->last_name }}";
+            if (fullName === employeeName) {
+                // If the names match, populate the employee ID field
+                document.getElementById("emp_id").value = "{{ $employee->id }}";
+                break; // Stop the loop
+            }
+        @endforeach
+    }
 </script>
+{{-- <script>
+    // Function to load employees based on both department and designation
+function loadEmployees(department, designation) {
+    if (department && designation) {
+        $.ajax({
+            url: '{{ route('get-employees') }}',
+            type: 'GET',
+            data: {
+                department: department,
+                designation: designation
+            },
+            success: function(data) {
+                $('select[name="task_assign_person"]').empty();
+                $.each(data, function(key, value) {
+                    $('select[name="task_assign_person"]').append(
+                        '<option value="' + value.first_name + ' ' + value.last_name + '">' + value.first_name + ' ' + value.last_name + '</option>'
+                    );
+                });
+            }
+        });
+    } else {
+        $('select[name="task_assign_person"]').empty();
+    }
+}
+</script> --}}
 
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {
         $('#addNewButton').click(function() {
             $('#cuModal').modal('show');
+        });
+    });
+</script>
+
+<script>
+    // JavaScript/jQuery code to dynamically update task category based on project name
+    $(document).ready(function() {
+        $('#projectName').change(function() {
+            var projectName = $(this).val();
+            var projectCategory = '';
+            // Iterate through the options to find the selected project's category
+            $('#projectName option').each(function() {
+                if ($(this).val() === projectName) {
+                    projectCategory = $(this).data('category');
+                    return false; // Exit the loop once the category is found
+                }
+            });
+            $('#taskCategory').val(projectCategory);
         });
     });
 </script>
