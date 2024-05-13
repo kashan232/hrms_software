@@ -1,4 +1,4 @@
-@include('admin_panel.include.header_include')
+@include('employee_panel.include.header_include')
 <style>
     .attendance-button {
         padding: 5px 10px;
@@ -41,14 +41,14 @@
     <!--**********************************
             Nav header start
         ***********************************-->
-    @include('admin_panel.include.navbar_include')
+    @include('employee_panel.include.navbar_include')
     <!--**********************************
             Nav header end
         ***********************************-->
     <!--**********************************
             Sidebar start
         ***********************************-->
-    @include('admin_panel.include.sidebar_include')
+    @include('employee_panel.include.sidebar_include')
     <!--**********************************
             Sidebar end
         ***********************************-->
@@ -135,7 +135,7 @@
 <!--**********************************
         Scripts
     ***********************************-->
-@include('admin_panel.include.footer_include')
+@include('employee_panel.include.footer_include')
 
 </body>
 

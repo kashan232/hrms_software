@@ -77,9 +77,6 @@ Route::get('/get-employees', [EmployeeController::class, 'getEmployees' ])->name
 
 
 //Attendance
-Route::get('/all-attendance', [EmployeeAttendanceController::class, 'all_attendance'])->middleware(['auth','admin'])->name('all-attendance');
-Route::get('/add-attendance', [EmployeeAttendanceController::class, 'add_attendance'])->middleware(['auth','admin'])->name('add-attendance');
-Route::post('/store-employee-attendance', [EmployeeAttendanceController::class, 'store_employee_attendance'])->name('store-employee-attendance');
 Route::get('/daily-attendance', [EmployeeAttendanceController::class, 'daily_attendance'])->middleware(['auth','admin'])->name('daily-attendance');
 Route::get('/fetch-daily-employee-attendance-record', [EmployeeAttendanceController::class, 'fetch_daily_employee_attendance_record'])->name('fetch-daily-employee-attendance-record');
 

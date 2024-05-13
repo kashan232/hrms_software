@@ -12,37 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class EmployeeAttendanceController extends Controller
 {
-    public function all_attendance()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            // dd($userId);
-            // $all_employee = Employee::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.attendance.all_attendance', [
-                // 'all_employee' => $all_employee,
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-    public function add_attendance()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            // dd($userId);
-            // $all_employee = Employee::where('admin_or_user_id', '=', $userId)->get();
-            $Departments = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.attendance.add_attendance', [
-                'Departments' => $Departments,
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-
    
-
-    
+   
 
     public function daily_attendance(Request $request)
     {
@@ -58,7 +29,28 @@ class EmployeeAttendanceController extends Controller
         }
     }
 
-   
+    public function fetch_daily_employee_attendance_record(Request $request)
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $dept_name = $request->input('department');
+            $designation = $request->input('designation');
+            $attendance_date = $request->input('employee_attendance_date');
+            // dd($dept_name,$designation,$attendance_date);
+
+            $attendance_records = EmployeeAttendance::where('department', $dept_name)
+                ->where('job_designation', $designation)
+                ->where('employee_attendance_date', $attendance_date)
+                ->get();
+
+            // dd($attendance_records);
+            return view('admin_panel.attendance.fetch_daily_attendance', [
+                'attendance_records' => $attendance_records
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
 
 
     public function employee_attendance_create()
@@ -156,27 +148,22 @@ class EmployeeAttendanceController extends Controller
     public function all_employee_attendance(Request $request)
     {
         if (Auth::id()) {
-            $userId = Auth::id();
-            $dept_name = $request->input('department');
-            $designation = $request->input('designation');
-            $attendance_date = $request->input('employee_attendance_date');
+           
             // dd($dept_name,$designation,$attendance_date);
-
+            $userId = Auth::id();
             $usertype = Auth()->user()->usertype;
             $useremail = Auth()->user()->email;
             
-            $attendance_records = EmployeeAttendance::where('department', $dept_name)
-                ->where('job_designation', $designation)
-                ->where('employee_attendance_date', $attendance_date)
-                ->get();
+            $attendance_records = EmployeeAttendance::where('admin_or_user_id', $userId)->get();
 
             // dd($attendance_records);
-            return view('admin_panel.attendance.fetch_daily_attendance', [
+
+            // dd($attendance_records);
+            return view('employee_panel.attendance.employee_fetch_daily_attendance', [
                 'attendance_records' => $attendance_records
             ]);
         } else {
             return redirect()->back();
         }
     }
-
 }

@@ -25,7 +25,7 @@
              </li>
 
              <li>
-                 <a href="#" aria-expanded="false">
+                 <a href="{{ route('all-employee-attendance') }}" aria-expanded="false">
                      <i class="fas fa-check-circle"></i>
                      <span class="nav-text">Check Attendance</span>
                  </a>
