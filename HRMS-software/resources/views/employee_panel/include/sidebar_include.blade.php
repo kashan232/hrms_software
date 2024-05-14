@@ -25,7 +25,7 @@
                  </li>
                  <li>
                     <a href="{{ route('mytask') }}" aria-expanded="false">
-                        <i class="fas fa-envelope-open"></i>
+                        <i class="fas fa-book-open"></i>
                         <span class="nav-text">My Task</span>
                     </a>
                 </li>
