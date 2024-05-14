@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // git connect
-
+// aiman pagal hai
 Route::get('/', function () {
     return view('welcome');
 });
