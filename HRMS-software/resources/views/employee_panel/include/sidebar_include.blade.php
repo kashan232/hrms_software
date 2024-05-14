@@ -23,6 +23,12 @@
                          <span class="nav-text">CMR</span>
                      </a>
                  </li>
+                 <li>
+                    <a href="{{ route('mytask') }}" aria-expanded="false">
+                        <i class="fas fa-envelope-open"></i>
+                        <span class="nav-text">My Task</span>
+                    </a>
+                </li>
          </ul>
 
      </div>
