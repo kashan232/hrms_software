@@ -20,12 +20,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">My Task</h4>
-                            <div>
+                            {{-- <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add Completion Status">
                                     <i class="las la-plus"></i>Add Completion Status
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
