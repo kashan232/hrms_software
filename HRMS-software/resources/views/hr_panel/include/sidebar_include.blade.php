@@ -16,8 +16,40 @@
                  </a>
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">All Leaves</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('all-leave') }}">All Leaves</a></li>
+                     <li><a href="{{ route('pending-leave') }}">Pending Leaves</a></li>
+                     <li><a href="{{ route('approve-leave') }}">Approve Leaves</a></li>
+                     <li><a href="{{ route('reject-leave') }}">Reject Leaves</a></li>
+                 </ul>
+
+             </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Expense</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('add-expense') }}">Add Expense</a></li>
+                     <li><a href="{{ route('all-expense') }}">All Expense</a></li>
+                 </ul>
+
+             </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Hiring</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('add-hiring') }}">Add Hiring</a></li>
+                     <li><a href="{{ route('all-hiring') }}">All Hiring</a></li>
+                 </ul>
                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                <i class="fa-solid fa-user"></i>
+                <i class="fas fa-calendar"></i>
                 <span class="nav-text">All Leaves</span>
             </a>
             <ul aria-expanded="false">
@@ -30,7 +62,7 @@
         </li>
         <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
             {{-- <i class="flaticon-381-controls-3"></i> --}}
-            <i class="fa-solid fa-user"></i>
+            <i class="fas fa-money-bill-wave"></i>
             <span class="nav-text">Expense</span>
         </a>
         <ul aria-expanded="false">
@@ -41,13 +73,14 @@
     </li>
     <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
         {{-- <i class="flaticon-381-controls-3"></i> --}}
-        <i class="fa-solid fa-user"></i>
+        <i class="fas fa-graduation-cap"></i>
         <span class="nav-text">Hiring</span>
     </a>
     <ul aria-expanded="false">
         <li><a href="{{ route('add-hiring') }}">Add Hiring</a></li>
         <li><a href="{{ route('all-hiring') }}">All Hiring</a></li>
     </ul>
+
 
              </li>
              <li><a class="has-arrow ai-icon" href="{{ route('project-listing-to-hr') }}" aria-expanded="false">

@@ -69,8 +69,6 @@ class LeaveRequestController extends Controller
         }
     }
 
-
-
     // public function store_leaverequest(Request $request)
     // {
     //     if (Auth::id()) {
