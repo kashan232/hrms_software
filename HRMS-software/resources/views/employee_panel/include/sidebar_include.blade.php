@@ -36,8 +36,7 @@
                          <span class="nav-text">CMR</span>
                      </a>
                  </li>
-
-                 >>>>>>> 3d599e664f402b3daffd8be72da18dc9c00763e4
+                 >>>>>>> 3d599e664f402b3daffd8be72da18dc9c0076
          </ul>
 
      </div>
