@@ -24,26 +24,25 @@ class ProjectController extends Controller
         }
     }
     public function store_project(Request $request)
-{
-    if (Auth::id()) {
-        $userId = Auth::id();
-        Project::create([
-            'admin_or_user_id'    => $userId,
-            'project_name'        => $request->project_name,
-            'project_category'    => $request->project_category,
-            'project_start_date'  => $request->project_start_date,
-            'project_end_date'    => $request->project_end_date,
-            'budget'              => $request->budget,
-            'priority'            => $request->priority,
-            'description'         => $request->description,
-            'status'              => 'Pending', // Set status as Pending by default
-            'created_at'          => now(),
-            'updated_at'          => now(),
-        ]);
-        return redirect()->back()->with('project-added', 'Project Added Successfully');
-    } else {
-        return redirect()->back();
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            Project::create([
+                'admin_or_user_id'    => $userId,
+                'project_name'        => $request->project_name,
+                'project_category'    => $request->project_category,
+                'project_start_date'  => $request->project_start_date,
+                'project_end_date'    => $request->project_end_date,
+                'budget'              => $request->budget,
+                'priority'            => $request->priority,
+                'description'         => $request->description,
+                'status'              => 'Pending', // Set status as Pending by default
+                'created_at'          => now(),
+                'updated_at'          => now(),
+            ]);
+            return redirect()->back()->with('project-added', 'Project Added Successfully');
+        } else {
+            return redirect()->back();
+        }
     }
-}
-    
 }

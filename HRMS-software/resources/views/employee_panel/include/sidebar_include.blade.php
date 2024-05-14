@@ -30,10 +30,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('employee-remote-work') }}" aria-expanded="false">
+                    <a href="#" aria-expanded="false">
                         <i class="fas fa-book-open"></i>
                         <span class="nav-text">Remote Work</span>
                     </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('add-employee-remote-work') }}">Add</a></li>
+                        <li><a href="{{ route('all-employee-remote-work') }}">All</a></li>
+                    </ul>
                 </li>
          </ul>
 

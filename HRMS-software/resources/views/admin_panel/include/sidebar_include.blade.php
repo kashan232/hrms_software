@@ -70,6 +70,14 @@
                  <span class="nav-text">Leaves</span>
              </a>
          </li>
+         <li>
+            <a class="has-arrow ai-icon" href="{{ route('remote-emp-list') }}" aria-expanded="false">
+                {{-- <i class="flaticon-381-controls-3"></i> --}}
+                <i class="fas fa-calendar"></i>
+                <span class="nav-text">Remote Employee</span>
+            </a>
+        </li>
+
 
          </ul>
 
