@@ -12,44 +12,72 @@ use Illuminate\Support\Facades\DB;
 
 class EmployeeAttendanceController extends Controller
 {
-    public function all_attendance()
+   
+   
+
+    public function daily_attendance(Request $request)
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            // $all_employee = Employee::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.attendance.all_attendance', [
-                // 'all_employee' => $all_employee,
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-    public function add_attendance()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            // dd($userId);
-            // $all_employee = Employee::where('admin_or_user_id', '=', $userId)->get();
             $Departments = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.attendance.add_attendance', [
-                'Departments' => $Departments,
+            return view('admin_panel.attendance.daily_attendance', [
+                'Departments' => $Departments
             ]);
         } else {
             return redirect()->back();
         }
     }
 
-    public function mark_attendance(Request $request)
+    public function fetch_daily_employee_attendance_record(Request $request)
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
+            $dept_name = $request->input('department');
+            $designation = $request->input('designation');
+            $attendance_date = $request->input('employee_attendance_date');
+            // dd($dept_name,$designation,$attendance_date);
+
+            $attendance_records = EmployeeAttendance::where('department', $dept_name)
+                ->where('job_designation', $designation)
+                ->where('employee_attendance_date', $attendance_date)
+                ->get();
+
+            // dd($attendance_records);
+            return view('admin_panel.attendance.fetch_daily_attendance', [
+                'attendance_records' => $attendance_records
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+
+    public function employee_attendance_create()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Employee = Employee::where('email', '=', $useremail)->first();
+            return view('employee_panel.attendance.create_attendance', [
+                'Employee' => $Employee,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function employee_mark_attendance(Request $request)
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
             $dept_name = $request->input('department');
             $designation = $request->input('designation');
             $employee_attendance_date = $request->input('employee_attendance_date');
-            $all_employess = Employee::where('admin_or_user_id', '=', $userId)->where('department', $dept_name)->where('designation', $designation)->get();
-
+            $all_employess = Employee::where('email', $useremail)->where('department', $dept_name)->where('designation', $designation)->get();
             $employees_attendance_data = DB::table('employee_attendances')
                 ->where('admin_or_user_id', $userId)
                 ->where('department', $dept_name)
@@ -58,7 +86,7 @@ class EmployeeAttendanceController extends Controller
                 ->toArray();
 
             // $Departments = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.attendance.mark_attendance', [
+            return view('employee_panel.attendance.employee_mark_attendance', [
                 'dept_name' => $dept_name,
                 'employee_attendance_date' => $employee_attendance_date,
                 'designation' => $designation,
@@ -70,7 +98,7 @@ class EmployeeAttendanceController extends Controller
         }
     }
 
-    public function store_employee_attendance(Request $request)
+    public function employee_store_attendance(Request $request)
     {
 
         if (Auth::id()) {
@@ -117,38 +145,21 @@ class EmployeeAttendanceController extends Controller
         }
     }
 
-    public function daily_attendance(Request $request)
+    public function all_employee_attendance(Request $request)
     {
         if (Auth::id()) {
-            $userId = Auth::id();
-            // dd($userId);
-            $Departments = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.attendance.daily_attendance', [
-                'Departments' => $Departments
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-
-    public function fetch_daily_employee_attendance_record(Request $request)
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            // dd($userId);
-            $dept_name = $request->input('department');
-            $designation = $request->input('designation');
-            $attendance_date = $request->input('employee_attendance_date');
+           
             // dd($dept_name,$designation,$attendance_date);
-
-            $attendance_records = EmployeeAttendance::where('admin_or_user_id', $userId)
-                ->where('department', $dept_name)
-                ->where('job_designation', $designation)
-                ->where('employee_attendance_date', $attendance_date)
-                ->get();
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            
+            $attendance_records = EmployeeAttendance::where('admin_or_user_id', $userId)->get();
 
             // dd($attendance_records);
-            return view('admin_panel.attendance.fetch_daily_attendance', [
+
+            // dd($attendance_records);
+            return view('employee_panel.attendance.employee_fetch_daily_attendance', [
                 'attendance_records' => $attendance_records
             ]);
         } else {

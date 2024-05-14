@@ -10,25 +10,12 @@
                      <span class="nav-text">Dashboard</span>
                  </a>
              </li>
-             <li><a href="{{ route('all-leaverequest') }}" aria-expanded="false">
-                     <i class="fas fa-check-circle"></i>
-
+             <li>
+                 <a href="{{ route('all-leaverequest') }}" aria-expanded="false">
+                     <i class="fas fa-envelope-open"></i>
                      <span class="nav-text">Leave Request</span>
                  </a>
-                 </li>
-                 <li><a class="has-arrow ai-icon" href="{{ route('mytask') }}" aria-expanded="false">
-                         <i class="fa-solid fa-user"></i>
-                         <span class="nav-text">My task</span>
-                     </a>
-
-                 </li>
-                
-                 <li>
-                     <a href="{{ route('all-leaverequest') }}" aria-expanded="false">
-                         <i class="fas fa-envelope-open"></i>
-                         <span class="nav-text">Leave Request</span>
-                     </a>
-                 </li>
+             </li>
 
                  <li>
                      <a href="{{ route('employee-cmr') }}" aria-expanded="false">

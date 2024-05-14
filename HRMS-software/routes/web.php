@@ -80,10 +80,6 @@ Route::get('/get-designations', [EmployeeController::class, 'getDesignations'])-
 
 
 //Attendance
-Route::get('/all-attendance', [EmployeeAttendanceController::class, 'all_attendance'])->middleware(['auth','admin'])->name('all-attendance');
-Route::get('/add-attendance', [EmployeeAttendanceController::class, 'add_attendance'])->middleware(['auth','admin'])->name('add-attendance');
-Route::get('/mark-attendance', [EmployeeAttendanceController::class, 'mark_attendance'])->middleware(['auth','admin'])->name('mark-attendance');
-Route::post('/store-employee-attendance', [EmployeeAttendanceController::class, 'store_employee_attendance'])->name('store-employee-attendance');
 Route::get('/daily-attendance', [EmployeeAttendanceController::class, 'daily_attendance'])->middleware(['auth','admin'])->name('daily-attendance');
 Route::get('/fetch-daily-employee-attendance-record', [EmployeeAttendanceController::class, 'fetch_daily_employee_attendance_record'])->name('fetch-daily-employee-attendance-record');
 
@@ -118,6 +114,10 @@ Route::post('/store-employee-cmr-add-salaires', [CMRController::class, 'store_em
 Route::get('/employee-cmr-add-suggestion', [CMRController::class, 'employee_cmr_add_suggestion'])->name('employee-cmr-add-suggestion');
 Route::post('/store-employee-cmr-add-suggestion', [CMRController::class, 'store_employee_cmr_add_suggestion'])->name('store-employee-cmr-add-suggestion');
 
+Route::get('/employee-attendance-create', [EmployeeAttendanceController::class, 'employee_attendance_create'])->name('employee-attendance-create');
+Route::get('/employee-mark-attendance', [EmployeeAttendanceController::class, 'employee_mark_attendance'])->name('employee-mark-attendance');
+Route::post('/employee-store-attendance', [EmployeeAttendanceController::class, 'employee_store_attendance'])->name('employee-store-attendance');
+Route::get('/all-employee-attendance', [EmployeeAttendanceController::class, 'all_employee_attendance'])->name('all-employee-attendance');
 
 //MyTask
 Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');
