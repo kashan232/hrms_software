@@ -123,6 +123,9 @@ Route::get('/all-employee-attendance', [EmployeeAttendanceController::class, 'al
 Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');
 Route::post('/update-status', [MyTaskController::class, 'update_status'])->name('update-status');
 
+//Remote work
+Route::get('/employee-remote-work', [MyTaskController::class, 'employee_remote_work'])->name('employee-remote-work');
+
 //HR panel
 
 //LeaveType

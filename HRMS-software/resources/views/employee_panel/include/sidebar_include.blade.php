@@ -29,6 +29,12 @@
                         <span class="nav-text">My Task</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('employee-remote-work') }}" aria-expanded="false">
+                        <i class="fas fa-book-open"></i>
+                        <span class="nav-text">Remote Work</span>
+                    </a>
+                </li>
          </ul>
 
      </div>
