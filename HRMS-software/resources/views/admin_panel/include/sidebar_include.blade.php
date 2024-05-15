@@ -59,7 +59,7 @@
              </a>
              <ul aria-expanded="false">
                  <li><a href="{{ route('project') }}">Project</a></li>
-                 <li><a href="{{ route('task') }}">Task</a></li>
+                 <li><a href="{{ route('employee-task-update') }}">Task</a></li>
              </ul>
 
          </li>
@@ -70,6 +70,14 @@
                  <span class="nav-text">Leaves</span>
              </a>
          </li>
+         <li>
+            <a class="has-arrow ai-icon" href="{{ route('remote-emp-list') }}" aria-expanded="false">
+                {{-- <i class="flaticon-381-controls-3"></i> --}}
+                <i class="fas fa-calendar"></i>
+                <span class="nav-text">Remote Employee</span>
+            </a>
+        </li>
+
 
          </ul>
 

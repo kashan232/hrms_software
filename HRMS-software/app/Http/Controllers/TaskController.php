@@ -80,7 +80,7 @@ class TaskController extends Controller
                 $task->status = 'In Process';
                 $task->save();
 
-                return redirect()->back()->with('task added', 'Task Added Successfully');
+                return redirect()->back()->with('task-added', 'Task Added Successfully');
             // } else {
             //     // If no employees are found, return back with an error message
             //     return redirect()->back()->with('error', 'No employees found for the selected department and designation.');

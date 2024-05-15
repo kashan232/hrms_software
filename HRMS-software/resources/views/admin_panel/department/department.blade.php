@@ -6,7 +6,7 @@
 
     @include('admin_panel.include.navbar_include')
 
-   
+
     @include('admin_panel.include.sidebar_include')
     <!--**********************************
             Content body start
@@ -14,16 +14,26 @@
     <div class="content-body ">
         <!-- row -->
         <div class="container">
-           
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('department-added'))
+                            <div class="alert alert-success solid alert-square">
+                                <strong>Success!</strong> {{ session('department-added') }}.
+                            </div>
+                        @endif
+                        @if (session()->has('department-update'))
+                            <div class="alert alert-success solid alert-square">
+                                <strong>Success!</strong> {{ session('department-update') }}.
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h4 class="card-title">Department</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New Department">
-                                    <i class="las la-plus"></i>Add New 
+                                    <i class="las la-plus"></i>Add New
                                 </button>
                             </div>
                         </div>
@@ -34,7 +44,8 @@
                                         <tr>
                                             <th>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="checkAll" required="">
+                                                    <input type="checkbox" class="custom-control-input" id="checkAll"
+                                                        required="">
                                                     <label class="custom-control-label" for="checkAll"></label>
                                                 </div>
                                             </th>
@@ -45,27 +56,31 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($all_department as $department)
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheckBox2" required="">
-                                                    <label class="custom-control-label" for="customCheckBox2"></label>
-                                                </div>
-                                            </td>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $department->department }}</td>
-                                            <td>
-                                                <div class="button--group">
-                                                    <button type="button" class="btn btn-primary editdepartmentBtn" data-toggle="modal"
-                                                        data-modal_title="Edit Department" data-has_status="1"
-                                                        data-target="#editdepartment" data-department-id="{{ $department->id }}" data-department-name="{{ $department->department }}">
-                                                        <i class="la la-pencil"></i>Edit </button>
-                                                    {{-- <button type="button"
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="customCheckBox2" required="">
+                                                        <label class="custom-control-label"
+                                                            for="customCheckBox2"></label>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $department->department }}</td>
+                                                <td>
+                                                    <div class="button--group">
+                                                        <button type="button" class="btn btn-primary editdepartmentBtn"
+                                                            data-toggle="modal" data-modal_title="Edit Department"
+                                                            data-has_status="1" data-target="#editdepartment"
+                                                            data-department-id="{{ $department->id }}"
+                                                            data-department-name="{{ $department->department }}">
+                                                            <i class="la la-pencil"></i>Edit </button>
+                                                        {{-- <button type="button"
                                                     class="btn btn-danger" data-question="Are you sure to delete this Department?">
                                                         <i class="la la-trash"></i>Delete </button> --}}
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -73,17 +88,18 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
-             <!--Create Modal -->
-             <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
+            <!--Create Modal -->
+            <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title"><span class="type"></span> <span>Add Department</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -94,7 +110,7 @@
                                     <label>Department</label>
                                     <input type="text" name="department" class="form-control" required>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -104,13 +120,16 @@
             </div>
 
             <!--Edit Modal -->
-            <div  id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel" aria-hidden="true">
+            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit Department</span></h5>
+                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit
+                                    Department</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -119,8 +138,10 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Department</label>
-                                    <input type="hidden" id="editdepartmentId" name="department_id" class="form-control" required>
-                                    <input type="text" id="editdepartmentName" name="department_name" class="form-control" required>
+                                    <input type="hidden" id="editdepartmentId" name="department_id"
+                                        class="form-control" required>
+                                    <input type="text" id="editdepartmentName" name="department_name"
+                                        class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -145,7 +166,7 @@
         </div>
     </div>
      <!--********************************** --}}
-            {{-- Footer end
+    {{-- Footer end
         ***********************************--> --}}
 
 
@@ -157,8 +178,8 @@
 @include('admin_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
-    $(document).ready(function(){
-        $('#addNewButton').click(function(){
+    $(document).ready(function() {
+        $('#addNewButton').click(function() {
             $('#cuModal').modal('show');
         });
     });
@@ -166,8 +187,8 @@
 
 <script>
     // JavaScript/jQuery code to trigger modal
-    $(document).ready(function(){
-        $('.editdepartmentBtn').click(function(){
+    $(document).ready(function() {
+        $('.editdepartmentBtn').click(function() {
             $('#editbtn').modal('show');
         });
     });
@@ -175,16 +196,14 @@
 
 <script>
     $(document).ready(function() {
-    // Edit category button click event
-    $('.editdepartmentBtn').click(function() {
-        // Extract department ID and name from data attributes
-        var departmentId = $(this).data('department-id');
-        var departmentName = $(this).data('department-name');
-        // Set the extracted values in the modal fields
-        $('#editdepartmentId').val(departmentId);
-        $('#editdepartmentName').val(departmentName);
+        // Edit category button click event
+        $('.editdepartmentBtn').click(function() {
+            // Extract department ID and name from data attributes
+            var departmentId = $(this).data('department-id');
+            var departmentName = $(this).data('department-name');
+            // Set the extracted values in the modal fields
+            $('#editdepartmentId').val(departmentId);
+            $('#editdepartmentName').val(departmentName);
+        });
     });
-});
 </script>
-
-

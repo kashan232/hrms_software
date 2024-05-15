@@ -59,7 +59,7 @@ class LeaveRequestController extends Controller
                 ]);
 
                 // Redirect back with success message
-                return redirect()->back()->with('Leave-req-added', 'Leave Request Is Successfully');
+                return redirect()->back()->with('Leave-req-added', 'Leave Request Is Successfully Added');
             } else {
                 // Handle case when employee record not found
                 return redirect()->back()->with('error', 'Employee record not found.');

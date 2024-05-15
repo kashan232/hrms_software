@@ -6,6 +6,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLeaveRequestController;
+use App\Http\Controllers\EmployeeRemoteWorkController;
 use App\Http\Controllers\EmployeeTaskUpdateController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HiringController;
@@ -94,6 +95,9 @@ Route::get('/employee-task-update', [EmployeeTaskUpdateController::class, 'emplo
 //leaves record
 Route::get('/leaves', [LeavesRecordController::class, 'leaves'])->name('leaves');
 
+//remote employee
+Route::get('/remote-emp-list', [LeavesRecordController::class, 'remote_emp_list'])->name('remote-emp-list');
+
 // Employee Panel
 
 // LeaveRequest
@@ -122,6 +126,11 @@ Route::get('/all-employee-attendance', [EmployeeAttendanceController::class, 'al
 //MyTask
 Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');
 Route::post('/update-status', [MyTaskController::class, 'update_status'])->name('update-status');
+
+//Remote work
+Route::get('/add-employee-remote-work', [EmployeeRemoteWorkController::class, 'add_employee_remote_work'])->name('add-employee-remote-work');
+Route::post('/store-remote-work', [EmployeeRemoteWorkController::class, 'store_remote_work'])->name('store-remote-work');
+Route::get('/all-employee-remote-work', [EmployeeRemoteWorkController::class, 'all_employee_remote_work'])->name('all-employee-remote-work');
 
 //HR panel
 
@@ -160,6 +169,8 @@ Route::get('/task', [TaskController::class, 'task'])->name('task');
 Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-task');
 //Route::get('/get-employees', [TaskController::class, 'getEmployees'])->name('get-employees');
 
+//remote employee
+Route::get('/remote-employee-listing', [ProjectListingController::class, 'remote_employee_listing'])->name('remote-employee-listing');
 
 
 Route::middleware('auth')->group(function () {

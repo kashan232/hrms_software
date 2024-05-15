@@ -50,19 +50,6 @@
                  </ul>
              </li>
 
-             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-calendar"></i>
-                     <span class="nav-text">All Leaves</span>
-                 </a>
-                 <ul aria-expanded="false">
-                     <li><a href="{{ route('all-leave') }}">All Leaves</a></li>
-                     <li><a href="{{ route('pending-leave') }}">Pending Leaves</a></li>
-                     <li><a href="{{ route('approve-leave') }}">Approve Leaves</a></li>
-                     <li><a href="{{ route('reject-leave') }}">Reject Leaves</a></li>
-                 </ul>
-
-             </li>
 
              <li><a class="has-arrow ai-icon" href="{{ route('project-listing-to-hr') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
@@ -86,6 +73,12 @@
                      <li><a href="{{ route('all-revenue') }}">All Revenue</a></li>
                  </ul>
 
+             </li>
+             <li><a class="has-arrow ai-icon" href="{{ route('remote-employee-listing') }}" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-bell"></i>
+                     <span class="nav-text">Remote Employee</span>
+                 </a>
              </li>
          </ul>
 

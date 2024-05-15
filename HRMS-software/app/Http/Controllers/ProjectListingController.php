@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeRemoteWork;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,4 +22,18 @@ class ProjectListingController extends Controller
             return redirect()->back();
         }
     }
+    public function remote_employee_listing()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            // dd($userId);
+            $all_remote = EmployeeRemoteWork::all();
+            return view('hr_panel.remote_employee.remote_employee_listing', [
+                'all_remote' => $all_remote,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+    
 }
