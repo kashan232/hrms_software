@@ -18,6 +18,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('project-added'))
+                            <div class="alert alert-success solid alert-square">
+                                <strong>Success!</strong> {{ session('project-added') }}.
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h4 class="card-title">Project</h4>
                             <div>
@@ -50,7 +55,8 @@
                                                 <td>{{ $project->project_name }}</td>
                                                 <td>{{ $project->project_category }}</td>
                                                 <td>{{ $project->project_start_date }}
-                                                    <br>{{ $project->project_end_date }}</td>
+                                                    <br>{{ $project->project_end_date }}
+                                                </td>
                                                 <td>{{ $project->budget }}</td>
                                                 {{-- <td>{{ $project->priority }}</td> --}}
                                                 <td>
@@ -90,14 +96,14 @@
                                                     <button type="button" class="btn btn-primary">
                                                         Pending</button>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <div class="button--group">
                                                         <button type="button" class="btn btn-primary editprojectBtn"
                                                             data-toggle="modal" data-modal_title="Edit Project"
                                                             data-has_status="1" data-target="#editproject">
                                                             <i class="la la-pencil"></i></button>
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -168,38 +174,6 @@
                 </div>
             </div>
 
-            <!--Edit Modal -->
-            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit
-                                    project</span></h5>
-                            <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                style="font-size: 1rem; border:none;">
-                                <i class="las la-times"></i>
-                            </button>
-                        </div>
-                        <form action="" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Department</label>
-                                    <input type="hidden" id="editdepartmentId" name="department_id"
-                                        class="form-control" required>
-                                    <input type="text" id="editdepartmentName" name="department_name"
-                                        class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!--**********************************

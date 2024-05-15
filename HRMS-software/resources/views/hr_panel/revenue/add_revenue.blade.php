@@ -22,14 +22,14 @@
                             <div class="alert alert-success solid alert-square">
                                 <strong>Success!</strong> {{ session('revenue-added') }}.
                             </div>
-                            @endif
+                        @endif
                         <div class="card-header">
                             <h4 class="card-title">Add Revenue</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
                                     <a href="{{ route('all-revenue') }}" style="color: white;">
-                                    All Revenue </a>
+                                        All Revenue </a>
                                 </button>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                             <label class="form-label">Amount</label>
                                             <input type="number" name="amount" class="form-control">
                                         </div>
-                                        
+
                                         <div class="mb-3 col-md-6">
                                             <label>Tax</label>
                                             <input type="number" name="tax" class="form-control">
@@ -108,13 +108,17 @@
             var department = $(this).val();
             if (department) {
                 $.ajax({
-                    url: '{{ route("get-designations") }}',
+                    url: '{{ route('get-designations') }}',
                     type: 'GET',
-                    data: { department: department },
+                    data: {
+                        department: department
+                    },
                     success: function(data) {
                         $('select[name="designation"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
+                            $('select[name="designation"]').append(
+                                '<option value="' + value + '">' + value +
+                                '</option>');
                         });
                     }
                 });
@@ -126,13 +130,13 @@
 </script>
 <script>
     document.getElementById("togglePassword").addEventListener("click", function() {
-    var passwordInput = document.getElementById("passwordInput");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
-    } else {
-        passwordInput.type = "password";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
-    }
-});
+        var passwordInput = document.getElementById("passwordInput");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
+        } else {
+            passwordInput.type = "password";
+            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
+        }
+    });
 </script>

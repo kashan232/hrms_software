@@ -38,7 +38,7 @@ class DesignationController extends Controller
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
-            return redirect()->back()->with('department-added', 'Department Added Successfully');
+            return redirect()->back()->with('designation-added', 'Designation Added Successfully');
         } else {
             return redirect()->back();
         }

@@ -18,13 +18,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('hiring-added'))
+                            <div class="alert alert-success solid alert-square">
+                                <strong>Success!</strong> {{ session('hiring-added') }}.
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h4 class="card-title">Add Hiring</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
                                     <a href="{{ route('all-hiring') }}" style="color: white;">
-                                    All Hiring </a>
+                                        All Hiring </a>
                                 </button>
                             </div>
                         </div>
@@ -53,7 +58,7 @@
                                             <label class="form-label">Skills</label>
                                             <input type="text" name="skills" class="form-control">
                                         </div>
-                                        
+
                                         <div class="mb-3 col-md-6">
                                             <label>Experience</label>
                                             <input type="text" name="experience" class="form-control">

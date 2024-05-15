@@ -73,7 +73,7 @@ class EmployeeRemoteWorkController extends Controller
                 ]);
 
                 // Redirect back with success message
-                return redirect()->back()->with('remote-work', 'Remote Work  Is Successfully');
+                return redirect()->back()->with('remote-work', ' Remote Employee  Is Successfully Added');
             } else {
                 // Handle case when employee record not found
                 return redirect()->back()->with('error', 'Remote Work not found.');

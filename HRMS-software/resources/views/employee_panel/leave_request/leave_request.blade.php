@@ -18,10 +18,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('Leave-req-added'))
+                            <div class="alert alert-success solid alert-square">
+                                <strong>Success!</strong> {{ session('Leave-req-added') }}.
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h4 class="card-title">Leave Request</h4>
                             <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New Department">
+                                <button id="addNewButton" type="button" class="btn btn-primary"
+                                    data-modal_title="Add New Department">
                                     <i class="las la-plus"></i>Add New
                                 </button>
                             </div>
@@ -39,21 +45,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($LeaveRequests as $LeaveRequest)
+                                        @foreach ($LeaveRequests as $LeaveRequest)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $LeaveRequest->leave_type }}</td>
-                                                <td>{{ $LeaveRequest->leave_from_date }} <br> {{ $LeaveRequest->leave_to_date }}</td>
+                                                <td>{{ $LeaveRequest->leave_from_date }} <br>
+                                                    {{ $LeaveRequest->leave_to_date }}</td>
                                                 <td>{{ $LeaveRequest->leave_reason }}</td>
                                                 {{-- <td>
-                                                    @if($LeaveRequest->leave_approve == 'Approve')
+                                                    @if ($LeaveRequest->leave_approve == 'Approve')
                                                         <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
                                                     @else
                                                         <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
                                                     @endif
                                                 </td> --}}
                                                 <td>
-                                                    @if($LeaveRequest->leave_approve == 'Approve')
+                                                    @if ($LeaveRequest->leave_approve == 'Approve')
                                                         <button type="button" class="btn btn-success">
                                                             Approved
                                                         </button>
@@ -83,7 +90,8 @@
                         <div class="modal-header">
                             <h5 class="modal-title"><span class="type"></span> <span>Add Leave Request</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -98,9 +106,9 @@
                                             <select name="leave_type" id="" class="form-control">
                                                 <option selected disabled>Select One</option>
                                                 @foreach ($LeaveTypes as $LeaveType)
-                                                <option value="{{ $LeaveType->leave_type }}">
-                                                    {{ $LeaveType->leave_type }}
-                                                </option>
+                                                    <option value="{{ $LeaveType->leave_type }}">
+                                                        {{ $LeaveType->leave_type }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -140,9 +148,11 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editleaveLabel"><span class="type"></span> <span>Edit Leave Type</span></h5>
+                            <h5 class="modal-title" id="editleaveLabel"><span class="type"></span> <span>Edit Leave
+                                    Type</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                                style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -151,8 +161,10 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Leave Type</label>
-                                    <input type="hidden" id="editleaveid" name="leave_type_id" class="form-control" required>
-                                    <input type="text" id="editleavetype" name="leave_type" class="form-control" required>
+                                    <input type="hidden" id="editleaveid" name="leave_type_id" class="form-control"
+                                        required>
+                                    <input type="text" id="editleavetype" name="leave_type" class="form-control"
+                                        required>
                                 </div>
                             </div>
                             <div class="modal-footer">

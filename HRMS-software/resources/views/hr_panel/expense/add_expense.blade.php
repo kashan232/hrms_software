@@ -18,6 +18,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('expense-added'))
+                            <div class="alert alert-success solid alert-square">
+                                <strong>Success!</strong> {{ session('expense-added') }}.
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h4 class="card-title">Add Expense</h4>
                             <div>

@@ -18,6 +18,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if (session()->has('remote-work'))
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('remote-work') }}.
+                        </div>
+                    @endif
                         <div class="card-header">
                             <h4 class="card-title">Add Remote Work</h4>
                             <div>
