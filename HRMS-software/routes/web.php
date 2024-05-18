@@ -21,6 +21,7 @@ use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectListingController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TaskController;
 use App\Models\LeaveRequest;
@@ -178,6 +179,12 @@ Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-t
 
 //remote employee
 Route::get('/remote-employee-listing', [ProjectListingController::class, 'remote_employee_listing'])->name('remote-employee-listing');
+
+
+// Admin Reporting Routes
+Route::get('/report-employee-attendance', [ReportController::class, 'report_employee_attendance'])->name('report-employee-attendance');
+Route::get('/report-employee-monthly-attendance-record', [ReportController::class, 'report_employee_monthly_attendance_record'])->name('report-employee-monthly-attendance-record');
+Route::get('/individual-employee-attendance/{id}/{dep}/{at_date}/{total_month_days}', [ReportController::class, 'individual_employee_attendance'])->name('individual-employee-attendance');
 
 
 Route::middleware('auth')->group(function () {
