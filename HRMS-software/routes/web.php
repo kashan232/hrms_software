@@ -16,6 +16,7 @@ use App\Http\Controllers\HRLeavesController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -68,6 +69,12 @@ Route::get('/all-hr', [HRController::class, 'all_hr'])->middleware(['auth','admi
 Route::get('/edit-hr/{id}', [HRController::class, 'edit_hr'])->middleware(['auth','admin'])->name('edit-hr');
 Route::post('/update-hr/{id}', [HRController::class, 'update_hr'])->name('update-hr');
 
+//Manager
+Route::get('/add-manager', [ManagerController::class, 'add_manager'])->middleware(['auth','admin'])->name('add-manager');
+Route::post('/store-manager', [ManagerController::class, 'store_manager'])->name('store-manager');
+Route::get('/all-manager', [ManagerController::class, 'all_manager'])->middleware(['auth','admin'])->name('all-manager');
+Route::get('/edit-manager/{id}', [ManagerController::class, 'edit_manager'])->middleware(['auth','admin'])->name('edit-manager');
+Route::post('/update-manager/{id}', [ManagerController::class, 'update_manager'])->name('update-manager');
 
 //Employees
 Route::get('/all-employee', [EmployeeController::class, 'all_employee'])->middleware(['auth','admin'])->name('all-employee');
