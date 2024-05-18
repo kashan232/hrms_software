@@ -24,15 +24,15 @@ class HomeController extends Controller
             }
             else if($usertype=='employee')
             {
-                
-
-
-
                 return view('employee_panel.employee_dashboard');
             }
             else if($usertype=='hr')
             {
                 return view('hr_panel.hr_dashboard');
+            }
+            else if($usertype=='manager')
+            {
+                return view('manager_panel.manager_dashboard');
             }
         }
         else

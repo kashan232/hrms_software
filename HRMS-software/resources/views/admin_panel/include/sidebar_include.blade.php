@@ -32,35 +32,47 @@
                      <li><a href="{{ route('all-hr') }}">List HR</a></li>
                      {{-- <li><a href="{{ route('get-designations') }}">Deleted Employee</a>
              </li> --}}
-         </ul>
-         </li>
-         <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                 <i class="fa-solid fa-user"></i>
-                 <span class="nav-text">Employee</span>
-             </a>
-             <ul aria-expanded="false">
-                 <li><a href="{{ route('add-employee') }}">Add Employee</a></li>
-                 <li><a href="{{ route('all-employee') }}">List Employee</a></li>
-                 <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li>
-             </ul>
-         </li>
-         <li>
-             <a class="has-arrow ai-icon" href="{{ route('daily-attendance') }}" aria-expanded="false">
-                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                 <i class="fas fa-check-circle"></i>
-                 <span class="nav-text">Attendance</span>
-             </a>
-         </li>
-         <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                 <i class="fas fa-briefcase"></i>
-                 <span class="nav-text">Create Task</span>
-             </a>
-             <ul aria-expanded="false">
-                 <li><a href="{{ route('project') }}">Project</a></li>
-                 <li><a href="{{ route('employee-task-update') }}">Task</a></li>
-             </ul>
+                 </ul>
+             </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-user-cog"></i>
+                     <span class="nav-text">Create Manager</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('add-manager') }}">Add Manager</a></li>
+                     <li><a href="{{ route('all-manager') }}">List Manager</a></li>
+                     {{-- <li><a href="{{ route('get-designations') }}">Deleted Employee</a>
+        </li> --}}
+                 </ul>
+             </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Employee</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('add-employee') }}">Add Employee</a></li>
+                     <li><a href="{{ route('all-employee') }}">List Employee</a></li>
+                     <li><a href="{{ route('get-designations') }}">Deleted Employee</a></li>
+                 </ul>
+             </li>
+             <li>
+                 <a class="has-arrow ai-icon" href="{{ route('daily-attendance') }}" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-check-circle"></i>
+                     <span class="nav-text">Attendance</span>
+                 </a>
+             </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-briefcase"></i>
+                     <span class="nav-text">Create Task</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('project') }}">Project</a></li>
+                     <li><a href="{{ route('employee-task-update') }}">Task</a></li>
+                 </ul>
 
          </li>
          <li>
@@ -71,12 +83,12 @@
              </a>
          </li>
          <li>
-             <a class="has-arrow ai-icon" href="{{ route('remote-emp-list') }}" aria-expanded="false">
-                 {{-- <i class="flaticon-381-controls-3"></i> --}}
-                 <i class="fas fa-calendar"></i>
-                 <span class="nav-text">Remote Employee</span>
-             </a>
-         </li>
+            <a class="has-arrow ai-icon" href="{{ route('remote-emp-list') }}" aria-expanded="false">
+                {{-- <i class="flaticon-381-controls-3"></i> --}}
+                <i class="fas fa-calendar"></i>
+                <span class="nav-text">Remote Employee</span>
+            </a>
+        </li>
 
          <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                  {{-- <i class="flaticon-381-controls-3"></i> --}}
