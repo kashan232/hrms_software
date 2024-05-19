@@ -16,19 +16,28 @@
                      <span class="nav-text">Leave Request</span>
                  </a>
              </li>
+             <li class="has-menu mm-active"><a class="has-arrow ai-icon" href="#" aria-expanded="true">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="nav-text">Attendance</span>
+                </a>
+                <ul aria-expanded="false" class="mm-collapse mm-show" style="">
+                    <li><a href="{{ route('employee-attendance-create') }}">Creae Attendance</a></li>
+                    <li><a href="{{ route('all-employee-attendance') }}">Check Attendance</a></li>
+                </ul>
+            </li>
 
-                 <li>
-                     <a href="{{ route('employee-cmr') }}" aria-expanded="false">
-                         <i class="fas fa-boxes"></i>
-                         <span class="nav-text">CMR</span>
-                     </a>
-                 </li>
-                 <li>
-                    <a href="{{ route('mytask') }}" aria-expanded="false">
-                        <i class="fas fa-book-open"></i>
-                        <span class="nav-text">My Task</span>
-                    </a>
-                </li>
+             <li>
+                 <a href="{{ route('employee-cmr') }}" aria-expanded="false">
+                     <i class="fas fa-boxes"></i>
+                     <span class="nav-text">CMR</span>
+                 </a>
+             </li>
+             <li>
+                 <a href="{{ route('mytask') }}" aria-expanded="false">
+                     <i class="fas fa-book-open"></i>
+                     <span class="nav-text">My Task</span>
+                 </a>
+             </li>
          </ul>
 
      </div>
