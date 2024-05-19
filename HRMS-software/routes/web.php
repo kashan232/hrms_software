@@ -18,6 +18,7 @@ use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MyTaskController;
+use App\Http\Controllers\PayrolController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectListingController;
@@ -179,6 +180,10 @@ Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-t
 
 //remote employee
 Route::get('/remote-employee-listing', [ProjectListingController::class, 'remote_employee_listing'])->name('remote-employee-listing');
+
+
+//hr routes
+Route::get('/create-salary', [PayrolController::class, 'create_salary'])->name('create-salary');
 
 
 // Admin Reporting Routes
