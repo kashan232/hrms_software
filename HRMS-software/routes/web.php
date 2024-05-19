@@ -184,6 +184,9 @@ Route::get('/remote-employee-listing', [ProjectListingController::class, 'remote
 
 //hr routes
 Route::get('/create-salary', [PayrolController::class, 'create_salary'])->name('create-salary');
+Route::post('/post-create-salary', [PayrolController::class, 'post_create_salary'])->name('post-create-salary');
+Route::get('/generate-salary', [PayrolController::class, 'generate_salary'])->name('generate-salary');
+Route::get('/salary-print/{id}', [PayrolController::class, 'printSalary'])->name('salary-print');
 
 
 // Admin Reporting Routes

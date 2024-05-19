@@ -57,6 +57,7 @@
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('create-salary') }}">Create Salary</a></li>
+                     <li><a href="{{ route('generate-salary') }}">Generate Salary</a></li>
                  </ul>
              </li>
 
