@@ -7,15 +7,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LeaveTypeController extends Controller
+class ManagerLeaveTypeController extends Controller
 {
-    public function all_leavetype()
+    public function manager_all_leavetype()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
             $LeaveTypes = LeaveType::where('admin_or_user_id', '=', $userId)->get();
-            return view('hr_panel.leave_type.hr_leave_type', [
+            return view('manager_panel.leave_type.manager_leave_type', [
                 'LeaveTypes' => $LeaveTypes,
             ]);
         } else {
@@ -23,7 +23,7 @@ class LeaveTypeController extends Controller
         }
     }
 
-    public function store_leavetype(Request $request)
+    public function manager_store_leavetype(Request $request)
     {
         if (Auth::check()) {
             $userId = Auth::id();
@@ -47,7 +47,7 @@ class LeaveTypeController extends Controller
         }
     }
 
-    public function update_leavetype(Request $request)
+    public function manager_update_leavetype(Request $request)
     {
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;

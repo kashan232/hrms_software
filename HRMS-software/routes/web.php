@@ -17,6 +17,7 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ManagerLeaveTypeController;
 use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\PayrolController;
 use App\Http\Controllers\ProfileController;
@@ -104,9 +105,17 @@ Route::get('/employee-task-update', [EmployeeTaskUpdateController::class, 'emplo
 //leaves record
 Route::get('/leaves', [LeavesRecordController::class, 'leaves'])->name('leaves');
 
-//remote employee
+//remote employee Listing for admin
 Route::get('/remote-emp-list', [LeavesRecordController::class, 'remote_emp_list'])->name('remote-emp-list');
 
+//Hiring Listing for admin
+Route::get('/hiring-listing', [LeavesRecordController::class, 'hiring_listing'])->name('hiring-listing');
+
+//Expense Listing for admin
+Route::get('/expense-listing', [LeavesRecordController::class, 'expense_listing'])->name('expense-listing');
+
+//Revenue Listing for admin
+Route::get('/revenue-listing', [LeavesRecordController::class, 'revenue_listing'])->name('revenue-listing');
 // Employee Panel
 
 // LeaveRequest
@@ -143,7 +152,7 @@ Route::get('/all-employee-remote-work', [EmployeeRemoteWorkController::class, 'a
 
 //HR panel
 
-//LeaveType
+//HRLeaveType
 Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->name('all-leavetype');
 Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
 Route::post('/update-leavetype', [LeaveTypeController::class, 'update_leavetype'])->name('update-leavetype');
@@ -188,6 +197,11 @@ Route::post('/post-create-salary', [PayrolController::class, 'post_create_salary
 Route::get('/generate-salary', [PayrolController::class, 'generate_salary'])->name('generate-salary');
 Route::get('/salary-print/{id}', [PayrolController::class, 'printSalary'])->name('salary-print');
 
+// Manager panel
+//Manager LeaveType
+Route::get('/manager-all-leavetype', [ManagerLeaveTypeController::class, 'manager_all_leavetype'])->name('manager-all-leavetype');
+Route::post('/manager-store-leavetype', [ManagerLeaveTypeController::class, 'manager_store_leavetype'])->name('manager-store-leavetype');
+Route::post('/manager-update-leavetype', [ManagerLeaveTypeController::class, 'manager_update_leavetype'])->name('manager-update-leavetype');
 
 // Admin Reporting Routes
 Route::get('/report-employee-attendance', [ReportController::class, 'report_employee_attendance'])->name('report-employee-attendance');
