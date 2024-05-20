@@ -17,7 +17,9 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ManagerExpenseController;
 use App\Http\Controllers\ManagerLeaveTypeController;
+use App\Http\Controllers\ManagerProjectListingController;
 use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\PayrolController;
 use App\Http\Controllers\ProfileController;
@@ -164,7 +166,7 @@ Route::get('/approve-leave', [HRLeavesController::class, 'approve_leave'])->name
 Route::get('/reject-leave', [HRLeavesController::class, 'reject_leave'])->name('reject-leave');
 Route::post('/update-leave-approve', [HRLeavesController::class,'updateLeaveApprove'])->name('update-leave-approve');
 
-//Expense
+//HR Expense
 Route::get('/all-expense', [ExpenseController::class, 'all_expense'])->name('all-expense');
 Route::get('/add-expense', [ExpenseController::class, 'add_expense'])->name('add-expense');
 Route::post('/store-expense', [ExpenseController::class, 'store_expense'])->name('store-expense');
@@ -202,6 +204,14 @@ Route::get('/salary-print/{id}', [PayrolController::class, 'printSalary'])->name
 Route::get('/manager-all-leavetype', [ManagerLeaveTypeController::class, 'manager_all_leavetype'])->name('manager-all-leavetype');
 Route::post('/manager-store-leavetype', [ManagerLeaveTypeController::class, 'manager_store_leavetype'])->name('manager-store-leavetype');
 Route::post('/manager-update-leavetype', [ManagerLeaveTypeController::class, 'manager_update_leavetype'])->name('manager-update-leavetype');
+
+//Manager Expense
+Route::get('/manager-all-expense', [ManagerExpenseController::class, 'manager_all_expense'])->name('manager-all-expense');
+Route::get('/manager-add-expense', [ManagerExpenseController::class, 'manager_add_expense'])->name('manager-add-expense');
+Route::post('/manager-store-expense', [ManagerExpenseController::class, 'manager_store_expense'])->name('manager-store-expense');
+
+//Manager projects LIsting
+Route::get('/project-listing-to-manager', [ManagerProjectListingController::class, 'project_listing_to_manager'])->name('project-listing-to-manager');
 
 // Admin Reporting Routes
 Route::get('/report-employee-attendance', [ReportController::class, 'report_employee_attendance'])->name('report-employee-attendance');
