@@ -19,7 +19,10 @@ use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerExpenseController;
 use App\Http\Controllers\ManagerLeaveTypeController;
+use App\Http\Controllers\ManagerPayrolController;
 use App\Http\Controllers\ManagerProjectListingController;
+use App\Http\Controllers\ManagerRevenueController;
+use App\Http\Controllers\ManagerTaskController;
 use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\PayrolController;
 use App\Http\Controllers\ProfileController;
@@ -163,7 +166,7 @@ Route::get('/all-leavetype', [LeaveTypeController::class, 'all_leavetype'])->nam
 Route::post('/store-leavetype', [LeaveTypeController::class, 'store_leavetype'])->name('store-leavetype');
 Route::post('/update-leavetype', [LeaveTypeController::class, 'update_leavetype'])->name('update-leavetype');
 
-//Approve Leaves
+//HR Approve Leaves
 Route::get('/all-leave', [HRLeavesController::class, 'all_leave'])->name('all-leave');
 Route::get('/pending-leave', [HRLeavesController::class, 'pending_leave'])->name('pending-leave');
 Route::get('/approve-leave', [HRLeavesController::class, 'approve_leave'])->name('approve-leave');
@@ -180,7 +183,7 @@ Route::get('/all-hiring', [HiringController::class, 'all_hiring'])->name('all-hi
 Route::get('/add-hiring', [HiringController::class, 'add_hiring'])->name('add-hiring');
 Route::post('/store-hiring', [HiringController::class, 'store_hiring'])->name('store-hiring');
 
-//Revenue
+//Hr Revenue
 Route::get('/all-revenue', [RevenueController::class, 'all_revenue'])->name('all-revenue');
 Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add-revenue');
 Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
@@ -188,16 +191,17 @@ Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name
 //projects
 Route::get('/project-listing-to-hr', [ProjectListingController::class, 'project_listing_to_hr'])->name('project-listing-to-hr');
 
-//Task
+//HR Task
 Route::get('/task', [TaskController::class, 'task'])->name('task');
 Route::post('/store-task', [TaskController::class, 'store_task'])->name('store-task');
 //Route::get('/get-employees', [TaskController::class, 'getEmployees'])->name('get-employees');
 
-//remote employee
+//HR remote employee Listing
 Route::get('/remote-employee-listing', [ProjectListingController::class, 'remote_employee_listing'])->name('remote-employee-listing');
 
 
 //hr routes
+// Salary
 Route::get('/create-salary', [PayrolController::class, 'create_salary'])->name('create-salary');
 Route::post('/post-create-salary', [PayrolController::class, 'post_create_salary'])->name('post-create-salary');
 Route::get('/generate-salary', [PayrolController::class, 'generate_salary'])->name('generate-salary');
@@ -217,10 +221,28 @@ Route::post('/manager-store-expense', [ManagerExpenseController::class, 'manager
 //Manager projects LIsting
 Route::get('/project-listing-to-manager', [ManagerProjectListingController::class, 'project_listing_to_manager'])->name('project-listing-to-manager');
 
+//Manager Task
+Route::get('/manager-task', [ManagerTaskController::class, 'manager_task'])->name('manager-task');
+Route::post('/manager-store-task', [ManagerTaskController::class, 'manager_store_task'])->name('manager-store-task');
+
+//Manager Revenue
+Route::get('/manager-all-revenue', [ManagerRevenueController::class, 'manager_all_revenue'])->name('manager-all-revenue');
+Route::get('/manager-add-revenue', [ManagerRevenueController::class, 'manager_add_revenue'])->name('manager-add-revenue');
+Route::post('/manager-store-revenue', [ManagerRevenueController::class, 'manager_store_revenue'])->name('manager-store-revenue'); 
+
 // Admin Reporting Routes
 Route::get('/report-employee-attendance', [ReportController::class, 'report_employee_attendance'])->name('report-employee-attendance');
 Route::get('/report-employee-monthly-attendance-record', [ReportController::class, 'report_employee_monthly_attendance_record'])->name('report-employee-monthly-attendance-record');
 Route::get('/individual-employee-attendance/{id}/{dep}/{at_date}/{total_month_days}', [ReportController::class, 'individual_employee_attendance'])->name('individual-employee-attendance');
+
+//Manager remote employee Listing
+Route::get('/manager-remote-employee-listing', [ProjectListingController::class, 'manager_remote_employee_listing'])->name('manager-remote-employee-listing');
+
+// Salary
+Route::get('/manager-create-salary', [ManagerPayrolController::class, 'manager_create_salary'])->name('manager-create-salary');
+Route::post('/manager-post-create-salary', [ManagerPayrolController::class, 'manager_post_create_salary'])->name('manager-post-create-salary');
+Route::get('/manager-generate-salary', [ManagerPayrolController::class, 'manager_generate_salary'])->name('manager-generate-salary');
+Route::get('/manager-salary-print/{id}', [ManagerPayrolController::class, 'manager_printSalary'])->name('manager-salary-print');
 
 
 Route::middleware('auth')->group(function () {

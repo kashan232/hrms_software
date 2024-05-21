@@ -13,6 +13,7 @@ class Hiring extends Model
 
     protected $fillable = [
         'admin_or_user_id',
+        'usertype',
         'date',
         'designation',
         'job_description',

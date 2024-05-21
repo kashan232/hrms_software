@@ -13,6 +13,7 @@ class PayrolSalary extends Model
 
     protected $fillable = [
         'emp_id',
+        'usertype',
         'employee_name',
         'department',
         'designation',

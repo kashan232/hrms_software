@@ -38,10 +38,12 @@ class HiringController extends Controller
     {
         if (Auth::id()){
             $userId = Auth::id();
+            $userType = Auth::user()->usertype;
             // Create the employee record
             // dd($request);
             $hiring = Hiring::create([
                 'admin_or_user_id' => $userId,
+                'usertype' => $userType, // Adding usertype to the database
                 'date' => $request->date,
                 'designation' => $request->designation,
                 'job_description' => $request->job_description,

@@ -15,6 +15,7 @@
                      <span class="nav-text">Leave Type</span>
                  </a>
              </li>
+             
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>
@@ -26,10 +27,44 @@
                  </ul>
 
              </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                {{-- <i class="flaticon-381-controls-3"></i> --}}
+                <i class="fas fa-graduation-cap"></i>
+                <span class="nav-text">Payrol</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="{{ route('manager-create-salary') }}">Create Salary</a></li>
+                <li><a href="{{ route('manager-generate-salary') }}">Generate Salary</a></li>
+            </ul>
+        </li>
              <li><a class="has-arrow ai-icon" href="{{ route('project-listing-to-manager') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-briefcase"></i>
                      <span class="nav-text">Projects</span>
+                 </a>
+             </li>
+             <li><a class="has-arrow ai-icon" href="{{ route('manager-task') }}" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-tasks"></i>
+                     <span class="nav-text">Create Task</span>
+                 </a>
+             </li>
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-bell"></i>
+                     <span class="nav-text">Revenue</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('manager-add-revenue') }}">Add Revenue</a></li>
+                     <li><a href="{{ route('manager-all-revenue') }}">All Revenue</a></li>
+                 </ul>
+
+             </li>
+             <li><a class="has-arrow ai-icon" href="{{ route('manager-remote-employee-listing') }}"
+                     aria-expanded="false">
+                     {{-- <i class="flaticon-381-controls-3"></i> --}}
+                     <i class="fas fa-bell"></i>
+                     <span class="nav-text">Remote Employee</span>
                  </a>
              </li>
          </ul>

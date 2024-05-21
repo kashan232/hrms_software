@@ -8,15 +8,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PayrolController extends Controller
+class ManagerPayrolController extends Controller
 {
-    public function create_salary()
+    public function manager_create_salary()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             $employees = Employee::All();
             // dd($employees);
-            return view('hr_panel.payrol_salary.create_payrol_salary', [
+            return view('manager_panel.payrol_salary.manager_create_salary', [
                 'employees' => $employees,
             ]);
         } else {
@@ -24,7 +24,7 @@ class PayrolController extends Controller
         }
     }
 
-    public function post_create_salary(Request $request)
+    public function manager_post_create_salary(Request $request)
     {
         if (Auth::id()) {
             // dd($request);
@@ -49,7 +49,6 @@ class PayrolController extends Controller
                     ];
                 }
             }
-
             if ($request->has('deductionDescription') && $request->has('deductionName')) {
                 foreach ($request->deductionDescription as $index => $description) {
                     $deductions[] = [
@@ -58,7 +57,6 @@ class PayrolController extends Controller
                     ];
                 }
             }
-
             // Create the salary record
             $PayrolSalary = PayrolSalary::create([
                 'emp_id' => $employeeId,
@@ -83,26 +81,24 @@ class PayrolController extends Controller
             return redirect()->back()->with('error', 'Unauthorized Access');
         }
     }
-
-    public function generate_salary()
+    public function manager_generate_salary()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             $salaries = PayrolSalary::All();
             // dd($employees);
-            return view('hr_panel.payrol_salary.generate_salary', [
+            return view('manager_panel.payrol_salary.manager_generate_salary', [
                 'salaries' => $salaries,
             ]);
         } else {
             return redirect()->back();
         }
     }
-
-    public function printSalary($id)
+    public function manager_printSalary($id)
     {
         $salary = PayrolSalary::findOrFail($id);
 
-        return view('hr_panel.payrol_salary.print_salary', [
+        return view('manager_panel.payrol_salary.manager_printSalary', [
             'salary' => $salary,
         ]);
     }

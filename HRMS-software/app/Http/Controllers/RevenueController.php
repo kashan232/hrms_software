@@ -38,10 +38,12 @@ class RevenueController extends Controller
     {
         if (Auth::id()){
             $userId = Auth::id();
+            $userType = Auth::user()->usertype;
             // Create the employee record
             // dd($request);
             $revenue = Revenue::create([
                 'admin_or_user_id' => $userId,
+                'usertype' => $userType, // Adding usertype to the database
                 'date' => $request->date,
                 'description' => $request->description,
                 'Customer' => $request->Customer,

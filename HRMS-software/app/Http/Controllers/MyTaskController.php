@@ -15,6 +15,7 @@ class MyTaskController extends Controller
         if (Auth::check()) {
             // Get the ID of the currently logged-in user
             $userId = Auth::id();
+            
 
             $name = Auth()->user()->name;
             $employeetasks = Task::where('task_assign_person', '=', $name)->get();

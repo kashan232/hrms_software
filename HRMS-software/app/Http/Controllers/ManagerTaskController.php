@@ -7,13 +7,12 @@ use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Project;
 use App\Models\Task;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TaskController extends Controller
+class ManagerTaskController extends Controller
 {
-    public function task()
+    public function manager_task()
     {
         if (Auth::id()) {
             $userId = Auth::id();
@@ -23,7 +22,7 @@ class TaskController extends Controller
             $all_task = Task::all();
             $all_department = Department::all();
             $all_designation = Designation::all();
-            return view('hr_panel.task.task', [
+            return view('manager_panel.task.manager_task', [
                 'all_project' => $all_project,
                 'all_employee' => $all_employee,
                 'all_task' => $all_task,
@@ -34,8 +33,7 @@ class TaskController extends Controller
             return redirect()->back();
         }
     }
-
-    public function store_task(Request $request)
+    public function manager_store_task(Request $request)
     {
         if (Auth::id()) {
             $userId = Auth::id();

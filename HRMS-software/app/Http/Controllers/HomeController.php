@@ -34,7 +34,7 @@ class HomeController extends Controller
                 $hiringCount = Hiring::count();
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
-                $all_project = Project::all();
+                $all_project = Project::count();
                 return view('admin_panel.admin_dashboard', 
             [
                 'departCount' => $departCount,
@@ -67,7 +67,7 @@ class HomeController extends Controller
                 $hiringCount = Hiring::count();
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
-                $all_project = Project::all();
+                $all_project = Project::Count();
                 return view('hr_panel.hr_dashboard',
                 [
                     'leaves' => $leaves,
@@ -81,13 +81,14 @@ class HomeController extends Controller
                 ]);
             } else if ($usertype == 'manager') {
                 $leaves = LeaveRequest::count();
+                $employee = Employee::count();
                 $projectCount = Project::count();
                 $taskCount = Task::count();
                 $remoteEmployeeCount = EmployeeRemoteWork::count();
                 $hiringCount = Hiring::count();
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
-                $all_project = Project::all();
+                $all_project = Project::count();
                 return view('manager_panel.manager_dashboard',
                 [
                     'leaves' => $leaves,
@@ -98,6 +99,7 @@ class HomeController extends Controller
                     'revenueCount' => $revenueCount,
                     'expenseCount' => $expenseCount,
                     'all_project' => $all_project,
+                    'employee' => $employee,
                 ]);
             }
         } else {

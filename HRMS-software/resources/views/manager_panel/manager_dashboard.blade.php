@@ -32,7 +32,7 @@
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
                                     <p class="fs-18 text-white mb-2">Projects</p>
-                                    <span class="fs-48 text-white font-w600">86</span>
+                                    <span class="fs-48 text-white font-w600">{{ $all_project }}</span>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
                                     <p class="fs-18 text-white mb-2">Task</p>
-                                    <span class="fs-48 text-white font-w600">75</span>
+                                    <span class="fs-48 text-white font-w600">{{ $taskCount }}</span>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +78,8 @@
 
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Client</p>
-                                    <span class="fs-48 text-white font-w600">45</span>
+                                    <p class="fs-18 text-white mb-2">Expense</p>
+                                    <span class="fs-48 text-white font-w600">{{ $expenseCount }}</span>
                                 </div>
                             </div>
                         </div>
@@ -102,8 +102,8 @@
                                     </svg>
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Department</p>
-                                    <span class="fs-48 text-white font-w600">86</span>
+                                    <p class="fs-18 text-white mb-2">Revenue</p>
+                                    <span class="fs-48 text-white font-w600">{{ $revenueCount }}</span>
                                 </div>
                             </div>
                         </div>
@@ -128,8 +128,8 @@
                                     </svg>
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Designation</p>
-                                    <span class="fs-48 text-white font-w600">75</span>
+                                    <p class="fs-18 text-white mb-2">Employee</p>
+                                    <span class="fs-48 text-white font-w600">{{ $employee }}</span>
                                 </div>
                             </div>
                         </div>
@@ -148,15 +148,15 @@
                                     </svg>
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Employee</p>
-                                    <span class="fs-48 text-white font-w600">93</span>
+                                    <p class="fs-18 text-white mb-2">Remote Employee</p>
+                                    <span class="fs-48 text-white font-w600">{{ $remoteEmployeeCount }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                
-                <div class="col-xl-3 col-xxl-4">
+                {{-- <div class="col-xl-3 col-xxl-4">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card d-flex flex-xl-column flex-sm-column flex-md-row flex-column">
@@ -196,8 +196,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-9 col-xxl-8">
+                </div> --}}
+                {{-- <div class="col-xl-9 col-xxl-8">
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card">
@@ -251,7 +251,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

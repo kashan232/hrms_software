@@ -35,5 +35,18 @@ class ProjectListingController extends Controller
             return redirect()->back();
         }
     }
+    public function manager_remote_employee_listing()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            // dd($userId);
+            $all_remote = EmployeeRemoteWork::all();
+            return view('manager_panel.remote_employee.manager_remote_employee_listing', [
+                'all_remote' => $all_remote,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
     
 }
