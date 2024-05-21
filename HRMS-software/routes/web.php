@@ -118,6 +118,7 @@ Route::get('/expense-listing', [LeavesRecordController::class, 'expense_listing'
 
 //Revenue Listing for admin
 Route::get('/revenue-listing', [LeavesRecordController::class, 'revenue_listing'])->name('revenue-listing');
+
 // Employee Panel
 
 // LeaveRequest
@@ -151,6 +152,9 @@ Route::post('/update-status', [MyTaskController::class, 'update_status'])->name(
 Route::get('/add-employee-remote-work', [EmployeeRemoteWorkController::class, 'add_employee_remote_work'])->name('add-employee-remote-work');
 Route::post('/store-remote-work', [EmployeeRemoteWorkController::class, 'store_remote_work'])->name('store-remote-work');
 Route::get('/all-employee-remote-work', [EmployeeRemoteWorkController::class, 'all_employee_remote_work'])->name('all-employee-remote-work');
+
+//Employee Performance 
+Route::get('/employee-performance', [EmployeeRemoteWorkController::class, 'employee_performance'])->name('employee-performance');
 
 //HR panel
 
