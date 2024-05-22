@@ -144,7 +144,7 @@
             </div>
 
             <!--Edit Modal -->
-            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editleaveLabel" aria-hidden="true">
+            {{-- <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editleaveLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -173,7 +173,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!--**********************************
