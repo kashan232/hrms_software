@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
-    
+
             if ($usertype == 'user') {
                 return view('dashboard');
             } else if ($usertype == 'admin') {
@@ -35,26 +35,28 @@ class HomeController extends Controller
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
                 $all_project = Project::count();
-                return view('admin_panel.admin_dashboard', 
-            [
-                'departCount' => $departCount,
-                'designationCount' => $designationCount,
-                'employeeCount' => $employeeCount,
-                'projectCount' => $projectCount,
-                'taskCount' => $taskCount,
-                'remoteEmployeeCount' => $remoteEmployeeCount,
-                'hiringCount' => $hiringCount,
-                'revenueCount' => $revenueCount,
-                'expenseCount' => $expenseCount,
-                'all_project' => $all_project,
-            ]);
-            }else if ($usertype == 'employee') {
+                return view(
+                    'admin_panel.admin_dashboard',
+                    [
+                        'departCount' => $departCount,
+                        'designationCount' => $designationCount,
+                        'employeeCount' => $employeeCount,
+                        'projectCount' => $projectCount,
+                        'taskCount' => $taskCount,
+                        'remoteEmployeeCount' => $remoteEmployeeCount,
+                        'hiringCount' => $hiringCount,
+                        'revenueCount' => $revenueCount,
+                        'expenseCount' => $expenseCount,
+                        'all_project' => $all_project,
+                    ]
+                );
+            } else if ($usertype == 'employee') {
                 // Get the logged-in employee's name
                 $employeeName = auth()->user()->name;
                 // Count the leave requests for the logged-in employee
                 $leaves = LeaveRequest::where('Employee', $employeeName)->count();
                 $task = Task::where('task_assign_person', $employeeName)->count();
-            
+
                 return view('employee_panel.employee_dashboard', [
                     'leaves' => $leaves,
                     'task' => $task,
@@ -68,17 +70,19 @@ class HomeController extends Controller
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
                 $all_project = Project::Count();
-                return view('hr_panel.hr_dashboard',
-                [
-                    'leaves' => $leaves,
-                    'projectCount' => $projectCount,
-                    'taskCount' => $taskCount,
-                    'remoteEmployeeCount' => $remoteEmployeeCount,
-                    'hiringCount' => $hiringCount,
-                    'revenueCount' => $revenueCount,
-                    'expenseCount' => $expenseCount,
-                    'all_project' => $all_project,
-                ]);
+                return view(
+                    'hr_panel.hr_dashboard',
+                    [
+                        'leaves' => $leaves,
+                        'projectCount' => $projectCount,
+                        'taskCount' => $taskCount,
+                        'remoteEmployeeCount' => $remoteEmployeeCount,
+                        'hiringCount' => $hiringCount,
+                        'revenueCount' => $revenueCount,
+                        'expenseCount' => $expenseCount,
+                        'all_project' => $all_project,
+                    ]
+                );
             } else if ($usertype == 'manager') {
                 $leaves = LeaveRequest::count();
                 $employee = Employee::count();
@@ -89,18 +93,20 @@ class HomeController extends Controller
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
                 $all_project = Project::count();
-                return view('manager_panel.manager_dashboard',
-                [
-                    'leaves' => $leaves,
-                    'projectCount' => $projectCount,
-                    'taskCount' => $taskCount,
-                    'remoteEmployeeCount' => $remoteEmployeeCount,
-                    'hiringCount' => $hiringCount,
-                    'revenueCount' => $revenueCount,
-                    'expenseCount' => $expenseCount,
-                    'all_project' => $all_project,
-                    'employee' => $employee,
-                ]);
+                return view(
+                    'manager_panel.manager_dashboard',
+                    [
+                        'leaves' => $leaves,
+                        'projectCount' => $projectCount,
+                        'taskCount' => $taskCount,
+                        'remoteEmployeeCount' => $remoteEmployeeCount,
+                        'hiringCount' => $hiringCount,
+                        'revenueCount' => $revenueCount,
+                        'expenseCount' => $expenseCount,
+                        'all_project' => $all_project,
+                        'employee' => $employee,
+                    ]
+                );
             }
         } else {
             // return redirect()->back();
