@@ -37,11 +37,18 @@
                         </li>
                         <li class="nav-item dropdown header-profile">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
-                                <img src="/images/profile/17.jpg" width="20" alt="" />
-                                <div class="header-info">
-                                    <span class="text-black">Oda Dink</span>
-                                    <p class="fs-12 mb-0">Super Admin</p>
-                                </div>
+                            <img src="/images/profile/admin.png" width="20" alt="" />
+                                @if (Auth::check())
+                                    <div class="header-info">
+                                        <span class="text-black">{{ Auth::user()->name }}</span>
+                                        <p class="fs-12 mb-0">{{ Auth::user()->email }}</p>
+                                    </div>
+                                @else
+                                    <div class="header-info">
+                                        <span class="text-black">Guest</span>
+                                        <p class="fs-12 mb-0">Please log in</p>
+                                    </div>
+                                @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="#" class="dropdown-item ai-icon">
