@@ -37,9 +37,7 @@ class LeaveRequestController extends Controller
 
             $userId = Auth::id(); // Get the authenticated user's ID
             // Fetch employee details from the authenticated user
-            $emp_id = $request->emp_id;
-            $employee = Employee::find($emp_id);
-            // dd($employee);
+            $employee = Employee::find($userId);
 
             // Check if employee exists
             if ($employee) {
@@ -47,10 +45,12 @@ class LeaveRequestController extends Controller
                 $employeeName = $employee->first_name . ' ' . $employee->last_name;
                 $department = $employee->department;
                 $designation = $employee->designation;
+                // dd($request);
 
                 // Create the leave request with default status as 'Pending'
                 LeaveRequest::create([
                     'admin_or_user_id' => $userId,
+                    'usertype' =>  $userType,
                     'leave_type' => $request->leave_type,
                     'leave_from_date' => $request->leave_from_date,
                     'leave_to_date' => $request->leave_to_date,

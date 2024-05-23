@@ -7,26 +7,26 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HiringController extends Controller
+class ManagerHiringController extends Controller
 {
-    public function all_hiring()
+    public function manager_all_hiring()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
             $all_hiring = Hiring::all();
-            return view('hr_panel.hiring.all_hiring', [
+            return view('manager_panel.hiring.manager_all_hiring', [
                 'all_hiring' => $all_hiring,
             ]);
         } else {
             return redirect()->back();
         }
     }
-    public function add_hiring()
+    public function manager_add_hiring()
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            return view('hr_panel.hiring.add_hiring', [
+            return view('manager_panel.hiring.manager_add_hiring', [
             ]);
         } else {
             return redirect()->back();
@@ -34,7 +34,7 @@ class HiringController extends Controller
 
         return view('');
     }
-    public function store_hiring(Request $request)
+    public function manager_store_hiring(Request $request)
     {
         if (Auth::id()){
             $userId = Auth::id();

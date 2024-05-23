@@ -18,24 +18,24 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session()->has('expense-added'))
+                        @if (session()->has('hiring-added'))
                             <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('expense-added') }}.
+                                <strong>Success!</strong> {{ session('hiring-added') }}.
                             </div>
                         @endif
                         <div class="card-header">
-                            <h4 class="card-title">Add Expense</h4>
+                            <h4 class="card-title">Add Jobs</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
-                                    <a href="{{ route('manager-all-expense') }}" style="color: white;">
-                                    All Expense </a>
+                                    <a href="{{ route('manager-all-hiring') }}" style="color: white;">
+                                        All Jobs </a>
                                 </button>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-expense') }}" method="post">
+                                <form action="{{ route('store-hiring') }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
@@ -43,25 +43,25 @@
                                             <input type="date" name="date" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Description</label>
-                                            <input type="text" name="description" class="form-control">
+                                            <label class="form-label">Designation</label>
+                                            <input type="text" name="designation" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Vendor</label>
-                                            <input type="text" name="vendor" class="form-control">
+                                            <label class="form-label">Job Description</label>
+                                            <input type="text" name="job_description" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Amount</label>
-                                            <input type="text" name="amount" class="form-control">
-                                        </div>
-                                        
-                                        <div class="mb-3 col-md-6">
-                                            <label>Tax</label>
-                                            <input type="text" name="tax" class="form-control">
+                                            <label class="form-label">Education</label>
+                                            <input type="text" name="education" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label>Total paid</label>
-                                            <input type="text" name="total_paid" class="form-control">
+                                            <label class="form-label">Skills</label>
+                                            <input type="text" name="skills" class="form-control">
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label>Experience</label>
+                                            <input type="text" name="experience" class="form-control">
                                         </div>
 
                                         <div class="mb-3 col-md-6">
@@ -102,37 +102,3 @@
     ***********************************-->
 
 @include('manager_panel.include.footer_include')
-<script>
-    $(document).ready(function() {
-        $('select[name="department"]').on('change', function() {
-            var department = $(this).val();
-            if (department) {
-                $.ajax({
-                    url: '{{ route("get-designations") }}',
-                    type: 'GET',
-                    data: { department: department },
-                    success: function(data) {
-                        $('select[name="designation"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('select[name="designation"]').empty();
-            }
-        });
-    });
-</script>
-<script>
-    document.getElementById("togglePassword").addEventListener("click", function() {
-    var passwordInput = document.getElementById("passwordInput");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
-    } else {
-        passwordInput.type = "password";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
-    }
-});
-</script>

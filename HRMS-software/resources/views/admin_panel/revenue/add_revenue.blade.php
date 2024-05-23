@@ -1,14 +1,14 @@
-@include('hr_panel.include.header_include')
+@include('admin_panel.include.header_include')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('hr_panel.include.navbar_include')
+    @include('admin_panel.include.navbar_include')
 
 
-    @include('hr_panel.include.sidebar_include')
+    @include('admin_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -101,7 +101,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('hr_panel.include.footer_include')
+@include('admin_panel.include.footer_include')
 <script>
     $(document).ready(function() {
         $('select[name="department"]').on('change', function() {
