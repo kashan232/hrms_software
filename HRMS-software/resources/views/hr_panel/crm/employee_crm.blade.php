@@ -1,13 +1,13 @@
-@include('hr_panel.include.header_include')
+@include('employee_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('hr_panel.include.navbar_include')
+    @include('employee_panel.include.navbar_include')
 
 
-    @include('hr_panel.include.sidebar_include')
+    @include('employee_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -329,7 +329,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('hr_panel.include.footer_include')
+@include('employee_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {
