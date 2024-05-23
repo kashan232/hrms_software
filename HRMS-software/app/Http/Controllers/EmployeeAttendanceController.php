@@ -76,6 +76,9 @@ class EmployeeAttendanceController extends Controller
             $useremail = Auth()->user()->email;
             $dept_name = $request->input('department');
             $designation = $request->input('designation');
+            $start_time = $request->input('start_time');
+            $end_time = $request->input('end_time');
+            
             $employee_attendance_date = $request->input('employee_attendance_date');
             $all_employess = Employee::where('email', $useremail)->where('department', $dept_name)->where('designation', $designation)->get();
             $employees_attendance_data = DB::table('employee_attendances')
@@ -92,6 +95,8 @@ class EmployeeAttendanceController extends Controller
                 'designation' => $designation,
                 'all_employess' => $all_employess,
                 'employees_attendance_data' => $employees_attendance_data,
+                'start_time' => $start_time,
+                'end_time' => $end_time,
             ]);
         } else {
             return redirect()->back();
@@ -110,6 +115,8 @@ class EmployeeAttendanceController extends Controller
             $employees_attendance_data = $request->input('attendance');
             $department = $request->input('department');
             $job_designation = $request->input('job_designation');
+            $start_time = $request->input('start_time');
+            $end_time = $request->input('end_time');
 
             foreach ($empIds as $index => $empId) {
                 $attendance = $employees_attendance_data[$empId];
@@ -130,6 +137,8 @@ class EmployeeAttendanceController extends Controller
                         'emp_id' => $empId,
                         'department' => $department,
                         'job_designation' => $job_designation,
+                        'start_time' => $start_time,
+                        'end_time' => $end_time,
                         'emp_name' => $empNames[$index],
                         'employee_attendance_date' => $employee_attendance_date,
                         'employee_attendance' => $attendance,

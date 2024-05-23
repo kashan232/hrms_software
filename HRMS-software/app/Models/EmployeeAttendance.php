@@ -17,6 +17,8 @@ class EmployeeAttendance extends Model
         'emp_name',
         'employee_attendance_date',
         'employee_attendance',
+        'start_time',
+        'end_time',
         'department',
         'job_designation'
     ];

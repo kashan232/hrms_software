@@ -80,6 +80,8 @@
                                                 <tr>
                                                     <th>SNO</th>
                                                     <th>Department | Job Designation</th>
+                                                    <th>Start Time</th>
+                                                    <th>End Time</th>
                                                     <th>Employee Name</th>
                                                     <th>Date</th>
                                                     <th>Attendance</th>
@@ -94,6 +96,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration}}</td>
                                         <td>{{ $attendance_record->department}} <br> {{ $attendance_record->job_designation}}</td>
+                                        <td>{{ $attendance_record->start_time}}</td>
+                                        <td>{{ $attendance_record->end_time}}</td>
                                         <td>{{ $attendance_record->emp_name}}</td>
                                         <td>{{ $attendance_record->employee_attendance_date}}</td>
                                         <td>

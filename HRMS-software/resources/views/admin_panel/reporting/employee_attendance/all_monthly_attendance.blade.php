@@ -30,6 +30,8 @@
                                             <th>Designation</th>
                                             <th>Employee</th>
                                             <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
                                             <th>Attendance</th>
                                             <th>Monthly Record</th>
                                         </tr>
@@ -54,6 +56,8 @@
                                                 </a>
                                             </td>
                                             <td>{{ $attendance_record->employee_attendance_date }}</td>
+                                            <td>{{ $attendance_record->start_time}}</td>
+                                            <td>{{ $attendance_record->end_time}}</td>
                                             <td>
                                                 @if ($attendance_record->employee_attendance == 'Present')
                                                     <button
@@ -68,8 +72,8 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('individual-employee-attendance', ['id' => $attendance_record->emp_id, 'dep' => $attendance_record->department, 'at_date' => $attendance_date, 'total_month_days' => $days_count]) }}"
-                                                    class="btn btn-success btn-sm">
-                                                    Monthly Record
+                                                    class="btn btn-danger btn-sm">
+                                                    Generate
                                                 </a>
                                             </td>
                                         </tr>
