@@ -18,6 +18,7 @@ use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerExpenseController;
+use App\Http\Controllers\ManagerHiringController;
 use App\Http\Controllers\ManagerLeaveTypeController;
 use App\Http\Controllers\ManagerPayrolController;
 use App\Http\Controllers\ManagerProjectListingController;
@@ -119,8 +120,11 @@ Route::get('/hiring-listing', [LeavesRecordController::class, 'hiring_listing'])
 //Expense Listing for admin
 Route::get('/expense-listing', [LeavesRecordController::class, 'expense_listing'])->name('expense-listing');
 
-//Revenue Listing for admin
-Route::get('/revenue-listing', [LeavesRecordController::class, 'revenue_listing'])->name('revenue-listing');
+//Revenue 
+//Route::get('/revenue-listing', [LeavesRecordController::class, 'revenue_listing'])->name('revenue-listing');
+Route::get('/all-revenue', [RevenueController::class, 'all_revenue'])->name('all-revenue');
+Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add-revenue');
+Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
 
 // Employee Panel
 
@@ -178,15 +182,11 @@ Route::get('/all-expense', [ExpenseController::class, 'all_expense'])->name('all
 Route::get('/add-expense', [ExpenseController::class, 'add_expense'])->name('add-expense');
 Route::post('/store-expense', [ExpenseController::class, 'store_expense'])->name('store-expense');
 
-//Hiring
+//HR Hiring
 Route::get('/all-hiring', [HiringController::class, 'all_hiring'])->name('all-hiring');
 Route::get('/add-hiring', [HiringController::class, 'add_hiring'])->name('add-hiring');
 Route::post('/store-hiring', [HiringController::class, 'store_hiring'])->name('store-hiring');
 
-//Hr Revenue
-Route::get('/all-revenue', [RevenueController::class, 'all_revenue'])->name('all-revenue');
-Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add-revenue');
-Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
 
 //projects
 Route::get('/project-listing-to-hr', [ProjectListingController::class, 'project_listing_to_hr'])->name('project-listing-to-hr');
@@ -217,6 +217,12 @@ Route::post('/manager-update-leavetype', [ManagerLeaveTypeController::class, 'ma
 Route::get('/manager-all-expense', [ManagerExpenseController::class, 'manager_all_expense'])->name('manager-all-expense');
 Route::get('/manager-add-expense', [ManagerExpenseController::class, 'manager_add_expense'])->name('manager-add-expense');
 Route::post('/manager-store-expense', [ManagerExpenseController::class, 'manager_store_expense'])->name('manager-store-expense');
+
+//HR Hiring
+Route::get('/manager-all-hiring', [ManagerHiringController::class, 'manager_all_hiring'])->name('manager-all-hiring');
+Route::get('/manager-add-hiring', [ManagerHiringController::class, 'manager_add_hiring'])->name('manager-add-hiring');
+Route::post('/manager-store-hiring', [ManagerHiringController::class, 'manager_store_hiring'])->name('manager-store-hiring');
+
 
 //Manager projects LIsting
 Route::get('/project-listing-to-manager', [ManagerProjectListingController::class, 'project_listing_to_manager'])->name('project-listing-to-manager');

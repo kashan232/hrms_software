@@ -21,7 +21,7 @@
                             <h4 class="card-title">All Expense</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-expense') }}" style="color: white;">
+                                    <a href="{{ route('manager-add-expense') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
@@ -48,6 +48,7 @@
                                             <th>Tax</th>
                                             <th>Total paid</th>
                                             <th>Status</th>
+                                            <th>Expense By</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,6 +62,7 @@
                                             <td>{{ $expense->tax }}</td>
                                             <td>{{ $expense->total_paid }}</td>
                                             <td>{{ $expense->status }}</td>
+                                            <td>{{ $expense->usertype }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

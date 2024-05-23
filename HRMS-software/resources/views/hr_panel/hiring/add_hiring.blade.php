@@ -24,12 +24,12 @@
                             </div>
                         @endif
                         <div class="card-header">
-                            <h4 class="card-title">Add Hiring</h4>
+                            <h4 class="card-title">Add Jobs</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
                                     <a href="{{ route('all-hiring') }}" style="color: white;">
-                                        All Hiring </a>
+                                        All Jobs </a>
                                 </button>
                             </div>
                         </div>

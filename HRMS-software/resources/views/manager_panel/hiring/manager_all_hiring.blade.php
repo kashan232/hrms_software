@@ -1,13 +1,13 @@
-@include('hr_panel.include.header_include')
+@include('manager_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('hr_panel.include.navbar_include')
+    @include('manager_panel.include.navbar_include')
 
 
-    @include('hr_panel.include.sidebar_include')
+    @include('manager_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -18,10 +18,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">All Expense</h4>
+                            <h4 class="card-title">All Jobs</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-expense') }}" style="color: white;">
+                                    <a href="{{ route('manager-add-hiring') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
@@ -42,27 +42,27 @@
                                         <tr>
                                             <th>Sno#</th>
                                             <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Vendor</th>
-                                            <th>Amount</th>
-                                            <th>Tax</th>
-                                            <th>Total paid</th>
+                                            <th>Designation</th>
+                                            <th>Job Description</th>
+                                            <th>Education</th>
+                                            <th>Skills</th>
+                                            <th>Experience</th>
                                             <th>Status</th>
-                                            <th>Expense By</th>
+                                            <th>Hired By</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_expense as $expense)
+                                        @foreach ($all_hiring as $hiring)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $expense->date }}</td>
-                                            <td>{{ $expense->description }}</td>
-                                            <td>{{ $expense->vendor }}</td>
-                                            <td>{{ $expense->amount }}</td>
-                                            <td>{{ $expense->tax }}</td>
-                                            <td>{{ $expense->total_paid }}</td>
-                                            <td>{{ $expense->status }}</td>
-                                            <td>{{ $expense->usertype }}</td>
+                                            <td>{{ $hiring->date }}</td>
+                                            <td>{{ $hiring->designation }}</td>
+                                            <td>{{ $hiring->job_description }}</td>
+                                            <td>{{ $hiring->education }}</td>
+                                            <td>{{ $hiring->skills }}</td>
+                                            <td>{{ $hiring->experience }}</td>
+                                            <td>{{ $hiring->status }}</td>
+                                            <td>{{ $hiring->usertype }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -96,4 +96,4 @@
         Main wrapper end
     ***********************************-->
 
-@include('hr_panel.include.footer_include')
+@include('manager_panel.include.footer_include')

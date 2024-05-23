@@ -18,10 +18,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">All Expense</h4>
+                            <h4 class="card-title">All Jobs</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-expense') }}" style="color: white;">
+                                    <a href="{{ route('add-hiring') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
@@ -48,21 +48,23 @@
                                             <th>Tax</th>
                                             <th>Total paid</th>
                                             <th>Status</th>
+                                            <th>Hired By</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($all_expense as $expense)
+                                        @foreach ($all_hiring as $hiring)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $expense->date }}</td>
-                                            <td>{{ $expense->description }}</td>
-                                            <td>{{ $expense->vendor }}</td>
-                                            <td>{{ $expense->amount }}</td>
-                                            <td>{{ $expense->tax }}</td>
-                                            <td>{{ $expense->total_paid }}</td>
-                                            <td>{{ $expense->status }}</td>
+                                            <td>{{ $hiring->date }}</td>
+                                            <td>{{ $hiring->designation }}</td>
+                                            <td>{{ $hiring->job_description }}</td>
+                                            <td>{{ $hiring->education }}</td>
+                                            <td>{{ $hiring->skills }}</td>
+                                            <td>{{ $hiring->experience }}</td>
+                                            <td>{{ $hiring->status }}</td>
+                                            <td>{{ $hiring->usertype }}</td>
                                         </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

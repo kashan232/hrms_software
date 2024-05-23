@@ -42,11 +42,11 @@
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-graduation-cap"></i>
-                     <span class="nav-text">Hiring</span>
+                     <span class="nav-text">Jobs</span>
                  </a>
                  <ul aria-expanded="false">
-                     <li><a href="{{ route('add-hiring') }}">Add Hiring</a></li>
-                     <li><a href="{{ route('all-hiring') }}">All Hiring</a></li>
+                     <li><a href="{{ route('add-hiring') }}">Add Jobs</a></li>
+                     <li><a href="{{ route('all-hiring') }}">All Jobs</a></li>
                  </ul>
              </li>
 
@@ -56,7 +56,7 @@
                      <span class="nav-text">Payrol</span>
                  </a>
                  <ul aria-expanded="false">
-                     <li><a href="{{ route('create-salary') }}">Create Salary</a></li>
+                     <li><a href="{{ route('create-salary') }}">Add Salary</a></li>
                      <li><a href="{{ route('generate-salary') }}">Generate Salary</a></li>
                  </ul>
              </li>
@@ -71,20 +71,10 @@
              <li><a class="has-arrow ai-icon" href="{{ route('task') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-tasks"></i>
-                     <span class="nav-text">Create Task</span>
+                     <span class="nav-text">Add Task</span>
                  </a>
              </li>
-             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-bell"></i>
-                     <span class="nav-text">Revenue</span>
-                 </a>
-                 <ul aria-expanded="false">
-                     <li><a href="{{ route('add-revenue') }}">Add Revenue</a></li>
-                     <li><a href="{{ route('all-revenue') }}">All Revenue</a></li>
-                 </ul>
-
-             </li>
+             
              <li><a class="has-arrow ai-icon" href="{{ route('remote-employee-listing') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-bell"></i>

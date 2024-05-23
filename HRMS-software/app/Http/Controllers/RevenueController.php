@@ -15,7 +15,7 @@ class RevenueController extends Controller
             $userId = Auth::id();
             // dd($userId);
             $all_revenue = Revenue::where('admin_or_user_id', '=', $userId)->get();
-            return view('hr_panel.revenue.all_revenue', [
+            return view('admin_panel.revenue.all_revenue', [
                 'all_revenue' => $all_revenue,
             ]);
         } else {
@@ -26,7 +26,7 @@ class RevenueController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            return view('hr_panel.revenue.add_revenue', [
+            return view('admin_panel.revenue.add_revenue', [
             ]);
         } else {
             return redirect()->back();
