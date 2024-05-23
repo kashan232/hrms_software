@@ -41,7 +41,7 @@
              </li>
              <li>
                 <a href="{{ route('employee-performance') }}" aria-expanded="false">
-                    <i class="fas fa-book-open"></i>
+                    <i class="fa-solid fa-clipboard"></i>
                     <span class="nav-text"> Performance</span>
                 </a>
             </li>
