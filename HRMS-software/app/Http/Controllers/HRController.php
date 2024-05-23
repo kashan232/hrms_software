@@ -29,7 +29,7 @@ class HRController extends Controller
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
-            Hr::create([
+            $hrcreate = Hr::create([
                 'admin_or_user_id'    => $userId,
                 'first_name'          => $request->first_name,
                 'last_name'          => $request->last_name,
@@ -44,6 +44,7 @@ class HRController extends Controller
             // Create a user record with the same credentials and usertype 'employee'
             $user = User::create([
                 'name' => $request->first_name . ' ' . $request->last_name,
+                'emp_id' => $hrcreate->id, // Set the emp_id to the newly created employee's id
                 'email' => $request->email,
                 'password' => bcrypt($request->password), // Make sure to hash the password
                 'usertype' => 'hr', // Set the usertype to 'employee'

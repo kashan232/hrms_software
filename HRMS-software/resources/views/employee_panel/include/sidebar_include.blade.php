@@ -28,7 +28,7 @@
             </li>
             
              <li>
-                 <a href="{{ route('employee-cmr') }}" aria-expanded="false">
+                 <a href="{{ route('seprate-employee-cmr') }}" aria-expanded="false">
                      <i class="fas fa-boxes"></i>
                      <span class="nav-text">CMR</span>
                  </a>

@@ -128,6 +128,8 @@ Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name
 
 // Employee Panel
 
+Route::get('/seprate-employee-cmr', [CMRController::class, 'seprate_employee_cmr'])->name('seprate-employee-cmr');
+
 // LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');

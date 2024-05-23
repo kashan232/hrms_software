@@ -28,6 +28,12 @@
                  </ul>
 
              </li>
+             
+             <li><a class="has-arrow ai-icon" href="{{ route('employee-cmr') }}" aria-expanded="false">
+                     <i class="fas fa-boxes"></i>
+                     <span class="nav-text">CMR</span>
+                 </a>
+             </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>
