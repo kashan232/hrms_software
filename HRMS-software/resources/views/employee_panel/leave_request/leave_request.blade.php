@@ -99,10 +99,10 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
-
                                     <div class="col-12 col-md-12">
                                         <div class="form-group">
                                             <label>Select Leave type</label>
+                                            <input type="text" name="emp_id" value="{{ $employee_details->id }}">
                                             <select name="leave_type" id="" class="form-control">
                                                 <option selected disabled>Select One</option>
                                                 @foreach ($LeaveTypes as $LeaveType)

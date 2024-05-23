@@ -15,7 +15,9 @@ class LeaveRequestController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
+            $usertypeemail = Auth()->user()->email;
+            $employee_details = Employee::where('email', '=', $usertypeemail)->first();
+            // dd($employee_details);
             $LeaveTypes = LeaveType::all();
             $LeaveRequests = LeaveRequest::where('admin_or_user_id', '=', $userId)->get();
             $Employees = Employee::where('admin_or_user_id', '=', $userId)->whereNull('deleted_at')->get();
@@ -23,6 +25,7 @@ class LeaveRequestController extends Controller
                 'LeaveTypes' => $LeaveTypes,
                 'Employees' => $Employees,
                 'LeaveRequests' => $LeaveRequests,
+                'employee_details' => $employee_details,
             ]);
         } else {
             return redirect()->back();
@@ -31,10 +34,12 @@ class LeaveRequestController extends Controller
     public function store_leaverequest(Request $request)
     {
         if (Auth::check()) {
-            $userId = Auth::id(); // Get the authenticated user's ID
 
+            $userId = Auth::id(); // Get the authenticated user's ID
             // Fetch employee details from the authenticated user
-            $employee = Employee::find($userId);
+            $emp_id = $request->emp_id;
+            $employee = Employee::find($emp_id);
+            // dd($employee);
 
             // Check if employee exists
             if ($employee) {

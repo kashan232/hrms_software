@@ -16,16 +16,17 @@
                      <span class="nav-text">Leave Request</span>
                  </a>
              </li>
-             <li class="has-menu mm-active"><a class="has-arrow ai-icon" href="#" aria-expanded="true">
+             
+            <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                     <i class="fas fa-check-circle"></i>
                     <span class="nav-text">Attendance</span>
                 </a>
-                <ul aria-expanded="false" class="mm-collapse mm-show" style="">
+                <ul aria-expanded="false">
                     <li><a href="{{ route('employee-attendance-create') }}">Create Attendance</a></li>
                     <li><a href="{{ route('all-employee-attendance') }}">Check Attendance</a></li>
                 </ul>
             </li>
-
+            
              <li>
                  <a href="{{ route('employee-cmr') }}" aria-expanded="false">
                      <i class="fas fa-boxes"></i>
@@ -41,7 +42,7 @@
              <li>
                 <a href="{{ route('employee-performance') }}" aria-expanded="false">
                     <i class="fas fa-book-open"></i>
-                    <span class="nav-text">Employee Performance</span>
+                    <span class="nav-text"> Performance</span>
                 </a>
             </li>
          </ul>
