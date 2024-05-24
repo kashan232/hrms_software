@@ -13,8 +13,12 @@ class ProfilePageController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
+            $emp_id = Auth()->user()->emp_id;
+
             // dd($userId);
-            $all_employee = Employee::all();
+            $all_employee = Employee::where('id', '=', $emp_id)->first();
+            // dd($all_employee);
+
             return view('employee_panel.employee_profile_page', [
                 'all_employee' => $all_employee,
             ]);

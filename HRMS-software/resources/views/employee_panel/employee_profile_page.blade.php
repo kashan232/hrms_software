@@ -45,11 +45,11 @@
                             <i class="fas fa-user-circle fa-9x"></i>
                         </div>
                         <div class="info">
-                            <h3 class="text-center">{{ $all_employee->first()->first_name }}</h3>
-                            <p class="text-center text-muted">{{ $all_employee->first()->designation }}</p>
+                            <h3 class="text-center">{{ $all_employee->first_name }}</h3>
+                            <p class="text-center text-muted">{{ $all_employee->designation }}</p>
                             <hr>
-                            <p><strong>Email:</strong> {{ $all_employee->first()->email }}</p>
-                            <p><strong>Phone:</strong> {{ $all_employee->first()->phone }}</p>
+                            <p><strong>Email:</strong> {{ $all_employee->email }}</p>
+                            <p><strong>Phone:</strong> {{ $all_employee->phone }}</p>
                         </div>
                     </div>
                 </div>
@@ -58,14 +58,14 @@
                         <div class="info" style="margin-left: 40px;">
                             <h3 class="text-center mb-4">Employee Details</h3>
                             <hr>
-                            <p><strong>First Name:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->first_name }}</span></p>
-                            <p><strong>Last Name:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->last_name }}</span></p>
-                            <p><strong>Email:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->email }}</span></p>
-                            <p><strong>Joining Date:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->joining_date }}</span></p>
-                            <p><strong>Phone:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->phone }}</span></p>
-                            <p><strong>Department:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->department }}</span></p>
-                            <p><strong>Designation:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->designation }}</span></p>
-                            <p><strong>Username:</strong> <span style="margin-left: 40px;">{{ $all_employee->first()->username }}</span></p>
+                            <p><strong>First Name:</strong> <span style="margin-left: 40px;">{{ $all_employee->first_name }}</span></p>
+                            <p><strong>Last Name:</strong> <span style="margin-left: 40px;">{{ $all_employee->last_name }}</span></p>
+                            <p><strong>Email:</strong> <span style="margin-left: 40px;">{{ $all_employee->email }}</span></p>
+                            <p><strong>Joining Date:</strong> <span style="margin-left: 40px;">{{ $all_employee->joining_date }}</span></p>
+                            <p><strong>Phone:</strong> <span style="margin-left: 40px;">{{ $all_employee->phone }}</span></p>
+                            <p><strong>Department:</strong> <span style="margin-left: 40px;">{{ $all_employee->department }}</span></p>
+                            <p><strong>Designation:</strong> <span style="margin-left: 40px;">{{ $all_employee->designation }}</span></p>
+                            <p><strong>Username:</strong> <span style="margin-left: 40px;">{{ $all_employee->username }}</span></p>
                             <!-- Add more employee details here -->
                         </div>
                     </div>
