@@ -22,7 +22,7 @@
                     <span class="nav-text">Attendance</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('employee-attendance-create') }}">Create Attendance</a></li>
+                    <li><a href="{{ route('employee-attendance-create') }}">Add Attendance</a></li>
                     <li><a href="{{ route('all-employee-attendance') }}">Check Attendance</a></li>
                 </ul>
             </li>

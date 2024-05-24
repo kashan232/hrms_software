@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminLeaveApproveController;
 use App\Http\Controllers\CMRController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HiringController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HRController;
+use App\Http\Controllers\HRLeaveRequestController;
 use App\Http\Controllers\HRLeavesController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerExpenseController;
 use App\Http\Controllers\ManagerHiringController;
+use App\Http\Controllers\ManagerLeaveRequestController;
 use App\Http\Controllers\ManagerLeaveTypeController;
 use App\Http\Controllers\ManagerPayrolController;
 use App\Http\Controllers\ManagerProjectListingController;
@@ -27,6 +30,7 @@ use App\Http\Controllers\ManagerTaskController;
 use App\Http\Controllers\MyTaskController;
 use App\Http\Controllers\PayrolController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfilePageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectListingController;
 use App\Http\Controllers\ReportController;
@@ -126,9 +130,21 @@ Route::get('/all-revenue', [RevenueController::class, 'all_revenue'])->name('all
 Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add-revenue');
 Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
 
-// Employee Panel
+//Admin Approve Leaves
+Route::get('/admin-all-leave', [AdminLeaveApproveController::class, 'admin_all_leave'])->name('admin-all-leave');
+Route::get('/admin-pending-leave', [AdminLeaveApproveController::class, 'admin_pending_leave'])->name('admin-pending-leave');
+Route::get('/admin-approve-leave', [AdminLeaveApproveController::class, 'admin_approve_leave'])->name('admin-approve-leave');
+Route::get('/admin-reject-leave', [AdminLeaveApproveController::class, 'admin_reject_leave'])->name('admin-reject-leave');
+Route::post('/admin-update-leave-approve', [AdminLeaveApproveController::class,'admin_updateLeaveApprove'])->name('admin-update-leave-approve');
 
-// LeaveRequest
+
+// Employee Panel
+// employee profile page
+Route::get('/employee-profile-page', [ProfilePageController::class, 'employee_profile_page'])->name('employee-profile-page');
+Route::get('/hr-profile-page', [ProfilePageController::class, 'hr_profile_page'])->name('hr-profile-page');
+
+
+// Employee LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
 
@@ -177,6 +193,10 @@ Route::get('/approve-leave', [HRLeavesController::class, 'approve_leave'])->name
 Route::get('/reject-leave', [HRLeavesController::class, 'reject_leave'])->name('reject-leave');
 Route::post('/update-leave-approve', [HRLeavesController::class,'updateLeaveApprove'])->name('update-leave-approve');
 
+// HR leave request
+Route::get('/hr-all-leaverequest', [HRLeaveRequestController::class, 'hr_all_leaverequest'])->name('hr-all-leaverequest');
+Route::post('/hr-store-leaverequest', [HRLeaveRequestController::class, 'hr_store_leaverequest'])->name('hr-store-leaverequest');
+
 //HR Expense
 Route::get('/all-expense', [ExpenseController::class, 'all_expense'])->name('all-expense');
 Route::get('/add-expense', [ExpenseController::class, 'add_expense'])->name('add-expense');
@@ -208,10 +228,15 @@ Route::get('/generate-salary', [PayrolController::class, 'generate_salary'])->na
 Route::get('/salary-print/{id}', [PayrolController::class, 'printSalary'])->name('salary-print');
 
 // Manager panel
+
 //Manager LeaveType
 Route::get('/manager-all-leavetype', [ManagerLeaveTypeController::class, 'manager_all_leavetype'])->name('manager-all-leavetype');
 Route::post('/manager-store-leavetype', [ManagerLeaveTypeController::class, 'manager_store_leavetype'])->name('manager-store-leavetype');
 Route::post('/manager-update-leavetype', [ManagerLeaveTypeController::class, 'manager_update_leavetype'])->name('manager-update-leavetype');
+
+// Employee LeaveRequest
+Route::get('/manager-all-leaverequest', [ManagerLeaveRequestController::class, 'manager_all_leaverequest'])->name('manager-all-leaverequest');
+Route::post('/manager-store-leaverequest', [ManagerLeaveRequestController::class, 'manager_store_leaverequest'])->name('manager-store-leaverequest');
 
 //Manager Expense
 Route::get('/manager-all-expense', [ManagerExpenseController::class, 'manager_all_expense'])->name('manager-all-expense');

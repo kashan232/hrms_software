@@ -39,6 +39,10 @@
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
+                                            <label class="form-label">Designation</label>
+                                            <input type="text" name="designation" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">First Name</label>
                                             <input type="text" name="first_name" class="form-control">
                                         </div>

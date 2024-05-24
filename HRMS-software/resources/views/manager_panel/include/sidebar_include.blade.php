@@ -10,11 +10,17 @@
                      <span class="nav-text">Dashboard</span>
                  </a>
              </li>
-             <li><a href="{{ route('manager-all-leavetype') }}" aria-expanded="false">
+             {{-- <li><a href="{{ route('manager-all-leavetype') }}" aria-expanded="false">
                      <i class="fas fa-envelope"></i>
                      <span class="nav-text">Leave Type</span>
                  </a>
-             </li>
+             </li> --}}
+             <li>
+                <a href="{{ route('manager-all-leaverequest') }}" aria-expanded="false">
+                    <i class="fas fa-envelope-open"></i>
+                    <span class="nav-text">Leave Request</span>
+                </a>
+            </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>

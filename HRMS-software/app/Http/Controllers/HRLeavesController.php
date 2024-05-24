@@ -46,7 +46,7 @@ class HRLeavesController extends Controller
     {
         $leaveId = $request->input('leave_id');
         $status = $request->input('status');
-
+        
         // Find the leave request by ID
         $leaveRequest = LeaveRequest::find($leaveId);
 

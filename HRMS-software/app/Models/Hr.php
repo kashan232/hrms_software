@@ -15,6 +15,7 @@ class Hr extends Model
         'admin_or_user_id',
         'first_name',
         'last_name',
+        'designation',
         'phone',
         'email',
         'user_name',

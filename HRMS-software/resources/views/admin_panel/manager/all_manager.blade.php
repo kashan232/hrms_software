@@ -46,6 +46,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
+                                            <th>Designation</th>
                                             <th>First Name <br> Last Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
@@ -57,6 +58,7 @@
                                         @foreach ($all_manager as $manager)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $manager->designation }} </td>
                                             <td>{{ $manager->first_name }} <br> {{ $manager->last_name }} </td>
                                             <td>{{ $manager->phone }}</td>
                                             <td>{{ $manager->email }}</td>

@@ -21,7 +21,9 @@ class LeaveRequest extends Model
         'leave_from_date',
         'leave_to_date',
         'leave_reason',
-        'leave_approve'
+        'leave_approve',
+        'approved_by',
+        'user_name'
     ];
 
 }

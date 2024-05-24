@@ -33,6 +33,7 @@ class ManagerController extends Controller
                 'admin_or_user_id'    => $userId,
                 'first_name'          => $request->first_name,
                 'last_name'          => $request->last_name,
+                'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
                 'user_name'          => $request->user_name,
@@ -72,10 +73,10 @@ class ManagerController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            // $managerdetails = Manager::findOrFail($id);
+            $managerdetails = Manager::findOrFail($id);
             return view('admin_panel.manager.edit_manager', [
                 // 'all_department' => $all_department,
-                // 'managerdetails' => $managerdetails,
+                'managerdetails' => $managerdetails,
             ]);
         } else {
             return redirect()->back();
@@ -91,6 +92,7 @@ class ManagerController extends Controller
                 'admin_or_user_id'    => $userId,
                 'first_name'          => $request->first_name,
                 'last_name'          => $request->last_name,
+                'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
                 'user_name'          => $request->user_name,

@@ -18,7 +18,7 @@
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-envelope-open-text"></i>
-                     <span class="nav-text">All Leaves</span>
+                     <span class="nav-text">Leaves</span>
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('all-leave') }}">All Leaves</a></li>
@@ -28,6 +28,12 @@
                  </ul>
 
              </li>
+             <li>
+                <a href="{{ route('hr-all-leaverequest') }}" aria-expanded="false">
+                    <i class="fas fa-envelope-open"></i>
+                    <span class="nav-text">Add Leave Request</span>
+                </a>
+            </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>
@@ -74,7 +80,7 @@
                      <span class="nav-text">Add Task</span>
                  </a>
              </li>
-             
+
              <li><a class="has-arrow ai-icon" href="{{ route('remote-employee-listing') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-bell"></i>

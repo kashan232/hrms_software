@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Hr;
 use App\Models\LeaveRequest;
 use App\Models\LeaveType;
+use App\Models\Manager;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LeaveRequestController extends Controller
+class HRLeaveRequestController extends Controller
 {
-    public function all_leaverequest()
+    public function hr_all_leaverequest()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             $usertypeemail = Auth()->user()->email;
-            $employee_details = Employee::where('email', '=', $usertypeemail)->first();
+            $employee_details = Hr::where('email', '=', $usertypeemail)->first();
             // dd($employee_details);
             $LeaveTypes = LeaveType::all();
             $LeaveRequests = LeaveRequest::where('admin_or_user_id', '=', $userId)->get();
-            $Employees = Employee::where('admin_or_user_id', '=', $userId)->whereNull('deleted_at')->get();
-            return view('employee_panel.leave_request.leave_request', [
+            $Employees = Hr::where('admin_or_user_id', '=', $userId)->whereNull('deleted_at')->get();
+            return view('hr_panel.leave_request.hr_leave_request', [
                 'LeaveTypes' => $LeaveTypes,
                 'Employees' => $Employees,
                 'LeaveRequests' => $LeaveRequests,
@@ -31,7 +32,7 @@ class LeaveRequestController extends Controller
             return redirect()->back();
         }
     }
-    public function store_leaverequest(Request $request)
+    public function hr_store_leaverequest(Request $request)
     {
         if (Auth::check()) {
 
@@ -39,14 +40,14 @@ class LeaveRequestController extends Controller
             // Fetch employee details from the authenticated user
             $emp_id = $request->emp_id;
             $userType = Auth::user()->usertype;
-            $employee = Employee::find($emp_id);
+            $employee = Hr::find($emp_id);
 
 
             // Check if employee exists
             if ($employee) {
                 // Fetch employee details
                 $employeeName = $employee->first_name . ' ' . $employee->last_name;
-                $department = $employee->department;
+                // $department = $employee->department;
                 $designation = $employee->designation;
                 // dd($request);
 
@@ -59,11 +60,11 @@ class LeaveRequestController extends Controller
                     'leave_to_date' => $request->leave_to_date,
                     'leave_reason' => $request->leave_reason,
                     'Employee' => $employeeName,
-                    'department' => $department,
+                    // 'department' => $department,
                     'designation' => $designation,
                     'leave_approve' => 'Pending', // Set the default status to "Pending"
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
 
                 // Redirect back with success message
@@ -76,6 +77,4 @@ class LeaveRequestController extends Controller
             return redirect()->back();
         }
     }
-
-    
 }
