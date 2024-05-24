@@ -28,6 +28,18 @@
                  </ul>
 
              </li>
+             <li>
+                <a href="{{ route('hr-all-leaverequest') }}" aria-expanded="false">
+                    <i class="fas fa-envelope-open"></i>
+                    <span class="nav-text">Add Leave Request</span>
+                </a>
+            </li>
+            <li><a class="has-arrow ai-icon" href="{{ route('employee-cmr') }}" aria-expanded="false">
+                <i class="fas fa-boxes"></i>
+                <span class="nav-text">CMR</span>
+            </a>
+        </li>
+
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>
