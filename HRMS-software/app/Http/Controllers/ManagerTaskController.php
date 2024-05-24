@@ -35,34 +35,38 @@ class ManagerTaskController extends Controller
     }
     public function manager_store_task(Request $request)
     {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            $userType = Auth::user()->usertype;
+        if (Auth::check()) {
+            // dd($request);
+            $user = Auth::user();
+            $userId = $user->id;
+            $usertype = $user->usertype;
+            $name = $user->name;
+            $employeeId = $user->emp_id;
 
             // Fetch department and designation from the request
             $department = $request->department;
             $designation = $request->designation;
 
-                $task = Task::create([
-                    'admin_or_user_id'    => $userId,
-                    'usertype' => $userType, // Adding usertype to the database
-                    'project_name'          => $request->project_name,
-                    'task_category'          => $request->task_category,
-                    'start_date'          => $request->start_date,
-                    'end_date'          => $request->end_date,
-                    'department'          => $department,
-                    'designation'          => $designation,
-                    'task_assign_person'          => $request->task_assign_person,
-                    'task_priority'          => $request->task_priority,
-                    'description'          => $request->description,
-                    'created_at'        => now(),
-                    'updated_at'        => now(),
-                ]);
+            $task = Task::create([
+                'admin_or_user_id'     => $userId,
+                'usertype'             => $usertype, // Adding usertype to the database
+                'user_name'            => $name, // Adding username to the database
+                'emp_id'               => $employeeId, // Adding employee ID to the database
+                'project_name'         => $request->project_name,
+                'task_category'        => $request->task_category,
+                'start_date'           => $request->start_date,
+                'end_date'             => $request->end_date,
+                'department'           => $department,
+                'designation'          => $designation,
+                'task_assign_person'   => $request->task_assign_person,
+                'task_priority'        => $request->task_priority,
+                'description'          => $request->description,
+                'status'               => 'In Process', // Setting status directly here
+                'created_at'           => now(),
+                'updated_at'           => now(),
+            ]);
 
-                $task->status = 'In Process';
-                $task->save();
-
-                return redirect()->back()->with('task-added', 'Task Added Successfully');
+            return redirect()->back()->with('task-added', 'Task Added Successfully');
         } else {
             return redirect()->back();
         }

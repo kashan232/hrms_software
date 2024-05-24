@@ -26,9 +26,14 @@ class ProjectController extends Controller
     public function store_project(Request $request)
     {
         if (Auth::id()) {
-            $userId = Auth::id();
+            $user = Auth::user(); // Get the authenticated user
+            $userId = $user->id;
+            $usertype = $user->usertype;
+            $userName = $user->name;
             Project::create([
                 'admin_or_user_id'    => $userId,
+                'usertype'            => $usertype, // Store usertype
+                'user_name'           => $userName, // Store user_name
                 'project_name'        => $request->project_name,
                 'project_category'    => $request->project_category,
                 'project_start_date'  => $request->project_start_date,

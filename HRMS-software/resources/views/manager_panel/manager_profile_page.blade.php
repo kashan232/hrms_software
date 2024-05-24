@@ -45,25 +45,25 @@
                             <i class="fas fa-user-circle fa-9x"></i>
                         </div>
                         <div class="info">
-                            <h3 class="text-center">{{ $all_hr->first_name }}</h3>
-                            <p class="text-center text-muted">{{ $all_hr->designation }}</p>
+                            <h3 class="text-center">{{ $all_manager->first_name }}</h3>
+                            <p class="text-center text-muted">{{ $all_manager->designation }}</p>
                             <hr>
-                            <p><strong>Email:</strong> {{ $all_hr->email }}</p>
-                            <p><strong>Phone:</strong> {{ $all_hr->phone }}</p>
+                            <p><strong>Email:</strong> {{ $all_manager->email }}</p>
+                            <p><strong>Phone:</strong> {{ $all_manager->phone }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="profile-card">
                         <div class="info" style="margin-left: 40px;">
-                            <h3 class="text-center mb-4">HR Details</h3>
+                            <h3 class="text-center mb-4">Manager Details</h3>
                             <hr>
-                            <p><strong>First Name:</strong> <span style="margin-left: 40px;">{{ $all_hr->first_name }}</span></p>
-                            <p><strong>Last Name:</strong> <span style="margin-left: 40px;">{{ $all_hr->last_name }}</span></p>
-                            <p><strong>Email:</strong> <span style="margin-left: 40px;">{{ $all_hr->email }}</span></p>
-                            <p><strong>Phone:</strong> <span style="margin-left: 40px;">{{ $all_hr->phone }}</span></p>
-                            <p><strong>Designation:</strong> <span style="margin-left: 40px;">{{ $all_hr->designation }}</span></p>
-                            <p><strong>Username:</strong> <span style="margin-left: 40px;">{{ $all_hr->user_name }}</span></p>
+                            <p><strong>First Name:</strong> <span style="margin-left: 40px;">{{ $all_manager->first_name }}</span></p>
+                            <p><strong>Last Name:</strong> <span style="margin-left: 40px;">{{ $all_manager->last_name }}</span></p>
+                            <p><strong>Email:</strong> <span style="margin-left: 40px;">{{ $all_manager->email }}</span></p>
+                            <p><strong>Phone:</strong> <span style="margin-left: 40px;">{{ $all_manager->phone }}</span></p>
+                            <p><strong>Designation:</strong> <span style="margin-left: 40px;">{{ $all_manager->designation }}</span></p>
+                            <p><strong>Username:</strong> <span style="margin-left: 40px;">{{ $all_manager->user_name }}</span></p>
                             <!-- Add more employee details here -->
                         </div>
                     </div>

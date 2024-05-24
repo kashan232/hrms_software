@@ -76,6 +76,7 @@ class AdminLeaveApproveController extends Controller
 
             $leaveId = $request->input('leave_id');
             $status = $request->input('status');
+            // dd($status);
             // Find the leave request by ID
             $leaveRequest = LeaveRequest::find($leaveId);
 

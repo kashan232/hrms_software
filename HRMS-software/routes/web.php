@@ -143,6 +143,7 @@ Route::post('/admin-update-leave-approve', [AdminLeaveApproveController::class,'
 // employee profile page
 Route::get('/employee-profile-page', [ProfilePageController::class, 'employee_profile_page'])->name('employee-profile-page');
 Route::get('/hr-profile-page', [ProfilePageController::class, 'hr_profile_page'])->name('hr-profile-page');
+Route::get('/manager-profile-page', [ProfilePageController::class, 'manager_profile_page'])->name('manager-profile-page');
 
 // Employee LeaveRequest
 Route::get('/seprate-employee-cmr', [CMRController::class, 'seprate_employee_cmr'])->name('seprate-employee-cmr');

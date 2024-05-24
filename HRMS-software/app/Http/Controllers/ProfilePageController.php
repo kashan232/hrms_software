@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Hr;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,10 +31,25 @@ class ProfilePageController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
+            $emp_id = Auth()->user()->emp_id;
             // dd($userId);
-            $all_hr = Hr::where('admin_or_user_id', '=', $userId)->get();
+            $all_hr = Hr::where('id', '=', $emp_id)->first();
             return view('hr_panel.hr_profile_page', [
                 'all_hr' => $all_hr,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+    public function manager_profile_page()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $emp_id = Auth()->user()->emp_id;
+            // dd($userId);
+            $all_manager = Manager::where('id', '=', $emp_id)->first();
+            return view('manager_panel.manager_profile_page', [
+                'all_manager' => $all_manager,
             ]);
         } else {
             return redirect()->back();

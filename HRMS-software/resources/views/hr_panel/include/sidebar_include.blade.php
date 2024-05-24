@@ -74,19 +74,7 @@
              </li>
 
 
-             <li><a class="has-arrow ai-icon" href="{{ route('project-listing-to-hr') }}" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-briefcase"></i>
-                     <span class="nav-text">Projects</span>
-                 </a>
-             </li>
-             <li><a class="has-arrow ai-icon" href="{{ route('task') }}" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-tasks"></i>
-                     <span class="nav-text">Add Task</span>
-                 </a>
-             </li>
-
+             
              <li><a class="has-arrow ai-icon" href="{{ route('remote-employee-listing') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-bell"></i>

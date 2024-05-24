@@ -27,6 +27,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sno</th>
+                                            <th>Created By</th>
                                             <th>Project Name</th>
                                             <th>Project Category</th>
                                             <th>Project Start Date <br> Project End Date</th>
@@ -39,6 +40,7 @@
                                         @foreach ($all_project as $project)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $project->usertype }} <br>{{ $project->user_name }}</td>
                                             <td>{{ $project->project_name }}</td>
                                             <td>{{ $project->project_category }}</td>
                                             <td>{{ $project->project_start_date }} <br>{{ $project->project_end_date }}</td>

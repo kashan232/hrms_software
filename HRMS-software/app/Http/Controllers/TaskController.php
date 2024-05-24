@@ -38,8 +38,11 @@ class TaskController extends Controller
     public function store_task(Request $request)
     {
         if (Auth::id()) {
+            // dd($request);
             $userId = Auth::id();
             $userType = Auth::user()->usertype;
+            $emp_id = Auth::user()->emp_id;
+            $emp_name = Auth::user()->name;
 
             // Fetch department and designation from the request
             $department = $request->department;
@@ -48,6 +51,8 @@ class TaskController extends Controller
                 $task = Task::create([
                     'admin_or_user_id'    => $userId,
                     'usertype' => $userType, // Adding usertype to the database
+                    'user_name'          => $emp_name,
+                    'emp_id'          => $emp_id,
                     'project_name'          => $request->project_name,
                     'task_category'          => $request->task_category,
                     'start_date'          => $request->start_date,

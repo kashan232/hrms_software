@@ -13,6 +13,8 @@ class Project extends Model
 
     protected $fillable = [
         'admin_or_user_id',
+        'usertype',
+        'user_name',
         'project_name',
         'project_category',
         'project_start_date',

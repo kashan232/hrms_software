@@ -19,3 +19,17 @@
         <li><a href="{{ route('manager-all-revenue') }}">All Revenue</a></li>
     </ul>
 </li> --}} -->
+
+{{-- //HR panel sidebar --}}
+{{-- 
+<li><a class="has-arrow ai-icon" href="{{ route('project-listing-to-hr') }}" aria-expanded="false">
+    <i class="fas fa-briefcase"></i>
+    <span class="nav-text">Projects</span>
+</a>
+</li>
+<li><a class="has-arrow ai-icon" href="{{ route('task') }}" aria-expanded="false">
+    <i class="fas fa-tasks"></i>
+    <span class="nav-text">Add Task</span>
+</a>
+</li> --}}
+

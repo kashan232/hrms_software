@@ -113,7 +113,10 @@
 
         // Add event listener to radio buttons
         $('input[type="radio"]').change(function() {
-            var leaveId = $(this).data('leave-id');
+            // var leaveId = $(this).data('leave-id');
+            // var status = $(this).val();
+            // updateLeaveApprove(leaveId, status);
+            var leaveId = $(this).attr('name').replace('leave_approve', '');
             var status = $(this).val();
             updateLeaveApprove(leaveId, status);
         });
@@ -122,7 +125,7 @@
     function updateLeaveApprove(leaveId, status) {
         $.ajax({
             type: "POST",
-            url: "{{ route('update-leave-approve') }}",
+            url: "{{ route('admin-update-leave-approve') }}",
             data: {
                 leave_id: leaveId,
                 status: status,
@@ -131,12 +134,18 @@
             success: function(response) {
                 // Handle success response
                 console.log(response);
+                if(response.success) {
+                    alert(response.message);
+                } else {
+                    alert(response.message);
+                }
                 // Reload the page or perform any other action if needed
                 window.location.reload();
             },
             error: function(xhr, status, error) {
                 // Handle error response
                 console.error(xhr.responseText);
+                alert("An error occurred. Please try again.");
             }
         });
     }
