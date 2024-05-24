@@ -32,7 +32,14 @@
                                         <div class="mb-3 col-md-4">
                                             <label>Designation</label>
                                             <input type="text" name="designation" class="form-control" value="{{ $Employee->designation }}" readonly>
-
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label>Start Time</label>
+                                            <input type="time" name="start_time" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <label>End Time</label>
+                                            <input type="time" name="end_time" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label>Date</label>

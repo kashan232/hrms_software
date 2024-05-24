@@ -62,9 +62,11 @@ class EmployeeController extends Controller
             // Create a user record with the same credentials and usertype 'employee'
             $user = User::create([
                 'name' => $request->first_name . ' ' . $request->last_name,
+                'emp_id' => $employee->id, // Set the emp_id to the newly created employee's id
                 'email' => $request->email,
                 'password' => bcrypt($request->password), // Make sure to hash the password
                 'usertype' => 'employee', // Set the usertype to 'employee'
+                
             ]);
 
             return redirect()->back()->with('Employee-added', 'Employee Created Successfully');

@@ -78,16 +78,19 @@ class ReportController extends Controller
                 job_designation,
                 emp_name,
                 employee_attendance_date,
-                employee_attendance
+                employee_attendance,
+                start_time,
+                end_time
             ')
                 ->where('emp_id', $emp_id)
                 ->where('department', $emp_dep)
                 ->whereYear('employee_attendance_date', $year)
                 ->whereMonth('employee_attendance_date', $month)
-                ->groupBy('department', 'job_designation', 'emp_name', 'employee_attendance_date', 'employee_attendance')
+                ->groupBy('department', 'job_designation', 'emp_name', 'employee_attendance_date', 'employee_attendance','start_time','end_time')
                 ->get();
 
-    
+            // dd($employee_data);
+            
             // Calculate the counts after retrieving the data
             $present_count = $employee_data->sum('present_count');
             $absent_count = $employee_data->sum('absent_count');

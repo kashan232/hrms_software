@@ -1,4 +1,4 @@
-Manager panel side bar comment queries
+<!-- Manager panel side bar comment queries
 
 {{-- <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
         <i class="fas fa-graduation-cap"></i>
@@ -18,4 +18,4 @@ Manager panel side bar comment queries
         <li><a href="{{ route('manager-add-revenue') }}">Add Revenue</a></li>
         <li><a href="{{ route('manager-all-revenue') }}">All Revenue</a></li>
     </ul>
-</li> --}}
+</li> --}} -->

@@ -1,14 +1,14 @@
-@include('employee_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('employee_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('employee_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -31,6 +31,25 @@
                                 <form action="{{ route('store-employee-cmr-add-training') }}" method="post">
                                     @csrf
                                     <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                            <label for="employeeName" class="form-label">Employee Name:</label>
+                                            <select name="employee_id" id="employeeName" class="form-control" onchange="updateEmployeeDetails()" required>
+                                                <option>Select Employee</option>
+                                                @foreach($employees as $employee)
+                                                <option value="{{ $employee->id }} {{ $employee->first_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
+                                                    {{ $employee->first_name }} {{ $employee->last_name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="department" class="form-label">Department:</label>
+                                            <input type="text" id="department" name="department" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label for="designation" class="form-label">Designation:</label>
+                                            <input type="text" id="designation" name="designation" class="form-control">
+                                        </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Training Name</label>
                                             <input type="text" name="Training" class="form-control">
@@ -85,4 +104,16 @@
         Main wrapper end
     ***********************************-->
 
-@include('employee_panel.include.footer_include')
+@include('hr_panel.include.footer_include')
+
+<script>
+    function updateEmployeeDetails() {
+        var employeeSelect = document.getElementById('employeeName');
+        var selectedOption = employeeSelect.options[employeeSelect.selectedIndex];
+        var department = selectedOption.getAttribute('data-department');
+        var designation = selectedOption.getAttribute('data-designation');
+
+        document.getElementById('department').value = department;
+        document.getElementById('designation').value = designation;
+    }
+</script>

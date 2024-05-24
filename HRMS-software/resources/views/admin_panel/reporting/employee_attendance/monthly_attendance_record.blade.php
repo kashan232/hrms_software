@@ -49,6 +49,8 @@
                                             <th>Job Designation</th>
                                             <th>Employee Name</th>
                                             <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
                                             <th>Attendance</th>
                                         </tr>
                                     </thead>
@@ -62,6 +64,8 @@
                                                 {{ $data->emp_name }}
                                             </td>
                                             <td id="date">{{ $data->employee_attendance_date }}</td>
+                                            <td>{{ $data->start_time}}</td>
+                                            <td>{{ $data->end_time}}</td>
                                             <td id="attendance_type">
                                                 @if ($data->employee_attendance == 'Present')
                                                 <button class="btn btn-success">{{ $data->employee_attendance }}</button>

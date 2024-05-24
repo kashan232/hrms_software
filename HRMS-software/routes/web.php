@@ -139,10 +139,6 @@ Route::post('/admin-update-leave-approve', [AdminLeaveApproveController::class,'
 
 
 // Employee Panel
-// employee profile page
-Route::get('/employee-profile-page', [ProfilePageController::class, 'employee_profile_page'])->name('employee-profile-page');
-Route::get('/hr-profile-page', [ProfilePageController::class, 'hr_profile_page'])->name('hr-profile-page');
-
 
 // Employee LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');

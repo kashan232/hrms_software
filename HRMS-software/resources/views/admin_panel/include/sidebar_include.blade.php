@@ -98,21 +98,21 @@
              <li>
                  <a class="has-arrow ai-icon" href="{{ route('remote-emp-list') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-calendar"></i>
+                     <i class="fa-solid fa-clipboard-user"></i>
                      <span class="nav-text">Remote Employee</span>
                  </a>
              </li>
              <li>
                  <a class="has-arrow ai-icon" href="{{ route('hiring-listing') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-calendar"></i>
+                     <i class="fa-solid fa-graduation-cap"></i>
                      <span class="nav-text">Jobs</span>
                  </a>
              </li>
              <li>
                  <a class="has-arrow ai-icon" href="{{ route('expense-listing') }}" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-calendar"></i>
+                     <i class="fa-solid fa-receipt"></i>
                      <span class="nav-text">Expense</span>
                  </a>
              </li>

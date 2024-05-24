@@ -96,6 +96,8 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Department | Job Designation</th>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
                                                         <th>Employee</th>
                                                         <th>Attendance</th>
                                                     </tr>
@@ -106,16 +108,19 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <input type="hidden" name="emp_id[]" value="{{ $employess->id }}">
                                                         <td>{{ $employess->department }} <br> {{ $employess->designation }}</td>
+                                                        <td>{{ $start_time}}</td>
+                                                        <td>{{ $end_time }}</td>
                                                         <td>
                                                             <input type="hidden" name="employee_attendance_date" value="{{ $employee_attendance_date }}">
                                                             <input type="hidden" name="department" value="{{ $employess->department }}">
+                                                            <input type="hidden" name="start_time" value="{{ $start_time}}">
+                                                            <input type="hidden" name="end_time" value="{{ $end_time }}">
                                                             <input type="hidden" name="job_designation" value="{{ $employess->designation }}">
                                                             <input type="hidden" name="emp_name[]" value="{{ $employess->first_name }}">
                                                             <h6>{{ $employess->first_name }}&nbsp{{ $employess->last_name }}</h6>
                                                         </td>
                                                         <td>
                                                             <!-- Rest of the code -->
-
                                                             @php
                                                             $attendanceValue = $employees_attendance_data[$employess->id] ?? 'Present';
                                                             @endphp
@@ -132,8 +137,8 @@
                                             </table>
                                         </div>
                                         <div class="col-12 form-group mg-t-8 text-center">
-                                            <button type="submit" class="btn btn-primary btn-lg">
-                                                Submit
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                Save Attendance
                                             </button>
                                         </div>
                                     </form>

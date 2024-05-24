@@ -28,7 +28,7 @@
             </li>
             
              <li>
-                 <a href="{{ route('employee-cmr') }}" aria-expanded="false">
+                 <a href="{{ route('seprate-employee-cmr') }}" aria-expanded="false">
                      <i class="fas fa-boxes"></i>
                      <span class="nav-text">CMR</span>
                  </a>
@@ -41,7 +41,7 @@
              </li>
              <li>
                 <a href="{{ route('employee-performance') }}" aria-expanded="false">
-                    <i class="fas fa-book-open"></i>
+                    <i class="fa-solid fa-clipboard"></i>
                     <span class="nav-text"> Performance</span>
                 </a>
             </li>

@@ -39,7 +39,9 @@ class LeaveRequestController extends Controller
             // Fetch employee details from the authenticated user
             $emp_id = $request->emp_id;
             $userType = Auth::user()->usertype;
-            $employee = Employee::find($emp_id);
+            $employee_id = Auth::user()->emp_id;
+
+            $employee = Employee::find($employee_id);
 
 
             // Check if employee exists

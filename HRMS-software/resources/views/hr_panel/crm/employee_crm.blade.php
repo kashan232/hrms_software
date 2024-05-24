@@ -1,13 +1,13 @@
-@include('employee_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('employee_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('employee_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -61,6 +61,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
+                                                            <th>Employee | Department | Designation</th>
                                                             <th>Skills</th>
                                                             <th>Level</th>
                                                             <th>Experience</th>
@@ -72,6 +73,7 @@
                                                         @foreach ($CRMSkills as $CRMSkill)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMSkill->employee_name }} <br> {{ $CRMSkill->department }} <br> {{ $CRMSkill->designation }}</td>
                                                             <td>{{ $CRMSkill->Skills }}</td>
                                                             <td>{{ $CRMSkill->Level }}</td>
                                                             <td>{{ $CRMSkill->Experience }}</td>
@@ -103,6 +105,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
+                                                            <th>Employee | Department | Designation</th>
                                                             <th>Insurance</th>
                                                             <th>Coverage</th>
                                                             <th>Start Date</th>
@@ -114,6 +117,7 @@
                                                         @foreach ($CRMInsurances as $CRMInsurance)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMInsurance->employee_name }} <br> {{ $CRMInsurance->department }} <br> {{ $CRMInsurance->designation }}</td>
                                                             <td>{{ $CRMInsurance->Insurance }}</td>
                                                             <td>{{ $CRMInsurance->Coverage }}</td>
                                                             <td>{{ $CRMInsurance->Start_Date }}</td>
@@ -145,6 +149,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
+                                                            <th>Employee | Department | Designation</th>
                                                             <th>Training</th>
                                                             <th>Purpose</th>
                                                             <th>Start Date</th>
@@ -156,6 +161,7 @@
                                                         @foreach ($CRMTraininges as $CRMTraininges)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMTraininges->employee_name }} <br> {{ $CRMTraininges->department }} <br> {{ $CRMTraininges->designation }}</td>
                                                             <td>{{ $CRMTraininges->Training }}</td>
                                                             <td>{{ $CRMTraininges->Purpose }}</td>
                                                             <td>{{ $CRMTraininges->Start_Date }}</td>
@@ -188,6 +194,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
+                                                            <th>Employee | Department | Designation</th>
                                                             <th>Organization</th>
                                                             <th>Designation</th>
                                                             <th>Start Date</th>
@@ -200,6 +207,7 @@
                                                         @foreach ($CRMExperiences as $CRMExperience)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMExperience->employee_name }} <br> {{ $CRMExperience->emp_department }} <br> {{ $CRMExperience->emp_designation }}</td>
                                                             <td>{{ $CRMExperience->Organization }}</td>
                                                             <td>{{ $CRMExperience->Designation }}</td>
                                                             <td>{{ $CRMExperience->Start_Date }}</td>
@@ -232,6 +240,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
+                                                            <th>Employee | Department | Designation</th>
                                                             <th>Month</th>
                                                             <th>Salaries</th>
                                                             <th>Other Income</th>
@@ -243,6 +252,7 @@
                                                         @foreach ($CRMSalaires as $CRMSalaire)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMSalaire->employee_name }} <br> {{ $CRMSalaire->department }} <br> {{ $CRMSalaire->designation }}</td>
                                                             <td>{{ $CRMSalaire->Month }}</td>
                                                             <td>{{ $CRMSalaire->Salaries }}</td>
                                                             <td>{{ $CRMSalaire->Other_Income }}</td>
@@ -274,6 +284,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Sno</th>
+                                                            <th>Employee | Department | Designation</th>
                                                             <th>Subject</th>
                                                             <th>Complains</th>
                                                             <th>Reference</th>
@@ -285,6 +296,7 @@
                                                         @foreach ($CRMSuggestions as $CRMSuggestion)
                                                         <tr>
                                                             <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $CRMSuggestion->employee_name }} <br> {{ $CRMSuggestion->department }} <br> {{ $CRMSuggestion->designation }}</td>
                                                             <td>{{ $CRMSuggestion->Subject }}</td>
                                                             <td>{{ $CRMSuggestion->Complains }}</td>
                                                             <td>{{ $CRMSuggestion->Reference }}</td>
@@ -329,7 +341,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('employee_panel.include.footer_include')
+@include('hr_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {
