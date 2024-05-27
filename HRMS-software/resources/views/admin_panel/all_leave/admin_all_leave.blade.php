@@ -28,10 +28,11 @@
                                         <tr>
                                             <th>Sno</th>
                                             <th>Employee</th>
-                                            <th>Department <br> Designation</th>
+                                            <th>Designation</th>
                                             <th>Leave Type</th>
                                             <th>Leave From <br> Leave To</th>
                                             <th>Reason</th>
+                                            <th>Approved By</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -40,10 +41,11 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $leaves->Employee }}</td>
-                                                <td>{{ $leaves->department }} <br> {{ $leaves->designation }}</td>
+                                                <td>{{ $leaves->designation }}</td>
                                                 <td>{{ $leaves->leave_type }}</td>
                                                 <td>{{ $leaves->leave_from_date }} <br> {{ $leaves->leave_to_date }} </td>
                                                 <td>{{ $leaves->leave_reason }}</td>
+                                                <td>{{ $leaves->approved_by }}</td>
                                                 <td>
                                                     @if($leaves->leave_approve == 'Approve')
                                                         <button type="button" class="btn btn-success">

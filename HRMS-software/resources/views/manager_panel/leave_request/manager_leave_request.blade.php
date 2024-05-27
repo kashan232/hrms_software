@@ -41,6 +41,7 @@
                                             <th>LeaveType</th>
                                             <th>From | To</th>
                                             <th>Reason</th>
+                                            <th>Approved By</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -52,6 +53,8 @@
                                                 <td>{{ $LeaveRequest->leave_from_date }} <br>
                                                     {{ $LeaveRequest->leave_to_date }}</td>
                                                 <td>{{ $LeaveRequest->leave_reason }}</td>
+                                                <td>{{ $LeaveRequest->approved_by }}</td>
+
                                                 {{-- <td>
                                                     @if ($LeaveRequest->leave_approve == 'Approve')
                                                         <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
