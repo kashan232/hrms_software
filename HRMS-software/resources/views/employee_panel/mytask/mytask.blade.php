@@ -6,11 +6,10 @@
 
     @include('employee_panel.include.navbar_include')
 
-
     @include('employee_panel.include.sidebar_include')
     <!--**********************************
             Content body start
-        ***********************************-->
+    ***********************************-->
     <div class="content-body ">
         <!-- row -->
         <div class="container">
@@ -20,12 +19,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">My Task</h4>
-                            {{-- <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add Completion Status">
-                                    <i class="las la-plus"></i>Add Completion Status
-                                </button>
-                            </div> --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -87,35 +80,15 @@
                                             </td>
                                             <td>
                                                 @if($task->status == 'Complete')
-                                                <button class="btn btn-success btn-sm" disabled>Perfomed</button>
-                                                @elseif(strtotime($task->end_date) < strtotime(now())) 
-                                                    <input type="radio" name="status" value="Complete" disabled> Complete<br>
-                                                    <input type="radio" name="status" value="Incomplete" disabled> Incomplete<br>
-                                                    @else
-                                                    <input type="radio" name="status" value="Complete" onclick="updateStatus('{{ $task->id }}', 'Complete')"> Complete<br>
-                                                    <input type="radio" name="status" value="Incomplete" onclick="updateStatus('{{ $task->id }}', 'Incomplete')"> Incomplete<br>
-                                                    @endif
-
-                                                    <!-- @if(strtotime($task->end_date) < strtotime(now()))
-                                                        <input type="radio" name="status" value="Complete" disabled>
-                                                        Complete<br>
-                                                        <input type="radio" name="status" value="Incomplete" disabled>
-                                                        Incomplete<br>
-                                                    @else
-                                                        <input type="radio" name="status" value="Complete" onclick="updateStatus('{{ $task->id }}', 'Complete')">
-                                                        Complete<br>
-                                                        <input type="radio" name="status" value="Incomplete" onclick="updateStatus('{{ $task->id }}', 'Incomplete')">
-                                                        Incomplete<br>
-                                                    @endif -->
+                                                <button class="btn btn-success btn-sm" disabled>Performed</button>
+                                                @elseif(strtotime($task->end_date) < strtotime(now()))
+                                                <input type="radio" name="status" value="Complete" disabled> Complete<br>
+                                                <input type="radio" name="status" value="Incomplete" disabled> Incomplete<br>
+                                                @else
+                                                <input type="radio" name="status" value="Complete" onclick="showCompletionModal('{{ $task->id }}')"> Complete<br>
+                                                <input type="radio" name="status" value="Incomplete" onclick="updateStatus('{{ $task->id }}', 'Incomplete')"> Incomplete<br>
+                                                @endif
                                             </td>
-                                            {{-- <td>
-                                                    <div class="button--group">
-                                                        <button type="button" class="btn btn-primary edittaskBtn"
-                                                            data-toggle="modal" data-modal_title="Edit task"
-                                                            data-has_status="1" data-target="#edittask">
-                                                            <i class="la la-pencil"></i></button>
-                                                    </div>
-                                                </td> --}}
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -127,98 +100,88 @@
 
             </div>
 
-            {{-- <!--Create Modal -->
-            <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
+            <!-- Completion Modal -->
+            <div id="completionModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"><span class="type"></span> <span>Add Completion Status</span></h5>
-                            <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                style="font-size: 1rem; border:none;">
-                                <i class="las la-times"></i>
+                            <h5 class="modal-title">Add Completion Description</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 20px; border:none;" >
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('store-mytask') }}" method="POST">
-            @csrf
-            <div class="modal-body">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label>Completion Status</label>
-                            <input type="text" name="status" id="status" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div> --}}
-
-{{-- <!--Edit Modal -->
-            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit
-                                    project</span></h5>
-                            <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                style="font-size: 1rem; border:none;">
-                                <i class="las la-times"></i>
-                            </button>
-                        </div>
-                        <form action="" method="POST">
-                            @csrf
-                            <div class="modal-body">
+                        <div class="modal-body">
+                            <form id="completionForm">
+                                @csrf
+                                <input type="hidden" name="task_id" id="task_id">
                                 <div class="form-group">
-                                    <label>Department</label>
-                                    <input type="hidden" id="editdepartmentId" name="department_id"
-                                        class="form-control" required>
-                                    <input type="text" id="editdepartmentName" name="department_name"
-                                        class="form-control" required>
+                                    <label for="employee_description">Description</label>
+                                    <textarea name="employee_description" id="employee_description" class="form-control" rows="4"></textarea>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
+                                <button type="button" class="btn btn-primary" onclick="submitCompletionForm()">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div> --}}
-</div>
-</div>
-<!--**********************************
-            Content body end
-        ***********************************-->
-<!--**********************************
-            Footer start
-        ***********************************-->
-{{-- <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK Technologies</a>
-                2024</p>
+            </div>
+
         </div>
     </div>
-     <!--********************************** --}}
-{{-- Footer end
-        ***********************************--> --}}
-
-
+    <!--**********************************
+            Content body end
+    ***********************************-->
+    <!--**********************************
+            Footer start
+    ***********************************-->
+    {{-- <div class="footer">
+        <div class="copyright">
+            <p>Copyright © Designed & Developed by <a href="http://dexignzone.com/" target="_blank">AK Technologies</a> 2024</p>
+        </div>
+    </div>
+    --}}
+    <!--**********************************
+            Footer end
+    ***********************************-->
 </div>
 <!--**********************************
         Main wrapper end
-    ***********************************-->
+***********************************-->
 
 @include('employee_panel.include.footer_include')
 <script>
+    function showCompletionModal(taskId) {
+        $('#task_id').val(taskId);
+        $('#completionModal').modal('show');
+    }
+
+    function submitCompletionForm() {
+        const taskId = $('#task_id').val();
+        const description = $('#employee_description').val();
+        const status = 'Complete';
+
+        $.ajax({
+            url: "{{ route('update-status') }}",
+            method: "POST",
+            data: {
+                task_id: taskId,
+                status: status,
+                employee_description: description,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                $('#completionModal').modal('hide');
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert('An error occurred while updating the status.');
+            }
+        });
+    }
+
     function updateStatus(taskId, status) {
-        // Send AJAX request to update task status
         $.ajax({
             url: "{{ route('update-status') }}",
             method: "POST",
@@ -228,16 +191,13 @@
                 _token: "{{ csrf_token() }}"
             },
             success: function(response) {
-                // Handle success response
-                console.log(response);
-                // Reload the page after 3 seconds
                 setTimeout(function() {
                     location.reload();
-                }, 1000); // 1 seconds delay
+                }, 1000);
             },
             error: function(xhr, status, error) {
-                // Handle error
                 console.error(xhr.responseText);
+                alert('An error occurred while updating the status.');
             }
         });
     }

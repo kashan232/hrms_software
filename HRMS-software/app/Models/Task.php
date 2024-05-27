@@ -25,6 +25,7 @@ class Task extends Model
         'task_assign_person',
         'task_priority',
         'description',
-        'status'
+        'status',
+        'employee_description'
     ];  
 }
