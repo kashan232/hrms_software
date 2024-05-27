@@ -7,6 +7,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLeaveRequestController;
+use App\Http\Controllers\EmployeePerformanceController;
 use App\Http\Controllers\EmployeeRemoteWorkController;
 use App\Http\Controllers\EmployeeTaskUpdateController;
 use App\Http\Controllers\ExpenseController;
@@ -181,7 +182,7 @@ Route::post('/store-remote-work', [EmployeeRemoteWorkController::class, 'store_r
 Route::get('/all-employee-remote-work', [EmployeeRemoteWorkController::class, 'all_employee_remote_work'])->name('all-employee-remote-work');
 
 //Employee Performance 
-Route::get('/employee-performance', [EmployeeRemoteWorkController::class, 'employee_performance'])->name('employee-performance');
+Route::get('/employee-performance', [EmployeePerformanceController::class, 'employee_performance'])->name('employee-performance');
 
 //HR panel
 

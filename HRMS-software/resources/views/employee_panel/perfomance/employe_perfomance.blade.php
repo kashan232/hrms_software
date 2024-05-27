@@ -23,39 +23,36 @@
                                 <div class="card overflow-hidden">
                                     <div class="text-center p-5 overlay-box" style="background-image: url(https://jobie.dexignzone.com/laravel/demo/images/big/img5.jpg);">
                                         <img src="images/profile/admin.png" width="100" class="img-fluid rounded-circle" alt="">
-                                        <h3 class="mt-3 mb-0 text-white">Employee Name</h3>
-                                        <h6 class="mt-3 mb-0 text-white">Employee Name</h6>
+                                        <h3 class="mt-3 mb-0 text-white">{{ $all_employee->first_name }} {{ $all_employee->last_name }}</h3>
+                                        <h6 class="mt-3 mb-0 text-white">{{ $all_employee->designation }}</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="row text-center">
                                             <div class="col-6 mt-1">
                                                 <div class="bgl-primary rounded p-3">
-                                                    <h4 class="mb-0">Female</h4>
-                                                    <small>Patient </small>
+                                                    <h4 class="mb-0">Department</h4>
+                                                    <small>{{ $all_employee->department }}</small>
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
                                                 <div class="bgl-primary rounded p-3">
-                                                    <h4 class="mb-0">Age: 24</h4>
-                                                    <small>Years Old</small>
+                                                    <h4 class="mb-0">Designation</h4>
+                                                    <small>{{ $all_employee->designation }}</small>
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
                                                 <div class="bgl-primary rounded p-3">
-                                                    <h4 class="mb-0">Female</h4>
-                                                    <small>Patient </small>
+                                                    <h4 class="mb-0">Email</h4>
+                                                    <small>{{ $all_employee->email }}</small>
                                                 </div>
                                             </div>
                                             <div class="col-6 mt-1">
                                                 <div class="bgl-primary rounded p-3">
-                                                    <h4 class="mb-0">Age: 24</h4>
-                                                    <small>Years Old</small>
+                                                    <h4 class="mb-0">Phone Number</h4>
+                                                    <small>{{ $all_employee->phone }}</small>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer mt-0">
-                                        <button class="btn btn-primary btn-lg btn-block">Contact</button>
                                     </div>
                                 </div>
                             </div>
@@ -72,18 +69,18 @@
                                                 </span>
                                                 <div class="media-body text-white">
                                                     <p class="mb-1">Total Present</p>
-                                                    <h3 class="text-white">28</h3>
+                                                    <h3 class="text-white">{{ $total_present }}</h3>
                                                     <div class="progress mb-2 bg-primary">
-                                                        <div class="progress-bar progress-animated bg-light" style="width: 76%"></div>
+                                                        <div class="progress-bar progress-animated bg-light" style="width: {{ ($total_present / 30) * 100 }}%"></div>
                                                     </div>
-                                                    <small>76% Increase </small>
+                                                    <small>{{ ($total_present / 30) * 100 }}% of the month</small>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
-                                    <div class="widget-stat card bg-danger ">
+                                    <div class="widget-stat card bg-danger">
                                         <div class="card-body p-4">
                                             <div class="media">
                                                 <span class="me-3">
@@ -91,31 +88,30 @@
                                                 </span>
                                                 <div class="media-body text-white">
                                                     <p class="mb-1">Total Absent</p>
-                                                    <h3 class="text-white">250</h3>
+                                                    <h3 class="text-white">{{ $total_absent }}</h3>
                                                     <div class="progress mb-2 bg-secondary">
-                                                        <div class="progress-bar progress-animated bg-light" style="width: 30%"></div>
+                                                        <div class="progress-bar progress-animated bg-light" style="width: {{ $total_absent }}%"></div>
                                                     </div>
-                                                    <small>30% Increase</small>
+                                                    <small>{{ $total_absent }}% Increase</small>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
                                     <div class="widget-stat card bg-primary">
-                                        <div class="card-body  p-4">
+                                        <div class="card-body p-4">
                                             <div class="media">
                                                 <span class="me-3">
                                                     <i class="fas fa-envelope-open"></i>
                                                 </span>
                                                 <div class="media-body text-white">
                                                     <p class="mb-1">Total Leave</p>
-                                                    <h3 class="text-white">3280</h3>
+                                                    <h3 class="text-white">{{ $total_leave }}</h3>
                                                     <div class="progress mb-2 bg-secondary">
-                                                        <div class="progress-bar progress-animated bg-light" style="width: 80%"></div>
+                                                        <div class="progress-bar progress-animated bg-light" style="width: {{ $total_leave }}%"></div>
                                                     </div>
-                                                    <small>80% Increase</small>
+                                                    <small>{{ $total_leave }}% Increase</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,7 +132,7 @@
                                         </span>
                                         <div class="media-body text-white text-end">
                                             <p class="mb-1 text-white">Total Task</p>
-                                            <h3 class="text-white">$56K</h3>
+                                            <h3 class="text-white">{{ $total_tasks }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +148,7 @@
                                         </span>
                                         <div class="media-body text-white text-end">
                                             <p class="mb-1 text-white">Completed Task</p>
-                                            <h3 class="text-white">$76</h3>
+                                            <h3 class="text-white">{{ $completed_tasks_count }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -167,8 +163,8 @@
                                             <i class="flaticon-381-calendar-1"></i>
                                         </span>
                                         <div class="media-body text-white text-end">
-                                            <p class="mb-1 text-white">Late Task</p>
-                                            <h3 class="text-white">76</h3>
+                                            <p class="mb-1 text-white">InComplete Task</p>
+                                            <h3 class="text-white">{{ $incompletedTasksCount }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+                {{-- <div class="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Task Details</h4>
@@ -209,7 +205,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

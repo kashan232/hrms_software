@@ -22,16 +22,7 @@ class EmployeeRemoteWorkController extends Controller
         }
     }
 
-    public function employee_performance()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            return view('employee_panel.perfomance.employe_perfomance', [
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
+   
 
     //     public function store_remote_work(Request $request)
     // {
