@@ -122,6 +122,7 @@
                     </div>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+                    <h3 class="mt-2 mb-2 text-center ">Task Overview</h3>
                     <div class="row">
                         <div class="col-xl-4 col-xxl-4 col-lg-4 col-sm-6">
                             <div class="widget-stat card bg-success">
