@@ -75,6 +75,43 @@
                                                 <option value="Web Developer">Web Developer</option>
                                             </select>
                                         </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label>Decided Salary</label>
+                                            <input type="text" name="decided_salary" class="form-control" value="{{ $employeedetails->decided_salary }}">
+                                        </div>
+                                        
+                                        <div class="mb-3 col-md-6">
+                                            <label>Reporting Manager </label>
+                                            <Select name="reporting_manager" class="form-control">
+                                                @foreach($all_managers as $all_manager)
+                                                    <option value="{{ $all_manager->id }}">{{ $all_manager->first_name }}&nbsp;{{ $all_manager->last_name }}</option>
+                                                @endforeach
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label> Employee Status</label>
+                                            <Select name="employee_status" class="form-control">
+                                                <option value="Onsite">Onsite</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Hybrid">Hybrid</option>
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Address</label>
+                                            <input type="text" name="address" class="form-control" value="{{ $employeedetails->address }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Gender</label>
+                                            <Select name="employee_gender" class="form-control">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Number Of Leave Allow</label>
+                                            <input type="text" name="number_of_leaves" class="form-control" value="{{ $employeedetails->number_of_leaves }}">
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

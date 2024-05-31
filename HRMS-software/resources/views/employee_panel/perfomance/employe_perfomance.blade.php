@@ -173,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+                <div class="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Task Details</h4>
@@ -183,30 +183,68 @@
                                 <table class="table verticle-middle table-responsive-md">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Ward No.</th>
-                                            <th scope="col">Patient</th>
-                                            <th scope="col">Dr Name</th>
-                                            <th scope="col">Date</th>
+                                            <th scope="col">SNO</th>
+                                            <th scope="col">Project Name</th>
+                                            <th scope="col">Task Category</th>
+                                            <th scope="col">Start Date | End Date</th>
+                                            <th scope="col">Task Priority</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Bills</th>
-                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($employeetasks as $task)
                                         <tr>
-                                            <td>12</td>
-                                            <td>Mr. Bobby</td>
-                                            <td>Dr. Jackson</td>
-                                            <td>01 August 2020</td>
-                                            <td><span class="badge badge-rounded badge-primary">Checkin</span></td>
-                                            <td>$120</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $task->project_name }}</td>
+                                            <td>{{ $task->task_category }}</td>
+                                            <td>{{ $task->start_date }} <br> {{ $task->end_date }} </td>
+                                            <td>
+                                                {{ $task->task_priority }}
+                                                @php
+                                                $progress = 0;
+                                                $color = '';
+                                                switch ($task->task_priority) {
+                                                case 'Highest':
+                                                $progress = 100;
+                                                $color = 'bg-success';
+                                                break;
+                                                case 'Medium':
+                                                $progress = 75;
+                                                $color = 'bg-info';
+                                                break;
+                                                case 'Low':
+                                                $progress = 50;
+                                                $color = 'bg-warning';
+                                                break;
+                                                case 'Lowest':
+                                                $progress = 25;
+                                                $color = 'bg-danger';
+                                                break;
+                                                }
+                                                @endphp
+
+                                                <div class="progress" style="height: 20px;">
+                                                    <div class="progress-bar {{ $color }}" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+
+                                            </td>
+                                            <td>{{ $task->description }}</td>
+                                            <td>
+                                                @if($task->status == 'Complete')
+                                                <span class="badge badge-rounded badge-success">Complete</span>
+                                                @else($task->status == 'Incomplete')
+                                                <span class="badge badge-rounded badge-danger">Incomplete</span>
+                                                @endif
+                                            </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
             </div>
         </div>

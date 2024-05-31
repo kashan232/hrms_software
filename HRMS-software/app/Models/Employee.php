@@ -20,6 +20,12 @@ class Employee extends Model
         'phone',
         'department',
         'designation',
+        'decided_salary',
+        'reporting_manager',
+        'employee_status',
+        'address',
+        'employee_gender',
+        'number_of_leaves',
         'username',
         'password'
     ];

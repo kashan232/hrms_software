@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\Manager;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,8 +31,11 @@ class EmployeeController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+            $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+            // dd($all_managers);
             return view('admin_panel.employees.add_employee', [
                 'all_department' => $all_department,
+                'all_managers' => $all_managers,
             ]);
         } else {
             return redirect()->back();
@@ -53,6 +57,12 @@ class EmployeeController extends Controller
                 'phone' => $request->phone,
                 'department' => $request->department,
                 'designation' => $request->designation,
+                'decided_salary' => $request->decided_salary,
+                'reporting_manager' => $request->reporting_manager,
+                'employee_status' => $request->employee_status,
+                'address' => $request->address,
+                'employee_gender' => $request->employee_gender,
+                'number_of_leaves' => $request->number_of_leaves,
                 'username' => $request->username,
                 'password' => $request->password,
                 'created_at' => Carbon::now(),
@@ -86,9 +96,12 @@ class EmployeeController extends Controller
             // dd($userId);
             $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
             $employeedetails = Employee::findOrFail($id);
+            $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+
             return view('admin_panel.employees.edit-employee', [
                 'all_department' => $all_department,
                 'employeedetails' => $employeedetails,
+                'all_managers' => $all_managers,
             ]);
         } else {
             return redirect()->back();
@@ -108,6 +121,12 @@ class EmployeeController extends Controller
                 'phone'          => $request->phone,
                 'department'          => $request->department,
                 'designation'          => $request->designation,
+                'decided_salary' => $request->decided_salary,
+                'reporting_manager' => $request->reporting_manager,
+                'employee_status' => $request->employee_status,
+                'address' => $request->address,
+                'employee_gender' => $request->employee_gender,
+                'number_of_leaves' => $request->number_of_leaves,
                 'updated_at' => Carbon::now(),
             ]);
             return Redirect()->back()->with('success-message-updte', 'Employee Updated successfully!');

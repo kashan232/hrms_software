@@ -50,6 +50,9 @@ class EmployeePerformanceController extends Controller
             ->where('status', '=', 'incomplete')
             ->count();
 
+            $employeetasks = Task::where('emp_id', '=', $emp_id)->get();
+            // dd($employeetasks);
+
             return view('employee_panel.perfomance.employe_perfomance', [
                 'all_employee' => $all_employee,
                 'total_present' => $totalPresent,
@@ -58,6 +61,7 @@ class EmployeePerformanceController extends Controller
                 'total_tasks' => $totalTasks,
                 'completed_tasks_count' => $completedTasksCount,
                 'incompletedTasksCount' => $incompletedTasksCount,
+                'employeetasks' => $employeetasks,
             ]);
         } else {
             return redirect()->back();

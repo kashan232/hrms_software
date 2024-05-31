@@ -67,7 +67,7 @@
                                                 <div class="button--group">
                                                     <button type="button" class="btn btn-primary">
                                                         <a manageref="{{ route('edit-manager', ['id' => $manager->id]) }}"  style="color: white;">
-                                                        <i class="la la-pencil"></i> Edit </a>
+                                                        <i class="la la-pencil"></i>  </a>
                                                     </button>
                                                 </div>
                                             </td>

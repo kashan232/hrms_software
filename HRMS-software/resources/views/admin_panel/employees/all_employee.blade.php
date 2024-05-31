@@ -41,10 +41,11 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Name | Email</th>
+                                            <th>Name | Email | Address | Gender</th>
                                             <th>Joined Date</th>
                                             <th>Phone</th>
                                             <th>Department | Designation</th>
+                                            <th>Salary</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -52,19 +53,20 @@
                                         @foreach ($all_employee as $employee)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $employee->first_name }} {{ $employee->last_name }} <br>{{ $employee->email }} </td>
+                                            <td>{{ $employee->first_name }} {{ $employee->last_name }} <br>{{ $employee->email }} <br>{{ $employee->address }} <br>{{ $employee->employee_gender }} </td>
                                             <td>{{ $employee->joining_date }}</td>
                                             <td>{{ $employee->phone }}</td>
                                             <td>{{ $employee->department }} <br> {{ $employee->designation }}</td>
+                                            <td>{{ $employee->decided_salary }}</td>
                                             <td>
                                                 <div class="button--group">
-                                                    <button type="button" class="btn btn-primary">
+                                                    <button type="button" class="btn btn-primary btn-sm">
                                                         <a href="{{ route('edit-employee', ['id' => $employee->id]) }}"  style="color: white;">
-                                                        <i class="la la-pencil"></i>Edit </a>
+                                                        <i class="la la-pencil"></i> </a>
                                                     </button>
-                                                    <button type="button" class="btn btn-danger">
+                                                    <button type="button" class="btn btn-danger btn-sm">
                                                         <a href="{{ route('delete-employee', ['id' => $employee->id]) }}"  style="color: white;">
-                                                        <i class="la la-trash"></i>Delete </a>
+                                                        <i class="la la-trash"></i> </a>
                                                     </button>
 
                                                 </div>

@@ -79,7 +79,7 @@
                                                             data-designation-id="{{ $designation->id }}"
                                                             data-designation-name="{{ $designation->designation }}"
                                                             data-department-name="{{ $designation->department }}">
-                                                            <i class="la la-pencil"></i>Edit </button>
+                                                            <i class="la la-pencil"></i> </button>
                                                         {{-- <button type="button" class="btn btn-danger"
                                                         data-question="Are you sure to delete this designation?">
                                                         <i class="la la-trash"></i>Delete </button> --}}

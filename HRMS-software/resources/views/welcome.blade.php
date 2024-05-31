@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Marshall v28 - Ultimate Coming Soon Template</title>
+    <title>HRMS</title>
     <meta name="description" content="Marshall - Ultimate Coming Soon Template by pixiefy">
     <meta name="author" content="pixiefy">
     <meta name="viewport" content="width=device-width, initial-scale=1">

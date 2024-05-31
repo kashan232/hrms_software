@@ -67,7 +67,7 @@
                                                 <div class="button--group">
                                                     <button type="button" class="btn btn-primary">
                                                         <a href="{{ route('edit-hr', ['id' => $hr->id]) }}"  style="color: white;">
-                                                        <i class="la la-pencil"></i> Edit </a>
+                                                        <i class="la la-pencil"></i>  </a>
                                                     </button>
                                                 </div>
                                             </td>

@@ -74,7 +74,7 @@
                                                             data-has_status="1" data-target="#editdepartment"
                                                             data-department-id="{{ $department->id }}"
                                                             data-department-name="{{ $department->department }}">
-                                                            <i class="la la-pencil"></i>Edit </button>
+                                                            <i class="la la-pencil"></i> </button>
                                                         {{-- <button type="button"
                                                     class="btn btn-danger" data-question="Are you sure to delete this Department?">
                                                         <i class="la la-trash"></i>Delete </button> --}}
