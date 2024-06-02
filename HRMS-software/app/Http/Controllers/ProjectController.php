@@ -35,6 +35,7 @@ class ProjectController extends Controller
                 'usertype'            => $usertype, // Store usertype
                 'user_name'           => $userName, // Store user_name
                 'project_name'        => $request->project_name,
+                'project_deadline'        => $request->project_deadline,
                 'project_category'    => $request->project_category,
                 'project_start_date'  => $request->project_start_date,
                 'project_end_date'    => $request->project_end_date,

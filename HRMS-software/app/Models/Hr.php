@@ -18,6 +18,8 @@ class Hr extends Model
         'designation',
         'phone',
         'email',
+        'address',
+        'hr_gender',
         'user_name',
         'password'
     ];

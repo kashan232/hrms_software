@@ -16,6 +16,7 @@ class Project extends Model
         'usertype',
         'user_name',
         'project_name',
+        'project_deadline',
         'project_category',
         'project_start_date',
         'project_end_date',

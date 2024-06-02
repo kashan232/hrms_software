@@ -36,6 +36,8 @@ class HRController extends Controller
                 'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
+                'address'          => $request->address,
+                'hr_gender'          => $request->hr_gender,
                 'user_name'          => $request->user_name,
                 'password'          => $request->password,
                 'created_at'        => Carbon::now(),
@@ -97,8 +99,9 @@ class HRController extends Controller
                 'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
+                'address'          => $request->address,
+                'hr_gender'          => $request->hr_gender,
                 'user_name'          => $request->user_name,
-                'password'          => $request->password,
                 'updated_at' => Carbon::now(),
             ]);
             return Redirect()->back()->with('success-message-updte', 'HR Updated successfully!');

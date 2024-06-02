@@ -14,8 +14,10 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HiringController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HRController;
+use App\Http\Controllers\HrEmployeeController;
 use App\Http\Controllers\HRLeaveRequestController;
 use App\Http\Controllers\HRLeavesController;
+use App\Http\Controllers\HrManagerController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
@@ -87,11 +89,13 @@ Route::post('/update-hr/{id}', [HRController::class, 'update_hr'])->name('update
 Route::get('/add-manager', [ManagerController::class, 'add_manager'])->middleware(['auth','admin'])->name('add-manager');
 Route::post('/store-manager', [ManagerController::class, 'store_manager'])->name('store-manager');
 Route::get('/all-manager', [ManagerController::class, 'all_manager'])->middleware(['auth','admin'])->name('all-manager');
+Route::get('/allhr-manager', [ManagerController::class, 'allhr_manager'])->middleware(['auth','admin'])->name('allhr-manager');
 Route::get('/edit-manager/{id}', [ManagerController::class, 'edit_manager'])->middleware(['auth','admin'])->name('edit-manager');
 Route::post('/update-manager/{id}', [ManagerController::class, 'update_manager'])->name('update-manager');
 
 //Employees
 Route::get('/all-employee', [EmployeeController::class, 'all_employee'])->middleware(['auth','admin'])->name('all-employee');
+Route::get('/allhr-employee', [EmployeeController::class, 'allhr_employee'])->middleware(['auth','admin'])->name('allhr-employee');
 Route::get('/add-employee', [EmployeeController::class, 'add_employee'])->middleware(['auth','admin'])->name('add-employee');
 Route::post('/store-employee', [EmployeeController::class, 'store_employee'])->name('store-employee');
 Route::get('/delete-employee/{id}', [EmployeeController::class, 'delete_employee'])->middleware(['auth','admin'])->name('delete-employee');
@@ -100,6 +104,19 @@ Route::post('/update-employee/{id}', [EmployeeController::class, 'update_employe
 Route::get('/deleted-employee-screen', [EmployeeController::class, 'deleted_employee_screen'])->middleware(['auth','admin'])->name('deleted-employee-screen');
 Route::get('/get-designations', [EmployeeController::class, 'getDesignations'])->name('get-designations');
 
+// employee by hr 
+//Employees
+Route::get('/hr-all-employee', [HrEmployeeController::class, 'hr_all_employee'])->name('hr-all-employee');
+Route::get('/hr-add-employee', [HrEmployeeController::class, 'hr_add_employee'])->name('hr-add-employee');
+Route::post('/hr-store-employee', [HrEmployeeController::class, 'hr_store_employee'])->name('hr-store-employee');
+Route::get('/hr-edit-employee/{id}', [HrEmployeeController::class, 'hr_edit_employee'])->name('hr-edit-employee');
+Route::post('/hr-update-employee/{id}', [HrEmployeeController::class, 'hr_update_employee'])->name('hr-update-employee');
+
+Route::get('/hr-add-manager', [HrManagerController::class, 'hr_add_manager'])->name('hr-add-manager');
+Route::post('/hr-store-manager', [HrManagerController::class, 'hr_store_manager'])->name('hr-store-manager');
+Route::get('/hr-all-manager', [HrManagerController::class, 'hr_all_manager'])->name('hr-all-manager');
+Route::get('/hr-edit-manager/{id}', [HrManagerController::class, 'hr_edit_manager'])->name('hr-edit-manager');
+Route::post('/hr-update-manager/{id}', [HrManagerController::class, 'hr_update_manager'])->name('hr-update-manager');
 
 //Attendance
 Route::get('/daily-attendance', [EmployeeAttendanceController::class, 'daily_attendance'])->middleware(['auth','admin'])->name('daily-attendance');

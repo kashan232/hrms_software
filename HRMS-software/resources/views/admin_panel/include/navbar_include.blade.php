@@ -3,7 +3,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="#" class="brand-logo">
-                <h1 class="text-white">HRMS</h1>
+                <img src="/images/hrms_logo/hrms_white.png" alt="" style="max-width:150px;">
             </a>
             <div class="nav-control">
                 <div class="hamburger">

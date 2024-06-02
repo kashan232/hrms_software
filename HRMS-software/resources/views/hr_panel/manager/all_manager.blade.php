@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -26,7 +26,7 @@
                             <h4 class="card-title">Manager</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-manager') }}" style="color: white;">
+                                    <a href="{{ route('hr-add-manager') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
@@ -48,8 +48,8 @@
                                             <th>Sno#</th>
                                             <th>Designation</th>
                                             <th>First Name <br> Last Name</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
+                                            <th>Phone | Email</th>
+                                            <th>Created</th>
                                             <th>User Name</th>
                                             <th>Action</th>
                                         </tr>
@@ -60,13 +60,13 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $manager->designation }} </td>
                                             <td>{{ $manager->first_name }} <br> {{ $manager->last_name }} </td>
-                                            <td>{{ $manager->phone }}</td>
-                                            <td>{{ $manager->email }}</td>
+                                            <td>{{ $manager->phone }} <br> {{ $manager->email }}</td>
+                                            <td>{{ $manager->created_by }} </td>
                                             <td>{{ $manager->user_name }} </td>
                                             <td>
                                                 <div class="button--group">
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="{{ route('edit-manager', ['id' => $manager->id]) }}"  style="color: white;">
+                                                        <a href="{{ route('hr-edit-manager', ['id' => $manager->id]) }}"  style="color: white;">
                                                         <i class="la la-pencil"></i>  </a>
                                                     </button>
                                                 </div>
@@ -104,4 +104,4 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('hr_panel.include.footer_include')

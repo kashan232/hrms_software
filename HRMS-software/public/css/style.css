@@ -12525,7 +12525,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     -webkit-transform: rotate(-225deg) translateY(-50%);
     transform: rotate(-225deg) translateY(-50%); }
   [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu > li > a {
-    font-size: 16px;
+    font-size: 13px;
     padding: 16px 25px;
     -webkit-transition: all 0.5s;
     -ms-transition: all 0.5s;
@@ -13750,7 +13750,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     position: absolute;
     z-index: 9;
     bottom: 10.5rem;
-    padding: 13px 18px;
+    padding: 8px 10px;
+    font-size:12px;
     align-items: center;
     right: 100%;
     background-color: var(--primary);

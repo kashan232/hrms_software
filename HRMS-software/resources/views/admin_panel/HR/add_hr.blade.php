@@ -59,6 +59,17 @@
                                             <input type="email" name="email" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
+                                            <label>Address</label>
+                                            <input type="text" name="address" class="form-control">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Gender</label>
+                                            <Select name="hr_gender" class="form-control">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">User Name</label>
                                             <input type="text" name="user_name" class="form-control">
                                         </div>

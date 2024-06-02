@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
-use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Manager;
 use App\Models\User;
@@ -11,43 +10,30 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EmployeeController extends Controller
+class HrEmployeeController extends Controller
 {
-    public function all_employee()
+    public function hr_all_employee()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            $all_employee = Employee::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.employees.all_employee', [
-                'all_employee' => $all_employee,
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-    public function allhr_employee()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
             $usertype = Auth()->user()->usertype;
-            // dd($userId);
-            $all_employee = Employee::where('create_by', '=', 'hr')->get();
-            return view('admin_panel.employees.allhr_employee', [
+            $all_employee = Employee::where('admin_or_user_id', '=', $userId)->where('create_by', '=', $usertype)->get();
+            return view('hr_panel.employees.all_employee', [
                 'all_employee' => $all_employee,
             ]);
         } else {
             return redirect()->back();
         }
     }
-    public function add_employee()
+    public function hr_add_employee()
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
-            $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+            $all_department = Department::all();
+            $all_managers = Manager::all();
             // dd($all_managers);
-            return view('admin_panel.employees.add_employee', [
+            return view('hr_panel.employees.add_employee', [
                 'all_department' => $all_department,
                 'all_managers' => $all_managers,
             ]);
@@ -57,7 +43,7 @@ class EmployeeController extends Controller
 
         return view('');
     }
-    public function store_employee(Request $request)
+    public function hr_store_employee(Request $request)
     {
         if (Auth::id()) {
             $userId = Auth::id();
@@ -100,21 +86,17 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
-    public function delete_employee(Request $request, $id)
-    {
-        $delete = Employee::find($id)->delete();
-        return redirect()->back()->with('delete-message', 'Employee Has Been Deleted Successsfully');
-    }
-    public function edit_employee(Request $request, $id)
+
+    public function hr_edit_employee(Request $request, $id)
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+            $all_department = Department::all();
             $employeedetails = Employee::findOrFail($id);
-            $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+            $all_managers = Manager::all();
 
-            return view('admin_panel.employees.edit-employee', [
+            return view('hr_panel.employees.edit-employee', [
                 'all_department' => $all_department,
                 'employeedetails' => $employeedetails,
                 'all_managers' => $all_managers,
@@ -123,7 +105,7 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
-    public function update_employee(Request $request, $id)
+    public function hr_update_employee(Request $request, $id)
     {
 
         if (Auth::id()) {
@@ -151,29 +133,4 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
-    public function deleted_employee_screen()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            // Retrieve all employees deleted by the admin
-            $deleted_employee = Employee::onlyTrashed()
-                ->where('admin_or_user_id', $userId)
-                ->get();
-            return view('admin_panel.employees.deleted_employee_screen', [
-                'deleted_employee' => $deleted_employee,
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-    public function getDesignations(Request $request)
-    {
-        $department = $request->input('department');
-        $designations = Designation::where('department', $department)->pluck('designation')->toArray();
-        return response()->json($designations);
-    }
-    
-
-    
-
 }

@@ -8,14 +8,14 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ManagerController extends Controller
+class HrManagerController extends Controller
 {
-    public function add_manager()
+    public function hr_add_manager()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.manager.add_manager', [
+            return view('hr_panel.manager.add_manager', [
                 // 'all_department' => $all_department,
             ]);
         } else {
@@ -24,7 +24,7 @@ class ManagerController extends Controller
 
         return view('');
     }
-    public function store_manager(Request $request)
+    public function hr_store_manager(Request $request)
     {
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
@@ -59,39 +59,28 @@ class ManagerController extends Controller
             return redirect()->back();
         }
     }
-    public function all_manager()
+    public function hr_all_manager()
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            $all_manager = Manager::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.manager.all_manager', [
+            $usertype = Auth()->user()->usertype;
+            $all_manager = Manager::where('admin_or_user_id', '=', $userId)->where('created_by', '=', $usertype)->get();
+            return view('hr_panel.manager.all_manager', [
                 'all_manager' => $all_manager,
             ]);
         } else {
             return redirect()->back();
         }
     }
-    public function allhr_manager()
-    {
-        if (Auth::id()) {
-            $userId = Auth::id();
-            // dd($userId);
-            $all_manager = Manager::where('created_by', '=', 'hr')->get();
-            return view('admin_panel.manager.allhr_manager', [
-                'all_manager' => $all_manager,
-            ]);
-        } else {
-            return redirect()->back();
-        }
-    }
-    public function edit_manager(Request $request, $id)
+
+    public function hr_edit_manager(Request $request, $id)
     {
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
             $managerdetails = Manager::findOrFail($id);
-            return view('admin_panel.manager.edit_manager', [
+            return view('hr_panel.manager.edit_manager', [
                 // 'all_department' => $all_department,
                 'managerdetails' => $managerdetails,
             ]);
@@ -99,7 +88,7 @@ class ManagerController extends Controller
             return redirect()->back();
         }
     }
-    public function update_manager(Request $request, $id)
+    public function hr_update_manager(Request $request, $id)
     {
 
         if (Auth::id()) {

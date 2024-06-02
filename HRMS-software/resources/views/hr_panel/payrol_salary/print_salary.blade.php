@@ -80,7 +80,7 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="{{ asset('images/hrms_logo/hrms_black.png') }}" style="width:100%; max-width:130px;border-radius:100px;">
+                                <img src="{{ asset('/images/hrms_logo/hrms_black.png') }}" style="width:100%; max-width:130px;border-radius:100px;">
                             </td>
                             <td>
                                 Invoice #: {{ $salary->id }}<br>

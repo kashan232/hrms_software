@@ -21,10 +21,18 @@
             justify-content: center;
             padding: 0 20px;
             background: #ddd;
-            /* background: url('/student/student_bg3.jpg'); */
+            background: url('/images/login.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
+        }
+
+        body::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background: #0000006e;
+            position: absolute;
         }
 
         .wrapper {

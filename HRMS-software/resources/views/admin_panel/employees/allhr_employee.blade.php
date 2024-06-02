@@ -17,19 +17,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{-- @if (session()->has('hr-added'))
-                        <div class="alert alert-success solid alert-square">
-                            <strong>Success!</strong> {{ session('hr-added') }}.
-                        </div>
-                    @endif --}}
                         <div class="card-header">
-                            <h4 class="card-title">Manager</h4>
-                            <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-manager') }}" style="color: white;">
-                                        <i class="las la-plus"></i>Add New </a>
-                                </button>
-                            </div>
+                            <h4 class="card-title">Hr Employees</h4>
                         </div>
                         <div class="card-body">
                             @if (session()->has('delete-message'))
@@ -46,31 +35,24 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Designation</th>
-                                            <th>First Name <br> Last Name</th>
+                                            <th>Name | Email | Address | Gender</th>
+                                            <th>Joined Date</th>
                                             <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>User Name</th>
-                                            <th>Action</th>
+                                            <th>Department | Designation</th>
+                                            <th>Salary</th>
+                                            <th>Created</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_manager as $manager)
+                                        @foreach ($all_employee as $employee)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $manager->designation }} </td>
-                                            <td>{{ $manager->first_name }} <br> {{ $manager->last_name }} </td>
-                                            <td>{{ $manager->phone }}</td>
-                                            <td>{{ $manager->email }}</td>
-                                            <td>{{ $manager->user_name }} </td>
-                                            <td>
-                                                <div class="button--group">
-                                                    <button type="button" class="btn btn-primary">
-                                                        <a href="{{ route('edit-manager', ['id' => $manager->id]) }}"  style="color: white;">
-                                                        <i class="la la-pencil"></i>  </a>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                            <td>{{ $employee->first_name }} {{ $employee->last_name }} <br>{{ $employee->email }} <br>{{ $employee->address }} <br>{{ $employee->employee_gender }} </td>
+                                            <td>{{ $employee->joining_date }}</td>
+                                            <td>{{ $employee->phone }}</td>
+                                            <td>{{ $employee->department }} <br> {{ $employee->designation }}</td>
+                                            <td>{{ $employee->decided_salary }} </td>
+                                            <td><span class="font-weight-bold">{{ $employee->create_by }}</span></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -1,14 +1,14 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -18,49 +18,43 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session()->has('manager-added'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('manager-added') }}.
-                            </div>
+                        @if (session()->has('success-message-updte'))
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('success-message-updte') }}.
+                        </div>
                         @endif
                         <div class="card-header">
-                            <h4 class="card-title">Add Manager</h4>
-                            <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New designation">
-                                    <a href="{{ route('all-manager') }}" style="color: white;">
-                                    All HR </a>
-                                </button>
-                            </div>
+                            <h4 class="card-title">Edit Manager</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-manager') }}" method="POST">
+                                <form action="{{ route('hr-update-manager', ['id' => $managerdetails->id]) }}" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Designation</label>
-                                            <input type="text" name="designation" class="form-control">
+                                            <input type="text" name="designation" class="form-control" value="{{ $managerdetails->designation }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" name="first_name" class="form-control">
+                                            <input type="text" name="first_name" class="form-control" value="{{ $managerdetails->first_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" name="last_name" class="form-control">
+                                            <input type="text" name="last_name" class="form-control" value="{{ $managerdetails->last_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label>Phone</label>
-                                            <input type="number" name="phone" class="form-control">
+                                            <input type="number" name="phone" class="form-control" value="{{ $managerdetails->phone }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control">
+                                            <input type="email" name="email" class="form-control" value="{{ $managerdetails->email }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label>Address</label>
-                                            <input type="text" name="address" class="form-control">
+                                            <input type="text" name="address" class="form-control" value="{{ $managerdetails->address
+                                             }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label>Gender</label>
@@ -71,7 +65,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">User Name</label>
-                                            <input type="text" name="user_name" class="form-control">
+                                            <input type="text" name="user_name" class="form-control" value="{{ $managerdetails->user_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Password</label>
@@ -115,38 +109,17 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
-<script>
-    $(document).ready(function() {
-        $('select[name="department"]').on('change', function() {
-            var department = $(this).val();
-            if (department) {
-                $.ajax({
-                    url: '{{ route("get-designations") }}',
-                    type: 'GET',
-                    data: { department: department },
-                    success: function(data) {
-                        $('select[name="designation"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('select[name="designation"]').empty();
-            }
-        });
-    });
-</script>
+@include('hr_panel.include.footer_include')
+
 <script>
     document.getElementById("togglePassword").addEventListener("click", function() {
-    var passwordInput = document.getElementById("passwordInput");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
-    } else {
-        passwordInput.type = "password";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
-    }
-});
+        var passwordInput = document.getElementById("passwordInput");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
+        } else {
+            passwordInput.type = "password";
+            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
+        }
+    });
 </script>

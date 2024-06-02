@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -24,17 +24,10 @@
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Edit Employee</h4>
-                            <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New designation">
-                                    <a href="{{ route('all-employee') }}" style="color: white;">
-                                    All Employee </a>
-                                </button>
-                            </div>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('update-employee',['id'=> $employeedetails->id ]) }}" method="post">
+                                <form action="{{ route('hr-update-employee',['id'=> $employeedetails->id ]) }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
@@ -138,7 +131,7 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('hr_panel.include.footer_include')
 <script>
     $(document).ready(function() {
         $('select[name="department"]').on('change', function() {

@@ -27,6 +27,7 @@ class Employee extends Model
         'employee_gender',
         'number_of_leaves',
         'username',
-        'password'
+        'password',
+        'create_by'
     ];
 }

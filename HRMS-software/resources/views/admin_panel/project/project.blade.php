@@ -38,21 +38,22 @@
                                     <thead>
                                         <tr>
                                             <th>Sno</th>
-                                            <th>Project Name</th>
+                                            <th>Project Name </th>
+                                            <th>Deadline</th>
                                             <th>Project Category</th>
                                             <th>Project Start Date <br> Project End Date</th>
                                             <th>Budget</th>
                                             <th>Priority</th>
                                             <th>Description</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($all_project as $project)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $project->project_name }}</td>
+                                                <td>{{ $project->project_name }} </td>
+                                                <td>{{ $project->project_deadline }}</td>
                                                 <td>{{ $project->project_category }}</td>
                                                 <td>{{ $project->project_start_date }}
                                                     <br>{{ $project->project_end_date }}
@@ -133,6 +134,8 @@
                                 <div class="form-group">
                                     <label>Project Name</label>
                                     <input type="text" name="project_name" class="form-control" required>
+                                    <label>Project Deadline</label>
+                                    <input type="date" name="project_deadline" class="form-control" required>
                                     <label>Project Category</label>
                                     <input type="text" name="project_category" class="form-control" required>
                                     <div class="row">

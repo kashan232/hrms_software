@@ -19,15 +19,14 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('success-message-updte'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('success-message-updte') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('success-message-updte') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Edit Manager</h4>
                             <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New designation">
+                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
                                     <a href="{{ route('all-manager') }}" style="color: white;">
                                         All Manager </a>
                                 </button>
@@ -40,41 +39,45 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Designation</label>
-                                            <input type="text" name="designation" class="form-control"
-                                            value="{{ $managerdetails->designation }}">
+                                            <input type="text" name="designation" class="form-control" value="{{ $managerdetails->designation }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" name="first_name" class="form-control"
-                                                value="{{ $managerdetails->first_name }}">
+                                            <input type="text" name="first_name" class="form-control" value="{{ $managerdetails->first_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" name="last_name" class="form-control"
-                                                value="{{ $managerdetails->last_name }}">
+                                            <input type="text" name="last_name" class="form-control" value="{{ $managerdetails->last_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label>Phone</label>
-                                            <input type="number" name="phone" class="form-control"
-                                                value="{{ $managerdetails->phone }}">
+                                            <input type="number" name="phone" class="form-control" value="{{ $managerdetails->phone }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control"
-                                                value="{{ $managerdetails->email }}">
+                                            <input type="email" name="email" class="form-control" value="{{ $managerdetails->email }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Address</label>
+                                            <input type="text" name="address" class="form-control" value="{{ $managerdetails->address
+                                             }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Gender</label>
+                                            <Select name="manager_gender" class="form-control">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </Select>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">User Name</label>
-                                            <input type="text" name="user_name" class="form-control"
-                                                value="{{ $managerdetails->user_name }}">
+                                            <input type="text" name="user_name" class="form-control" value="{{ $managerdetails->user_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Password</label>
                                             <div class="input-group">
-                                                <input type="password" id="passwordInput" name="password"
-                                                    class="form-control">
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    id="togglePassword">
+                                                <input type="password" id="passwordInput" name="password" class="form-control">
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                                     <i class="fas fa-eye-slash"></i>
                                                 </button>
                                             </div>
@@ -113,32 +116,7 @@
     ***********************************-->
 
 @include('admin_panel.include.footer_include')
-<script>
-    $(document).ready(function() {
-        $('select[name="department"]').on('change', function() {
-            var department = $(this).val();
-            if (department) {
-                $.ajax({
-                    url: '{{ route('get-designations') }}',
-                    type: 'GET',
-                    data: {
-                        department: department
-                    },
-                    success: function(data) {
-                        $('select[name="designation"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="designation"]').append(
-                                '<option value="' + value + '">' + value +
-                                '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('select[name="designation"]').empty();
-            }
-        });
-    });
-</script>
+
 <script>
     document.getElementById("togglePassword").addEventListener("click", function() {
         var passwordInput = document.getElementById("passwordInput");

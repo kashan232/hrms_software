@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -17,16 +17,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{-- @if (session()->has('hr-added'))
-                        <div class="alert alert-success solid alert-square">
-                            <strong>Success!</strong> {{ session('hr-added') }}.
-                        </div>
-                    @endif --}}
                         <div class="card-header">
-                            <h4 class="card-title">Manager</h4>
+                            <h4 class="card-title">Employees</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-manager') }}" style="color: white;">
+                                    <a href="{{ route('hr-add-employee') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
@@ -46,27 +41,27 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Designation</th>
-                                            <th>First Name <br> Last Name</th>
+                                            <th>Name | Email | Address | Gender</th>
+                                            <th>Joined Date</th>
                                             <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>User Name</th>
+                                            <th>Department | Designation</th>
+                                            <th>Salary | Created</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_manager as $manager)
+                                        @foreach ($all_employee as $employee)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $manager->designation }} </td>
-                                            <td>{{ $manager->first_name }} <br> {{ $manager->last_name }} </td>
-                                            <td>{{ $manager->phone }}</td>
-                                            <td>{{ $manager->email }}</td>
-                                            <td>{{ $manager->user_name }} </td>
+                                            <td>{{ $employee->first_name }} {{ $employee->last_name }} <br>{{ $employee->email }} <br>{{ $employee->address }} <br>{{ $employee->employee_gender }} </td>
+                                            <td>{{ $employee->joining_date }}</td>
+                                            <td>{{ $employee->phone }}</td>
+                                            <td>{{ $employee->department }} <br> {{ $employee->designation }}</td>
+                                            <td>{{ $employee->decided_salary }} <br><span class="font-weight-bold">{{ $employee->create_by }}</span></td>
                                             <td>
                                                 <div class="button--group">
                                                     <button type="button" class="btn btn-primary">
-                                                        <a href="{{ route('edit-manager', ['id' => $manager->id]) }}"  style="color: white;">
+                                                        <a href="{{ route('hr-edit-employee', ['id' => $employee->id]) }}"  style="color: white;">
                                                         <i class="la la-pencil"></i>  </a>
                                                     </button>
                                                 </div>
@@ -104,4 +99,4 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('hr_panel.include.footer_include')

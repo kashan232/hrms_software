@@ -64,20 +64,20 @@
                                                 value="{{ $hrdetails->email }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
+                                            <label>Address</label>
+                                            <input type="text" name="address" class="form-control" value="{{ $hrdetails->address }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Gender</label>
+                                            <Select name="hr_gender" class="form-control">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">User Name</label>
                                             <input type="text" name="user_name" class="form-control"
                                                 value="{{ $hrdetails->user_name }}">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Password</label>
-                                            <div class="input-group">
-                                                <input type="password" id="passwordInput" name="password"
-                                                    class="form-control">
-                                                <button class="btn btn-outline-secondary" type="button"
-                                                    id="togglePassword">
-                                                    <i class="fas fa-eye-slash"></i>
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

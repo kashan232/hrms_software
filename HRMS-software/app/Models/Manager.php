@@ -18,7 +18,10 @@ class Manager extends Model
         'designation',
         'phone',
         'email',
+        'address',
+        'manager_gender',
         'user_name',
-        'password'
+        'password',
+        'created_by'
     ];
 }
