@@ -37,6 +37,7 @@ use App\Http\Controllers\ProfilePageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectListingController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportingController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TaskController;
 use App\Models\LeaveRequest;
@@ -296,6 +297,28 @@ Route::get('/manager-create-salary', [ManagerPayrolController::class, 'manager_c
 Route::post('/manager-post-create-salary', [ManagerPayrolController::class, 'manager_post_create_salary'])->name('manager-post-create-salary');
 Route::get('/manager-generate-salary', [ManagerPayrolController::class, 'manager_generate_salary'])->name('manager-generate-salary');
 Route::get('/manager-salary-print/{id}', [ManagerPayrolController::class, 'manager_printSalary'])->name('manager-salary-print');
+
+
+Route::get('/report1', [ReportingController::class, 'report1'])->name('report1');
+Route::get('/report2', [ReportingController::class, 'report2'])->name('report2');
+Route::get('/report3', [ReportingController::class, 'report3'])->name('report3');
+Route::get('/report4', [ReportingController::class, 'report4'])->name('report4');
+Route::get('/report5', [ReportingController::class, 'report5'])->name('report5');
+Route::get('/report6', [ReportingController::class, 'report6'])->name('report6');
+Route::get('/report7', [ReportingController::class, 'report7'])->name('report7');
+Route::get('/report8', [ReportingController::class, 'report8'])->name('report8');
+Route::get('/report9', [ReportingController::class, 'report9'])->name('report9');
+Route::get('/report10', [ReportingController::class, 'report10'])->name('report10');
+Route::get('/report11', [ReportingController::class, 'report11'])->name('report11');
+Route::get('/report12', [ReportingController::class, 'report12'])->name('report12');
+Route::get('/report13', [ReportingController::class, 'report13'])->name('report13');
+Route::get('/report14', [ReportingController::class, 'report14'])->name('report14');
+Route::get('/report15', [ReportingController::class, 'report15'])->name('report15');
+Route::get('/report16', [ReportingController::class, 'report16'])->name('report16');
+Route::get('/report17', [ReportingController::class, 'report17'])->name('report17');
+Route::get('/report18', [ReportingController::class, 'report18'])->name('report18');
+Route::get('/report19', [ReportingController::class, 'report19'])->name('report19');
+Route::get('/report20', [ReportingController::class, 'report20'])->name('report20');
 
 
 Route::middleware('auth')->group(function () {
