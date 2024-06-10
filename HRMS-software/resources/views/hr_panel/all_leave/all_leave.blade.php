@@ -31,6 +31,7 @@
                                             <th>Department <br> Designation</th>
                                             <th>Leave Type</th>
                                             <th>Leave From <br> Leave To</th>
+                                            <th>Start Time | End Time</th>
                                             <th>Reason</th>
                                             <th>Status</th>
                                         </tr>
@@ -43,6 +44,9 @@
                                                 <td>{{ $leaves->department }} <br> {{ $leaves->designation }}</td>
                                                 <td>{{ $leaves->leave_type }}</td>
                                                 <td>{{ $leaves->leave_from_date }} <br> {{ $leaves->leave_to_date }} </td>
+                                                <td>{{ $leaves->star_time }} <br>
+                                                    {{ $leaves->end_time }}
+                                                </td>
                                                 <td>{{ $leaves->leave_reason }}</td>
                                                 <td>
                                                     @if($leaves->leave_approve == 'Approve')

@@ -41,20 +41,21 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
+                                            <th>User</th>
                                             <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Vendor</th>
-                                            <th>Amount</th>
-                                            <th>Tax</th>
-                                            <th>Total paid</th>
+                                            <th>Designation</th>
+                                            <th>Job description</th>
+                                            <th>Education</th>
+                                            <th>Skills</th>
+                                            <th>Experience</th>
                                             <th>Status</th>
-                                            <th>Hired By</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($all_hiring as $hiring)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $hiring->usertype }}</td>
                                             <td>{{ $hiring->date }}</td>
                                             <td>{{ $hiring->designation }}</td>
                                             <td>{{ $hiring->job_description }}</td>
@@ -62,7 +63,6 @@
                                             <td>{{ $hiring->skills }}</td>
                                             <td>{{ $hiring->experience }}</td>
                                             <td>{{ $hiring->status }}</td>
-                                            <td>{{ $hiring->usertype }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

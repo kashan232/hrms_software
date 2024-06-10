@@ -20,6 +20,8 @@ class LeaveRequest extends Model
         'leave_type',
         'leave_from_date',
         'leave_to_date',
+        'star_time',
+        'end_time',
         'leave_reason',
         'leave_approve',
         'approved_by',

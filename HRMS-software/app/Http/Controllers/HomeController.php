@@ -14,6 +14,8 @@ use App\Models\Revenue;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -111,6 +113,58 @@ class HomeController extends Controller
         } else {
             // return redirect()->back();
             return redirect()->route('login');
+        }
+    }
+
+    public function Admin_Change_Password()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            // dd($userId);
+            // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+            return view('admin_panel.admin_change_password', [
+                // 'all_department' => $all_department,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function updte_change_Password(Request $request)
+    {
+        if (Auth::id()) {
+            // dd($request);
+            // Validate the form data
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|min:8',
+                'retype_new_password' => 'required|same:new_password'
+            ]);
+
+            // Get the current authenticated user
+            $user = Auth::user();
+            // dd($user);
+            // Check if the old password matches
+            if (!Hash::check($request->input('old_password'), $user->password)) {
+                return redirect()->back()->withErrors(['old_password' => 'Old password is incorrect']);
+            }
+
+            // Check if the user is an admin
+            if ($user->usertype !== 'admin') {
+                return redirect()->back()->withErrors(['error' => 'Unauthorized action']);
+            }
+
+            // Update the password
+            $user->password = Hash::make($request->input('new_password'));
+            $user->save();
+
+            // Add a success message to the session
+            Session::flash('success', 'Password changed successfully');
+
+            // Redirect back with success message
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
     }
 }

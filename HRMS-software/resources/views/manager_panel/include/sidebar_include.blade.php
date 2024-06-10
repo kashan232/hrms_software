@@ -56,13 +56,13 @@
                  </a>
              </li>
 
-             <li><a class="has-arrow ai-icon" href="{{ route('manager-remote-employee-listing') }}"
+             <!-- <li><a class="has-arrow ai-icon" href="{{ route('manager-remote-employee-listing') }}"
                      aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-bell"></i>
                      <span class="nav-text">Remote Employee</span>
                  </a>
-             </li>
+             </li> -->
          </ul>
 
      </div>

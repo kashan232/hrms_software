@@ -19,15 +19,14 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('Leave-req-added'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('Leave-req-added') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('Leave-req-added') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Leave Request</h4>
                             <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New Department">
+                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New Department">
                                     <i class="las la-plus"></i>Add New
                                 </button>
                             </div>
@@ -40,41 +39,46 @@
                                             <th>Sno</th>
                                             <th>LeaveType</th>
                                             <th>From | To</th>
+                                            <th>Start Time | End Time</th>
                                             <th>Reason</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($LeaveRequests as $LeaveRequest)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $LeaveRequest->leave_type }}</td>
-                                                <td>{{ $LeaveRequest->leave_from_date }} <br>
-                                                    {{ $LeaveRequest->leave_to_date }}</td>
-                                                <td>{{ $LeaveRequest->leave_reason }}</td>
-                                                {{-- <td>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $LeaveRequest->leave_type }}</td>
+                                            <td>{{ $LeaveRequest->leave_from_date }} <br>
+                                                {{ $LeaveRequest->leave_to_date }}
+                                            </td>
+                                            <td>{{ $LeaveRequest->star_time }} <br>
+                                                {{ $LeaveRequest->end_time }}
+                                            </td>
+                                            <td>{{ $LeaveRequest->leave_reason }}</td>
+                                            {{-- <td>
                                                     @if ($LeaveRequest->leave_approve == 'Approve')
                                                         <i class="fas fa-check-circle text-success" style="font-size: 20px;"></i>
                                                     @else
                                                         <i class="fas fa-times-circle text-danger" style="font-size: 20px;"></i>
                                                     @endif
                                                 </td> --}}
-                                                <td>
-                                                    @if ($LeaveRequest->leave_approve == 'Approve')
-                                                        <button type="button" class="btn btn-success">
-                                                            Approved
-                                                        </button>
-                                                    @elseif($LeaveRequest->leave_approve == 'Reject')
-                                                        <button type="button" class="btn btn-danger">
-                                                            Rejected
-                                                        </button>
-                                                    @else
-                                                        <button type="button" class="btn btn-primary">
-                                                            Pending
-                                                        </button>
-                                                    @endif
-                                                </td>
-                                            </tr>
+                                            <td>
+                                                @if ($LeaveRequest->leave_approve == 'Approve')
+                                                <button type="button" class="btn btn-success">
+                                                    Approved
+                                                </button>
+                                                @elseif($LeaveRequest->leave_approve == 'Reject')
+                                                <button type="button" class="btn btn-danger">
+                                                    Rejected
+                                                </button>
+                                                @else
+                                                <button type="button" class="btn btn-primary">
+                                                    Pending
+                                                </button>
+                                                @endif
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -90,8 +94,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title"><span class="type"></span> <span>Add Leave Request</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -106,9 +109,9 @@
                                             <select name="leave_type" id="" class="form-control">
                                                 <option selected disabled>Select One</option>
                                                 @foreach ($LeaveTypes as $LeaveType)
-                                                    <option value="{{ $LeaveType->leave_type }}">
-                                                        {{ $LeaveType->leave_type }}
-                                                    </option>
+                                                <option value="{{ $LeaveType->leave_type }}">
+                                                    {{ $LeaveType->leave_type }}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -126,6 +129,21 @@
                                             <input type="date" name="leave_to_date" class="form-control" required>
                                         </div>
                                     </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Start time</label>
+                                            <input type="time" name="star_time" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>End time</label>
+                                            <input type="time" name="end_time" class="form-control" required>
+                                        </div>
+                                    </div>
+
 
                                     <div class="col-12 col-md-12">
                                         <div class="form-group">
@@ -157,39 +175,37 @@
                             </button>
                         </div>
                         <form action="{{ route('update-leavetype') }}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Leave Type</label>
-                                    <input type="hidden" id="editleaveid" name="leave_type_id" class="form-control"
-                                        required>
-                                    <input type="text" id="editleavetype" name="leave_type" class="form-control"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
-                        </form>
-                    </div>
+            @csrf
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Leave Type</label>
+                    <input type="hidden" id="editleaveid" name="leave_type_id" class="form-control" required>
+                    <input type="text" id="editleavetype" name="leave_type" class="form-control" required>
                 </div>
-            </div> --}}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            </form>
         </div>
     </div>
-    <!--**********************************
+</div> --}}
+</div>
+</div>
+<!--**********************************
             Content body end
         ***********************************-->
-    <!--**********************************
+<!--**********************************
             Footer start
         ***********************************-->
-    {{-- <div class="footer">
+{{-- <div class="footer">
         <div class="copyright">
             <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK Technologies</a>
                 2024</p>
         </div>
     </div>
      <!--********************************** --}}
-    {{-- Footer end
+{{-- Footer end
         ***********************************--> --}}
 
 

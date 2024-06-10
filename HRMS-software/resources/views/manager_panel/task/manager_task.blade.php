@@ -19,15 +19,14 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('task-added'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('task-added') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('task-added') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Task</h4>
                             <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New Department">
+                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New Department">
                                     <i class="las la-plus"></i>Add New
                                 </button>
                             </div>
@@ -51,36 +50,34 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($all_task as $task)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $task->project_name }}</td>
-                                                <td>{{ $task->task_category }}</td>
-                                                <td>{{ $task->start_date }} <br> {{ $task->end_date }} </td>
-                                                <td>{{ $task->department }} <br> {{ $task->designation }} </td>
-                                                <td>{{ $task->task_assign_person }}</td>
-                                                <td>{{ $task->task_priority }}</td>
-                                                <td>{{ $task->description }}</td>
-                                                <td>
-                                                    <div class="button--group">
-                                                        <button type="button" class="btn btn-primary">
-                                                            {{ $task->status }} </button>
-                                                    </div>
-                                                </td>
-                                                {{-- <td>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $task->project_name }}</td>
+                                            <td>{{ $task->task_category }}</td>
+                                            <td>{{ $task->start_date }} <br> {{ $task->end_date }} </td>
+                                            <td>{{ $task->department }} <br> {{ $task->designation }} </td>
+                                            <td>{{ $task->task_assign_person }}</td>
+                                            <td>{{ $task->task_priority }}</td>
+                                            <td>{{ $task->description }}</td>
+                                            <td>
+                                                <div class="button--group">
+                                                    <button type="button" class="btn btn-primary">
+                                                        {{ $task->status }} </button>
+                                                </div>
+                                            </td>
+                                            {{-- <td>
                                                     <div class="form-check form-switch">
                                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                       </div>
                                                 </td> --}}
-                                                <td>
-                                                    <div class="button--group">
-                                                        <button type="button" class="btn btn-primary edittaskBtn"
-                                                            data-toggle="modal" data-modal_title="Edit task"
-                                                            data-has_status="1" data-target="#edittask">
-                                                            <i class="la la-pencil"></i></button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            <td>
+                                                <div class="button--group">
+                                                    <button type="button" class="btn btn-primary edittaskBtn" data-toggle="modal" data-modal_title="Edit task" data-has_status="1" data-target="#edittask">
+                                                        <i class="la la-pencil"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -98,8 +95,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title"><span class="type"></span> <span>Add Task</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -111,15 +107,13 @@
                                     <select name="project_name" id="projectName" class="form-control">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($all_project as $project)
-                                            <option value="{{ $project->project_name }}"
-                                                data-category="{{ $project->project_category }}">
-                                                {{ $project->project_name }}
-                                            </option>
+                                        <option value="{{ $project->project_name }}" data-category="{{ $project->project_category }}">
+                                            {{ $project->project_name }}
+                                        </option>
                                         @endforeach
                                     </select>
                                     <label>Project Category</label>
-                                    <input type="text" name="task_category" id="taskCategory" class="form-control"
-                                        required>
+                                    <input type="text" name="task_category" id="taskCategory" class="form-control" required>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Task Start Date</label>
@@ -133,13 +127,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Employee Department</label>
-                                            <select name="department" id="editDepartmentName" class="form-control"
-                                                required>
+                                            <select name="department" id="editDepartmentName" class="form-control" required>
                                                 <option value="" selected disabled>Select One</option>
                                                 @foreach ($all_department as $department)
-                                                    <option value="{{ $department->department }}">
-                                                        {{ $department->department }}
-                                                    </option>
+                                                <option value="{{ $department->department }}">
+                                                    {{ $department->department }}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -149,17 +142,14 @@
                                         </div>
                                     </div>
                                     <label>Task Assign Person</label>
-                                    <select name="task_assign_person" id="editprojectName" class="form-control"
-                                        onchange="populateEmployeeID()">
+                                    <select name="task_assign_person" id="editprojectName" class="form-control" onchange="populateEmployeeID()">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($all_employee as $employee)
-                                            <option value="{{ $employee->first_name }} {{ $employee->last_name }}">
-                                                {{ $employee->first_name }} {{ $employee->last_name }}
-                                            </option>
+                                        <option value="{{ $employee->first_name }} {{ $employee->last_name }}">
+                                            {{ $employee->first_name }} {{ $employee->last_name }}
+                                        </option>
                                         @endforeach
                                     </select>
-
-                                    {{-- emp_id --}}
 
                                     <label>Task Priority</label>
                                     <select name="task_priority" id="" class="form-control" required>
@@ -182,16 +172,14 @@
             </div>
 
             <!--Edit Modal -->
-            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel"
-                aria-hidden="true">
+            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit
                                     project</span></h5>
                             <!-- Adjusted close button with custom styling -->
-                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                                style="font-size: 1rem; border:none;">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
@@ -200,10 +188,8 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Department</label>
-                                    <input type="hidden" id="editdepartmentId" name="department_id"
-                                        class="form-control" required>
-                                    <input type="text" id="editdepartmentName" name="department_name"
-                                        class="form-control" required>
+                                    <input type="hidden" id="editdepartmentId" name="department_id" class="form-control" required>
+                                    <input type="text" id="editdepartmentName" name="department_name" class="form-control" required>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -271,13 +257,13 @@
         var employeeName = document.getElementById("editprojectName").value;
 
         // Loop through all employees to find the matching one
-        @foreach ($all_employee as $employee)
-            var fullName = "{{ $employee->first_name }} {{ $employee->last_name }}";
-            if (fullName === employeeName) {
-                // If the names match, populate the employee ID field
-                document.getElementById("emp_id").value = "{{ $employee->id }}";
-                break; // Stop the loop
-            }
+        @foreach($all_employee as $employee)
+        var fullName = "{{ $employee->first_name }} {{ $employee->last_name }}";
+        if (fullName === employeeName) {
+            // If the names match, populate the employee ID field
+            document.getElementById("emp_id").value = "{{ $employee->id }}";
+            break; // Stop the loop
+        }
         @endforeach
     }
 </script>
@@ -287,23 +273,23 @@ function loadEmployees(department, designation) {
     if (department && designation) {
         $.ajax({
             url: '{{ route('get-employees') }}',
-            type: 'GET',
-            data: {
-                department: department,
-                designation: designation
-            },
-            success: function(data) {
-                $('select[name="task_assign_person"]').empty();
-                $.each(data, function(key, value) {
-                    $('select[name="task_assign_person"]').append(
-                        '<option value="' + value.first_name + ' ' + value.last_name + '">' + value.first_name + ' ' + value.last_name + '</option>'
-                    );
-                });
-            }
-        });
-    } else {
-        $('select[name="task_assign_person"]').empty();
-    }
+type: 'GET',
+data: {
+department: department,
+designation: designation
+},
+success: function(data) {
+$('select[name="task_assign_person"]').empty();
+$.each(data, function(key, value) {
+$('select[name="task_assign_person"]').append(
+'<option value="' + value.first_name + ' ' + value.last_name + '">' + value.first_name + ' ' + value.last_name + '</option>'
+);
+});
+}
+});
+} else {
+$('select[name="task_assign_person"]').empty();
+}
 }
 </script> --}}
 

@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HRController extends Controller
 {
@@ -105,6 +106,58 @@ class HRController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
             return Redirect()->back()->with('success-message-updte', 'HR Updated successfully!');
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function hr_Change_Password()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            // dd($userId);
+            // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+            return view('hr_panel.hr_change_password', [
+                // 'all_department' => $all_department,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function hr_updte_change_Password(Request $request)
+    {
+        if (Auth::id()) {
+            // dd($request)
+            // Validate the request data
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|min:8',
+                'retype_new_password' => 'required|same:new_password'
+            ]);
+
+            // Get the currently authenticated user
+            $user = Auth::user();
+            // dd($user);
+            // Check if the old password matches the current password
+            if (!Hash::check($request->old_password, $user->password)) {
+                return back()->with('error', 'The provided old password does not match our records.');
+            }
+
+            // Update password in the users table
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            // Update password in the hr table
+            $hr = Hr::where('id', $user->emp_id)->first();
+            if ($hr) {
+                $hr->password = $request->new_password;  // No hashing for the hr table password
+                $hr->save();
+            } else {
+                return back()->with('error', 'HR record not found.');
+            }
+
+            return back()->with('success', 'Password changed successfully.');
         } else {
             return redirect()->back();
         }

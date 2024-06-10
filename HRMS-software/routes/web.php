@@ -68,6 +68,20 @@ Route::get('/admin-dashboard', [HomeController::class, 'adminpage'])->middleware
 
 //Admin Panel
 
+
+Route::get('/Admin-Change-Password', [HomeController::class, 'Admin_Change_Password'])->name('Admin-Change-Password');
+Route::post('/updte-change-Password', [HomeController::class, 'updte_change_Password'])->name('updte-change-Password');
+
+Route::get('/hr-Change-Password', [HRController::class, 'hr_Change_Password'])->name('hr-Change-Password');
+Route::post('/hr-updte-change-Password', [HRController::class, 'hr_updte_change_Password'])->name('hr-updte-change-Password');
+
+Route::get('/manager-Change-Password', [ManagerController::class, 'manager_Change_Password'])->name('manager-Change-Password');
+Route::post('/manager-updte-change-Password', [ManagerController::class, 'manager_updte_change_Password'])->name('manager-updte-change-Password');
+
+Route::get('/emp-Change-Password', [EmployeeController::class, 'emp_Change_Password'])->name('emp-Change-Password');
+Route::post('/emp-updte-change-Password', [EmployeeController::class, 'emp_updte_change_Password'])->name('emp-updte-change-Password');
+
+
 //DEpartment
 Route::get('/department', [DepartmentController::class, 'department'])->middleware(['auth','admin'])->name('department');
 Route::post('/store-department', [DepartmentController::class, 'store_department'])->name('store-department');
@@ -299,11 +313,11 @@ Route::get('/manager-generate-salary', [ManagerPayrolController::class, 'manager
 Route::get('/manager-salary-print/{id}', [ManagerPayrolController::class, 'manager_printSalary'])->name('manager-salary-print');
 
 
-Route::get('/report1', [ReportingController::class, 'report1'])->name('report1');
-Route::get('/report2', [ReportingController::class, 'report2'])->name('report2');
-Route::get('/report3', [ReportingController::class, 'report3'])->name('report3');
-Route::get('/report4', [ReportingController::class, 'report4'])->name('report4');
-Route::get('/report5', [ReportingController::class, 'report5'])->name('report5');
+Route::get('/report-employee-performance', [ReportingController::class, 'report_employee_performance'])->name('report-employee-performance');
+Route::get('/get-employees', [ReportingController::class, 'get_employees'])->name('get-employees');
+Route::get('/get-report-employee-performance', [ReportingController::class, 'get_report_employee_performance'])->name('get-report-employee-performance');
+Route::get('/report-expense', [ReportingController::class, 'report_expense'])->name('report-expense');
+Route::get('/get-expense-report', [ReportingController::class, 'get_expense_report'])->name('get-expense-report');
 Route::get('/report6', [ReportingController::class, 'report6'])->name('report6');
 Route::get('/report7', [ReportingController::class, 'report7'])->name('report7');
 Route::get('/report8', [ReportingController::class, 'report8'])->name('report8');

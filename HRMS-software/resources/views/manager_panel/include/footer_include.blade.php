@@ -14,6 +14,8 @@
 <script src="/js/styleSwitcher.js" type="text/javascript"></script>
 <script src="/vendor/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="/js/plugins-init/datatables.init.js" type="text/javascript"></script>
+<script src="/vendor/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="/js/plugins-init/select2-init.js" type="text/javascript"></script>
 <script>
     function carouselReview() {
         /*  testimonial one function by = owl.carousel.js */

@@ -58,6 +58,8 @@ class ManagerLeaveRequestController extends Controller
                     'leave_type' => $request->leave_type,
                     'leave_from_date' => $request->leave_from_date,
                     'leave_to_date' => $request->leave_to_date,
+                    'star_time' => $request->star_time,
+                    'end_time' => $request->end_time,
                     'leave_reason' => $request->leave_reason,
                     'Employee' => $employeeName,
                     // 'department' => $department,

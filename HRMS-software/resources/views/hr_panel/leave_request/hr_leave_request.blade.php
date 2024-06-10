@@ -40,6 +40,7 @@
                                             <th>Sno</th>
                                             <th>LeaveType</th>
                                             <th>From | To</th>
+                                            <th>Start Time | End Time</th>
                                             <th>Reason</th>
                                             <th>Status</th>
                                         </tr>
@@ -51,6 +52,9 @@
                                                 <td>{{ $LeaveRequest->leave_type }}</td>
                                                 <td>{{ $LeaveRequest->leave_from_date }} <br>
                                                     {{ $LeaveRequest->leave_to_date }}</td>
+                                                    <td>{{ $LeaveRequest->star_time }} <br>
+                                                {{ $LeaveRequest->end_time }}
+                                            </td>
                                                 <td>{{ $LeaveRequest->leave_reason }}</td>
                                                 {{-- <td>
                                                     @if ($LeaveRequest->leave_approve == 'Approve')
@@ -102,7 +106,7 @@
                                     <div class="col-12 col-md-12">
                                         <div class="form-group">
                                             <label>Select Leave type</label>
-                                            <input type="text" name="emp_id" value="{{ $employee_details->id }}">
+                                            <input type="hidden" name="emp_id" value="{{ $employee_details->id }}">
                                             <select name="leave_type" id="" class="form-control">
                                                 <option selected disabled>Select One</option>
                                                 @foreach ($LeaveTypes as $LeaveType)
@@ -124,6 +128,20 @@
                                         <div class="form-group">
                                             <label>Leave to Date</label>
                                             <input type="date" name="leave_to_date" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>Start time</label>
+                                            <input type="time" name="star_time" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label>End time</label>
+                                            <input type="time" name="end_time" class="form-control" required>
                                         </div>
                                     </div>
 

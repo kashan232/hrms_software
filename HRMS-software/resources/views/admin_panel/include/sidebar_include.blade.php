@@ -98,13 +98,13 @@
                  <span class="nav-text">Leaves</span>
              </a>
          </li>
-         <li>
+         <!-- <li>
              <a class="has-arrow ai-icon" href="{{ route('remote-emp-list') }}" aria-expanded="false">
                  {{-- <i class="flaticon-381-controls-3"></i> --}}
                  <i class="fa-solid fa-clipboard-user"></i>
                  <span class="nav-text">Remote Employee</span>
              </a>
-         </li>
+         </li> -->
          <li>
              <a class="has-arrow ai-icon" href="{{ route('hiring-listing') }}" aria-expanded="false">
                  {{-- <i class="flaticon-381-controls-3"></i> --}}
@@ -137,7 +137,9 @@
                  <span class="nav-text">Reporting</span>
              </a>
              <ul aria-expanded="false">
-                 <li><a href="{{ route('report-employee-attendance') }}">Employee Attendance</a></li>
+             <li><a href="{{ route('report-employee-attendance') }}">Employee Attendance</a></li>
+             <li><a href="{{ route('report-employee-performance') }}">Employee Performance</a></li>
+             <li><a href="{{ route('report-expense') }}">Expense Report</a></li>
              </ul>
 
          </li>
