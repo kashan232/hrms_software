@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// git connect
+// git connect on pc
 //kashan pagal he
 Route::get('/', function () {
     return view('welcome');
