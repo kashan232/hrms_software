@@ -139,7 +139,11 @@
              <ul aria-expanded="false">
              <li><a href="{{ route('report-employee-attendance') }}">Employee Attendance</a></li>
              <li><a href="{{ route('report-employee-performance') }}">Employee Performance</a></li>
+             <li><a href="{{ route('report-leave') }}">Employee leave Report</a></li>
+             <li><a href="{{ route('hr-report-leave') }}">Hr leave Report</a></li>
+             <li><a href="{{ route('manager-report-leave') }}">Manager leave Report</a></li>
              <li><a href="{{ route('report-expense') }}">Expense Report</a></li>
+             <li><a href="{{ route('report-revenue') }}">Revenue Report</a></li>
              </ul>
 
          </li>
