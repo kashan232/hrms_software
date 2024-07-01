@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CRMExperience;
+use App\Models\CRMInsurance;
+use App\Models\CRMSalaire;
+use App\Models\CRMSkill;
+use App\Models\CRMSuggestion;
+use App\Models\CRMTraininge;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\EmployeeAttendance;
 use App\Models\Expense;
+use App\Models\Hiring;
 use App\Models\Hr;
 use App\Models\LeaveRequest;
 use App\Models\Manager;
+use App\Models\Project;
 use App\Models\Revenue;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -274,25 +282,189 @@ class ReportingController extends Controller
             return redirect()->back();
         }
     }
-    public function report14()
+    public function report_expense_hr()
     {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Departments = Department::get();
+            return view('hr_panel.reporting.expense_report.expense_report', [
+                'Departments' => $Departments,
+            ]);
+        } else {
+            return redirect()->back();
+        }
     }
-    public function report15()
+    public function get_expense_report_hr(Request $request)
     {
+        if (Auth::id()) {
+            $dateFrom = $request->input('date_from');
+            $dateTo = $request->input('date_to');
+
+            $expenses = Expense::whereBetween('date', [$dateFrom, $dateTo])->get();
+
+            return response()->json(['expenses' => $expenses]);
+        } else {
+            return redirect()->back();
+        }
     }
-    public function report16()
+    public function report_employee_cmr_hr()
     {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Departments = Department::get();
+            return view('hr_panel.reporting.cmr_report.cmr_report', [
+                'Departments' => $Departments,
+            ]);
+        } else {
+            return redirect()->back();
+        }
     }
-    public function report17()
+    public function get_report_employee_cmr_hr(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->back();
+        }
+
+        $type = $request->input('type');
+        $data = [];
+
+        switch ($type) {
+            case 'skills':
+                $data = CRMSkill::all();
+                break;
+            case 'insurance':
+                $data = CRMInsurance::all();
+                break;
+            case 'training':
+                $data = CRMTraininge::all();
+                break;
+            case 'experience':
+                $data = CRMExperience::all(['employee_name', 'emp_department as department', 'emp_designation as designation', 'organization', 'designation as emp_designation', 'start_date', 'end_date', 'total_experience']);
+                break;
+            case 'salaries':
+                $data = CRMSalaire::all();
+                break;
+            case 'suggestion':
+                $data = CRMSuggestion::all();
+                break;
+            default:
+                return response()->json(['error' => 'Invalid CMR type'], 400);
+        }
+
+        return response()->json(['data' => $data]);
     }
-    public function report18()
+    public function report_all_jobs_hr()
     {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Departments = Department::get();
+            return view('hr_panel.reporting.jobs_report.jobs_report', [
+                'Departments' => $Departments,
+            ]);
+        } else {
+            return redirect()->back();
+        }
     }
-    public function report19()
+    public function get_jobs_report(Request $request)
     {
+        if (Auth::id()) {
+            $dateFrom = $request->input('date_from');
+            $dateTo = $request->input('date_to');
+    
+            $jobs = Hiring::whereBetween('date', [$dateFrom, $dateTo])->get();
+    
+            return response()->json(['jobs' => $jobs]); // Changed 'jobss' to 'jobs'
+        } else {
+            return redirect()->back();
+        }
     }
-    public function report20()
+    public function report_expense_manager()
     {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Departments = Department::get();
+            return view('manager_panel.reporting.expense_report.expense_report', [
+                'Departments' => $Departments,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function get_expense_report_manager(Request $request)
+    {
+        if (Auth::id()) {
+            $dateFrom = $request->input('date_from');
+            $dateTo = $request->input('date_to');
+
+            $expenses = Expense::whereBetween('date', [$dateFrom, $dateTo])->get();
+
+            return response()->json(['expenses' => $expenses]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function report_all_jobs_manager()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Departments = Department::get();
+            return view('manager_panel.reporting.jobs_report.jobs_report', [
+                'Departments' => $Departments,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+    public function get_jobs_report_manager(Request $request)
+    {
+        if (Auth::id()) {
+            $dateFrom = $request->input('date_from');
+            $dateTo = $request->input('date_to');
+    
+            $jobs = Hiring::whereBetween('date', [$dateFrom, $dateTo])->get();
+    
+            return response()->json(['jobs' => $jobs]); // Changed 'jobss' to 'jobs'
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function report_all_task_manager()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $Projects = Project::all();
+            // dd($Projects);
+            return view('manager_panel.reporting.task_report.task_report', [
+                'Projects' => $Projects,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function get_task_report_manager(Request $request)
+    {
+        if (Auth::id()) {
+            $project_name = $request->input('project_name');
+            $tasks = Task::where('project_name', $project_name)->get();
+            return response()->json(['tasks' => $tasks]); // Corrected 'taskss' to 'tasks'
+        } else {
+            return redirect()->back();
+        }
     }
 }

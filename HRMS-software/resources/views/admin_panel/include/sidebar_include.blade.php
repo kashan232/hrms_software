@@ -148,12 +148,18 @@
 
          </li>
 
-         </ul>
+         <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                 <i class="fas fa-question"></i>
+                 <span class="nav-text">Quiz</span>
+             </a>
+             <ul aria-expanded="false">
+                 <li><a href="{{ route('Quiz-creation') }}">Quiz Creation</a></li>
+                 <li><a href="{{ route('all-quiz-creation') }}">Quizzes</a></li>
+             </ul>
 
-         {{-- <div class="copyright">
-                    <p><strong>Jobie Dashboard</strong> © 2023 All Rights Reserved</p>
-                    <p>by DexignZone</p>
-                </div> --}}
+         </li>
+
+         </ul>
      </div>
  </div> <!--**********************************
                     Sidebar end

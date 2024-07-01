@@ -36,7 +36,7 @@
                                             <select name="employee_id" id="employeeName" class="form-control" onchange="updateEmployeeDetails()" required>
                                                 <option>Select Employee</option>
                                                 @foreach($employees as $employee)
-                                                <option value="{{ $employee->id }} {{ $employee->first_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
+                                                <option value="{{ $employee->id }} {{ $employee->first_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}" data-salary="{{ $employee->decided_salary }}">
                                                     {{ $employee->first_name }} {{ $employee->last_name }}
                                                 </option>
                                                 @endforeach
@@ -44,14 +44,14 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="department" class="form-label">Department:</label>
-                                            <input type="text" id="department" name="department" class="form-control">
+                                            <input type="text" id="department" name="department" class="form-control" readonly>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label for="designation" class="form-label">Designation:</label>
-                                            <input type="text" id="designation" name="designation" class="form-control">
+                                            <input type="text" id="designation" name="designation" class="form-control" readonly>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="month" class="form-label">Salary Month:</label>
@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label for="basicSalary" class="form-label">Basic Salary:</label>
-                                            <input type="text" id="basicSalary" name="basic_salary" class="form-control" oninput="calculateNetSalary()">
+                                            <input type="text" id="basicSalary" name="basic_salary" readonly class="form-control" oninput="calculateNetSalary()">
                                         </div>
                                     </div>
 
@@ -209,9 +209,11 @@
         var selectedOption = employeeSelect.options[employeeSelect.selectedIndex];
         var department = selectedOption.getAttribute('data-department');
         var designation = selectedOption.getAttribute('data-designation');
+        var salary = selectedOption.getAttribute('data-salary');
 
         document.getElementById('department').value = department;
         document.getElementById('designation').value = designation;
+        document.getElementById('basicSalary').value = salary;
     }
 </script>
 <script>

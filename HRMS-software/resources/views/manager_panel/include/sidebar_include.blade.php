@@ -56,6 +56,18 @@
                  </a>
              </li>
 
+             <li class="has-menu">
+                 <a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     <i class="fas fa-briefcase"></i>
+                     <span class="nav-text">Reporting</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('report-expense-manager') }}">Expense Report</a></li>
+                     <li><a href="{{ route('report-all-jobs-manager') }}">Jobs Report</a></li>
+                     <li><a href="{{ route('report-all-task-manager') }}">Task Report</a></li>
+                 </ul>
+             </li>
+
              <!-- <li><a class="has-arrow ai-icon" href="{{ route('manager-remote-employee-listing') }}"
                      aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}

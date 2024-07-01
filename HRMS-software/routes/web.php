@@ -18,6 +18,8 @@ use App\Http\Controllers\HrEmployeeController;
 use App\Http\Controllers\HRLeaveRequestController;
 use App\Http\Controllers\HRLeavesController;
 use App\Http\Controllers\HrManagerController;
+use App\Http\Controllers\JobBoardController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeavesRecordController;
 use App\Http\Controllers\LeaveTypeController;
@@ -36,6 +38,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilePageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectListingController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportingController;
 use App\Http\Controllers\RevenueController;
@@ -80,6 +83,11 @@ Route::post('/manager-updte-change-Password', [ManagerController::class, 'manage
 
 Route::get('/emp-Change-Password', [EmployeeController::class, 'emp_Change_Password'])->name('emp-Change-Password');
 Route::post('/emp-updte-change-Password', [EmployeeController::class, 'emp_updte_change_Password'])->name('emp-updte-change-Password');
+
+
+Route::get('/Quiz-creation', [QuizController::class, 'Quiz_creation'])->middleware(['auth','admin'])->name('Quiz-creation');
+Route::get('/Quiz-store', [QuizController::class, 'Quiz_store'])->middleware(['auth','admin'])->name('Quiz-store');
+Route::get('/all-quiz-creation', [QuizController::class, 'all_quiz_creation'])->middleware(['auth','admin'])->name('all-quiz-creation');
 
 
 //DEpartment
@@ -326,13 +334,28 @@ Route::get('/hr-report-leave', [ReportingController::class, 'hr_report_leave'])-
 Route::get('/get-hr-leave-report', [ReportingController::class, 'get_hr_leave_report'])->name('get-hr-leave-report');
 Route::get('/manager-report-leave', [ReportingController::class, 'manager_report_leave'])->name('manager-report-leave');
 Route::get('/get-manager-leave-report', [ReportingController::class, 'get_manager_leave_report'])->name('get-manager-leave-report');
-Route::get('/report14', [ReportingController::class, 'report14'])->name('report14');
-Route::get('/report15', [ReportingController::class, 'report15'])->name('report15');
-Route::get('/report16', [ReportingController::class, 'report16'])->name('report16');
-Route::get('/report17', [ReportingController::class, 'report17'])->name('report17');
-Route::get('/report18', [ReportingController::class, 'report18'])->name('report18');
-Route::get('/report19', [ReportingController::class, 'report19'])->name('report19');
-Route::get('/report20', [ReportingController::class, 'report20'])->name('report20');
+Route::get('/report-expense-hr', [ReportingController::class, 'report_expense_hr'])->name('report-expense-hr');
+Route::get('/get-expense-report-hr', [ReportingController::class, 'get_expense_report_hr'])->name('get-expense-report-hr');
+Route::get('/report-employee-cmr-hr', [ReportingController::class, 'report_employee_cmr_hr'])->name('report-employee-cmr-hr');
+Route::get('/get-report-employee-cmr-hr', [ReportingController::class, 'get_report_employee_cmr_hr'])->name('get-report-employee-cmr-hr');
+Route::get('/report-all-jobs-hr', [ReportingController::class, 'report_all_jobs_hr'])->name('report-all-jobs-hr');
+Route::get('/get-jobs-report', [ReportingController::class, 'get_jobs_report'])->name('get-jobs-report');
+Route::get('/report-expense-manager', [ReportingController::class, 'report_expense_manager'])->name('report-expense-manager');
+Route::get('/get-expense-report-manager', [ReportingController::class, 'get_expense_report_manager'])->name('get-expense-report-manager');
+Route::get('/report-all-jobs-manager', [ReportingController::class, 'report_all_jobs_manager'])->name('report-all-jobs-manager');
+Route::get('/get-jobs-report-manager', [ReportingController::class, 'get_jobs_report_manager'])->name('get-jobs-report-manager');
+
+Route::get('/report-all-task-manager', [ReportingController::class, 'report_all_task_manager'])->name('report-all-task-manager');
+Route::get('/get-task-report-manager', [ReportingController::class, 'get_task_report_manager'])->name('get-task-report-manager');
+
+    
+Route::get('/job-page', [JobController::class, 'job_page'])->name('job-page');
+Route::get('/job-listing', [JobController::class, 'job_listing'])->name('job-listing');
+Route::get('/job-details', [JobController::class, 'job_details'])->name('job-details');
+Route::get('/apply-job', [JobController::class, 'apply_job'])->name('apply-job');
+
+Route::get('/add-job-board', [JobBoardController::class, 'add_job_board'])->name('add-job-board');
+Route::post('/store-job-board', [JobBoardController::class, 'store_job_board'])->name('store-job-board');
 
 
 Route::middleware('auth')->group(function () {

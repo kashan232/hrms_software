@@ -31,8 +31,6 @@ class HiringController extends Controller
         } else {
             return redirect()->back();
         }
-
-        return view('');
     }
     public function store_hiring(Request $request)
     {
