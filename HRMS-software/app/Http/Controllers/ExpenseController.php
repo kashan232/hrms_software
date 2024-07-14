@@ -59,4 +59,49 @@ class ExpenseController extends Controller
             return redirect()->back();
         }
     }
+
+    public function edit_expense($id)
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+
+            $expense = Expense::where('id', '=', $id)->first();
+
+            
+            return view('hr_panel.expense.edit_expense', [
+                'expense' => $expense,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function update_expense(Request $request,$id)
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $userType = Auth::user()->usertype;
+            // Create the employee record
+            $employee = Expense::where('id', '=', $id)->update([
+                'date' => $request->date,
+                'description' => $request->description,
+                'vendor' => $request->vendor,
+                'amount' => $request->amount,
+                'tax' => $request->tax,
+                'total_paid' => $request->total_paid,
+                'status' => $request->status,
+                'updated_at' => Carbon::now(),
+            ]);
+
+            return redirect()->back()->with('expense-updt', 'Expense Updated Successfully');
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function delete_expense(Request $request, $id)
+    {
+        $delete = Expense::find($id)->delete();
+        return redirect()->back()->with('delete-message', 'Expense Has Been Deleted Successsfully');
+    }
 }

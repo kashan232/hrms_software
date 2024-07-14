@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Application Form</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
         body {
             background-color: #f0f2f5;
             padding: 20px;
             font-family: "Poppins", sans-serif;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
         }
+
         .form-section {
             background-color: #ffffff;
             padding: 20px;
@@ -24,6 +29,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
         .form-section h3 {
             margin-bottom: 20px;
             color: #343a40;
@@ -31,38 +37,67 @@
             border-bottom: 2px solid #6c757d;
             padding-bottom: 10px;
         }
+
         .btn-submit {
             width: 100%;
             padding: 10px;
         }
+
         .form-group label {
             font-weight: bold;
             color: #495057;
         }
+
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .header img {
             max-width: 150px;
             margin-bottom: 10px;
         }
+
         .header h2 {
             color: #343a40;
             font-weight: bold;
         }
     </style>
 </head>
+
 <body>
+
+    <!-- Modal Structure -->
+    <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseModalLabel">Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="responseMessage">
+                    <!-- Success or error message will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
             <h2>Job Application Form</h2>
         </div>
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form id="jobApplicationForm" action="{{ route('job_application.submit') }}" method="post" enctype="multipart/form-data">
+            @csrf
             <!-- Application Post -->
             <div class="form-group">
                 <label for="application_post">Application Post</label>
-                <input type="text" class="form-control" id="application_post" name="application_post" required>
+                <input type="text" name="Job_id" value="{{ $job_id }}" readonly>
+                <input type="text" class="form-control" id="application_post" name="application_post" value="{{ $jobBoard->job_title }}" readonly>
             </div>
 
             <!-- Personal Information -->
@@ -189,8 +224,52 @@
     </div>
 
     <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#jobApplicationForm').on('submit', function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.message) {
+                            $('#responseMessage').html('<div class="alert alert-success">' + response.message + '</div>');
+                            $('#responseModalLabel').text('Success');
+                        } else {
+                            $('#responseMessage').html('<div class="alert alert-success">Your application is successfully sent.</div>');
+                            $('#responseModalLabel').text('Success');
+                        }
+                        $('#responseModal').modal('show');
+                    },
+                    error: function(xhr) {
+                        let errorMessage = 'An error occurred while submitting your application. Please try again.';
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            errorMessage = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                        }
+                        $('#responseMessage').html('<div class="alert alert-danger">' + errorMessage + '</div>');
+                        $('#responseModalLabel').text('Error');
+                        $('#responseModal').modal('show');
+                    }
+                });
+            });
+
+            // Event listener to refresh the page when the modal is closed
+            $('#responseModal').on('hidden.bs.modal', function() {
+                location.reload();
+            });
+        });
+    </script>
+
+
+
 </body>
+
 </html>

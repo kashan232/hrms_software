@@ -1,13 +1,13 @@
-@include('admin_panel.include.header_include')
+@include('hr_panel.include.header_include')
 <!--**********************************
         Main wrapper start
     ***********************************-->
 <div id="main-wrapper">
 
-    @include('admin_panel.include.navbar_include')
+    @include('hr_panel.include.navbar_include')
 
 
-    @include('admin_panel.include.sidebar_include')
+    @include('hr_panel.include.sidebar_include')
     <!--**********************************
             Content body start
         ***********************************-->
@@ -18,10 +18,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">All Revenue</h4>
+                            <h4 class="card-title">All Jobs</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-revenue') }}" style="color: white;">
+                                    <a href="{{ route('add-job-board') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
@@ -33,44 +33,35 @@
                             </div>
                             @endif
 
+                            {{-- <div class="alert alert-dark solid alert-square"><strong>Error!</strong>
+                                 You successfully read this important alert message.</div> --}}
+
                             <div class="table-responsive">
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Customer</th>
-                                            <th>Amount</th>
-                                            <th>Tax</th>
-                                            <th>Total paid</th>
-                                            <th>Status</th>
+                                            <th>Department</th>
+                                            <th>Designation</th>
+                                            <th>Job Title</th>
+                                            <th>CLose Date</th>
+                                            <th>Vacancies</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_revenue as $revenue)
+                                        @foreach ($all_job_boards as $all_job_board)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $revenue->date }}</td>
-                                            <td>{{ $revenue->description }}</td>
-                                            <td>{{ $revenue->Customer }}</td>
-                                            <td>{{ $revenue->amount }}</td>
-                                            <td>{{ $revenue->tax }}</td>
-                                            <td>{{ $revenue->total_paid }}</td>
-                                            <td>{{ $revenue->status }}</td>
+                                            <td>{{ $all_job_board->department }}</td>
+                                            <td>{{ $all_job_board->designation }}</td>
+                                            <td>{{ $all_job_board->job_title }}</td>
+                                            <td>{{ $all_job_board->closing_date }}</td>
+                                            <td>{{ $all_job_board->vacancies }}</td>
                                             <td>
-                                                <div class="button--group">
-                                                    <button type="button" class="btn btn-primary btn-sm">
-                                                        <a href="{{ route('edit-revenue', ['id' => $revenue->id]) }}"  style="color: white;">
-                                                        <i class="la la-pencil"></i> </a>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger btn-sm">
-                                                        <a href="{{ route('delete-revenue', ['id' => $revenue->id]) }}"  style="color: white;">
-                                                        <i class="la la-trash"></i> </a>
-                                                    </button>
-
-                                                </div>
+                                                <a href="{{ route('add-job-page', ['id' => $all_job_board->id]) }}" class="btn btn-success">
+                                                <i class="fa-solid fa-file"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -105,4 +96,4 @@
         Main wrapper end
     ***********************************-->
 
-@include('admin_panel.include.footer_include')
+@include('hr_panel.include.footer_include')

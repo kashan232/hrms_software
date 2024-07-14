@@ -131,7 +131,7 @@
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
                                     <p class="fs-18 text-white mb-2">Expense</p>
-                                    <span class="fs-48 text-white font-w600">{{ $remoteEmployeeCount }}</span>
+                                    <span class="fs-48 text-white font-w600">{{ $expenseCount }}</span>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                                 </span>
                                 <div class="media-body text-end feature-icon-text">
                                     <p class="fs-18 text-white mb-2">Revenue</p>
-                                    <span class="fs-48 text-white font-w600">{{ $remoteEmployeeCount }}</span>
+                                    <span class="fs-48 text-white font-w600">{{ $revenueCount }}</span>
                                 </div>
                             </div>
                         </div>

@@ -1,143 +1,129 @@
 @include('Job_portal.layouts.head_include')
-   <main>
-        <!-- Hero Area Start-->
-        <div class="slider-area ">
+<main>
+    <!-- Hero Area Start-->
+    <div class="slider-area">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="/job_portal_assets/assets/img/hero/about.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Apply Now</h2>
+                            <h2>Job Details</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        <!-- Hero Area End -->
-        <!-- job post company Start -->
-        <div class="job-post-company pt-120 pb-120">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <!-- Left Content -->
-                    <div class="col-xl-7 col-lg-8">
-                        <!-- job single -->
-                        <div class="single-job-items mb-50">
-                            <div class="job-items">
-                                <div class="company-img company-img-details">
-                                    <a href="#"><img src="/job_portal_assets/assets/img/icon/job-list1.png" alt=""></a>
-                                </div>
-                                <div class="job-tittle">
-                                    <a href="#">
-                                        <h4>Digital Marketer</h4>
-                                    </a>
-                                    <ul>
-                                        <li>Creative Agency</li>
-                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                        <li>$3500 - $4000</li>
-                                    </ul>
-                                </div>
+    </div>
+    <!-- Hero Area End -->
+    <!-- job post company Start -->
+    <div class="job-post-company pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-between">
+                <!-- Left Content -->
+                <div class="col-xl-7 col-lg-8">
+                    <!-- job single -->
+                    <div class="single-job-items mb-50">
+                        <div class="job-items">
+                            <div class="job-tittle">
+                                <a href="#">
+                                    <h4>{{ $jobBoard->job_title }}</h4>
+                                </a>
+                                <ul>
+                                    <li>{{ $jobBoard->department }}</li>
+                                    <li><i class="fas fa-map-marker-alt"></i>{{ $jobDetails->location }}</li>
+                                    <li>Vacancies: {{ $jobBoard->vacancies }}</li>
+                                </ul>
                             </div>
                         </div>
-                          <!-- job single End -->
-                       
-                        <div class="job-post-details">
-                            <div class="post-details1 mb-50">
-                                <!-- Small Section Tittle -->
-                                <div class="small-section-tittle">
-                                    <h4>Job Description</h4>
-                                </div>
-                                <p>It is a long established fact that a reader will beff distracted by vbthe creadable content of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf mcore or-lgess normal distribution of letters, as opposed to using, Content here content here making it look like readable.</p>
-                            </div>
-                            <div class="post-details2  mb-50">
-                                 <!-- Small Section Tittle -->
-                                <div class="small-section-tittle">
-                                    <h4>Required Knowledge, Skills, and Abilities</h4>
-                                </div>
-                               <ul>
-                                   <li>System Software Development</li>
-                                   <li>Mobile Applicationin iOS/Android/Tizen or other platform</li>
-                                   <li>Research and code , libraries, APIs and frameworks</li>
-                                   <li>Strong knowledge on software development life cycle</li>
-                                   <li>Strong problem solving and debugging skills</li>
-                               </ul>
-                            </div>
-                            <div class="post-details2  mb-50">
-                                 <!-- Small Section Tittle -->
-                                <div class="small-section-tittle">
-                                    <h4>Education + Experience</h4>
-                                </div>
-                               <ul>
-                                   <li>3 or more years of professional design experience</li>
-                                   <li>Direct response email experience</li>
-                                   <li>Ecommerce website design experience</li>
-                                   <li>Familiarity with mobile and web apps preferred</li>
-                                   <li>Experience using Invision a plus</li>
-                               </ul>
-                            </div>
-                        </div>
-
                     </div>
-                    <!-- Right Content -->
-                    <div class="col-xl-4 col-lg-4">
-                        <div class="post-details3  mb-50">
+                    <!-- job single End -->
+                    <div class="job-post-details">
+                        <div class="post-details1 mb-50">
                             <!-- Small Section Tittle -->
-                           <div class="small-section-tittle">
-                               <h4>Job Overview</h4>
-                           </div>
-                          <ul>
-                              <li>Posted date : <span>12 Aug 2019</span></li>
-                              <li>Location : <span>New York</span></li>
-                              <li>Vacancy : <span>02</span></li>
-                              <li>Job nature : <span>Full time</span></li>
-                              <li>Salary :  <span>$7,800 yearly</span></li>
-                              <li>Application date : <span>12 Sep 2020</span></li>
-                          </ul>
-                         <div class="apply-btn2">
-                            <a href="{{ route('apply-job') }}" class="btn">Apply Now</a>
-                         </div>
-                       </div>
-                        <div class="post-details4  mb-50">
+                            <div class="small-section-tittle">
+                                <h4>Job Description</h4>
+                            </div>
+                            <p>{{ $jobDetails->job_description }}</p>
+                        </div>
+                        <div class="post-details2 mb-50">
                             <!-- Small Section Tittle -->
-                           <div class="small-section-tittle">
-                               <h4>Company Information</h4>
-                           </div>
-                              <span>Colorlib</span>
-                              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                            <div class="small-section-tittle">
+                                <h4>Required Knowledge, Skills, and Abilities</h4>
+                            </div>
                             <ul>
-                                <li>Name: <span>Colorlib </span></li>
-                                <li>Web : <span> colorlib.com</span></li>
-                                <li>Email: <span>carrier.colorlib@gmail.com</span></li>
+                                @foreach(explode("\n", $jobDetails->required_skills) as $skill)
+                                    <li>{{ $skill }}</li>
+                                @endforeach
                             </ul>
-                       </div>
+                        </div>
+                        <div class="post-details2 mb-50">
+                            <!-- Small Section Tittle -->
+                            <div class="small-section-tittle">
+                                <h4>Education + Experience</h4>
+                            </div>
+                            <ul>
+                                @foreach(explode("\n", $jobDetails->educational_requirement) as $requirement)
+                                    <li>{{ $requirement }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="post-details2 mb-50">
+                            <!-- Small Section Tittle -->
+                            <div class="small-section-tittle">
+                                <h4>Important Notes</h4>
+                            </div>
+                            <ul>
+                                @foreach(explode("\n", $jobDetails->important_notes) as $notes)
+                                    <li>{{ $notes }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- job post company End -->
-
-    </main>
-    <footer>
-        <!-- Footer Start-->
-        <!-- footer-bottom area -->
-        <div class="footer-bottom-area footer-bg">
-            <div class="container">
-                <div class="footer-border">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-xl-12 col-lg-12 ">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>
-                                        document.write(new Date().getFullYear());
-                                    </script> All rights reserved | made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">HRMS</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
+                <!-- Right Content -->
+                <div class="col-xl-4 col-lg-4">
+                    <div class="post-details3 mb-50">
+                        <!-- Small Section Tittle -->
+                        <div class="small-section-tittle">
+                            <h4>Job Overview</h4>
+                        </div>
+                        <ul>
+                            <li>Posted date: <span>{{ $jobBoard->created_at->format('d M Y') }}</span></li>
+                            <li>Location: <span>{{ $jobDetails->location }}</span></li>
+                            <li>Vacancy: <span>{{ $jobBoard->vacancies }}</span></li>
+                            <li>Job nature: <span>{{ $jobDetails->job_type }}</span></li>
+                            <li>Last date: <span>{{ $jobBoard->closing_date }}</span></li>
+                        </ul>
+                        <div class="apply-btn2">
+                            <a href="{{ route('apply-job', ['id' => $jobBoard->id]) }}" class="btn">Apply Now</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Footer End-->
-    </footer>
-
+    </div>
+    <!-- job post company End -->
+</main>
+<footer>
+    <!-- Footer Start-->
+    <!-- footer-bottom area -->
+    <div class="footer-bottom-area footer-bg">
+        <div class="container">
+            <div class="footer-border">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="footer-copy-right">
+                            <p>
+                                Copyright &copy;<script>
+                                    document.write(new Date().getFullYear());
+                                </script> All rights reserved | made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">HRMS</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+</footer>
 @include('Job_portal.layouts.footer_include')

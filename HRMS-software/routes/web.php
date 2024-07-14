@@ -170,6 +170,10 @@ Route::get('/expense-listing', [LeavesRecordController::class, 'expense_listing'
 Route::get('/all-revenue', [RevenueController::class, 'all_revenue'])->name('all-revenue');
 Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add-revenue');
 Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
+Route::get('/edit-revenue/{id}', [RevenueController::class, 'edit_revenue'])->name('edit-revenue');
+Route::post('/update-revenue/{id}', [RevenueController::class, 'update_revenue'])->name('update-revenue');
+Route::get('/delete-revenue/{id}', [RevenueController::class, 'delete_revenue'])->name('delete-revenue');
+
 
 //Admin Approve Leaves
 Route::get('/admin-all-leave', [AdminLeaveApproveController::class, 'admin_all_leave'])->name('admin-all-leave');
@@ -246,6 +250,9 @@ Route::post('/hr-store-leaverequest', [HRLeaveRequestController::class, 'hr_stor
 Route::get('/all-expense', [ExpenseController::class, 'all_expense'])->name('all-expense');
 Route::get('/add-expense', [ExpenseController::class, 'add_expense'])->name('add-expense');
 Route::post('/store-expense', [ExpenseController::class, 'store_expense'])->name('store-expense');
+Route::get('/edit-expense/{id}', [ExpenseController::class, 'edit_expense'])->name('edit-expense');
+Route::post('/update-expense/{id}', [ExpenseController::class, 'update_expense'])->name('update-expense');
+Route::get('/delete-expense/{id}', [ExpenseController::class, 'delete_expense'])->name('delete-expense');
 
 //HR Hiring
 Route::get('/all-hiring', [HiringController::class, 'all_hiring'])->name('all-hiring');
@@ -350,13 +357,27 @@ Route::get('/get-task-report-manager', [ReportingController::class, 'get_task_re
 
     
 Route::get('/job-page', [JobController::class, 'job_page'])->name('job-page');
-Route::get('/job-listing', [JobController::class, 'job_listing'])->name('job-listing');
-Route::get('/job-details', [JobController::class, 'job_details'])->name('job-details');
-Route::get('/apply-job', [JobController::class, 'apply_job'])->name('apply-job');
+Route::get('/job-listing/{id}', [JobController::class, 'job_listing'])->name('job-listing');
+Route::get('/job-details/{id}', [JobController::class, 'job_details'])->name('job-details');
+Route::get('/apply-job/{id}', [JobController::class, 'apply_job'])->name('apply-job');
+Route::post('/submit-job-application', [JobController::class, 'submit'])->name('job_application.submit');
+
+
+
+Route::get('/job-applications', [JobBoardController::class, 'job_applications'])->name('job-applications');
+Route::get('/approved-applications', [JobBoardController::class, 'approved_applications'])->name('approved-applications');
+Route::get('/rejected-applications', [JobBoardController::class, 'rejected_applications'])->name('rejected-applications');
+Route::post('/store-job-applications', [JobBoardController::class, 'store_job_applications'])->name('store-job-applications');
+Route::get('/view-applications/{id}', [JobBoardController::class, 'view_applications'])->name('view-applications');
+
 
 Route::get('/add-job-board', [JobBoardController::class, 'add_job_board'])->name('add-job-board');
 Route::post('/store-job-board', [JobBoardController::class, 'store_job_board'])->name('store-job-board');
+Route::get('/all-job-board', [JobBoardController::class, 'all_job_board'])->name('all-job-board');
 
+
+Route::get('/add-job-page/{id}', [JobBoardController::class, 'add_job_page'])->name('add-job-page');
+Route::post('/store-job-page', [JobBoardController::class, 'store_job_page'])->name('store-job-page');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

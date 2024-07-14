@@ -32,101 +32,29 @@
                 </div>
             </div>
             <div class="row d-flex justify-contnet-center">
+                @foreach($Departments as $Department)
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                     <div class="single-services text-center mb-30">
                         <div class="services-ion">
                             <span class="flaticon-tour"></span>
                         </div>
                         <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Design & Creative</a></h5>
-                            <span>(653)</span>
+                            <h5><a href="{{ route('job-listing', ['id' => $Department->id]) }}">{{ $Department->department }}</a></h5>
+                            <span>{{ $Department->job_boards_count }} Jobs Available</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-cms"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Design & Development</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-report"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Sales & Marketing</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-app"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Mobile Application</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-helmet"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Construction</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-high-tech"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Information Technology</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-real-estate"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Real Estate</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-services text-center mb-30">
-                        <div class="services-ion">
-                            <span class="flaticon-content"></span>
-                        </div>
-                        <div class="services-cap">
-                            <h5><a href="{{ route('job-listing') }}">Content Writer</a></h5>
-                            <span>(658)</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+
+
             </div>
             <!-- More Btn -->
             <!-- Section Button -->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="browse-btn2 text-center mt-50">
-                        <a href="{{ route('job-listing') }}" class="border-btn2">Browse All Sectors</a>
+                        <a href="#" class="border-btn2">Browse All Sectors</a>
                     </div>
                 </div>
             </div>

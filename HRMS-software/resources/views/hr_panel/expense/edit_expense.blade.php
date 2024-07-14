@@ -18,50 +18,48 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session()->has('hiring-added'))
+                        @if (session()->has('expense-updt'))
                             <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('hiring-added') }}.
+                                <strong>Success!</strong> {{ session('expense-updt') }}.
                             </div>
                         @endif
                         <div class="card-header">
-                            <h4 class="card-title">Create Job Board</h4>
-                            <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary"
-                                    data-modal_title="Add New designation">
-                                    <a href="{{ route('all-hiring') }}" style="color: white;">
-                                        All Jobs </a>
-                                </button>
-                            </div>
+                            <h4 class="card-title">Edit Expense</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-job-board') }}" method="post">
+                                <form action="{{ route('update-expense',['id'=> $expense->id ]) }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
-                                            <label>Department</label>
-                                            <select name="department" id="department" class="form-control">
-                                                <option value="" selected disabled>Select One</option>
-                                                @foreach ($Departments as $department)
-                                                <option value="{{ $department->department }}">{{ $department->department }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label class="form-label">Date</label>
+                                            <input type="date" name="date" class="form-control" value="{{ $expense->date }}" >
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label>Designation</label>
-                                            <select name="designation" id="designation" class="form-control"></select>
+                                            <label class="form-label">Description</label>
+                                            <input type="text" name="description" class="form-control" value="{{ $expense->description }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Job Title</label>
-                                            <input type="text" name="job_title" class="form-control">
+                                            <label class="form-label">Vendor</label>
+                                            <input type="text" name="vendor" class="form-control" value="{{ $expense->vendor }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Closing Date</label>
-                                            <input type="date" name="closing_date" class="form-control">
+                                            <label class="form-label">Amount</label>
+                                            <input type="text" name="amount" class="form-control" value="{{ $expense->amount }}">
+                                        </div>
+                                        
+                                        <div class="mb-3 col-md-6">
+                                            <label>Tax</label>
+                                            <input type="text" name="tax" class="form-control" value="{{ $expense->tax }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Vacancies</label>
-                                            <input type="text" name="vacancies" class="form-control">
+                                            <label>Total paid</label>
+                                            <input type="text" name="total_paid" class="form-control" value="{{ $expense->total_paid }}">
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label>Status</label>
+                                            <input type="text" name="status" class="form-control" value="{{ $expense->status }}">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -97,7 +95,6 @@
     ***********************************-->
 
 @include('hr_panel.include.footer_include')
-
 <script>
     $(document).ready(function() {
         $('select[name="department"]').on('change', function() {
@@ -106,9 +103,7 @@
                 $.ajax({
                     url: '{{ route("get-designations") }}',
                     type: 'GET',
-                    data: {
-                        department: department
-                    },
+                    data: { department: department },
                     success: function(data) {
                         $('select[name="designation"]').empty();
                         $.each(data, function(key, value) {
@@ -121,4 +116,16 @@
             }
         });
     });
+</script>
+<script>
+    document.getElementById("togglePassword").addEventListener("click", function() {
+    var passwordInput = document.getElementById("passwordInput");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
+    } else {
+        passwordInput.type = "password";
+        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
+    }
+});
 </script>

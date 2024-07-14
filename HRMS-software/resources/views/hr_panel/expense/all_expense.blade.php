@@ -49,6 +49,8 @@
                                             <th>Total paid</th>
                                             <th>Status</th>
                                             <th>Expense By</th>
+                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,6 +65,19 @@
                                             <td>{{ $expense->total_paid }}</td>
                                             <td>{{ $expense->status }}</td>
                                             <td>{{ $expense->usertype }}</td>
+                                            <td>
+                                                <div class="button--group">
+                                                    <button type="button" class="btn btn-primary btn-sm">
+                                                        <a href="{{ route('edit-expense', ['id' => $expense->id]) }}"  style="color: white;">
+                                                        <i class="la la-pencil"></i> </a>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <a href="{{ route('delete-expense', ['id' => $expense->id]) }}"  style="color: white;">
+                                                        <i class="la la-trash"></i> </a>
+                                                    </button>
+
+                                                </div>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

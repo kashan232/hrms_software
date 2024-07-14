@@ -34,6 +34,7 @@
                                             <th>Tax</th>
                                             <th>Total paid</th>
                                             <th>Status</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,6 +48,7 @@
                                             <td>{{ $expense->tax }}</td>
                                             <td>{{ $expense->total_paid }}</td>
                                             <td>{{ $expense->status }}</td>
+                                            
                                         </tr>
                                         @endforeach
                                     </tbody>

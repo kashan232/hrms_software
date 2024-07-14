@@ -6,16 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class JobBoard extends Model
+class JobApplicationForm extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $guarded = [];
 
-    // JobBoard.php
-    public function department()
-    {
-        return $this->belongsTo(Department::class, 'department', 'department');
-    }
 }

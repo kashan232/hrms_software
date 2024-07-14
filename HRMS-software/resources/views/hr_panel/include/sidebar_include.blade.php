@@ -89,9 +89,21 @@
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('add-job-board') }}">Create Job Board</a></li>
-                     <li><a href="#">Jobs Boards</a></li>
+                     <li><a href="{{ route('all-job-board') }}">Jobs Boards</a></li>
                  </ul>
              </li>
+
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     <i class="fas fa-graduation-cap"></i>
+                     <span class="nav-text">Applications</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('job-applications') }}">Job Applications</a></li>
+                     <li><a href="#">Approved Applications</a></li>
+                     <li><a href="#">Rejected Applications</a></li>
+                 </ul>
+             </li>
+
 
 
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
