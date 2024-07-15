@@ -46,7 +46,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Designation</th>
+                                            <th>Designation <br> Join Date</th>
                                             <th>First Name <br> Last Name</th>
                                             <th>Phone</th>
                                             <th>Email</th>
@@ -58,7 +58,7 @@
                                         @foreach ($all_hr as $hr)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $hr->designation }}</td>
+                                            <td>{{ $hr->designation }} <br> {{ $hr->joining_date }} </td>
                                             <td>{{ $hr->first_name }} <br> {{ $hr->last_name }} </td>
                                             <td>{{ $hr->phone }}</td>
                                             <td>{{ $hr->email }}</td>

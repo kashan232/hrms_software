@@ -149,6 +149,8 @@ Route::get('/fetch-daily-employee-attendance-record', [EmployeeAttendanceControl
 //Project
 Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');
 Route::post('/store-project', [ProjectController::class, 'store_project'])->name('store-project');
+Route::post('/update-project', [ProjectController::class, 'update'])->name('update-project');
+Route::get('/delete-project/{id}', [ProjectController::class, 'delete_project'])->name('delete-project');
 
 //done task list
 Route::get('/employee-task-update', [EmployeeTaskUpdateController::class, 'employee_task_update'])->middleware(['auth','admin'])->name('employee-task-update');
@@ -189,9 +191,12 @@ Route::post('/admin-update-leave-approve', [AdminLeaveApproveController::class,'
 Route::get('/employee-profile-page', [ProfilePageController::class, 'employee_profile_page'])->name('employee-profile-page');
 Route::get('/hr-profile-page', [ProfilePageController::class, 'hr_profile_page'])->name('hr-profile-page');
 Route::get('/manager-profile-page', [ProfilePageController::class, 'manager_profile_page'])->name('manager-profile-page');
+Route::post('/employee-profile-picture', [ProfilePageController::class,'employee_profile_picture'])->name('employee-profile-picture');
 
 // Employee LeaveRequest
 Route::get('/seprate-employee-cmr', [CMRController::class, 'seprate_employee_cmr'])->name('seprate-employee-cmr');
+Route::get('/seprate-employee-cmr-add-suggestion', [CMRController::class, 'seprate_employee_cmr_add_suggestion'])->name('seprate-employee-cmr-add-suggestion');
+Route::post('/seprate-store-employee-cmr-add-suggestion', [CMRController::class, 'seprate_store_employee_cmr_add_suggestion'])->name('seprate-store-employee-cmr-add-suggestion');
 
 // Employee LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');

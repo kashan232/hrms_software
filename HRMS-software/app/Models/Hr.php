@@ -11,16 +11,6 @@ class Hr extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
-        'admin_or_user_id',
-        'first_name',
-        'last_name',
-        'designation',
-        'phone',
-        'email',
-        'address',
-        'hr_gender',
-        'user_name',
-        'password'
-    ];
+    protected $guarded = [];
+
 }

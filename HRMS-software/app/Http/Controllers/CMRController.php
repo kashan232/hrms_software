@@ -45,6 +45,49 @@ class CMRController extends Controller
         }
     }
 
+    public function seprate_employee_cmr_add_suggestion()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            // dd($userId);
+            $emp_id = Auth()->user()->emp_id;
+            $employees = Employee::where('id', '=', $emp_id)->first();
+            // dd($employees);
+            return view('employee_panel.crm.employee_cmr_add_suggestion', [
+                'employees' => $employees,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function seprate_store_employee_cmr_add_suggestion(Request $request)
+    {
+        if (Auth::id()) {
+            $usertype = Auth()->user()->usertype;
+            $userId = Auth::id();
+           
+            $emp_id = Auth()->user()->emp_id;
+
+            CRMSuggestion::create([
+                'admin_or_user_id' => $userId,
+                'emp_id' => $emp_id,
+                'employee_name' => $request->employee_id,
+                'department' => $request->department,
+                'designation' => $request->designation,
+                'Subject' => $request->Subject,
+                'Complains' => $request->Complains,
+                'Reference' => $request->Reference,
+                'Status' => $request->Status,
+                'Solution' => $request->Solution,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+            return redirect()->back()->with('Suggestion-added', 'Suggestion Added Successfully');
+        } else {
+            return redirect()->back();
+        }
+    }
 
     public function employee_cmr()
     {

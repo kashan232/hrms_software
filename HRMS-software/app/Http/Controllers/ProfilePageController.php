@@ -55,4 +55,28 @@ class ProfilePageController extends Controller
             return redirect()->back();
         }
     }
+
+    public function employee_profile_picture(Request $request)
+    {
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $emp_id = Auth::user()->emp_id; // Assuming the employee is logged in
+        $employee = Employee::where('id', $emp_id)->firstOrFail();
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('employe_profile'), $filename);
+
+            // Update the employee record with the new profile picture filename
+            $employee->emp_pic = $filename;
+            $employee->save();
+
+            return back()->with('success', 'Profile picture updated successfully.');
+        }
+
+        return back()->with('error', 'Failed to update profile picture.');
+    }
 }

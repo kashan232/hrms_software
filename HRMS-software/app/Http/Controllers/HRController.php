@@ -37,10 +37,14 @@ class HRController extends Controller
                 'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
+                'joining_date'          => $request->joining_date,
+                'decided_salary'          => $request->decided_salary,
+                'hr_status'          => $request->hr_status,
                 'address'          => $request->address,
                 'hr_gender'          => $request->hr_gender,
                 'user_name'          => $request->user_name,
                 'password'          => $request->password,
+                'nummbr_of_leave'          => $request->nummbr_of_leave,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
@@ -100,9 +104,13 @@ class HRController extends Controller
                 'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
+                'joining_date'          => $request->joining_date,
+                'decided_salary'          => $request->decided_salary,
+                'hr_status'          => $request->hr_status,
                 'address'          => $request->address,
                 'hr_gender'          => $request->hr_gender,
                 'user_name'          => $request->user_name,
+                'nummbr_of_leave'          => $request->nummbr_of_leave,
                 'updated_at' => Carbon::now(),
             ]);
             return Redirect()->back()->with('success-message-updte', 'HR Updated successfully!');

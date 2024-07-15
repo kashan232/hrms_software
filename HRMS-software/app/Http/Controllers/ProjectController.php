@@ -51,4 +51,26 @@ class ProjectController extends Controller
             return redirect()->back();
         }
     }
+
+    public function update(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        $project->project_name = $request->project_name;
+        $project->project_deadline = $request->project_deadline;
+        $project->project_category = $request->project_category;
+        $project->project_start_date = $request->project_start_date;
+        $project->project_end_date = $request->project_end_date;
+        $project->budget = $request->budget;
+        $project->priority = $request->priority;
+        $project->description = $request->description;
+        $project->save();
+
+        return redirect()->back()->with('success', 'Project updated successfully');
+    }
+
+    public function delete_project(Request $request, $id)
+    {
+        $delete = Project::find($id)->delete();
+        return redirect()->back()->with('success', 'Project Has Been Deleted Successsfully');
+    }
 }

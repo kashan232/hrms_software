@@ -64,6 +64,22 @@
                                                 value="{{ $hrdetails->email }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
+                                            <label class="form-label">Joining Date</label>
+                                            <input type="date" name="joining_date" class="form-control" value="{{ $hrdetails->joining_date }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Decided Salary</label>
+                                            <input type="number" name="decided_salary" class="form-control" value="{{ $hrdetails->decided_salary }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Hr Status</label>
+                                            <select name="hr_status" class="form-control">
+                                                <option value="Onsite">Onsite</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Hybrid">Hybrid</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
                                             <label>Address</label>
                                             <input type="text" name="address" class="form-control" value="{{ $hrdetails->address }}">
                                         </div>
@@ -78,6 +94,11 @@
                                             <label class="form-label">User Name</label>
                                             <input type="text" name="user_name" class="form-control"
                                                 value="{{ $hrdetails->user_name }}">
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Number Of Leave Allow</label>
+                                            <input type="text" name="nummbr_of_leave" class="form-control" value="{{ $hrdetails->nummbr_of_leave }}">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

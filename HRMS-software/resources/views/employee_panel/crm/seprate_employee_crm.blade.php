@@ -237,6 +237,13 @@
                                         <div class="col-md-12">
                                             <div class="card-header">
                                                 <h4 class="card-title">Suggestions</h4>
+                                                <div>
+                                                    <a href="{{ route('seprate-employee-cmr-add-suggestion') }}">
+                                                        <button id="addNewButtonSkills" type="button" class="btn btn-primary" data-modal_title="Add New Department">
+                                                            <i class="las la-plus"></i>Add New
+                                                        </button>
+                                                    </a>
+                                                </div>
                                             </div>
                                             <div class="table-responsive">
                                                 <table id="example5" class="display table-responsive-lg">
