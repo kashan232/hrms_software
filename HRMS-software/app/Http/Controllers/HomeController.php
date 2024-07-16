@@ -86,8 +86,9 @@ class HomeController extends Controller
                     ]
                 );
             } else if ($usertype == 'manager') {
+                $emp_id = auth()->user()->emp_id;
                 $leaves = LeaveRequest::count();
-                $employee = Employee::count();
+                $employee = Employee::where('reporting_manager', $emp_id)->count();
                 $projectCount = Project::count();
                 $taskCount = Task::count();
                 $remoteEmployeeCount = EmployeeRemoteWork::count();

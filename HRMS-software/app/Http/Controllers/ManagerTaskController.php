@@ -18,7 +18,8 @@ class ManagerTaskController extends Controller
             $userId = Auth::id();
             // dd($userId);
             $all_project = Project::all();
-            $all_employee = Employee::all();
+            $emp_id = auth()->user()->emp_id;
+            $all_employee = Employee::where('reporting_manager', $emp_id)->get();
             $all_task = Task::all();
             $all_department = Department::all();
             $all_designation = Designation::all();
@@ -71,4 +72,46 @@ class ManagerTaskController extends Controller
             return redirect()->back();
         }
     }
+
+    public function manager_update_task(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $userId = $user->id;
+            $usertype = $user->usertype;
+            $name = $user->name;
+            $employeeId = $user->emp_id;
+            // Find the task by ID
+            $task = Task::find($request->task_id);
+            // Update the task details
+            $task->admin_or_user_id = $userId;
+            $task->usertype = $usertype;
+            $task->user_name = $name;
+            $task->emp_id = $employeeId;
+            $task->project_name = $request->project_name;
+            $task->task_category = $request->task_category;
+            $task->start_date = $request->start_date;
+            $task->end_date = $request->end_date;
+            $task->department = $request->department;
+            $task->designation = $request->designation;
+            $task->task_assign_person = $request->task_assign_person;
+            $task->task_priority = $request->task_priority;
+            $task->description = $request->description;
+            $task->updated_at = now();
+            // Save the updated task
+            $task->save();
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Task updated successfully!');
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function delete_manager_task(Request $request, $id)
+    {
+        $delete = Task::find($id)->delete();
+        return redirect()->back()->with('success', 'Task Has Been Deleted Successsfully');
+    }
+
 }

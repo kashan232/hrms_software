@@ -23,6 +23,13 @@
                             <strong>Success!</strong> {{ session('task-added') }}.
                         </div>
                         @endif
+
+                        @if (session()->has('success'))
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('success') }}.
+                        </div>
+                        @endif
+
                         <div class="card-header">
                             <h4 class="card-title">Task</h4>
                             <div>
@@ -61,25 +68,26 @@
                                             <td>{{ $task->description }}</td>
                                             <td>
                                                 <div class="button--group">
-                                                    <button type="button" class="btn btn-primary">
-                                                        {{ $task->status }} </button>
+                                                    <button type="button" class="btn btn-primary">{{ $task->status }}</button>
                                                 </div>
                                             </td>
-                                            {{-- <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                                                      </div>
-                                                </td> --}}
                                             <td>
                                                 <div class="button--group">
-                                                    <button type="button" class="btn btn-primary edittaskBtn" data-toggle="modal" data-modal_title="Edit task" data-has_status="1" data-target="#edittask">
-                                                        <i class="la la-pencil"></i></button>
+                                                    <button type="button" class="btn btn-primary edittaskBtn" data-task-id="{{ $task->id }}" data-project-name="{{ $task->project_name }}" data-task-category="{{ $task->task_category }}" data-start-date="{{ $task->start_date }}" data-end-date="{{ $task->end_date }}" data-department="{{ $task->department }}" data-designation="{{ $task->designation }}" data-task-assign-person="{{ $task->task_assign_person }}" data-task-priority="{{ $task->task_priority }}" data-description="{{ $task->description }}" data-toggle="modal" data-target="#edittask">
+                                                        <i class="la la-pencil"></i>
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <a href="{{ route('delete-manager-task', ['id' => $task->id]) }}" style="color: white;">
+                                                            <i class="la la-trash"></i> </a>
+                                                    </button>
+
                                                 </div>
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -124,33 +132,32 @@
                                             <input type="date" name="end_date" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Employee Department</label>
-                                            <select name="department" id="editDepartmentName" class="form-control" required>
-                                                <option value="" selected disabled>Select One</option>
-                                                @foreach ($all_department as $department)
-                                                <option value="{{ $department->department }}">
-                                                    {{ $department->department }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Designation</label>
-                                            <select name="designation" id="designation" class="form-control"></select>
-                                        </div>
-                                    </div>
+                                    <!-- Task Assign Person Select Box -->
                                     <label>Task Assign Person</label>
-                                    <select name="task_assign_person" id="editprojectName" class="form-control" onchange="populateEmployeeID()">
+                                    <select name="task_assign_person" id="editProjectName" class="form-control">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($all_employee as $employee)
-                                        <option value="{{ $employee->first_name }} {{ $employee->last_name }}">
+                                        <option value="{{ $employee->first_name }} {{ $employee->last_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
                                             {{ $employee->first_name }} {{ $employee->last_name }}
                                         </option>
                                         @endforeach
                                     </select>
 
+                                    <!-- <select  onchange="populateEmployeeID()">
+                                        
+                                    </select> -->
+
+                                    <!-- Employee Department and Designation Input Fields -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Employee Department</label>
+                                            <input type="text" name="department" id="editDepartmentName" class="form-control" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Designation</label>
+                                            <input type="text" name="designation" id="editDesignationname" class="form-control" readonly>
+                                        </div>
+                                    </div>
                                     <label>Task Priority</label>
                                     <select name="task_priority" id="" class="form-control" required>
                                         <option value="" selected disabled>Select One</option>
@@ -171,34 +178,85 @@
                 </div>
             </div>
 
-            <!--Edit Modal -->
-            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel" aria-hidden="true">
+
+            <div id="cuModaledit" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editdepartmentLabel"><span class="type"></span> <span>Edit
-                                    project</span></h5>
-                            <!-- Adjusted close button with custom styling -->
+                            <h5 class="modal-title"><span class="type"></span> <span>Edit Task</span></h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
                         </div>
-                        <form action="" method="POST">
+                        <form action="{{ route('manager-update-task') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="task_id" id="editTaskId">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Department</label>
-                                    <input type="hidden" id="editdepartmentId" name="department_id" class="form-control" required>
-                                    <input type="text" id="editdepartmentName" name="department_name" class="form-control" required>
+                                    <label>Project Name</label>
+                                    <select name="project_name" id="editProjectName" class="form-control">
+                                        <option value="" selected disabled>Select One</option>
+                                        @foreach ($all_project as $project)
+                                        <option value="{{ $project->project_name }}" data-category="{{ $project->project_category }}">
+                                            {{ $project->project_name }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    <label>Project Category</label>
+                                    <input type="text" name="task_category" id="editTaskCategory" class="form-control" required>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Task Start Date</label>
+                                            <input type="date" name="start_date" id="editStartDate" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Task End Date</label>
+                                            <input type="date" name="end_date" id="editEndDate" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <label>Task Assign Person</label>
+                                    <select name="task_assign_person" id="editTaskAssignPerson" class="form-control">
+                                        <option value="" selected disabled>Select One</option>
+                                        @foreach ($all_employee as $employee)
+                                        <option value="{{ $employee->first_name }} {{ $employee->last_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
+                                            {{ $employee->first_name }} {{ $employee->last_name }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Employee Department</label>
+                                            <input type="text" name="department" id="editDepartment" class="form-control" readonly>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Designation</label>
+                                            <input type="text" name="designation" id="editDesignation" class="form-control" readonly>
+                                        </div>
+                                    </div>
+
+                                    <label>Task Priority</label>
+                                    <select name="task_priority" id="editTaskPriority" class="form-control" required>
+                                        <option value="" selected disabled>Select One</option>
+                                        <option value="Highest">Highest</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Lowest">Lowest</option>
+                                    </select>
+                                    <label>Description</label>
+                                    <textarea name="description" id="editDescription" class="form-control" required></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
     <!--**********************************
@@ -224,74 +282,61 @@
     ***********************************-->
 
 @include('manager_panel.include.footer_include')
-
 <script>
     $(document).ready(function() {
-        $('select[name="department"]').on('change', function() {
-            var department = $(this).val();
-            if (department) {
-                $.ajax({
-                    url: '{{ route('get-designations') }}',
-                    type: 'GET',
-                    data: {
-                        department: department
-                    },
-                    success: function(data) {
-                        $('select[name="designation"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="designation"]').append(
-                                '<option value="' + value + '">' + value +
-                                '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('select[name="designation"]').empty();
-            }
+        // Fill the edit form with existing data when the edit button is clicked
+        $('.edittaskBtn').on('click', function() {
+            var taskId = $(this).data('task-id');
+            var projectName = $(this).data('project-name');
+            var taskCategory = $(this).data('task-category');
+            var startDate = $(this).data('start-date');
+            var endDate = $(this).data('end-date');
+            var department = $(this).data('department');
+            var designation = $(this).data('designation');
+            var taskAssignPerson = $(this).data('task-assign-person');
+            var taskPriority = $(this).data('task-priority');
+            var description = $(this).data('description');
+
+            $('#editTaskId').val(taskId);
+            $('#editProjectName').val(projectName);
+            $('#editTaskCategory').val(taskCategory);
+            $('#editStartDate').val(startDate);
+            $('#editEndDate').val(endDate);
+            $('#editDepartment').val(department);
+            $('#editDesignation').val(designation);
+            $('#editTaskAssignPerson').val(taskAssignPerson);
+            $('#editTaskPriority').val(taskPriority);
+            $('#editDescription').val(description);
+        });
+
+        // Update department and designation when a new task assign person is selected
+        $('#editTaskAssignPerson').on('change', function() {
+            var selectedOption = $(this).find('option:selected');
+            var department = selectedOption.data('department');
+            var designation = selectedOption.data('designation');
+
+            $('#editDepartment').val(department);
+            $('#editDesignation').val(designation);
+        });
+    });
+
+    $(document).ready(function() {
+        // alert('ok');
+        $('#editProjectName').on('change', function() {
+            // Get the selected option
+            var selectedOption = $(this).find('option:selected');
+
+            // Get the department and designation from the selected option
+            var department = selectedOption.attr('data-department');
+            var designation = selectedOption.attr('data-designation');
+
+            // Set the department and designation to the input fields
+            $('#editDepartmentName').val(department);
+            $('#editDesignationname').val(designation);
         });
     });
 </script>
-<script>
-    function populateEmployeeID() {
-        // Get the selected employee's name
-        var employeeName = document.getElementById("editprojectName").value;
 
-        // Loop through all employees to find the matching one
-        @foreach($all_employee as $employee)
-        var fullName = "{{ $employee->first_name }} {{ $employee->last_name }}";
-        if (fullName === employeeName) {
-            // If the names match, populate the employee ID field
-            document.getElementById("emp_id").value = "{{ $employee->id }}";
-            break; // Stop the loop
-        }
-        @endforeach
-    }
-</script>
-{{-- <script>
-    // Function to load employees based on both department and designation
-function loadEmployees(department, designation) {
-    if (department && designation) {
-        $.ajax({
-            url: '{{ route('get-employees') }}',
-type: 'GET',
-data: {
-department: department,
-designation: designation
-},
-success: function(data) {
-$('select[name="task_assign_person"]').empty();
-$.each(data, function(key, value) {
-$('select[name="task_assign_person"]').append(
-'<option value="' + value.first_name + ' ' + value.last_name + '">' + value.first_name + ' ' + value.last_name + '</option>'
-);
-});
-}
-});
-} else {
-$('select[name="task_assign_person"]').empty();
-}
-}
-</script> --}}
 
 <script>
     // JavaScript/jQuery code to trigger modal
@@ -300,7 +345,14 @@ $('select[name="task_assign_person"]').empty();
             $('#cuModal').modal('show');
         });
     });
+
+    $(document).ready(function() {
+        $('.edittaskBtn').click(function() {
+            $('#cuModaledit').modal('show');
+        });
+    });
 </script>
+
 
 <script>
     // JavaScript/jQuery code to dynamically update task category based on project name
@@ -319,26 +371,3 @@ $('select[name="task_assign_person"]').empty();
         });
     });
 </script>
-
-{{-- <script>
-    // JavaScript/jQuery code to trigger modal
-    $(document).ready(function() {
-        $('.editdepartmentBtn').click(function() {
-            $('#editbtn').modal('show');
-        });
-    });
-</script> --}}
-
-{{-- <script>
-    $(document).ready(function() {
-        // Edit category button click event
-        $('.editdepartmentBtn').click(function() {
-            // Extract department ID and name from data attributes
-            var departmentId = $(this).data('department-id');
-            var departmentName = $(this).data('department-name');
-            // Set the extracted values in the modal fields
-            $('#editdepartmentId').val(departmentId);
-            $('#editdepartmentName').val(departmentName);
-        });
-    });
-</script> --}}
