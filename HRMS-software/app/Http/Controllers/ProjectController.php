@@ -73,4 +73,17 @@ class ProjectController extends Controller
         $delete = Project::find($id)->delete();
         return redirect()->back()->with('success', 'Project Has Been Deleted Successsfully');
     }
+
+    public function update_project_status(Request $request)
+    {
+        $project = Project::find($request->project_id);
+        if ($project) {
+            $project->is_completed = $request->is_completed;
+            $project->status = $request->is_completed ? 'Completed' : 'Pending';
+            $project->save();
+            return response()->json(['status' => 'success']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Project not found']);
+        }
+    }
 }

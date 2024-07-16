@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Month</label>
-                                            <input type="text" name="Month" class="form-control">
+                                            <input type="month" name="Month" class="form-control">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Salaries</label>

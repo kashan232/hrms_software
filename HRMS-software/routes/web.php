@@ -151,6 +151,7 @@ Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth
 Route::post('/store-project', [ProjectController::class, 'store_project'])->name('store-project');
 Route::post('/update-project', [ProjectController::class, 'update'])->name('update-project');
 Route::get('/delete-project/{id}', [ProjectController::class, 'delete_project'])->name('delete-project');
+Route::post('/update-project-status', [ProjectController::class, 'update_project_status'])->name('update-project-status');
 
 //done task list
 Route::get('/employee-task-update', [EmployeeTaskUpdateController::class, 'employee_task_update'])->middleware(['auth','admin'])->name('employee-task-update');

@@ -23,7 +23,8 @@ class Project extends Model
         'budget',
         'priority',
         'description',
-        'status'
+        'status',
+        'is_completed'
         
     ];
 }
