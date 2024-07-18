@@ -12,5 +12,10 @@ class JobApplicationStatus extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function application()
+    {
+        return $this->belongsTo(JobApplicationForm::class, 'application_id');
+    }
     
 }

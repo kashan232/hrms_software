@@ -46,6 +46,7 @@
                                             <th>Job Title</th>
                                             <th>CLose Date</th>
                                             <th>Vacancies</th>
+                                            <th>Total Applications</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -58,6 +59,7 @@
                                             <td>{{ $all_job_board->job_title }}</td>
                                             <td>{{ $all_job_board->closing_date }}</td>
                                             <td>{{ $all_job_board->vacancies }}</td>
+                                            <td>{{ $all_job_board->total_applications }}</td>
                                             <td>
                                                 <a href="{{ route('add-job-page', ['id' => $all_job_board->id]) }}" class="btn btn-success">
                                                 <i class="fa-solid fa-file"></i>

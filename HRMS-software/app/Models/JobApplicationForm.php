@@ -13,4 +13,9 @@ class JobApplicationForm extends Model
 
     protected $guarded = [];
 
+    public function statuses()
+    {
+        return $this->hasMany(JobApplicationStatus::class, 'application_id');
+    }
+
 }

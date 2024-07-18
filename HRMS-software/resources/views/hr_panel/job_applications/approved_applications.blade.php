@@ -18,7 +18,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">All Jobs</h4>
+                            <h4 class="card-title">Approved Applications</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
                                     <a href="{{ route('add-job-board') }}" style="color: white;">
@@ -41,26 +41,30 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Department</th>
-                                            <th>Designation</th>
-                                            <th>Job Title</th>
-                                            <th>CLose Date</th>
-                                            <th>Vacancies</th>
+                                            <th>Date</th>
+                                            <th>Job</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_job_boards as $all_job_board)
+                                        @foreach ($approvedApplications as $approvedApplication)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $all_job_board->department }}</td>
-                                            <td>{{ $all_job_board->designation }}</td>
-                                            <td>{{ $all_job_board->job_title }}</td>
-                                            <td>{{ $all_job_board->closing_date }}</td>
-                                            <td>{{ $all_job_board->vacancies }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($approvedApplication->created_at)->format('Y-m-d') }}</td>
+                                            <td>{{ $approvedApplication->application_post }}</td>
+                                            <td>{{ $approvedApplication->first_name }}</td>
+                                            <td>{{ $approvedApplication->last_name }}</td>
                                             <td>
-                                                <a href="{{ route('add-job-page', ['id' => $all_job_board->id]) }}" class="btn btn-success">
-                                                <i class="fa-solid fa-file"></i>
+                                                <button type="button" class="btn btn-success addNewButton btn-sm" data-toggle="modal" data-target="#cuModal" onclick="setApplicationId('{{ $approvedApplication->id }}')">
+                                                    Approved
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('view-applications', ['id' => $approvedApplication->id]) }}" class="btn btn-success">
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>

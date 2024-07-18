@@ -18,13 +18,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">All Jobs</h4>
-                            <div>
-                                <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
-                                    <a href="{{ route('add-job-board') }}" style="color: white;">
-                                        <i class="las la-plus"></i>Add New </a>
-                                </button>
-                            </div>
+                            <h4 class="card-title">Rejected Applications</h4>
                         </div>
                         <div class="card-body">
                             @if (session()->has('delete-message'))
@@ -41,26 +35,30 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
-                                            <th>Department</th>
-                                            <th>Designation</th>
-                                            <th>Job Title</th>
-                                            <th>CLose Date</th>
-                                            <th>Vacancies</th>
+                                            <th>Date</th>
+                                            <th>Job</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($all_job_boards as $all_job_board)
+                                        @foreach ($RejectApplications as $RejectApplications)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $all_job_board->department }}</td>
-                                            <td>{{ $all_job_board->designation }}</td>
-                                            <td>{{ $all_job_board->job_title }}</td>
-                                            <td>{{ $all_job_board->closing_date }}</td>
-                                            <td>{{ $all_job_board->vacancies }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($RejectApplications->created_at)->format('Y-m-d') }}</td>
+                                            <td>{{ $RejectApplications->application_post }}</td>
+                                            <td>{{ $RejectApplications->first_name }}</td>
+                                            <td>{{ $RejectApplications->last_name }}</td>
                                             <td>
-                                                <a href="{{ route('add-job-page', ['id' => $all_job_board->id]) }}" class="btn btn-success">
-                                                <i class="fa-solid fa-file"></i>
+                                                <button type="button" class="btn btn-danger addNewButton btn-sm" data-toggle="modal" data-target="#cuModal" onclick="setApplicationId('{{ $RejectApplications->id }}')">
+                                                    Rejected
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('view-applications', ['id' => $RejectApplications->id]) }}" class="btn btn-success">
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>

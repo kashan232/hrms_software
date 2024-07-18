@@ -7,6 +7,7 @@ use App\Models\JobApplicationForm;
 use App\Models\JobApplicationStatus;
 use App\Models\JobBoard;
 use App\Models\JobBoardDetail;
+use App\Models\Quiz;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +31,10 @@ class JobBoardController extends Controller
 
     public function store_job_board(Request $request)
     {
-        if (Auth::id()){
+        if (Auth::id()) {
             $userId = Auth::id();
             $userType = Auth::user()->usertype;
-           
+
             $JobBoard = JobBoard::create([
                 'admin_or_user_id' => $userId,
                 'usertype' => $userType, // Adding usertype to the database
@@ -126,10 +127,15 @@ class JobBoardController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
-            $all_job_boards = JobBoard::all();
+            // Fetch approved applications using eager loading for efficiency
+            $approvedApplications = JobApplicationForm::whereHas('statuses', function ($query) {
+                $query->where('application_status', 'Approve');
+            })->with('statuses')->get();
+            // dd($approvedApplications);
+            $quizzes = Quiz::all();
             return view('hr_panel.job_applications.approved_applications', [
-                'all_job_boards' => $all_job_boards,
+                'approvedApplications' => $approvedApplications,
+                'quizzes' => $quizzes,
             ]);
         } else {
             return redirect()->back();
@@ -141,9 +147,11 @@ class JobBoardController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
-            $all_job_boards = JobBoard::all();
+            $RejectApplications = JobApplicationForm::whereHas('statuses', function ($query) {
+                $query->where('application_status', 'Reject');
+            })->with('statuses')->get();
             return view('hr_panel.job_applications.rejected_applications', [
-                'all_job_boards' => $all_job_boards,
+                'RejectApplications' => $RejectApplications,
             ]);
         } else {
             return redirect()->back();
@@ -152,7 +160,7 @@ class JobBoardController extends Controller
 
     public function store_job_applications(Request $request)
     {
-        if (Auth::id()){
+        if (Auth::id()) {
             $status = JobApplicationStatus::create([
                 'application_id' => $request->application_id,
                 'application_status' => $request->application_status,
@@ -180,4 +188,6 @@ class JobBoardController extends Controller
             return redirect()->back();
         }
     }
+
+    
 }

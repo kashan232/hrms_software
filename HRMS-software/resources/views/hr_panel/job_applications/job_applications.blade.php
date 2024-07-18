@@ -67,7 +67,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($job_applications as $job_application)
+                                        @foreach ($approvedApplications as $job_application)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ \Carbon\Carbon::parse($job_application->created_at)->format('Y-m-d') }}</td>

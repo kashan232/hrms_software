@@ -99,8 +99,8 @@
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('job-applications') }}">Job Applications</a></li>
-                     <li><a href="#">Approved Applications</a></li>
-                     <li><a href="#">Rejected Applications</a></li>
+                     <li><a href="{{ route('approved-applications') }}">Approved Applications</a></li>
+                     <li><a href="{{ route('rejected-applications') }}">Rejected Applications</a></li>
                  </ul>
              </li>
 
