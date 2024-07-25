@@ -375,8 +375,23 @@ Route::post('/submit-job-application', [JobController::class, 'submit'])->name('
 Route::get('/job-applications', [JobBoardController::class, 'job_applications'])->name('job-applications');
 Route::get('/approved-applications', [JobBoardController::class, 'approved_applications'])->name('approved-applications');
 Route::get('/rejected-applications', [JobBoardController::class, 'rejected_applications'])->name('rejected-applications');
+Route::get('/Intervied-applications', [JobBoardController::class, 'Intervied_applications'])->name('Intervied-applications');
+Route::get('/hired-applications', [JobBoardController::class, 'hired_applications'])->name('hired-applications');
 Route::post('/store-job-applications', [JobBoardController::class, 'store_job_applications'])->name('store-job-applications');
 Route::get('/view-applications/{id}', [JobBoardController::class, 'view_applications'])->name('view-applications');
+Route::get('/get-quizzes', [JobBoardController::class, 'getQuizzes'])->name('get-quizzes');
+Route::post('/assign-quiz', [JobBoardController::class, 'assignQuiz'])->name('assign-quiz');
+
+Route::get('/quiz-results/{applicationId}', [JobBoardController::class, 'getQuizResults']);
+Route::post('/hire-candidate/{id}', [JobBoardController::class, 'hireCandidate']);
+Route::post('/update-interview-status/{id}', [JobBoardController::class, 'updateInterviewStatus']);
+
+
+Route::get('/quizze-atempt-login', [JobBoardController::class, 'quizze_atempt_login'])->name('quizze-atempt-login');
+Route::post('/candidate-login', [JobBoardController::class, 'candidate_login'])->name('candidate-login');
+Route::get('/quizze-atempt', [JobBoardController::class, 'quizze_atempt'])->name('quizze-atempt')->middleware('auth.candidate');
+Route::post('/submit-quiz', [JobBoardController::class, 'submitQuiz'])->name('submit-quiz');
+Route::post('/candidate-logout', [JobBoardController::class, 'candidate_logout'])->name('candidate-logout');
 
 
 Route::get('/add-job-board', [JobBoardController::class, 'add_job_board'])->name('add-job-board');

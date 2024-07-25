@@ -8,12 +8,15 @@ use App\Models\Employee;
 use App\Models\EmployeeRemoteWork;
 use App\Models\Expense;
 use App\Models\Hiring;
+use App\Models\JobApplicationForm;
+use App\Models\JobApplicationStatus;
 use App\Models\LeaveRequest;
 use App\Models\Project;
 use App\Models\Revenue;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -37,6 +40,14 @@ class HomeController extends Controller
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
                 $all_project = Project::count();
+
+                $expenses = Expense::select('date', DB::raw('SUM(total_paid) as total_expense'))
+                    ->groupBy('date')
+                    ->orderBy('date')
+                    ->get();
+
+                // Fetch project data
+                $projects = Project::select('project_name', 'status', 'priority', 'budget')->get();
                 return view(
                     'admin_panel.admin_dashboard',
                     [
@@ -50,6 +61,8 @@ class HomeController extends Controller
                         'revenueCount' => $revenueCount,
                         'expenseCount' => $expenseCount,
                         'all_project' => $all_project,
+                        'expenses' => $expenses,
+                        'projects' => $projects
                     ]
                 );
             } else if ($usertype == 'employee') {
@@ -72,6 +85,13 @@ class HomeController extends Controller
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::count();
                 $all_project = Project::Count();
+
+                // Fetch job application data
+                $totalApplications = JobApplicationForm::count();
+                $approvedApplications = JobApplicationStatus::where('application_status', 'Approve')->count();
+                $rejectedApplications = JobApplicationStatus::where('application_status', 'Reject')->count();
+
+
                 return view(
                     'hr_panel.hr_dashboard',
                     [
@@ -83,6 +103,9 @@ class HomeController extends Controller
                         'revenueCount' => $revenueCount,
                         'expenseCount' => $expenseCount,
                         'all_project' => $all_project,
+                        'totalApplications' => $totalApplications,
+                        'approvedApplications' => $approvedApplications,
+                        'rejectedApplications' => $rejectedApplications,
                     ]
                 );
             } else if ($usertype == 'manager') {

@@ -101,8 +101,11 @@
                      <li><a href="{{ route('job-applications') }}">Job Applications</a></li>
                      <li><a href="{{ route('approved-applications') }}">Approved Applications</a></li>
                      <li><a href="{{ route('rejected-applications') }}">Rejected Applications</a></li>
+                     <li><a href="{{ route('Intervied-applications') }}">Interview Applications</a></li>
+                     <li><a href="{{ route('hired-applications') }}">Hired Applications</a></li>
                  </ul>
              </li>
+             
 
 
 

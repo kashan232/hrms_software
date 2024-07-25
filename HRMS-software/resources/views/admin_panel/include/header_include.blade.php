@@ -20,7 +20,8 @@
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link href="/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>

@@ -36,34 +36,36 @@
                                 </div>
                                 <hr>
                                 <div id="questionsContainer">
-                                    <div class="question form-group">
-                                        <label for="question1">Question:</label>
-                                        <input type="text" id="question1" name="question" class="form-control" placeholder="Enter the question">
+                                    <div class="question form-group" id="questionTemplate">
+                                        <label for="question">Question:</label>
+                                        <input type="text" name="questions[][question]" class="form-control" placeholder="Enter the question">
                                         <div class="options">
                                             <label>Options:</label>
                                             <div class="option form-check">
-                                                <input type="radio" id="question1_optionA" name="right_option" value="A" class="form-check-input">
-                                                <input type="text" name="options[]" class="form-control" placeholder="Option A">
+                                                <input type="radio" name="questions[0][right_option]" value="A" class="form-check-input">
+                                                <input type="text" name="questions[0][options][]" class="form-control" placeholder="Option A">
                                             </div>
                                             <div class="option form-check">
-                                                <input type="radio" id="question1_optionB" name="right_option" value="B" class="form-check-input">
-                                                <input type="text" name="options[]" class="form-control" placeholder="Option B">
+                                                <input type="radio" name="questions[0][right_option]" value="B" class="form-check-input">
+                                                <input type="text" name="questions[0][options][]" class="form-control" placeholder="Option B">
                                             </div>
                                             <div class="option form-check">
-                                                <input type="radio" id="question1_optionC" name="right_option" value="C" class="form-check-input">
-                                                <input type="text" name="options[]" class="form-control" placeholder="Option C">
+                                                <input type="radio" name="questions[0][right_option]" value="C" class="form-check-input">
+                                                <input type="text" name="questions[0][options][]" class="form-control" placeholder="Option C">
                                             </div>
                                             <div class="option form-check">
-                                                <input type="radio" id="question1_optionD" name="right_option" value="D" class="form-check-input">
-                                                <input type="text" name="options[]" class="form-control" placeholder="Option D">
+                                                <input type="radio" name="questions[0][right_option]" value="D" class="form-check-input">
+                                                <input type="text" name="questions[0][options][]" class="form-control" placeholder="Option D">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="button-group">
                                     <button type="button" id="addQuestion" class="btn btn-primary">Add Another Question</button>
+                                    <button type="button" id="saveQuiz" class="btn btn-success">Save Quiz</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -101,68 +103,49 @@
 
 <script>
     $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        let questionCount = 1;
+        let questionCount = 0;
 
         $('#addQuestion').click(function() {
-            // Get the checked radio button for the correct option
-            let selectedOption = $(`input[name="right_option"]:checked`).siblings('input[type="text"]').val();
+            questionCount++;
+            let newQuestionHtml = `
+            <div class="question form-group">
+                <label for="question">Question:</label>
+                <input type="text" name="questions[${questionCount}][question]" class="form-control" placeholder="Enter the question">
+                <div class="options">
+                    <label>Options:</label>
+                    <div class="option form-check">
+                        <input type="radio" name="questions[${questionCount}][right_option]" value="A" class="form-check-input">
+                        <input type="text" name="questions[${questionCount}][options][]" class="form-control" placeholder="Option A">
+                    </div>
+                    <div class="option form-check">
+                        <input type="radio" name="questions[${questionCount}][right_option]" value="B" class="form-check-input">
+                        <input type="text" name="questions[${questionCount}][options][]" class="form-control" placeholder="Option B">
+                    </div>
+                    <div class="option form-check">
+                        <input type="radio" name="questions[${questionCount}][right_option]" value="C" class="form-check-input">
+                        <input type="text" name="questions[${questionCount}][options][]" class="form-control" placeholder="Option C">
+                    </div>
+                    <div class="option form-check">
+                        <input type="radio" name="questions[${questionCount}][right_option]" value="D" class="form-check-input">
+                        <input type="text" name="questions[${questionCount}][options][]" class="form-control" placeholder="Option D">
+                    </div>
+                </div>
+            </div>
+        `;
+            $('#questionsContainer').append(newQuestionHtml);
+        });
 
-            let formData = {
-                admin_or_user_id: '{{ Auth::id() }}',
-                department: $('#department').val(),
-                designation: $('#designation').val(),
-                job_title: $('#job_title').val(),
-                question: $(`#question1`).val(),
-                options: [
-                    $(`input[name="options[]"]`).eq(0).val(),
-                    $(`input[name="options[]"]`).eq(1).val(),
-                    $(`input[name="options[]"]`).eq(2).val(),
-                    $(`input[name="options[]"]`).eq(3).val()
-                ],
-                right_option: selectedOption // Send the text of the selected option
-            };
-
+        $('#saveQuiz').click(function() {
+            let formData = $('#quizForm').serialize();
             $.ajax({
                 url: '{{ route("Quiz-store") }}',
                 method: 'get',
                 data: formData,
                 success: function(response) {
                     alert(response.message);
-
-                    questionCount++;
-                    const questionHtml = `
-                        <div class="question form-group">
-                            <label for="question${questionCount}">Question:</label>
-                            <input type="text" id="question${questionCount}" name="question" class="form-control" placeholder="Enter the question">
-                            <div class="options">
-                                <label>Options:</label>
-                                <div class="option form-check">
-                                    <input type="radio" id="question${questionCount}_optionA" name="right_option" value="A" class="form-check-input">
-                                    <input type="text" name="options[]" class="form-control" placeholder="Option A">
-                                </div>
-                                <div class="option form-check">
-                                    <input type="radio" id="question${questionCount}_optionB" name="right_option" value="B" class="form-check-input">
-                                    <input type="text" name="options[]" class="form-control" placeholder="Option B">
-                                </div>
-                                <div class="option form-check">
-                                    <input type="radio" id="question${questionCount}_optionC" name="right_option" value="C" class="form-check-input">
-                                    <input type="text" name="options[]" class="form-control" placeholder="Option C">
-                                </div>
-                                <div class="option form-check">
-                                    <input type="radio" id="question${questionCount}_optionD" name="right_option" value="D" class="form-check-input">
-                                    <input type="text" name="options[]" class="form-control" placeholder="Option D">
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-                    $('#questionsContainer').append(questionHtml);
+                    $('#questionsContainer').empty();
+                    $('#quizForm')[0].reset();
+                    questionCount = 0;
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -172,4 +155,3 @@
         });
     });
 </script>
-

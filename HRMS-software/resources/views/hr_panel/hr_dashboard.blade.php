@@ -253,6 +253,12 @@
                     </div>
                 </div> --}}
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="jobApplicationChart" class="card"></div>
+                </div>
+            </div>
         </div>
     </div>
     <!--**********************************
@@ -275,3 +281,120 @@
     ***********************************-->
 
 @include('hr_panel.include.footer_include')
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const totalApplications = @json($totalApplications);
+            const approvedApplications = @json($approvedApplications);
+            const rejectedApplications = @json($rejectedApplications);
+
+            // Chart configuration
+            const options = {
+                series: [{
+                    name: 'Total Applications',
+                    data: [totalApplications],
+                    color: '#1E90FF'
+                }, {
+                    name: 'Approved',
+                    data: [approvedApplications],
+                    color: '#28a745'
+                }, {
+                    name: 'Rejected',
+                    data: [rejectedApplications],
+                    color: '#dc3545'
+                }],
+                chart: {
+                    height: 400,
+                    type: 'bar',
+                    stacked: false,
+                    toolbar: {
+                        show: true
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        barHeight: '50%',
+                        dataLabels: {
+                            position: 'top'
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    offsetX: -6,
+                    style: {
+                        fontSize: '14px',
+                        colors: ['#333']
+                    }
+                },
+                stroke: {
+                    show: true,
+                    width: 1,
+                    colors: ['#fff']
+                },
+                title: {
+                    text: 'Job Applications Status',
+                    align: 'center',
+                    style: {
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }
+                },
+                xaxis: {
+                    categories: ['Applications'],
+                    title: {
+                        text: 'Status',
+                        style: {
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            color: '#333'
+                        }
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '12px',
+                            fontWeight: 'bold',
+                            color: '#333'
+                        }
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Number of Applications',
+                        style: {
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            color: '#333'
+                        }
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '12px',
+                            fontWeight: 'bold',
+                            color: '#333'
+                        }
+                    }
+                },
+                tooltip: {
+                    theme: 'dark',
+                    y: {
+                        formatter: function (val) {
+                            return val;
+                        }
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'center',
+                    offsetX: 0
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector("#jobApplicationChart"), options);
+            chart.render();
+        });
+    </script>

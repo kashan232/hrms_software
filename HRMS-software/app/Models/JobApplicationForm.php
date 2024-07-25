@@ -18,4 +18,10 @@ class JobApplicationForm extends Model
         return $this->hasMany(JobApplicationStatus::class, 'application_id');
     }
 
+    public function jobBoard()
+    {
+        return $this->belongsTo(JobBoard::class, 'Job_id');
+    }
+
+    
 }

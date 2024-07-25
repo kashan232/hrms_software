@@ -18,4 +18,9 @@ class JobBoard extends Model
     {
         return $this->belongsTo(Department::class, 'department', 'department');
     }
+
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplicationForm::class, 'Job_id');
+    }
 }

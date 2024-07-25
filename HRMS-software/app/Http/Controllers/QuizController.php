@@ -27,26 +27,26 @@ class QuizController extends Controller
 
     public function Quiz_store(Request $request)
     {
-        // Log the incoming request for debugging
-
         $userId = Auth::id();
-
-        // Save the incoming data to the database
-        $quiz = new Quiz([
-            'admin_or_user_id' => $userId,
-            'department' => $request->department,
-            'designation' => $request->designation,
-            'job_title' => $request->job_title,
-            'question' => $request->question,
-            'option_a' => $request->options[0],
-            'option_b' => $request->options[1],
-            'option_c' => $request->options[2],
-            'option_d' => $request->options[3],
-            'right_option' => $request->right_option, // Save the text of the selected option
-        ]);
-
-        $quiz->save();
-
+        $questions = $request->input('questions');
+    
+        foreach ($questions as $questionData) {
+            $quiz = new Quiz([
+                'admin_or_user_id' => $userId,
+                'department' => $request->input('department'),
+                'designation' => $request->input('designation'),
+                'job_title' => $request->input('job_title'),
+                'question' => $questionData['question'],
+                'option_a' => $questionData['options'][0],
+                'option_b' => $questionData['options'][1],
+                'option_c' => $questionData['options'][2],
+                'option_d' => $questionData['options'][3],
+                'right_option' => $questionData['right_option'],
+            ]);
+    
+            $quiz->save();
+        }
+    
         return response()->json(['message' => 'Quiz saved successfully']);
     }
 
