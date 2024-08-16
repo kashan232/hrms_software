@@ -13,8 +13,7 @@ class ExpenseController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
-            $all_expense = Expense::all();
+            $all_expense = Expense::where('admin_or_user_id', '=', $userId)->get();
             return view('hr_panel.expense.all_expense', [
                 'all_expense' => $all_expense,
             ]);

@@ -1,5 +1,4 @@
 @include('admin_panel.include.header_include')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -18,85 +17,95 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session()->has('manager-added'))
+                        @if (session()->has('success-message-updte'))
                             <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('manager-added') }}.
+                                <strong>Success!</strong> {{ session('success-message-updte') }}.
                             </div>
                         @endif
                         <div class="card-header">
-                            <h4 class="card-title">Add Manager</h4>
+                            <h4 class="card-title">Edit Employee</h4>
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
-                                    <a href="{{ route('all-manager') }}" style="color: white;">
-                                    All HR </a>
+                                    <a href="{{ route('all-employee') }}" style="color: white;">
+                                    All Employee </a>
                                 </button>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-manager') }}" method="POST">
+                                <form action="{{ route('update-employee',['id'=> $employeedetails->id ]) }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Designation</label>
-                                            <input type="text" name="designation" class="form-control">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" name="first_name" class="form-control">
+                                            <input type="text" name="first_name" class="form-control" value="{{ $employeedetails->first_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" name="last_name" class="form-control">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label>Phone</label>
-                                            <input type="number" name="phone" class="form-control">
+                                            <input type="text" name="last_name" class="form-control" value="{{ $employeedetails->last_name }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control">
+                                            <input type="email" name="email" class="form-control" value="{{ $employeedetails->email }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Joining Date</label>
-                                            <input type="date" name="joining_date" class="form-control">
+                                            <label>Joining Date</label>
+                                            <input type="date" name="joining_date" class="form-control" value="{{ $employeedetails->joining_date }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Decided Salary</label>
-                                            <input type="number" name="decided_salary" class="form-control">
+                                            <label>Phone</label>
+                                            <input type="number" name="phone" class="form-control" value="{{ $employeedetails->phone }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Manager Status</label>
-                                            <select name="manager_status" class="form-control">
-                                                <option value="Onsite">Onsite</option>
-                                                <option value="Remote">Remote</option>
-                                                <option value="Hybrid">Hybrid</option>
+                                            <label>Department</label>
+                                            <select name="department" id="department" class="form-control">
+                                                <option value="" selected disabled>Select One</option>
+                                                @foreach ($all_department as $department)
+                                                    <option value="{{ $department->department }}">{{ $department->department }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-6">
+                                            <label>Designation</label>
+                                            <select name="designation" id="designation" class="form-control"></select>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label>Decided Salary</label>
+                                            <input type="text" name="decided_salary" class="form-control" value="{{ $employeedetails->decided_salary }}">
+                                        </div>
+                                        
+                                        <div class="mb-3 col-md-6">
+                                            <label>Reporting Manager </label>
+                                            <Select name="reporting_manager" class="form-control">
+                                                @foreach($all_managers as $all_manager)
+                                                    <option value="{{ $all_manager->id }}">{{ $all_manager->first_name }}&nbsp;{{ $all_manager->last_name }}</option>
+                                                @endforeach
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label> Employee Status</label>
+                                            <Select name="employee_status" class="form-control">
+                                                <option value="Onsite">Onsite</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Hybrid">Hybrid</option>
+                                            </Select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
                                             <label>Address</label>
-                                            <input type="text" name="address" class="form-control">
+                                            <input type="text" name="address" class="form-control" value="{{ $employeedetails->address }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label>Gender</label>
-                                            <Select name="manager_gender" class="form-control">
+                                            <Select name="employee_gender" class="form-control">
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                             </Select>
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">User Name</label>
-                                            <input type="text" name="user_name" class="form-control">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Password</label>
-                                            <div class="input-group">
-                                                <input type="password" id="passwordInput" name="password" class="form-control">
-                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                                    <i class="fas fa-eye-slash"></i>
-                                                </button>
-                                            </div>
+                                            <label>Number Of Leave Allow</label>
+                                            <input type="text" name="number_of_leaves" class="form-control" value="{{ $employeedetails->number_of_leaves }}">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -117,15 +126,13 @@
         ***********************************-->
     <div class="footer">
         <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK
+            <p>Copyright © Designed &amp; Developed by <a href="3" target="_blank">AK
                     Technologies</a>
                 2024</p>
         </div>
     </div> <!--**********************************
             Footer end
         ***********************************-->
-
-
 </div>
 <!--**********************************
         Main wrapper end
@@ -153,16 +160,4 @@
             }
         });
     });
-</script>
-<script>
-    document.getElementById("togglePassword").addEventListener("click", function() {
-    var passwordInput = document.getElementById("passwordInput");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
-    } else {
-        passwordInput.type = "password";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
-    }
-});
 </script>

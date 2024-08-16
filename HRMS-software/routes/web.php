@@ -69,9 +69,14 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('home');
 Route::get('/admin-dashboard', [HomeController::class, 'adminpage'])->middleware(['auth','admin'])->name('admin-dashboard');
 
+// // make Admin
+// Route::get('/add-admin', [HRController::class, 'add_admin'])->middleware(['auth','admin'])->name('add-admin');
+// Route::post('/store-admin', [HRController::class, 'store_admin'])->name('store-admin');
+// Route::get('/all-admin', [HRController::class, 'all_admin'])->middleware(['auth','admin'])->name('all-admin');
+// Route::get('/edit-admin/{id}', [HRController::class, 'edit_admin'])->middleware(['auth','admin'])->name('edit-admin');
+// Route::post('/update-admin/{id}', [HRController::class, 'update_admin'])->name('update-admin');
+
 //Admin Panel
-
-
 Route::get('/Admin-Change-Password', [HomeController::class, 'Admin_Change_Password'])->name('Admin-Change-Password');
 Route::post('/updte-change-Password', [HomeController::class, 'updte_change_Password'])->name('updte-change-Password');
 

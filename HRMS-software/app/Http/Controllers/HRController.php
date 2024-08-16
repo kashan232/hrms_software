@@ -170,4 +170,46 @@ class HRController extends Controller
             return redirect()->back();
         }
     }
+
+    // public function add_admin()
+    // {
+    //     if (Auth::id()) {
+    //         $userId = Auth::id();
+    //         // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+    //         return view('admin_panel.admin.add_admin', [
+    //             // 'all_department' => $all_department,
+    //         ]);
+    //     } else {
+    //         return redirect()->back();
+    //     }
+
+    //     return view('');
+    // }
+    // public function store_admin(Request $request)
+    // {
+    //     if (Auth::id()) {
+    //         $user = User::create([
+    //             'name' => $request->first_name . ' ' . $request->last_name,
+    //             'email' => $request->email,
+    //             'password' => bcrypt($request->password), // Make sure to hash the password
+    //             'usertype' => 'admin', // Set the usertype to 'employee'
+    //         ]);
+
+    //         return redirect()->back()->with('admin-added', 'Admin is Added Successfully');
+    //     } else {
+    //         return redirect()->back();
+    //     }
+    // }
+    // public function all_admin()
+    // {
+    //     if (Auth::id()) {
+            
+    //         $admins = User::where('usertype', '=', 'admin')->get();
+    //         return view('admin_panel.admin.all_admin', [
+    //             'admins' => $admins,
+    //         ]);
+    //     } else {
+    //         return redirect()->back();
+    //     }
+    // }
 }

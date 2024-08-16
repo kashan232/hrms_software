@@ -5,13 +5,11 @@
      <div class="deznav-scroll">
          <ul class="metismenu" id="menu">
              <li><a href="{{ route('home') }}" aria-expanded="false">
-                     {{-- <i class="flaticon-381-networking"></i> --}}
                      <i class="fa-solid fa-house"></i>
                      <span class="nav-text">Dashboard</span>
                  </a>
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fa-solid fa-user"></i>
                      <span class="nav-text">Employee</span>
                  </a>
@@ -37,7 +35,6 @@
                  </a>
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-envelope-open-text"></i>
                      <span class="nav-text">Leaves</span>
                  </a>
@@ -62,7 +59,6 @@
              </li>
 
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>
                      <span class="nav-text">Expense</span>
                  </a>
@@ -73,7 +69,6 @@
 
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-graduation-cap"></i>
                      <span class="nav-text">Jobs</span>
                  </a>
@@ -106,11 +101,7 @@
                  </ul>
              </li>
              
-
-
-
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-graduation-cap"></i>
                      <span class="nav-text">Payrol</span>
                  </a>

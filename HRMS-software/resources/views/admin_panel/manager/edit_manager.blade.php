@@ -58,6 +58,23 @@
                                             <input type="email" name="email" class="form-control" value="{{ $managerdetails->email }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
+                                            <label class="form-label">Joining Date</label>
+                                            <input type="date" name="joining_date" class="form-control" value="{{ $managerdetails->joining_date }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Decided Salary</label>
+                                            <input type="number" name="decided_salary" class="form-control" value="{{ $managerdetails->decided_salary }}">
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Manager Status</label>
+                                            <select name="manager_status" class="form-control">
+                                                <option value="Onsite">Onsite</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Hybrid">Hybrid</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
                                             <label>Address</label>
                                             <input type="text" name="address" class="form-control" value="{{ $managerdetails->address
                                              }}">
@@ -72,15 +89,6 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">User Name</label>
                                             <input type="text" name="user_name" class="form-control" value="{{ $managerdetails->user_name }}">
-                                        </div>
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Password</label>
-                                            <div class="input-group">
-                                                <input type="password" id="passwordInput" name="password" class="form-control">
-                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                                    <i class="fas fa-eye-slash"></i>
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

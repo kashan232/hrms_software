@@ -16,141 +16,159 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <div class="card bg-primary">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fa-solid fa-building-user text-white"></i>
-                                </span>
+                    <a href="{{ route('department') }}">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fa-solid fa-building-user text-white"></i>
+                                    </span>
 
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Total Departments</p>
-                                    <span class="fs-48 text-white font-w600">{{ $departCount }}</span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Total Departments</p>
+                                        <span class="fs-48 text-white font-w600">{{ $departCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <div class="card bg-info overflow-hidden">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fa-solid fa-building-columns text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Designation</p>
-                                    <span class="fs-48 text-white font-w600">{{ $designationCount }}</span>
+                    <a href="{{ route('designation') }}">
+                        <div class="card bg-info overflow-hidden">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fa-solid fa-building-columns text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Designation</p>
+                                        <span class="fs-48 text-white font-w600">{{ $designationCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <div class="card bg-success">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fa-solid fa-user text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Employee</p>
-                                    <span class="fs-48 text-white font-w600">{{ $employeeCount }}</span>
+                    <a href="{{ route('all-employee') }}">
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fa-solid fa-user text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Employee</p>
+                                        <span class="fs-48 text-white font-w600">{{ $employeeCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 {{-- // new cards --}}
                 <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <div class="card bg-primary">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fas fa-briefcase text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Projects</p>
-                                    <span class="fs-48 text-white font-w600">{{ $projectCount }}</span>
+                    <a href="{{ route('project') }}">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fas fa-briefcase text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Projects</p>
+                                        <span class="fs-48 text-white font-w600">{{ $projectCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <div class="card bg-info overflow-hidden">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fas fa-briefcase text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Task</p>
-                                    <span class="fs-48 text-white font-w600">{{ $taskCount }}</span>
+                    <a href="{{ route('employee-task-update') }}">
+                        <div class="card bg-info overflow-hidden">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fas fa-briefcase text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Task</p>
+                                        <span class="fs-48 text-white font-w600">{{ $taskCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-sm-6">
-                    <div class="card bg-secondary">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fa-solid fa-clipboard-user text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Remote Employees</p>
-                                    <span class="fs-48 text-white font-w600">{{ $remoteEmployeeCount }}</span>
+                    <a href="#">
+                        <div class="card bg-secondary">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fa-solid fa-clipboard-user text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Remote Employees</p>
+                                        <span class="fs-48 text-white font-w600">{{ $remoteEmployeeCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-sm-6">
-                    <div class="card bg-secondary">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fa-solid fa-graduation-cap text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Hiring</p>
-                                    <span class="fs-48 text-white font-w600">{{ $hiringCount }}</span>
+                    <a href="{{ route('hiring-listing') }}">
+                        <div class="card bg-secondary">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fa-solid fa-graduation-cap text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Hiring</p>
+                                        <span class="fs-48 text-white font-w600">{{ $hiringCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-sm-6">
-                    <div class="card bg-secondary">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fa-solid fa-receipt text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Expense</p>
-                                    <span class="fs-48 text-white font-w600">{{ $expenseCount }}</span>
+                    <a href="{{ route('expense-listing') }}">
+                        <div class="card bg-secondary">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fa-solid fa-receipt text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Expense</p>
+                                        <span class="fs-48 text-white font-w600">{{ $expenseCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-xl-4 col-xxl-4 col-sm-6">
-                    <div class="card bg-secondary">
-                        <div class="card-body">
-                            <div class="media align-items-center">
-                                <span class="p-2 me-3 feature-icon rounded">
-                                    <i class="fas fa-bell text-white"></i>
-                                </span>
-                                <div class="media-body text-end feature-icon-text">
-                                    <p class="fs-18 text-white mb-2">Revenue</p>
-                                    <span class="fs-48 text-white font-w600">{{ $revenueCount }}</span>
+                    <a href="{{ route('all-revenue') }}">
+                        <div class="card bg-secondary">
+                            <div class="card-body">
+                                <div class="media align-items-center">
+                                    <span class="p-2 me-3 feature-icon rounded">
+                                        <i class="fas fa-bell text-white"></i>
+                                    </span>
+                                    <div class="media-body text-end feature-icon-text">
+                                        <p class="fs-18 text-white mb-2">Revenue</p>
+                                        <span class="fs-48 text-white font-w600">{{ $revenueCount }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="row">
@@ -280,122 +298,122 @@
     });
 </script>
 <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const expenseData = @json($expenses);
+    document.addEventListener('DOMContentLoaded', function() {
+        const expenseData = @json($expenses);
 
-            // Extract dates and total expenses
-            const dates = expenseData.map(expense => expense.date);
-            const totalExpenses = expenseData.map(expense => expense.total_expense);
+        // Extract dates and total expenses
+        const dates = expenseData.map(expense => expense.date);
+        const totalExpenses = expenseData.map(expense => expense.total_expense);
 
-            // Chart configuration
-            const options = {
-                series: [{
-                    name: 'Total Expense',
-                    data: totalExpenses
-                }],
-                chart: {
-                    height: 400,
-                    type: 'bar',
-                    toolbar: {
-                        show: true
-                    }
-                },
-                colors: ['#4ba064'],
+        // Chart configuration
+        const options = {
+            series: [{
+                name: 'Total Expense',
+                data: totalExpenses
+            }],
+            chart: {
+                height: 400,
+                type: 'bar',
+                toolbar: {
+                    show: true
+                }
+            },
+            colors: ['#4ba064'],
+            title: {
+                text: 'Total Expenses by Date',
+                align: 'center',
+                style: {
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    color: '#333'
+                }
+            },
+            xaxis: {
+                categories: dates,
                 title: {
-                    text: 'Total Expenses by Date',
-                    align: 'center',
+                    text: 'Date',
                     style: {
-                        fontSize: '20px',
+                        fontSize: '14px',
                         fontWeight: 'bold',
                         color: '#333'
                     }
                 },
-                xaxis: {
-                    categories: dates,
-                    title: {
-                        text: 'Date',
-                        style: {
-                            fontSize: '14px',
-                            fontWeight: 'bold',
-                            color: '#333'
-                        }
-                    },
-                    labels: {
-                        style: {
-                            fontSize: '12px',
-                            fontWeight: 'bold',
-                            color: '#333'
-                        }
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'Total Expense',
-                        style: {
-                            fontSize: '14px',
-                            fontWeight: 'bold',
-                            color: '#333'
-                        }
-                    },
-                    labels: {
-                        style: {
-                            fontSize: '12px',
-                            fontWeight: 'bold',
-                            color: '#333'
-                        }
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '10%',
-                        endingShape: 'rounded'
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
+                labels: {
                     style: {
-                        colors: ['#333']
-                    },
-                    formatter: function (val) {
-                        return + val;
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        color: '#333'
                     }
-                },
-                tooltip: {
-                    theme: 'dark',
-                    y: {
-                        formatter: function (val) {
-                            return + val;
-                        }
-                    }
-                },
-                annotations: {
-                    points: expenseData.map((expense, index) => ({
-                        x: expense.date,
-                        y: expense.total_expense,
-                        marker: {
-                            size: 4,
-                            fillColor: '#fff',
-                            strokeColor: '#4ba064',
-                            radius: 2,
-                        },
-                        label: {
-                            borderColor: '#4ba064',
-                            offsetY: -10,
-                            style: {
-                                color: '#fff',
-                                background: '#4ba064',
-                            },
-                            text: "$" + expense.total_expense,
-                        }
-                    }))
                 }
-            };
+            },
+            yaxis: {
+                title: {
+                    text: 'Total Expense',
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }
+                },
+                labels: {
+                    style: {
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '10%',
+                    endingShape: 'rounded'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                style: {
+                    colors: ['#333']
+                },
+                formatter: function(val) {
+                    return +val;
+                }
+            },
+            tooltip: {
+                theme: 'dark',
+                y: {
+                    formatter: function(val) {
+                        return +val;
+                    }
+                }
+            },
+            annotations: {
+                points: expenseData.map((expense, index) => ({
+                    x: expense.date,
+                    y: expense.total_expense,
+                    marker: {
+                        size: 4,
+                        fillColor: '#fff',
+                        strokeColor: '#4ba064',
+                        radius: 2,
+                    },
+                    label: {
+                        borderColor: '#4ba064',
+                        offsetY: -10,
+                        style: {
+                            color: '#fff',
+                            background: '#4ba064',
+                        },
+                        text: "$" + expense.total_expense,
+                    }
+                }))
+            }
+        };
 
-            const chart = new ApexCharts(document.querySelector("#expenseChart"), options);
-            chart.render();
-        });
-    </script>
+        const chart = new ApexCharts(document.querySelector("#expenseChart"), options);
+        chart.render();
+    });
+</script>
 <script>
     // Fetch data from server-side (you need to implement this)
     // Example data

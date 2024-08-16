@@ -19,6 +19,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Models\CRMExperience;
+use App\Models\CRMInsurance;
+use App\Models\CRMSalaire;
+use App\Models\CRMSkill;
+use App\Models\CRMSuggestion;
+use App\Models\CRMTraininge;
+use App\Models\EmployeeAttendance;
 
 class HomeController extends Controller
 {
@@ -72,9 +79,64 @@ class HomeController extends Controller
                 $leaves = LeaveRequest::where('Employee', $employeeName)->count();
                 $task = Task::where('task_assign_person', $employeeName)->count();
 
+                $emp_id = Auth()->user()->emp_id;
+
+                // dd($userId);
+                $CRMSkills = CRMSkill::where('emp_id', '=', $emp_id)->count();
+                $CRMSalaires = CRMSalaire::where('emp_id', '=', $emp_id)->count();
+                $CRMInsurances = CRMInsurance::where('emp_id', '=', $emp_id)->count();
+                $CRMTraininges = CRMTraininge::where('emp_id', '=', $emp_id)->count();
+                $CRMExperiences = CRMExperience::where('emp_id', '=', $emp_id)->count();
+                $CRMSuggestions = CRMSuggestion::where('emp_id', '=', $emp_id)->count();
+
+                $attendance_records = EmployeeAttendance::where('emp_id', $emp_id)->count();
+
+                $all_employee = Employee::where('id', '=', $emp_id)->first();
+
+                // Get the current month and year
+                $currentMonth = date('m');
+                $currentYear = date('Y');
+
+                // Calculate the total presents for the current month
+                $totalPresent = EmployeeAttendance::where('emp_id', '=', $emp_id)
+                    ->whereMonth('employee_attendance_date', '=', $currentMonth)
+                    ->whereYear('employee_attendance_date', '=', $currentYear)
+                    ->where('employee_attendance', '=', 'present')
+                    ->count();
+
+                // Calculate the total absents for the current month
+                $totalAbsent = EmployeeAttendance::where('emp_id', '=', $emp_id)
+                    ->whereMonth('employee_attendance_date', '=', $currentMonth)
+                    ->whereYear('employee_attendance_date', '=', $currentYear)
+                    ->where('employee_attendance', '=', 'absent')
+                    ->count();
+
+                // Calculate the total leaves for the current month
+                $totalLeave = EmployeeAttendance::where('emp_id', '=', $emp_id)
+                    ->whereMonth('employee_attendance_date', '=', $currentMonth)
+                    ->whereYear('employee_attendance_date', '=', $currentYear)
+                    ->where('employee_attendance', '=', 'leave')
+                    ->count();
+
+                $name = Auth::user()->name;
+                $employeetasks = Task::where('task_assign_person', '=', $name)->get();
+
+
                 return view('employee_panel.employee_dashboard', [
                     'leaves' => $leaves,
                     'task' => $task,
+                    'CRMSkills' => $CRMSkills,
+                    'CRMSalaires' => $CRMSalaires,
+                    'CRMInsurances' => $CRMInsurances,
+                    'CRMTraininges' => $CRMTraininges,
+                    'CRMExperiences' => $CRMExperiences,
+                    'CRMSuggestions' => $CRMSuggestions,
+                    'attendance_records' => $attendance_records,
+                    'all_employee' => $all_employee,
+                    'totalPresent' => $totalPresent,
+                    'totalAbsent' => $totalAbsent,
+                    'totalLeave' => $totalLeave,
+                    'employeetasks' => $employeetasks,
                 ]);
             } else if ($usertype == 'hr') {
                 $leaves = LeaveRequest::count();
@@ -86,6 +148,8 @@ class HomeController extends Controller
                 $expenseCount = Expense::count();
                 $all_project = Project::Count();
 
+                $userId = Auth::id();
+                $all_expense = Expense::where('admin_or_user_id', '=', $userId)->get();
                 // Fetch job application data
                 $totalApplications = JobApplicationForm::count();
                 $approvedApplications = JobApplicationStatus::where('application_status', 'Approve')->count();
@@ -106,6 +170,7 @@ class HomeController extends Controller
                         'totalApplications' => $totalApplications,
                         'approvedApplications' => $approvedApplications,
                         'rejectedApplications' => $rejectedApplications,
+                        'all_expense' => $all_expense,
                     ]
                 );
             } else if ($usertype == 'manager') {
