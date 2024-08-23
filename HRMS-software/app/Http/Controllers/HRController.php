@@ -16,8 +16,7 @@ class HRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.HR.add_hr', [
-                // 'all_department' => $all_department,
+            return view('admin_panel.HR.add_hr', [// 'all_department' => $all_department,
             ]);
         } else {
             return redirect()->back();

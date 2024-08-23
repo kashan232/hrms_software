@@ -28,7 +28,7 @@
                             <div>
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
-                                    <a href="{{ route('all-employee') }}" style="color: white;">
+                                    <a href="{{ route('all-hr') }}" style="color: white;">
                                     All HR </a>
                                 </button>
                             </div>

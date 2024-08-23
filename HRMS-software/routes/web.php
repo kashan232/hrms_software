@@ -57,7 +57,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // git connect on pc
-//kashan pagal he
+// connected
 Route::get('/', function () {
     return view('welcome');
 });
