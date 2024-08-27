@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeAttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLeaveRequestController;
 use App\Http\Controllers\EmployeePerformanceController;
+use App\Http\Controllers\EmployeePromotionController;
 use App\Http\Controllers\EmployeeRemoteWorkController;
 use App\Http\Controllers\EmployeeTaskUpdateController;
 use App\Http\Controllers\ExpenseController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\ManagerProjectListingController;
 use App\Http\Controllers\ManagerRevenueController;
 use App\Http\Controllers\ManagerTaskController;
 use App\Http\Controllers\MyTaskController;
+use App\Http\Controllers\OfferLetterController;
 use App\Http\Controllers\PayrolController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilePageController;
@@ -43,6 +45,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportingController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TaskController;
+use App\Models\EmployeePromotion;
 use App\Models\LeaveRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -150,6 +153,13 @@ Route::post('/hr-update-manager/{id}', [HrManagerController::class, 'hr_update_m
 Route::get('/daily-attendance', [EmployeeAttendanceController::class, 'daily_attendance'])->middleware(['auth','admin'])->name('daily-attendance');
 Route::get('/fetch-daily-employee-attendance-record', [EmployeeAttendanceController::class, 'fetch_daily_employee_attendance_record'])->name('fetch-daily-employee-attendance-record');
 
+Route::get('/hr-offer-letter', [OfferLetterController::class, 'hr_offer_letter'])->name('hr-offer-letter');
+Route::post('/store-hr-offer-letter', [OfferLetterController::class, 'store_hr_offer_letter'])->name('store-hr-offer-letter');
+Route::get('/hr-all-offer-letter', [OfferLetterController::class, 'hr_all_offer_letter'])->name('hr-all-offer-letter');
+
+Route::get('/hr-promotion', [EmployeePromotionController::class, 'hr_promotion'])->name('hr-promotion');
+Route::post('/store-hr-promotion', [EmployeePromotionController::class, 'store_hr_promotion'])->name('store-hr-promotion');
+Route::get('/hr-all-promotion', [EmployeePromotionController::class, 'hr_all_promotion'])->name('hr-all-promotion');
 
 //Project
 Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');

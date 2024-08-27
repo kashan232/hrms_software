@@ -44,8 +44,28 @@
                      <li><a href="{{ route('approve-leave') }}">Approve Leaves</a></li>
                      <li><a href="{{ route('reject-leave') }}">Reject Leaves</a></li>
                  </ul>
-
              </li>
+             
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     <i class="fas fa-envelope-open-text"></i>
+                     <span class="nav-text">Offer Letter</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('hr-offer-letter') }}">Create Offer Letter</a></li>
+                     <li><a href="{{ route('hr-all-offer-letter') }}">All Offer letter</a></li>
+                 </ul>
+             </li>
+
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Employee Promotion</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('hr-promotion') }}">Create Promotion</a></li>
+                     <li><a href="{{ route('hr-all-promotion') }}">All Promotion</a></li>
+                 </ul>
+             </li>
+
              <li>
                  <a href="{{ route('hr-all-leaverequest') }}" aria-expanded="false">
                      <i class="fas fa-envelope-open"></i>
