@@ -45,6 +45,17 @@
                     <span class="nav-text"> Performance</span>
                 </a>
             </li>
+
+            <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="nav-text">Resignation</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('resignation-create') }}">Add Resignation</a></li>
+                    <li><a href="{{ route('all-resignation') }}">all Resignation</a></li>
+                </ul>
+            </li>
+
          </ul>
 
      </div>

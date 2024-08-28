@@ -10,6 +10,7 @@ use App\Http\Controllers\EmployeeLeaveRequestController;
 use App\Http\Controllers\EmployeePerformanceController;
 use App\Http\Controllers\EmployeePromotionController;
 use App\Http\Controllers\EmployeeRemoteWorkController;
+use App\Http\Controllers\EmployeeResignationController;
 use App\Http\Controllers\EmployeeTaskUpdateController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HiringController;
@@ -160,6 +161,14 @@ Route::get('/hr-all-offer-letter', [OfferLetterController::class, 'hr_all_offer_
 Route::get('/hr-promotion', [EmployeePromotionController::class, 'hr_promotion'])->name('hr-promotion');
 Route::post('/store-hr-promotion', [EmployeePromotionController::class, 'store_hr_promotion'])->name('store-hr-promotion');
 Route::get('/hr-all-promotion', [EmployeePromotionController::class, 'hr_all_promotion'])->name('hr-all-promotion');
+
+
+
+Route::get('/resignation-create', [EmployeeResignationController::class, 'resignation_create'])->name('resignation-create');
+Route::post('/store-resignation-create', [EmployeeResignationController::class, 'store_resignation_create'])->name('store-resignation-create');
+Route::get('/all-resignation', [EmployeeResignationController::class, 'all_resignation'])->name('all-resignation');
+
+
 
 //Project
 Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');
