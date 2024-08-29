@@ -11,16 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeResignationController extends Controller
 {
-    
+
     public function resignation_create()
     {
         if (Auth::id()) {
             $userId = Auth::id();
+            $emp_id = Auth()->user()->emp_id;
+            // dd($userId);
             $all_department = Department::all();
-            $Employees = Employee::all();
+            $Employee = Employee::where('id', '=', $emp_id)->first();
+            // dd($Employee);
             return view('employee_panel.resignatoin.add_resignatoin', [
                 'all_department' => $all_department,
-                'Employees' => $Employees,
+                'Employee' => $Employee,
             ]);
         } else {
             return redirect()->back();
@@ -33,22 +36,19 @@ class EmployeeResignationController extends Controller
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
-            $OfferLetters = EmployeeResignation::create([
+            $EmployeeResignation = EmployeeResignation::create([
                 'admin_or_user_id'    => $userId,
-                'employee_name'          => $request->employee_name,
-                'curent_position'          => $request->curent_position,
-                'new_position'          => $request->new_position,
+                'employeeName'          => $request->employeeName,
                 'department'          => $request->department,
                 'designation'          => $request->designation,
-                'new_salary'          => $request->new_salary,
-                'date'          => $request->date,
-                'jobDescription'          => $request->jobDescription,
-                'additionalNotes'          => $request->additionalNotes,
-                'created_by'          => $usertype,
+                'resignationDate'          => $request->resignationDate,
+                'lastWorkingDay'          => $request->lastWorkingDay,
+                'resignationReason'          => $request->resignationReason,
+                'status'          => 'Pending',
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now(),
             ]);
-            return redirect()->back()->with('promotion-added', 'Employee Promotion Created Successfully');
+            return redirect()->back()->with('resignation-added', 'Your Resignation Is Created Successfully');
         } else {
             return redirect()->back();
         }
@@ -59,13 +59,41 @@ class EmployeeResignationController extends Controller
             $userId = Auth::id();
             // dd($userId);
             $usertype = Auth()->user()->usertype;
-            $EmployeePromotions = EmployeeResignation::where('admin_or_user_id', '=', $userId)->where('created_by', '=', $usertype)->get();
+            $EmployeeResignations = EmployeeResignation::where('admin_or_user_id', '=', $userId)->get();
             return view('employee_panel.resignatoin.all_resignatoin', [
-                'EmployeePromotions' => $EmployeePromotions,
+                'EmployeeResignations' => $EmployeeResignations,
             ]);
         } else {
             return redirect()->back();
         }
     }
 
+
+
+    public function hr_all_resignation()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            // dd($userId);
+            $usertype = Auth()->user()->usertype;
+            $EmployeeResignations = EmployeeResignation::all();
+            return view('hr_panel.resignatoin.all_resignatoin', [
+                'EmployeeResignations' => $EmployeeResignations,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $resignation = EmployeeResignation::find($request->id);
+        if ($resignation) {
+            $resignation->status = $request->status;
+            $resignation->save();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
 }

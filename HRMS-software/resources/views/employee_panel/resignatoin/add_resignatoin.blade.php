@@ -28,29 +28,32 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form action="{{ route('store-hr-offer-letter') }}" method="POST">
+                                <form action="{{ route('store-resignation-create') }}" method="POST">
                                     @csrf
                                     <div class="row">
-
                                         <div class="form-group">
                                             <label for="employeeName">Employee Name</label>
-                                            <input type="text" class="form-control" id="employeeName" placeholder="Enter your name" required>
+                                            <input type="text" class="form-control" id="employeeName" name="employeeName" placeholder="Enter your name" value="{{ $Employee->first_name. ' ' .$Employee->last_name }}" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="department">Department</label>
-                                            <input type="text" class="form-control" id="department" placeholder="Enter your department" required>
+                                            <input type="text" class="form-control" id="department" name="department" placeholder="Enter your department" value="{{ $Employee->department }}"  readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="designation">Designation</label>
+                                            <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter your Designation" value="{{ $Employee->designation }}"  readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="resignationDate">Date of Resignation</label>
-                                            <input type="date" class="form-control" id="resignationDate" required>
+                                            <input type="date" class="form-control" id="resignationDate" name="resignationDate" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastWorkingDay">Last Working Day</label>
-                                            <input type="date" class="form-control" id="lastWorkingDay" required>
+                                            <input type="text" class="form-control" id="lastWorkingDay" name="lastWorkingDay" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="resignationReason">Reason for Resignation</label>
-                                            <textarea class="form-control" id="resignationReason" rows="3" placeholder="Enter the reason for resignation" required></textarea>
+                                            <textarea class="form-control" id="resignationReason" name="resignationReason" rows="3" placeholder="Enter the reason for resignation" required></textarea>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

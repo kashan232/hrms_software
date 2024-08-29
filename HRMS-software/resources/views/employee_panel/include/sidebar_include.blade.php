@@ -52,7 +52,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('resignation-create') }}">Add Resignation</a></li>
-                    <li><a href="{{ route('all-resignation') }}">all Resignation</a></li>
+                    <li><a href="{{ route('all-resignation') }}">All Resignation</a></li>
                 </ul>
             </li>
 

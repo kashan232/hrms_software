@@ -61,6 +61,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // git connect on pc
+// all code deploy 
 // connected
 Route::get('/', function () {
     return view('welcome');
@@ -168,6 +169,9 @@ Route::get('/resignation-create', [EmployeeResignationController::class, 'resign
 Route::post('/store-resignation-create', [EmployeeResignationController::class, 'store_resignation_create'])->name('store-resignation-create');
 Route::get('/all-resignation', [EmployeeResignationController::class, 'all_resignation'])->name('all-resignation');
 
+
+Route::get('/hr-all-resignation', [EmployeeResignationController::class, 'hr_all_resignation'])->name('hr-all-resignation');
+Route::post('/update-resignation-status', [EmployeeResignationController::class, 'updateStatus']);
 
 
 //Project

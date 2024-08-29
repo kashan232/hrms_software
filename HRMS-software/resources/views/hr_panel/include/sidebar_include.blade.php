@@ -66,6 +66,12 @@
                  </ul>
              </li>
 
+             <li class="has-menu"><a class="has-arrow ai-icon" href="{{ route('hr-all-resignation') }}" aria-expanded="false">
+                     <i class="fa-solid fa-user"></i>
+                     <span class="nav-text">Employee Resignation</span>
+                 </a>
+             </li>
+
              <li>
                  <a href="{{ route('hr-all-leaverequest') }}" aria-expanded="false">
                      <i class="fas fa-envelope-open"></i>
