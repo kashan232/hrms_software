@@ -39,9 +39,11 @@ class JobController extends Controller
 
     public function job_details($id)
     {
+        
         // Fetch job board and job details based on the job_id
         $jobBoard = JobBoard::findOrFail($id);
         $jobDetails = JobBoardDetail::where('job_id', '=', $id)->firstOrFail();
+        // dd($jobDetails);
 
         return view('Job_portal.job_details', [
             'jobBoard' => $jobBoard,

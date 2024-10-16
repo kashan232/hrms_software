@@ -22,31 +22,34 @@
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form class="new-added-form" method="GET" action="{{ route('employee-mark-attendance') }}">
+                                <form id="inAttendanceForm" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-4">
                                             <label>Department</label>
-                                            <input type="text" name="department" class="form-control" value="{{ $Employee->department }}" readonly>
+                                            <input type="text" name="department" id="department" class="form-control" value="{{ $Employee->department }}" readonly>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label>Designation</label>
-                                            <input type="text" name="designation" class="form-control" value="{{ $Employee->designation }}" readonly>
+                                            <input type="text" name="designation" id="designation" class="form-control" value="{{ $Employee->designation }}" readonly>
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label>Start Time</label>
-                                            <input type="time" name="start_time" class="form-control">
+                                            <input type="time" id="startTime" name="start_time" class="form-control" readonly
+                                                value="{{ $Employeeattendance ? $Employeeattendance->start_time : '' }}">
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label>End Time</label>
-                                            <input type="time" name="end_time" class="form-control">
+                                            <input type="time" id="end_time" name="end_time" class="form-control"  value="{{ $Employeeattendance ? $Employeeattendance->end_time : '' }}">
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <label>Date</label>
-                                            <input type="date" name="employee_attendance_date" class="form-control">
+                                            <input type="date" name="employee_attendance_date" class="form-control" value="{{ date('Y-m-d') }}" readonly>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <!-- In button to mark attendance -->
+                                    <button type="button" id="markInButton" class="btn btn-success">Check-In</button>
+                                    <button type="submit" id="markoutButton" class="btn btn-danger">Chek-Out</button>
                                 </form>
                             </div>
                         </div>
@@ -81,25 +84,67 @@
 @include('employee_panel.include.footer_include')
 <script>
     $(document).ready(function() {
-        $('select[name="department"]').on('change', function() {
-            var department = $(this).val();
-            if (department) {
-                $.ajax({
-                    url: '{{ route("get-designations") }}',
-                    type: 'GET',
-                    data: {
-                        department: department
-                    },
-                    success: function(data) {
-                        $('select[name="designation"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('select[name="designation"]').empty();
-            }
+        $('#markInButton').click(function() {
+            // Get the current time
+            let currentTime = new Date().toLocaleTimeString('en-GB', {
+                hour12: false
+            });
+
+            // Set the current time in the Start Time input
+            $('#startTime').val(currentTime);
+
+
+            // AJAX request to mark attendance
+            $.ajax({
+                url: "{{ route('employee-mark-attendance-in') }}",
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    start_time: currentTime,
+                    department: $('#department').val(),
+                    designation: $('#designation').val(),
+                    employee_attendance_date: $('input[name="employee_attendance_date"]').val()
+                },
+                success: function(response) {
+                    // Show success message or handle response
+                    alert('Attendance marked successfully.');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.log(xhr.responseText);
+                }
+            });
         });
+
+
+        $('#markoutButton').click(function() {
+            // Get the current time
+            let currentTime = new Date().toLocaleTimeString('en-GB', {
+                hour12: false
+            });
+
+            // Set the current time in the Start Time input
+            $('#end_time').val(currentTime);
+
+            // AJAX request to mark attendance
+            $.ajax({
+                url: "{{ route('employee.attendance.out') }}",
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    end_time: currentTime,
+                    employee_attendance_date: $('input[name="employee_attendance_date"]').val()
+                },
+                success: function(response) {
+                    // Show success message or handle response
+                    alert('Attendance marked Out successfully.');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+
     });
 </script>

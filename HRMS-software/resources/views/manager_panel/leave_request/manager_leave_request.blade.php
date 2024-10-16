@@ -105,18 +105,27 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Select Leave type</label>
-                                            <input type="hidden" name="emp_id" value="{{ $employee_details->id }}">
-                                            <select name="leave_type" id="" class="form-control">
+                                            <label for="leaveTypeSelect">Select Leave type</label>
+                                            <select name="leave_type" id="leaveTypeSelect" class="form-control" required>
                                                 <option selected disabled>Select One</option>
                                                 @foreach ($LeaveTypes as $LeaveType)
-                                                <option value="{{ $LeaveType->leave_type }}">
-                                                    {{ $LeaveType->leave_type }}
-                                                </option>
+                                                <option value="{{ $LeaveType->leave_type }}">{{ $LeaveType->leave_type }}</option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="leaveBalance">Leave Balance</label>
+                                            <input type="text" id="leaveBalance" class="form-control" name="leave_balance" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-6">
+                                        <div class="form-group">
+                                            <label for="take_leave">Leave Days Requested</label>
+                                            <input type="number" id="take_leave" class="form-control" name="take_leave" required>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-6">
@@ -225,6 +234,37 @@
             $('#cuModal').modal('show');
         });
     });
+
+    $(document).ready(function() {
+        // Add event listener for when the leave type changes
+        $('select[name="leave_type"]').on('change', function() {
+            let leaveType = $(this).val(); // Get the selected leave type
+
+            // Check if a leave type is selected
+            if (leaveType) {
+                // Make an AJAX request to get the leave balance for the selected leave type
+                $.ajax({
+                    url: '{{ route("get-leave-balance-manager") }}', // Adjust the route to your correct route
+                    type: 'GET',
+                    data: {
+                        leave_type: leaveType,
+                        emp_id: '{{ $employee_details->id }}' // Send HR ID instead of employee ID
+                    },
+                    success: function(response) {
+                        // Optionally update the leave balance input or any other UI element
+                        $('#leaveBalance').val(response.leave_balance);
+                    },
+                    error: function(xhr, status, error) {
+                        // If there's an error, alert the error message
+                        alert('Error fetching leave balance: ' + xhr.responseText);
+                    }
+                });
+            } else {
+                alert('Please select a valid leave type.');
+            }
+        });
+    });
+
 </script>
 
 <script>

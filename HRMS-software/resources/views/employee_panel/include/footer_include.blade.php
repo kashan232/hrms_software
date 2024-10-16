@@ -15,6 +15,9 @@
 <script src="/vendor/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="/js/plugins-init/datatables.init.js" type="text/javascript"></script>
 
+<script src="/vendor/apexchart/apexchart.js" type="text/javascript"></script>
+<script src="/js/dashboard/statistics.js" type="text/javascript"></script>
+
 <script>
     function carouselReview() {
         /*  testimonial one function by = owl.carousel.js */
@@ -92,4 +95,5 @@
 </script>
 
 </body>
+
 </html>

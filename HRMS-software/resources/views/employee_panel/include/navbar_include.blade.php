@@ -37,7 +37,7 @@
                     </li>
 
                     <li class="nav-item dropdown header-profile">
-                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link"  href="#" role="button" data-bs-toggle="dropdown">
                             <img src="/images/profile/admin.png" width="20" alt="" />
                             @if (Auth::check())
                             <div class="header-info">
@@ -64,6 +64,7 @@
                                 </svg>
                                 <span class="ms-2">Profile </span>
                             </a>
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <a href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" class="dropdown-item ai-icon">

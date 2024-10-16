@@ -19,9 +19,9 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('success-message-updte'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('success-message-updte') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('success-message-updte') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Edit HR</h4>
@@ -41,7 +41,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Designation</label>
                                             <input type="text" name="designation" class="form-control"
-                                            value="{{ $hrdetails->designation }}">
+                                                value="{{ $hrdetails->designation }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">First Name</label>
@@ -96,9 +96,28 @@
                                                 value="{{ $hrdetails->user_name }}">
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
-                                            <label class="form-label">Number Of Leave Allow</label>
-                                            <input type="text" name="nummbr_of_leave" class="form-control" value="{{ $hrdetails->nummbr_of_leave }}">
+
+                                        <div class="mb-3 col-md-12">
+                                            <label>Leave Types and Quotas</label>
+                                            <div id="leaveContainer">
+                                                <div class="leave-entry row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Leave Type</label>
+                                                        <select name="leave_type_ids[]" class="form-control">
+                                                            <option value="" selected disabled>Select Leave Type</option>
+                                                            @foreach ($leave_types as $leave_type)
+                                                            <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Number Of Leaves</label>
+                                                        <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" id="addMoreLeave" class="btn btn-secondary">Add More Leave Type</button>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -158,6 +177,30 @@
                 $('select[name="designation"]').empty();
             }
         });
+    });
+
+
+    document.getElementById('addMoreLeave').addEventListener('click', function() {
+        var leaveContainer = document.getElementById('leaveContainer');
+        var leaveEntry = document.createElement('div');
+        leaveEntry.classList.add('leave-entry', 'row');
+
+        leaveEntry.innerHTML = `
+            <div class="col-md-6 mb-3">
+                <label>Leave Type</label>
+                <select name="leave_type_ids[]" class="form-control">
+                    <option value="" selected disabled>Select Leave Type</option>
+                    @foreach ($leave_types as $leave_type)
+                    <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Number Of Leaves</label>
+                <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+            </div>
+        `;
+        leaveContainer.appendChild(leaveEntry);
     });
 </script>
 <script>

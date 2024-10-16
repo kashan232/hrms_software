@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeLeave;
+use App\Models\Hr;
+use App\Models\LeaveType;
 use App\Models\Manager;
 use App\Models\User;
 use Carbon\Carbon;
@@ -16,9 +19,12 @@ class ManagerController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
+            $leave_types = LeaveType::all();
+
             // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
             return view('admin_panel.manager.add_manager', [
                 // 'all_department' => $all_department,
+                'leave_types' => $leave_types,
             ]);
         } else {
             return redirect()->back();
@@ -59,6 +65,20 @@ class ManagerController extends Controller
                 'usertype' => 'manager', // Set the usertype to 'employee'
             ]);
 
+             // Store multiple leave types for the employee
+             if ($request->has('leave_type_ids')) {
+                foreach ($request->leave_type_ids as $index => $leave_type_id) {
+                    $leave_quota = $request->leave_quotas[$index];
+                    EmployeeLeave::create([
+                        'employee_id' => $managercreae->id,
+                        'leave_type_id' => $leave_type_id,
+                        'leave_quota' => $leave_quota,
+                        'usertype' => 'manager',
+                    ]);
+                }
+            }
+
+
             return redirect()->back()->with('manager-added', 'Manager Added Successfully');
         } else {
             return redirect()->back();
@@ -96,9 +116,12 @@ class ManagerController extends Controller
             $userId = Auth::id();
             // dd($userId);
             $managerdetails = Manager::findOrFail($id);
+            $leave_types = LeaveType::all();
+
             return view('admin_panel.manager.edit_manager', [
                 // 'all_department' => $all_department,
                 'managerdetails' => $managerdetails,
+                'leave_types' => $leave_types,
             ]);
         } else {
             return redirect()->back();
@@ -108,6 +131,9 @@ class ManagerController extends Controller
     {
 
         if (Auth::id()) {
+            $manager = Manager::find($id);
+
+
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
             Manager::where('id', $id)->update([
@@ -126,6 +152,29 @@ class ManagerController extends Controller
                 'created_by'          => $usertype,
                 'updated_at' => Carbon::now(),
             ]);
+
+             // Handle leave types and quotas
+             if ($request->has('leave_type_ids') && $request->has('leave_quotas')) {
+                // dd($request->leave_type_ids, $request->leave_quotas);
+                // Loop through the leave types and quotas
+                foreach ($request->leave_type_ids as $key => $leave_type_id) {
+                    $leave_quota = $request->leave_quotas[$key];
+
+                    // Assuming you have a Leave model to save employee leave details
+                    EmployeeLeave::updateOrCreate(
+                        [
+                            'employee_id' => $manager->id,
+                            'leave_type_id' => $leave_type_id,
+                        ],
+                        [
+                            'leave_quota' => $leave_quota,
+                            'usertype' => 'manager',
+                        ]
+                    );
+                }
+            }
+
+
             return Redirect()->back()->with('success-message-updte', 'Manager Updated successfully!');
         } else {
             return redirect()->back();

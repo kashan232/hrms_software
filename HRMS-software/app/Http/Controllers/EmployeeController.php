@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\EmployeeLeave;
+use App\Models\LeaveType;
 use App\Models\Manager;
 use App\Models\User;
 use Carbon\Carbon;
@@ -48,10 +50,12 @@ class EmployeeController extends Controller
             $userId = Auth::id();
             $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
             $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+            $leave_types = LeaveType::all();
             // dd($all_managers);
             return view('admin_panel.employees.add_employee', [
                 'all_department' => $all_department,
                 'all_managers' => $all_managers,
+                'leave_types' => $leave_types,
             ]);
         } else {
             return redirect()->back();
@@ -94,8 +98,22 @@ class EmployeeController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password), // Make sure to hash the password
                 'usertype' => 'employee', // Set the usertype to 'employee'
-                
+
             ]);
+
+            // Store multiple leave types for the employee
+            if ($request->has('leave_type_ids')) {
+                foreach ($request->leave_type_ids as $index => $leave_type_id) {
+                    $leave_quota = $request->leave_quotas[$index];
+                    EmployeeLeave::create([
+                        'employee_id' => $employee->id,
+                        'leave_type_id' => $leave_type_id,
+                        'leave_quota' => $leave_quota,
+                        'usertype' => 'employee',
+                    ]);
+                }
+            }
+
 
             return redirect()->back()->with('Employee-added', 'Employee Created Successfully');
         } else {
@@ -115,11 +133,13 @@ class EmployeeController extends Controller
             $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
             $employeedetails = Employee::findOrFail($id);
             $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+            $leave_types = LeaveType::all();
 
             return view('admin_panel.employees.edit-employee', [
                 'all_department' => $all_department,
                 'employeedetails' => $employeedetails,
                 'all_managers' => $all_managers,
+                'leave_types' => $leave_types,
             ]);
         } else {
             return redirect()->back();
@@ -129,6 +149,7 @@ class EmployeeController extends Controller
     {
 
         if (Auth::id()) {
+            $employee = Employee::find($id);
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
             Employee::where('id', $id)->update([
@@ -148,6 +169,29 @@ class EmployeeController extends Controller
                 'create_by' => $usertype,
                 'updated_at' => Carbon::now(),
             ]);
+
+
+            // Handle leave types and quotas
+            if ($request->has('leave_type_ids') && $request->has('leave_quotas')) {
+                // dd($request->leave_type_ids, $request->leave_quotas);
+                // Loop through the leave types and quotas
+                foreach ($request->leave_type_ids as $key => $leave_type_id) {
+                    $leave_quota = $request->leave_quotas[$key];
+
+                    // Assuming you have a Leave model to save employee leave details
+                    EmployeeLeave::updateOrCreate(
+                        [
+                            'employee_id' => $employee->id,
+                            'leave_type_id' => $leave_type_id,
+                        ],
+                        [
+                            'leave_quota' => $leave_quota,
+                            'usertype' => 'employee',
+                        ]
+                    );
+                }
+            }
+
             return Redirect()->back()->with('success-message-updte', 'Employee Updated successfully!');
         } else {
             return redirect()->back();
@@ -174,7 +218,7 @@ class EmployeeController extends Controller
         $designations = Designation::where('department', $department)->pluck('designation')->toArray();
         return response()->json($designations);
     }
-    
+
     public function emp_Change_Password()
     {
         if (Auth::id()) {
@@ -226,7 +270,4 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
     }
-
-    
-
 }

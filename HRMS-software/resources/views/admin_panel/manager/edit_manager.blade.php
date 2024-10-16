@@ -90,6 +90,30 @@
                                             <label class="form-label">User Name</label>
                                             <input type="text" name="user_name" class="form-control" value="{{ $managerdetails->user_name }}">
                                         </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label>Leave Types and Quotas</label>
+                                            <div id="leaveContainer">
+                                                <div class="leave-entry row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Leave Type</label>
+                                                        <select name="leave_type_ids[]" class="form-control">
+                                                            <option value="" selected disabled>Select Leave Type</option>
+                                                            @foreach ($leave_types as $leave_type)
+                                                            <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Number Of Leaves</label>
+                                                        <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" id="addMoreLeave" class="btn btn-secondary">Add More Leave Type</button>
+                                        </div>
+
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
@@ -136,4 +160,28 @@
             document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
         }
     });
+
+    document.getElementById('addMoreLeave').addEventListener('click', function() {
+        var leaveContainer = document.getElementById('leaveContainer');
+        var leaveEntry = document.createElement('div');
+        leaveEntry.classList.add('leave-entry', 'row');
+
+        leaveEntry.innerHTML = `
+            <div class="col-md-6 mb-3">
+                <label>Leave Type</label>
+                <select name="leave_type_ids[]" class="form-control">
+                    <option value="" selected disabled>Select Leave Type</option>
+                    @foreach ($leave_types as $leave_type)
+                    <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Number Of Leaves</label>
+                <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+            </div>
+        `;
+        leaveContainer.appendChild(leaveEntry);
+    });
+
 </script>

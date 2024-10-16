@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 class EmployeeAttendanceController extends Controller
 {
-   
-   
+
+
 
     public function daily_attendance(Request $request)
     {
@@ -60,8 +60,14 @@ class EmployeeAttendanceController extends Controller
             $usertype = Auth()->user()->usertype;
             $useremail = Auth()->user()->email;
             $Employee = Employee::where('email', '=', $useremail)->first();
+
+            $employeeName = auth()->user()->name;
+            $emp_id = Auth()->user()->emp_id;
+            $Employeeattendance = EmployeeAttendance::where('emp_id', '=', $emp_id)->where('emp_name', '=', $employeeName)->first();
+            // dd($Employeeattendance);
             return view('employee_panel.attendance.create_attendance', [
                 'Employee' => $Employee,
+                'Employeeattendance' => $Employeeattendance,
             ]);
         } else {
             return redirect()->back();
@@ -78,7 +84,7 @@ class EmployeeAttendanceController extends Controller
             $designation = $request->input('designation');
             $start_time = $request->input('start_time');
             $end_time = $request->input('end_time');
-            
+
             $employee_attendance_date = $request->input('employee_attendance_date');
             $all_employess = Employee::where('email', $useremail)->where('department', $dept_name)->where('designation', $designation)->get();
             $employees_attendance_data = DB::table('employee_attendances')
@@ -157,13 +163,16 @@ class EmployeeAttendanceController extends Controller
     public function all_employee_attendance(Request $request)
     {
         if (Auth::id()) {
-           
+
             // dd($dept_name,$designation,$attendance_date);
             $userId = Auth::id();
             $usertype = Auth()->user()->usertype;
             $useremail = Auth()->user()->email;
-            
-            $attendance_records = EmployeeAttendance::where('admin_or_user_id', $userId)->get();
+
+            $employeeName = auth()->user()->name;
+            $emp_id = Auth()->user()->emp_id;
+
+            $attendance_records = EmployeeAttendance::where('emp_id', $emp_id)->where('emp_name', $employeeName)->get();
 
             // dd($attendance_records);
 
@@ -174,5 +183,57 @@ class EmployeeAttendanceController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function markIn(Request $request)
+    {
+        $emp_id = Auth()->user()->emp_id;
+        $currentDate = $request->employee_attendance_date;
+        $currentTime = $request->start_time;
+        $department = $request->department;
+        $designation = $request->designation;
+
+        // Check if attendance record already exists for today
+        $attendance = EmployeeAttendance::where('emp_id', $emp_id)
+            ->whereDate('employee_attendance_date', $currentDate)
+            ->first();
+
+        if (!$attendance) {
+            // Create attendance record and mark start time
+            EmployeeAttendance::create([
+                'emp_id' => $emp_id,
+                'emp_name' => Auth()->user()->name,
+                'employee_attendance_date' => $currentDate,
+                'start_time' => $currentTime,
+                'employee_attendance' => 'Present',
+                'department' => $department,
+                'job_designation' => $designation
+            ]);
+
+            return response()->json(['success' => 'Attendance marked successfully']);
+        }
+
+        return response()->json(['error' => 'Attendance already marked for today'], 400);
+    }
+
+
+    // Controller Method
+    public function markOut(Request $request)
+    {
+        $emp_id = Auth()->user()->emp_id;
+        $currentDate = $request->employee_attendance_date;
+
+        $endtime = $request->end_time;
+
+        // Update attendance record with end time
+        $attendance = EmployeeAttendance::where('emp_id', $emp_id)
+            ->whereDate('employee_attendance_date', $currentDate)
+            ->first();
+        if ($attendance) {
+            $attendance->update([
+                'end_time' => $endtime
+            ]);
+        }
+        return response()->json(['success' => 'Attendance marked out successfully']);
     }
 }

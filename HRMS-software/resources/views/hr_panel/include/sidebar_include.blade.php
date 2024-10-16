@@ -47,7 +47,7 @@
              </li>
              
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     <i class="fas fa-envelope-open-text"></i>
+                     <i class="fas fa-envelope"></i>
                      <span class="nav-text">Offer Letter</span>
                  </a>
                  <ul aria-expanded="false">
@@ -57,8 +57,8 @@
              </li>
 
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     <i class="fa-solid fa-user"></i>
-                     <span class="nav-text">Employee Promotion</span>
+                     <i class="fas fa-user-plus"></i>
+                     <span class="nav-text"> Promotion</span>
                  </a>
                  <ul aria-expanded="false">
                      <li><a href="{{ route('hr-promotion') }}">Create Promotion</a></li>
@@ -66,9 +66,9 @@
                  </ul>
              </li>
 
-             <li class="has-menu"><a class="has-arrow ai-icon" href="{{ route('hr-all-resignation') }}" aria-expanded="false">
-                     <i class="fa-solid fa-user"></i>
-                     <span class="nav-text">Employee Resignation</span>
+             <li><a class="has-arrow ai-icon" href="{{ route('hr-all-resignation') }}" aria-expanded="false">
+                     <i class="fas fa-user-times"></i>
+                     <span class="nav-text"> Resignation</span>
                  </a>
              </li>
 
@@ -105,7 +105,7 @@
              </li>
 
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     <i class="fas fa-graduation-cap"></i>
+                     <i class="fas fa-clipboard"></i>
                      <span class="nav-text">Job Board</span>
                  </a>
                  <ul aria-expanded="false">
@@ -115,7 +115,7 @@
              </li>
 
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     <i class="fas fa-graduation-cap"></i>
+                     <i class="far fa-envelope"></i>
                      <span class="nav-text">Applications</span>
                  </a>
                  <ul aria-expanded="false">
@@ -128,7 +128,7 @@
              </li>
              
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     <i class="fas fa-graduation-cap"></i>
+                     <i class="fas fa-money-bill"></i>
                      <span class="nav-text">Payrol</span>
                  </a>
                  <ul aria-expanded="false">

@@ -52,7 +52,7 @@
                             </div>
                             <ul>
                                 @foreach(explode("\n", $jobDetails->required_skills) as $skill)
-                                    <li>{{ $skill }}</li>
+                                <li>{{ $skill }}</li>
                                 @endforeach
                             </ul>
                         </div>
@@ -63,7 +63,7 @@
                             </div>
                             <ul>
                                 @foreach(explode("\n", $jobDetails->educational_requirement) as $requirement)
-                                    <li>{{ $requirement }}</li>
+                                <li>{{ $requirement }}</li>
                                 @endforeach
                             </ul>
                         </div>
@@ -74,7 +74,7 @@
                             </div>
                             <ul>
                                 @foreach(explode("\n", $jobDetails->important_notes) as $notes)
-                                    <li>{{ $notes }}</li>
+                                <li>{{ $notes }}</li>
                                 @endforeach
                             </ul>
                         </div>
@@ -97,6 +97,19 @@
                         <div class="apply-btn2">
                             <a href="{{ route('apply-job', ['id' => $jobBoard->id]) }}" class="btn">Apply Now</a>
                         </div>
+
+                        <!-- Share Job Link Section -->
+                        <div class="share-job-link mt-3">
+                            <label for="job-link" class="font-weight-bold">Share Job Link:</label>
+                            <div class="input-group">
+                                <input type="text" id="job-link" class="form-control" value="{{ url()->current() }}" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" onclick="copyJobLink()">Copy Link</button>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -127,3 +140,18 @@
     <!-- Footer End-->
 </footer>
 @include('Job_portal.layouts.footer_include')
+
+<!-- Script to Copy Link -->
+<script>
+    function copyJobLink() {
+        var copyText = document.getElementById("job-link");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the input field
+        document.execCommand("copy");
+
+        // Alert to confirm the copy action
+        alert("Job link copied: " + copyText.value);
+    }
+</script>

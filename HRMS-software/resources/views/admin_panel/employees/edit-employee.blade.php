@@ -18,9 +18,9 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('success-message-updte'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('success-message-updte') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('success-message-updte') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Edit Employee</h4>
@@ -28,7 +28,7 @@
                                 <button id="addNewButton" type="button" class="btn btn-primary"
                                     data-modal_title="Add New designation">
                                     <a href="{{ route('all-employee') }}" style="color: white;">
-                                    All Employee </a>
+                                        All Employee </a>
                                 </button>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                             <select name="department" id="department" class="form-control">
                                                 <option value="" selected disabled>Select One</option>
                                                 @foreach ($all_department as $department)
-                                                    <option value="{{ $department->department }}">{{ $department->department }}</option>
+                                                <option value="{{ $department->department }}">{{ $department->department }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -75,12 +75,12 @@
                                             <label>Decided Salary</label>
                                             <input type="text" name="decided_salary" class="form-control" value="{{ $employeedetails->decided_salary }}">
                                         </div>
-                                        
+
                                         <div class="mb-3 col-md-6">
                                             <label>Reporting Manager </label>
                                             <Select name="reporting_manager" class="form-control">
                                                 @foreach($all_managers as $all_manager)
-                                                    <option value="{{ $all_manager->id }}">{{ $all_manager->first_name }}&nbsp;{{ $all_manager->last_name }}</option>
+                                                <option value="{{ $all_manager->id }}">{{ $all_manager->first_name }}&nbsp;{{ $all_manager->last_name }}</option>
                                                 @endforeach
                                             </Select>
                                         </div>
@@ -103,10 +103,34 @@
                                                 <option value="Female">Female</option>
                                             </Select>
                                         </div>
+
                                         <div class="mb-3 col-md-6">
+                                            <label>Leave Types and Quotas</label>
+                                            <div id="leaveContainer">
+                                                <div class="leave-entry row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Leave Type</label>
+                                                        <select name="leave_type_ids[]" class="form-control">
+                                                            <option value="" selected disabled>Select Leave Type</option>
+                                                            @foreach ($leave_types as $leave_type)
+                                                            <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Number Of Leaves</label>
+                                                        <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" id="addMoreLeave" class="btn btn-secondary">Add More Leave Type</button>
+                                        </div>
+
+                                        <!-- <div class="mb-3 col-md-6">
                                             <label>Number Of Leave Allow</label>
                                             <input type="text" name="number_of_leaves" class="form-control" value="{{ $employeedetails->number_of_leaves }}">
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
@@ -147,7 +171,9 @@
                 $.ajax({
                     url: '{{ route("get-designations") }}',
                     type: 'GET',
-                    data: { department: department },
+                    data: {
+                        department: department
+                    },
                     success: function(data) {
                         $('select[name="designation"]').empty();
                         $.each(data, function(key, value) {
@@ -160,4 +186,28 @@
             }
         });
     });
+
+    document.getElementById('addMoreLeave').addEventListener('click', function() {
+        var leaveContainer = document.getElementById('leaveContainer');
+        var leaveEntry = document.createElement('div');
+        leaveEntry.classList.add('leave-entry', 'row');
+
+        leaveEntry.innerHTML = `
+            <div class="col-md-6 mb-3">
+                <label>Leave Type</label>
+                <select name="leave_type_ids[]" class="form-control">
+                    <option value="" selected disabled>Select Leave Type</option>
+                    @foreach ($leave_types as $leave_type)
+                    <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Number Of Leaves</label>
+                <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+            </div>
+        `;
+        leaveContainer.appendChild(leaveEntry);
+    });
+
 </script>

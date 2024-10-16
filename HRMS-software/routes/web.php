@@ -155,6 +155,7 @@ Route::post('/hr-update-manager/{id}', [HrManagerController::class, 'hr_update_m
 Route::get('/daily-attendance', [EmployeeAttendanceController::class, 'daily_attendance'])->middleware(['auth','admin'])->name('daily-attendance');
 Route::get('/fetch-daily-employee-attendance-record', [EmployeeAttendanceController::class, 'fetch_daily_employee_attendance_record'])->name('fetch-daily-employee-attendance-record');
 
+
 Route::get('/hr-offer-letter', [OfferLetterController::class, 'hr_offer_letter'])->name('hr-offer-letter');
 Route::post('/store-hr-offer-letter', [OfferLetterController::class, 'store_hr_offer_letter'])->name('store-hr-offer-letter');
 Route::get('/hr-all-offer-letter', [OfferLetterController::class, 'hr_all_offer_letter'])->name('hr-all-offer-letter');
@@ -162,8 +163,6 @@ Route::get('/hr-all-offer-letter', [OfferLetterController::class, 'hr_all_offer_
 Route::get('/hr-promotion', [EmployeePromotionController::class, 'hr_promotion'])->name('hr-promotion');
 Route::post('/store-hr-promotion', [EmployeePromotionController::class, 'store_hr_promotion'])->name('store-hr-promotion');
 Route::get('/hr-all-promotion', [EmployeePromotionController::class, 'hr_all_promotion'])->name('hr-all-promotion');
-
-
 
 Route::get('/resignation-create', [EmployeeResignationController::class, 'resignation_create'])->name('resignation-create');
 Route::post('/store-resignation-create', [EmployeeResignationController::class, 'store_resignation_create'])->name('store-resignation-create');
@@ -231,6 +230,11 @@ Route::post('/seprate-store-employee-cmr-add-suggestion', [CMRController::class,
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
 
+Route::get('/get-leave-balance', [LeaveRequestController::class, 'getLeaveBalance'])->name('get-leave-balance');
+Route::get('/get-leave-balance-hr', [LeaveRequestController::class, 'get_leave_balance_hr'])->name('get-leave-balance-hr');
+Route::get('/get-leave-balance-manager', [LeaveRequestController::class, 'get_leave_balance_manager'])->name('get-leave-balance-manager');
+
+
 Route::get('/employee-cmr', [CMRController::class, 'employee_cmr'])->name('employee-cmr');
 Route::get('/employee-cmr-add-skills', [CMRController::class, 'employee_cmr_add_skills'])->name('employee-cmr-add-skills');
 Route::post('/store-employee-cmr-add-skills', [CMRController::class, 'store_employee_cmr_add_skills'])->name('store-employee-cmr-add-skills');
@@ -249,6 +253,9 @@ Route::get('/employee-attendance-create', [EmployeeAttendanceController::class, 
 Route::get('/employee-mark-attendance', [EmployeeAttendanceController::class, 'employee_mark_attendance'])->name('employee-mark-attendance');
 Route::post('/employee-store-attendance', [EmployeeAttendanceController::class, 'employee_store_attendance'])->name('employee-store-attendance');
 Route::get('/all-employee-attendance', [EmployeeAttendanceController::class, 'all_employee_attendance'])->name('all-employee-attendance');
+
+Route::post('/employee/attendance/in', [EmployeeAttendanceController::class, 'markIn'])->name('employee-mark-attendance-in');
+Route::post('/employee/attendance/out', [EmployeeAttendanceController::class, 'markOut'])->name('employee.attendance.out');
 
 //MyTask
 Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');
@@ -395,6 +402,8 @@ Route::get('/get-task-report-manager', [ReportingController::class, 'get_task_re
 Route::get('/job-page', [JobController::class, 'job_page'])->name('job-page');
 Route::get('/job-listing/{id}', [JobController::class, 'job_listing'])->name('job-listing');
 Route::get('/job-details/{id}', [JobController::class, 'job_details'])->name('job-details');
+
+
 Route::get('/apply-job/{id}', [JobController::class, 'apply_job'])->name('apply-job');
 Route::post('/submit-job-application', [JobController::class, 'submit'])->name('job_application.submit');
 

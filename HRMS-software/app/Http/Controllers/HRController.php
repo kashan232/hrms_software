@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeLeave;
 use App\Models\Hr;
+use App\Models\LeaveType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,8 +17,10 @@ class HRController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
+            $leave_types = LeaveType::all();
             // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
-            return view('admin_panel.HR.add_hr', [// 'all_department' => $all_department,
+            return view('admin_panel.HR.add_hr', [ // 'all_department' => $all_department,
+                'leave_types' => $leave_types,
             ]);
         } else {
             return redirect()->back();
@@ -57,6 +61,20 @@ class HRController extends Controller
                 'usertype' => 'hr', // Set the usertype to 'employee'
             ]);
 
+            // Store multiple leave types for the employee
+            if ($request->has('leave_type_ids')) {
+                foreach ($request->leave_type_ids as $index => $leave_type_id) {
+                    $leave_quota = $request->leave_quotas[$index];
+                    EmployeeLeave::create([
+                        'employee_id' => $hrcreate->id,
+                        'leave_type_id' => $leave_type_id,
+                        'leave_quota' => $leave_quota,
+                        'usertype' => 'hr',
+                    ]);
+                }
+            }
+
+
             return redirect()->back()->with('hr-added', 'HR Added Successfully');
         } else {
             return redirect()->back();
@@ -82,9 +100,12 @@ class HRController extends Controller
             // dd($userId);
             // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
             $hrdetails = Hr::findOrFail($id);
+            $leave_types = LeaveType::all();
+
             return view('admin_panel.HR.edit_hr', [
                 // 'all_department' => $all_department,
                 'hrdetails' => $hrdetails,
+                'leave_types' => $leave_types,
             ]);
         } else {
             return redirect()->back();
@@ -94,6 +115,7 @@ class HRController extends Controller
     {
 
         if (Auth::id()) {
+            $hr = Hr::find($id);
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
             Hr::where('id', $id)->update([
@@ -112,6 +134,29 @@ class HRController extends Controller
                 'nummbr_of_leave'          => $request->nummbr_of_leave,
                 'updated_at' => Carbon::now(),
             ]);
+
+            // Handle leave types and quotas
+            if ($request->has('leave_type_ids') && $request->has('leave_quotas')) {
+                // dd($request->leave_type_ids, $request->leave_quotas);
+                // Loop through the leave types and quotas
+                foreach ($request->leave_type_ids as $key => $leave_type_id) {
+                    $leave_quota = $request->leave_quotas[$key];
+
+                    // Assuming you have a Leave model to save employee leave details
+                    EmployeeLeave::updateOrCreate(
+                        [
+                            'employee_id' => $hr->id,
+                            'leave_type_id' => $leave_type_id,
+                        ],
+                        [
+                            'leave_quota' => $leave_quota,
+                            'usertype' => 'hr',
+                        ]
+                    );
+                }
+            }
+
+
             return Redirect()->back()->with('success-message-updte', 'HR Updated successfully!');
         } else {
             return redirect()->back();
@@ -202,7 +247,7 @@ class HRController extends Controller
     // public function all_admin()
     // {
     //     if (Auth::id()) {
-            
+
     //         $admins = User::where('usertype', '=', 'admin')->get();
     //         return view('admin_panel.admin.all_admin', [
     //             'admins' => $admins,

@@ -25,7 +25,6 @@
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>
                                         <tr>
-                                            <th>Sno#</th>
                                             <th>Employee Name | Current Position</th>
                                             <th>New Position</th>
                                             <th>Department</th>
@@ -33,13 +32,12 @@
                                             <th>New Salary <br> Date</th>
                                             <th>Description</th>
                                             <th>Notes</th>
-                                            <th>Notes</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($EmployeePromotions as $EmployeePromotion)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $EmployeePromotion->employee_name }} <br> {{ $EmployeePromotion->curent_position }} </td>
                                             <td>{{ $EmployeePromotion->new_position }} </td>
                                             <td>{{ $EmployeePromotion->department }} </td>
@@ -47,6 +45,14 @@
                                             <td>{{ $EmployeePromotion->new_salary }} <br> {{ $EmployeePromotion->date }} </td>
                                             <td>{{ $EmployeePromotion->jobDescription }}</td>
                                             <td>{{ $EmployeePromotion->additionalNotes }} </td>
+                                            <td>
+                                                <div class="button--group">
+                                                    <button type="button" class="btn btn-primary">
+                                                        <a href="#"  style="color: white;">
+                                                        <i class="la la-pencil"></i>  </a>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

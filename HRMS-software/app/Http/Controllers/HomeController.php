@@ -75,6 +75,7 @@ class HomeController extends Controller
             } else if ($usertype == 'employee') {
                 // Get the logged-in employee's name
                 $employeeName = auth()->user()->name;
+
                 // Count the leave requests for the logged-in employee
                 $leaves = LeaveRequest::where('Employee', $employeeName)->count();
                 $task = Task::where('task_assign_person', $employeeName)->count();
