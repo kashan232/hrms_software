@@ -170,14 +170,14 @@
                     </div>
                 </div>
 
-               
+
 
                 <div class="col-md-4 mb-3">
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title text-center">Project Status</h5>
                             <!-- Set a container for the chart with a fixed height -->
-                            <div >
+                            <div>
                                 <canvas id="projectStatusChart" width="100%" height="100"></canvas>
 
                             </div>
@@ -185,6 +185,42 @@
                     </div>
                 </div>
 
+                <div class="col-xl-8 col-xxl-8">
+                    <div class="card p-3">
+                        <h5 class="card-title text-center">Task Status</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm display table-responsive-lg">
+                                <thead>
+                                    <tr>
+                                        <th>Sno</th>
+                                        <th>Project Name</th>
+                                        <th>Task Category</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Description</th>
+                                        <th>Completion Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>HRMS</td>
+                                        <td>hr management</td>
+                                        <td>2024-10-15</td>
+                                        <td>2024-10-22 </td>
+                                        <td>Testing the product and give review</td>
+                                        <td>
+                                            <div class="button--group">
+                                                <button type="button" class="btn btn-primary">
+                                                    Complete </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
@@ -352,66 +388,103 @@
 
 <script>
     // Sample project data
-var projectData = {
-    projects: [
-        { createdBy: 'admin', name: 'HRMS', category: 'hr management', startDate: '2024-10-01', endDate: '2024-10-31', priority: 'Highest', description: 'testing', status: 'Complete' },
-        { createdBy: 'admin', name: 'Finance System', category: 'finance', startDate: '2024-09-01', endDate: '2024-10-15', priority: 'Medium', description: 'finance tracking', status: 'Pending' },
-        { createdBy: 'admin', name: 'Inventory Management', category: 'inventory', startDate: '2024-08-01', endDate: '2024-09-30', priority: 'Lowest', description: 'manage inventory', status: 'Complete' },
-        { createdBy: 'admin', name: 'HR Recruitment', category: 'hr management', startDate: '2024-10-05', endDate: '2024-11-01', priority: 'Highest', description: 'recruiting staff', status: 'Incomplete' }
-        // Add more project entries as needed
-    ]
-};
-
-// Count statuses
-var statusCounts = { Pending: 0, Complete: 0, Incomplete: 0 };
-
-// Count project statuses
-projectData.projects.forEach(project => {
-    statusCounts[project.status]++;
-});
-
-// Stacked bar chart configuration
-var ctx = document.getElementById('projectStatusChart').getContext('2d');
-var projectStatusChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Projects'],
-        datasets: [
-            {
-                label: 'Pending',
-                data: [statusCounts.Pending],
-                backgroundColor: '#ffc107', // Yellow for Pending
+    var projectData = {
+        projects: [{
+                createdBy: 'admin',
+                name: 'HRMS',
+                category: 'hr management',
+                startDate: '2024-10-01',
+                endDate: '2024-10-31',
+                priority: 'Highest',
+                description: 'testing',
+                status: 'Complete'
             },
             {
-                label: 'Complete',
-                data: [statusCounts.Complete],
-                backgroundColor: '#4ba064', // Green for Complete
+                createdBy: 'admin',
+                name: 'Finance System',
+                category: 'finance',
+                startDate: '2024-09-01',
+                endDate: '2024-10-15',
+                priority: 'Medium',
+                description: 'finance tracking',
+                status: 'Pending'
             },
             {
-                label: 'Incomplete',
-                data: [statusCounts.Incomplete],
-                backgroundColor: '#dc3545', // Red for Incomplete
+                createdBy: 'admin',
+                name: 'Inventory Management',
+                category: 'inventory',
+                startDate: '2024-08-01',
+                endDate: '2024-09-30',
+                priority: 'Lowest',
+                description: 'manage inventory',
+                status: 'Complete'
+            },
+            {
+                createdBy: 'admin',
+                name: 'HR Recruitment',
+                category: 'hr management',
+                startDate: '2024-10-05',
+                endDate: '2024-11-01',
+                priority: 'Highest',
+                description: 'recruiting staff',
+                status: 'Incomplete'
             }
+            // Add more project entries as needed
         ]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
+    };
+
+    // Count statuses
+    var statusCounts = {
+        Pending: 0,
+        Complete: 0,
+        Incomplete: 0
+    };
+
+    // Count project statuses
+    projectData.projects.forEach(project => {
+        statusCounts[project.status]++;
+    });
+
+    // Stacked bar chart configuration
+    var ctx = document.getElementById('projectStatusChart').getContext('2d');
+    var projectStatusChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Projects'],
+            datasets: [{
+                    label: 'Pending',
+                    data: [statusCounts.Pending],
+                    backgroundColor: '#ffc107', // Yellow for Pending
+                },
+                {
+                    label: 'Complete',
+                    data: [statusCounts.Complete],
+                    backgroundColor: '#4ba064', // Green for Complete
+                },
+                {
+                    label: 'Incomplete',
+                    data: [statusCounts.Incomplete],
+                    backgroundColor: '#dc3545', // Red for Incomplete
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Number of Projects'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
                     display: true,
-                    text: 'Number of Projects'
+                    position: 'top'
                 }
             }
-        },
-        plugins: {
-            legend: {
-                display: true,
-                position: 'top'
-            }
         }
-    }
-});
-
+    });
 </script>

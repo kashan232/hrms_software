@@ -15,265 +15,166 @@
         <!-- row -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+
+                <div class="row">
+                    <div class="d-flex flex-wrap mb-4 row">
+                        <div class="col-xl-4 col-lg-4 mb-2">
+                            <h2 class="text-black  font-w600 mb-1">Welcome Back, <br> Hr: <strong>&nbsp;{{ Auth::user()->name }}</strong></h2> <!-- Use h2 for bigger font and bold employee name -->
+                        </div>
+                        <!-- class="card" style="width: auto; border: 1px solid #007bff;" -->
+                        <div class="col-xl-8 col-lg-8 d-flex justify-content-end align-items-center">
+                            <div class="ms-3"> <!-- Margin start for spacing -->
+                                <div> <!-- Card for date with primary border -->
+                                    <div class="card-body">
+                                        <h6 id="currentDate" class="text-center fs-16" style="margin: 0;"></h6> <!-- Smaller font for date -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-clock me-2" style="font-size: 16px;"></i> <!-- Smaller clock icon -->
+                                <div id="currentTime" class="fs-14"></div> <!-- Current time with smaller font -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="{{ route('all-leaverequest') }}">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-plane-departure fa-2x mb-2 text-success"></i>
+                                <h5 class="mb-0">Employees</h5>
+                                <h3 class="mt-2">0</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="{{ route('all-leaverequest') }}">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-plane-departure fa-2x mb-2 text-warning"></i>
+                                <h5 class="mb-0">Managers</h5>
+                                <h3 class="mt-2">0</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
                     <a href="{{ route('all-leave') }}">
-                        <div class="card bg-primary">
-                            <div class="card-body">
-                                <div class="media align-items-center">
-                                    <span class="p-2 me-3 feature-icon rounded">
-                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M30.25 5.75H28.5V2.25C28.5 1.78587 28.3156 1.34075 27.9874 1.01256C27.6593 0.684374 27.2141 0.5 26.75 0.5C26.2859 0.5 25.8407 0.684374 25.5126 1.01256C25.1844 1.34075 25 1.78587 25 2.25V5.75H11V2.25C11 1.78587 10.8156 1.34075 10.4874 1.01256C10.1592 0.684374 9.71413 0.5 9.25 0.5C8.78587 0.5 8.34075 0.684374 8.01256 1.01256C7.68437 1.34075 7.5 1.78587 7.5 2.25V5.75H5.75C4.35761 5.75 3.02226 6.30312 2.03769 7.28769C1.05312 8.27226 0.5 9.60761 0.5 11V12.75H35.5V11C35.5 9.60761 34.9469 8.27226 33.9623 7.28769C32.9777 6.30312 31.6424 5.75 30.25 5.75Z" fill="white" />
-                                            <path d="M0.5 30.25C0.5 31.6424 1.05312 32.9777 2.03769 33.9623C3.02226 34.9469 4.35761 35.5 5.75 35.5H30.25C31.6424 35.5 32.9777 34.9469 33.9623 33.9623C34.9469 32.9777 35.5 31.6424 35.5 30.25V16.25H0.5V30.25Z" fill="white" />
-                                        </svg>
-                                    </span>
-                                    <div class="media-body text-end feature-icon-text">
-                                        <p class="fs-18 text-white mb-2">All Leaves</p>
-                                        <span class="fs-48 text-white font-w600">{{ $leaves }}</span>
-                                    </div>
-                                </div>
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-plane-departure fa-2x mb-2 text-primary"></i>
+                                <h5 class="mb-0">Leave Requests</h5>
+                                <h3 class="mt-2">{{ $leaves }}</h3>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+
+                <div class="col-md-3 col-sm-6 mb-3">
                     <a href="{{ route('all-expense') }}">
-                        <div class="card bg-info overflow-hidden">
-                            <div class="card-body">
-                                <div class="media align-items-center">
-                                    <span class="p-2 me-3 feature-icon rounded">
-                                        <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M38.4998 10.4995H35.0002V38.4999H38.4998C40.4245 38.4999 42 36.9238 42 34.9992V13.9992C42 12.075 40.4245 10.4995 38.4998 10.4995Z" fill="white" />
-                                            <path d="M27.9998 10.4995V6.9998C27.9998 5.07515 26.4243 3.49963 24.5001 3.49963H17.4998C15.5756 3.49963 14.0001 5.07515 14.0001 6.9998V10.4995H10.5V38.4998H31.5V10.4995H27.9998ZM24.5001 10.4995H17.4998V6.99929H24.5001V10.4995Z" fill="white" />
-                                            <path d="M3.50017 10.4995C1.57551 10.4995 0 12.075 0 13.9997V34.9997C0 36.9243 1.57551 38.5004 3.50017 38.5004H6.99983V10.4995H3.50017Z" fill="white" />
-                                        </svg>
-                                    </span>
-                                    <div class="media-body text-end feature-icon-text">
-                                        <p class="fs-18 text-white mb-2">Expense</p>
-                                        <span class="fs-48 text-white font-w600">{{ $expenseCount }}</span>
-                                    </div>
-                                </div>
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-dollar-sign fa-2x mb-2 text-danger"></i>
+                                <h5 class="mb-0">Expense</h5>
+                                <h3 class="mt-2">{{ $expenseCount }}</h3>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+
+                <div class="col-md-3 col-sm-6 mb-3">
                     <a href="{{ route('all-hiring') }}">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="media align-items-center">
-                                    <span class="p-2 me-3 feature-icon rounded">
-                                        <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1811 22.0083C15.065 21.9063 14.7968 21.6695 14.7015 21.5799C12.3755 19.3941 10.8517 15.9712 10.8517 12.1138C10.8517 5.37813 15.4868 0.0410156 21.001 0.0410156C26.5152 0.0410156 31.1503 5.37813 31.1503 12.1138C31.1503 15.9679 29.6292 19.3884 27.3094 21.5778C27.2118 21.6699 26.9384 21.9116 26.8238 22.0125L26.8139 22.1799C26.8789 23.1847 27.554 24.0553 28.5232 24.3626C35.7277 26.641 40.9507 32.0853 41.8276 38.538C41.9483 39.3988 41.6902 40.2696 41.1198 40.9254C40.5495 41.5813 39.723 41.9579 38.8541 41.9579C32.4956 41.9591 9.50672 41.9591 3.14818 41.9591C2.2787 41.9591 1.4518 41.5824 0.881242 40.9263C0.31068 40.2701 0.0523763 39.3989 0.172318 38.5437C1.05145 32.0851 6.27444 26.641 13.4777 24.3628C14.4504 24.0544 15.1263 23.1802 15.1885 22.1722L15.1811 22.0083Z" fill="white" />
-                                        </svg>
-
-                                    </span>
-                                    <div class="media-body text-end feature-icon-text">
-                                        <p class="fs-18 text-white mb-2">Hiring</p>
-                                        <span class="fs-48 text-white font-w600">{{ $hiringCount }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                {{-- // new cards --}}
-                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <a href="#">
-                        <div class="card bg-primary">
-                            <div class="card-body">
-                                <div class="media align-items-center">
-                                    <span class="p-2 me-3 feature-icon rounded">
-                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M30.25 5.75H28.5V2.25C28.5 1.78587 28.3156 1.34075 27.9874 1.01256C27.6593 0.684374 27.2141 0.5 26.75 0.5C26.2859 0.5 25.8407 0.684374 25.5126 1.01256C25.1844 1.34075 25 1.78587 25 2.25V5.75H11V2.25C11 1.78587 10.8156 1.34075 10.4874 1.01256C10.1592 0.684374 9.71413 0.5 9.25 0.5C8.78587 0.5 8.34075 0.684374 8.01256 1.01256C7.68437 1.34075 7.5 1.78587 7.5 2.25V5.75H5.75C4.35761 5.75 3.02226 6.30312 2.03769 7.28769C1.05312 8.27226 0.5 9.60761 0.5 11V12.75H35.5V11C35.5 9.60761 34.9469 8.27226 33.9623 7.28769C32.9777 6.30312 31.6424 5.75 30.25 5.75Z" fill="white" />
-                                            <path d="M0.5 30.25C0.5 31.6424 1.05312 32.9777 2.03769 33.9623C3.02226 34.9469 4.35761 35.5 5.75 35.5H30.25C31.6424 35.5 32.9777 34.9469 33.9623 33.9623C34.9469 32.9777 35.5 31.6424 35.5 30.25V16.25H0.5V30.25Z" fill="white" />
-                                        </svg>
-                                    </span>
-                                    <div class="media-body text-end feature-icon-text">
-                                        <p class="fs-18 text-white mb-2">Projects</p>
-                                        <span class="fs-48 text-white font-w600">{{ $projectCount }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
-                    <a href="#">
-                        <div class="card bg-info overflow-hidden">
-                            <div class="card-body">
-                                <div class="media align-items-center">
-                                    <span class="p-2 me-3 feature-icon rounded">
-                                        <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M38.4998 10.4995H35.0002V38.4999H38.4998C40.4245 38.4999 42 36.9238 42 34.9992V13.9992C42 12.075 40.4245 10.4995 38.4998 10.4995Z" fill="white" />
-                                            <path d="M27.9998 10.4995V6.9998C27.9998 5.07515 26.4243 3.49963 24.5001 3.49963H17.4998C15.5756 3.49963 14.0001 5.07515 14.0001 6.9998V10.4995H10.5V38.4998H31.5V10.4995H27.9998ZM24.5001 10.4995H17.4998V6.99929H24.5001V10.4995Z" fill="white" />
-                                            <path d="M3.50017 10.4995C1.57551 10.4995 0 12.075 0 13.9997V34.9997C0 36.9243 1.57551 38.5004 3.50017 38.5004H6.99983V10.4995H3.50017Z" fill="white" />
-                                        </svg>
-                                    </span>
-                                    <div class="media-body text-end feature-icon-text">
-                                        <p class="fs-18 text-white mb-2">Task</p>
-                                        <span class="fs-48 text-white font-w600">{{ $taskCount }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xl-4 col-xxl-4 col-sm-6">
-                    <a href="#">
-                        <div class="card bg-secondary">
-                            <div class="card-body">
-                                <div class="media align-items-center">
-                                    <span class="p-2 me-3 feature-icon rounded">
-                                        <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1811 22.0083C15.065 21.9063 14.7968 21.6695 14.7015 21.5799C12.3755 19.3941 10.8517 15.9712 10.8517 12.1138C10.8517 5.37813 15.4868 0.0410156 21.001 0.0410156C26.5152 0.0410156 31.1503 5.37813 31.1503 12.1138C31.1503 15.9679 29.6292 19.3884 27.3094 21.5778C27.2118 21.6699 26.9384 21.9116 26.8238 22.0125L26.8139 22.1799C26.8789 23.1847 27.554 24.0553 28.5232 24.3626C35.7277 26.641 40.9507 32.0853 41.8276 38.538C41.9483 39.3988 41.6902 40.2696 41.1198 40.9254C40.5495 41.5813 39.723 41.9579 38.8541 41.9579C32.4956 41.9591 9.50672 41.9591 3.14818 41.9591C2.2787 41.9591 1.4518 41.5824 0.881242 40.9263C0.31068 40.2701 0.0523763 39.3989 0.172318 38.5437C1.05145 32.0851 6.27444 26.641 13.4777 24.3628C14.4504 24.0544 15.1263 23.1802 15.1885 22.1722L15.1811 22.0083Z" fill="white" />
-                                        </svg>
-                                    </span>
-                                    <div class="media-body text-end feature-icon-text">
-                                        <p class="fs-18 text-white mb-2">Revenue</p>
-                                        <span class="fs-48 text-white font-w600">{{ $revenueCount }}</span>
-                                    </div>
-                                </div>
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-tie fa-2x mb-2 text-success"></i>
+                                <h5 class="mb-0">Hiring</h5>
+                                <h3 class="mt-2">{{ $hiringCount }}</h3>
                             </div>
                         </div>
                     </a>
                 </div>
 
-                {{-- <div class="col-xl-3 col-xxl-4">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="card d-flex flex-xl-column flex-sm-column flex-md-row flex-column">
-                                <div class="card-body text-center profile-bx">
-                                    <div class="profile-image mb-4">
-                                        <img src="images/avatar/1.jpg" class="rounded-circle" alt="">
-                                    </div>
-                                    <h4 class="fs-22 text-black mb-1">Oda Dink</h4>
-                                    <p class="mb-4">Programmer</p>
-                                    <div class="row">
-                                        <div class="col-4 p-0">
-                                            <div class="d-inline-block mb-2 relative donut-chart-sale">
-                                                <span class="donut"
-                                                    data-peity='{ "fill": ["rgb(255, 142, 38)", "rgba(236, 236, 236, 1)"],   "innerRadius": 27, "radius": 10}'>7/9</span>
-                                                <small class="text-black">66%</small>
-                                            </div>
-                                            <span class="d-block">PHP</span>
-                                        </div>
-                                        <div class="col-4 p-0">
-                                            <div class="d-inline-block mb-2 relative donut-chart-sale">
-                                                <span class="donut"
-                                                    data-peity='{ "fill": ["rgb(62, 168, 52)", "rgba(236, 236, 236, 1)"],   "innerRadius": 27, "radius": 10}'>4/9</span>
-                                                <small class="text-black">31%</small>
-                                            </div>
-                                            <span class="d-block">Vue</span>
-                                        </div>
-                                        <div class="col-4 p-0">
-                                            <div class="d-inline-block mb-2 relative donut-chart-sale">
-                                                <span class="donut"
-                                                    data-peity='{ "fill": ["rgb(34, 172, 147)", "rgba(236, 236, 236, 1)"],   "innerRadius": 27, "radius": 10}'>2/9</span>
-                                                <small class="text-black">7%</small>
-                                            </div>
-                                            <span class="d-block">Laravel</span>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="#">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-clipboard-list fa-2x mb-2 text-info"></i>
+                                <h5 class="mb-0">Projects</h5>
+                                <h3 class="mt-2">{{ $projectCount }}</h3>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col-xl-9 col-xxl-8">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="card-header border-0 pb-0 flex-wrap">
-                                    <h4 class="fs-20 text-black me-4 mb-2">Vacancy Stats</h4>
-                                    <div class="form-check custom-checkbox mb-3">
-                                        <input type="checkbox" class="form-check-input" id="customCheckBox1"
-                                            required>
-                                        <label class="form-check-label" for="customCheckBox1">Application Sent</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox mb-3">
-                                        <input type="checkbox" class="form-check-input" id="customCheck1" required>
-                                        <label class="form-check-label" for="customCheck1">Interviews</label>
-                                    </div>
-                                    <div class="form-check custom-checkbox mb-3">
-                                        <input type="checkbox" class="form-check-input" id="customCheck2" required>
-                                        <label class="form-check-label" for="customCheck2">Rejected</label>
-                                    </div>
-                                    <select class="form-control style-1 default-select mt-3 mt-sm-0">
-                                        <option>Monthly</option>
-                                        <option>Weekly</option>
-                                        <option>Daily</option>
-                                    </select>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="lineChart" class="Vacancy-chart"></canvas>
-                                    <div class="d-flex flex-wrap align-items-center justify-content-center mt-3">
-                                        <div class="fs-14 text-black me-4">
-                                            <svg class="me-2" width="19" height="19" viewBox="0 0 19 19"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="19" height="19" rx="9.5" fill="#4E36E2" />
-                                            </svg>
-                                            Application Sent
-                                        </div>
-                                        <div class="fs-14 text-black me-4">
-                                            <svg class="me-2" width="19" height="19" viewBox="0 0 19 19"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="19" height="19" rx="9.5" fill="#1BD084" />
-                                            </svg>
-                                            Interviews
-                                        </div>
-                                        <div class="fs-14 text-black">
-                                            <svg class="me-2" width="19" height="19" viewBox="0 0 19 19"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="19" height="19" rx="9.5" fill="#FF424D" />
-                                            </svg>
-                                            Rejected
-                                        </div>
-                                    </div>
-                                </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="#">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-tasks fa-2x mb-2 text-success"></i>
+                                <h5 class="mb-0">Task</h5>
+                                <h3 class="mt-2">{{ $taskCount }}</h3>
                             </div>
                         </div>
-                    </div>
-                </div> --}}
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="#">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chart-line fa-2x mb-2 text-secondary"></i>
+                                <h5 class="mb-0">Revenue</h5>
+                                <h3 class="mt-2">{{ $revenueCount }}</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
             </div>
 
             <div class="row">
-                <div class="col-md-12">
-                    <div id="jobApplicationChart" class="card"></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card p-3">
-                        <table class="table table-striped table-sm display table-responsive-lg">
-                            <thead>
-                                <tr>
-                                    <th>Sno#</th>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Vendor</th>
-                                    <th>Amount</th>
-                                    <th>Tax</th>
-                                    <th>Total paid</th>
-                                    <th>Status</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($all_expense as $expense)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $expense->date }}</td>
-                                    <td>{{ $expense->description }}</td>
-                                    <td>{{ $expense->vendor }}</td>
-                                    <td>{{ $expense->amount }}</td>
-                                    <td>{{ $expense->tax }}</td>
-                                    <td>{{ $expense->total_paid }}</td>
-                                    <td>{{ $expense->status }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>My Teams</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="teamAttendanceDonut"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Employee Check-in/Check-out Times</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Display initials and times -->
+                                <div id="employeeAttendanceDetails">
+                                    <!-- Example employee data -->
+                                    <div class="employee-details">
+                                        <div class="employee-initial">KS</div>
+                                        <span>Kashan Shaikh</span> - Check-in: 9:00 AM, Check-out: 5:00 PM
+                                    </div>
+                                    <div class="employee-details">
+                                        <div class="employee-initial">JS</div>
+                                        <span>John Smith</span> - Check-in: 9:15 AM, Check-out: 5:15 PM
+                                    </div>
+                                    <div class="employee-details">
+                                        <div class="employee-initial">AS</div>
+                                        <span>Aisha Syed</span> - Check-in: 8:45 AM, Check-out: 4:45 PM
+                                    </div>
+                                </div>
+                                <!-- Chart for Check-in/Check-out Times -->
+                                <div id="checkInOutChart"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -299,120 +200,177 @@
     ***********************************-->
 
 @include('hr_panel.include.footer_include')
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const totalApplications = @json($totalApplications);
-        const approvedApplications = @json($approvedApplications);
-        const rejectedApplications = @json($rejectedApplications);
-
-        // Chart configuration
+    function updateTime() {
+        const now = new Date();
         const options = {
-            series: [{
-                name: 'Total Applications',
-                data: [totalApplications],
-                color: '#1E90FF'
-            }, {
-                name: 'Approved',
-                data: [approvedApplications],
-                color: '#28a745'
-            }, {
-                name: 'Rejected',
-                data: [rejectedApplications],
-                color: '#dc3545'
-            }],
-            chart: {
-                height: 400,
-                type: 'bar',
-                stacked: false,
-                toolbar: {
-                    show: true
-                }
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: true,
-                    barHeight: '50%',
-                    dataLabels: {
-                        position: 'top'
-                    }
-                }
-            },
-            dataLabels: {
-                enabled: true,
-                offsetX: -6,
-                style: {
-                    fontSize: '14px',
-                    colors: ['#333']
-                }
-            },
-            stroke: {
-                show: true,
-                width: 1,
-                colors: ['#fff']
-            },
-            title: {
-                text: 'Job Applications Status',
-                align: 'center',
-                style: {
-                    fontSize: '20px',
-                    fontWeight: 'bold',
-                    color: '#333'
-                }
-            },
-            xaxis: {
-                categories: ['Applications'],
-                title: {
-                    text: 'Status',
-                    style: {
-                        fontSize: '14px',
-                        fontWeight: 'bold',
-                        color: '#333'
-                    }
-                },
-                labels: {
-                    style: {
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        color: '#333'
-                    }
-                }
-            },
-            yaxis: {
-                title: {
-                    text: 'Number of Applications',
-                    style: {
-                        fontSize: '14px',
-                        fontWeight: 'bold',
-                        color: '#333'
-                    }
-                },
-                labels: {
-                    style: {
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        color: '#333'
-                    }
-                }
-            },
-            tooltip: {
-                theme: 'dark',
-                y: {
-                    formatter: function(val) {
-                        return val;
-                    }
-                }
-            },
-            fill: {
-                opacity: 1
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'center',
-                offsetX: 0
-            }
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         };
+        const date = now.toLocaleDateString('en-US', options); // Format date
+        const time = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }); // Format time
 
-        const chart = new ApexCharts(document.querySelector("#jobApplicationChart"), options);
-        chart.render();
-    });
+        document.getElementById('currentDate').innerText = date; // Set current date
+        document.getElementById('currentTime').innerText = time; // Set current time
+    }
+
+    setInterval(updateTime, 1000); // Update time every second
+    updateTime(); // Initial call to display time immediately
+</script>
+
+<script>
+    // Corrected ApexCharts Donut Chart Configuration
+    var options = {
+        series: [40, 10, 20, 30], // On Time, Absent, Leave, Present
+        chart: {
+            type: 'donut',
+            height: 300,
+            animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+            }
+        },
+        labels: ['On Time', 'Absent', 'Leave', 'Present'],
+        colors: ['#28a745', '#dc3545', '#fd7e14', '#007bff'], // Color codes
+        legend: {
+            position: 'right',
+            fontSize: '14px',
+            labels: {
+                colors: ['#333'],
+                useSeriesColors: true
+            },
+            markers: {
+                width: 12,
+                height: 12,
+            }
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: '65%', // Bigger hole in the middle
+                    labels: {
+                        show: true,
+                        total: {
+                            showAlways: true,
+                            show: true,
+                            label: 'Total',
+                            fontSize: '16px',
+                            fontWeight: 600,
+                            color: '#000',
+                            formatter: function(w) {
+                                return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function(val, opts) {
+                return val.toFixed(1) + "%"; // Correct percentage format
+            }
+        },
+        responsive: [{
+            breakpoint: 768,
+            options: {
+                chart: {
+                    width: '100%'
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    // Render the chart
+    var chart = new ApexCharts(document.querySelector("#teamAttendanceDonut"), options);
+    chart.render();
+
+      // Donut Chart Configuration
+      var attendanceOptions = {
+        series: [40, 10, 20, 30], // On Time, Absent, Leave, Present
+        chart: {
+            type: 'donut',
+            height: 300,
+        },
+        labels: ['On Time', 'Absent', 'Leave', 'Present'],
+        colors: ['#28a745', '#dc3545', '#fd7e14', '#007bff'],
+        legend: {
+            position: 'right',
+            fontSize: '14px',
+        },
+        plotOptions: {
+            pie: {
+                donut: {
+                    size: '65%',
+                }
+            }
+        },
+        dataLabels: {
+            enabled: true,
+        }
+    };
+
+    // Render the Donut Chart
+    var attendanceChart = new ApexCharts(document.querySelector("#teamAttendanceDonut"), attendanceOptions);
+    attendanceChart.render();
+
+    // Check-in/Check-out Chart Configuration
+    var checkInOutOptions = {
+        series: [{
+            name: 'Check-in',
+            data: [9, 9.25, 8.75] // Example check-in times in hours (9:00 AM, 9:15 AM, 8:45 AM)
+        }, {
+            name: 'Check-out',
+            data: [17, 17.25, 16.75] // Example check-out times in hours (5:00 PM, 5:15 PM, 4:45 PM)
+        }],
+        chart: {
+            type: 'bar',
+            height: 350,
+            stacked: true,
+            toolbar: {
+                show: false
+            }
+        },
+        colors: ['#007bff', '#28a745'], // Primary and secondary colors
+        xaxis: {
+            categories: ['Kashan Shaikh', 'John Smith', 'Aisha Syed'], // Employee Names
+        },
+        yaxis: {
+            title: {
+                text: 'Time (Hours)'
+            }
+        },
+        legend: {
+            position: 'top'
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded',
+            },
+        },
+        dataLabels: {
+            enabled: true,
+        },
+    };
+
+    // Render the Check-in/Check-out Chart
+    var checkInOutChart = new ApexCharts(document.querySelector("#checkInOutChart"), checkInOutOptions);
+    checkInOutChart.render();
+    
 </script>
