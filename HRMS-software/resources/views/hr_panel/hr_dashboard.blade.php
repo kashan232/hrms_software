@@ -2,6 +2,82 @@
 <!--**********************************
         Main wrapper start
     ***********************************-->
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f7fb;
+    }
+
+    .card {
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-header {
+        background-color: white;
+        border-bottom: none;
+        padding: 15px 20px;
+    }
+
+    .card-body {
+        padding: 15px 20px;
+        max-height: 300px;
+        /* Limit the height of the card */
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+    }
+
+    .list-unstyled li {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .leave-status {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #999;
+        margin-left: 15px;
+    }
+
+    .status-pending {
+        color: #ffae42;
+    }
+
+    .status-approved {
+        color: #4CAF50;
+    }
+
+    .status-rejected {
+        color: #f44336;
+    }
+
+    .leave-icon {
+        font-size: 1rem;
+        margin-right: 8px;
+    }
+
+    .leave-title {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .leave-details {
+        font-size: 0.85rem;
+        color: #888;
+    }
+
+    a.apply-link {
+        font-size: 0.9rem;
+        color: #0062cc;
+        text-decoration: none;
+    }
+
+    a.apply-link:hover {
+        text-decoration: underline;
+    }
+</style>
 <div id="main-wrapper">
 
     @include('hr_panel.include.navbar_include')
@@ -138,46 +214,84 @@
             </div>
 
             <div class="row">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>My Teams</h5>
-                            </div>
-                            <div class="card-body">
-                                <div id="teamAttendanceDonut"></div>
-                            </div>
+                <!-- My Leaves Section -->
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>My Teams</h5>
                         </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Employee Check-in/Check-out Times</h5>
-                            </div>
-                            <div class="card-body">
-                                <!-- Display initials and times -->
-                                <div id="employeeAttendanceDetails">
-                                    <!-- Example employee data -->
-                                    <div class="employee-details">
-                                        <div class="employee-initial">KS</div>
-                                        <span>Kashan Shaikh</span> - Check-in: 9:00 AM, Check-out: 5:00 PM
-                                    </div>
-                                    <div class="employee-details">
-                                        <div class="employee-initial">JS</div>
-                                        <span>John Smith</span> - Check-in: 9:15 AM, Check-out: 5:15 PM
-                                    </div>
-                                    <div class="employee-details">
-                                        <div class="employee-initial">AS</div>
-                                        <span>Aisha Syed</span> - Check-in: 8:45 AM, Check-out: 4:45 PM
-                                    </div>
-                                </div>
-                                <!-- Chart for Check-in/Check-out Times -->
-                                <div id="checkInOutChart"></div>
-                            </div>
+                        <div class="card-body">
+                            <div id="teamAttendanceDonut"></div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="m-0">My Leaves</h6>
+                            <a href="#" class="apply-link">Apply for Leaves</a>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <!-- Pending Leave -->
+                                <li class="d-flex justify-content-between">
+                                    <div>
+                                        <span class="leave-icon">⏳</span>
+                                        <span class="leave-title">29 September 2023 - 30 September 2023</span>
+                                        <br />
+                                        <span class="leave-details">Leaving for Dussehra • 2 days</span>
+                                    </div>
+                                    <div class="leave-status status-pending">Pending</div>
+                                </li>
+                                <!-- Approved Leave -->
+                                <li class="d-flex justify-content-between">
+                                    <div>
+                                        <span class="leave-icon">✔️</span>
+                                        <span class="leave-title">5 September 2023</span>
+                                        <br />
+                                        <span class="leave-details">Teacher's day speaking at my old high school • 1 day</span>
+                                    </div>
+                                    <div class="leave-status status-approved">Approved</div>
+                                </li>
+                                <!-- Rejected Leave -->
+                                <li class="d-flex justify-content-between">
+                                    <div>
+                                        <span class="leave-icon">❌</span>
+                                        <span class="leave-title">4 September 2023</span>
+                                        <br />
+                                        <span class="leave-details">Travelling for teacher's day at high school • 1 day</span>
+                                    </div>
+                                    <div class="leave-status status-rejected">Rejected</div>
+                                </li>
+                                <!-- Approved Leave -->
+                                <li class="d-flex justify-content-between">
+                                    <div>
+                                        <span class="leave-icon">✔️</span>
+                                        <span class="leave-title">24 August 2023 - 26 August 2023</span>
+                                        <br />
+                                        <span class="leave-details">Raksha Bandhan leave • 3 days</span>
+                                    </div>
+                                    <div class="leave-status status-approved">Approved</div>
+                                </li>
+                                <!-- Approved Leave -->
+                                <li class="d-flex justify-content-between">
+                                    <div>
+                                        <span class="leave-icon">✔️</span>
+                                        <span class="leave-title">10 August 2023</span>
+                                        <br />
+                                        <span class="leave-details">Birthday! • 1 day</span>
+                                    </div>
+                                    <div class="leave-status status-approved">Approved</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+            
         </div>
     </div>
     <!--**********************************
@@ -299,8 +413,8 @@
     var chart = new ApexCharts(document.querySelector("#teamAttendanceDonut"), options);
     chart.render();
 
-      // Donut Chart Configuration
-      var attendanceOptions = {
+    // Donut Chart Configuration
+    var attendanceOptions = {
         series: [40, 10, 20, 30], // On Time, Absent, Leave, Present
         chart: {
             type: 'donut',
@@ -323,54 +437,4 @@
             enabled: true,
         }
     };
-
-    // Render the Donut Chart
-    var attendanceChart = new ApexCharts(document.querySelector("#teamAttendanceDonut"), attendanceOptions);
-    attendanceChart.render();
-
-    // Check-in/Check-out Chart Configuration
-    var checkInOutOptions = {
-        series: [{
-            name: 'Check-in',
-            data: [9, 9.25, 8.75] // Example check-in times in hours (9:00 AM, 9:15 AM, 8:45 AM)
-        }, {
-            name: 'Check-out',
-            data: [17, 17.25, 16.75] // Example check-out times in hours (5:00 PM, 5:15 PM, 4:45 PM)
-        }],
-        chart: {
-            type: 'bar',
-            height: 350,
-            stacked: true,
-            toolbar: {
-                show: false
-            }
-        },
-        colors: ['#007bff', '#28a745'], // Primary and secondary colors
-        xaxis: {
-            categories: ['Kashan Shaikh', 'John Smith', 'Aisha Syed'], // Employee Names
-        },
-        yaxis: {
-            title: {
-                text: 'Time (Hours)'
-            }
-        },
-        legend: {
-            position: 'top'
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded',
-            },
-        },
-        dataLabels: {
-            enabled: true,
-        },
-    };
-
-    // Render the Check-in/Check-out Chart
-    var checkInOutChart = new ApexCharts(document.querySelector("#checkInOutChart"), checkInOutOptions);
-    checkInOutChart.render();
-    
 </script>
