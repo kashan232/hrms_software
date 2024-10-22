@@ -26,7 +26,6 @@ class HRController extends Controller
             return redirect()->back();
         }
 
-        return view('');
     }
     public function store_hr(Request $request)
     {

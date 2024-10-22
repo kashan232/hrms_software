@@ -10,6 +10,17 @@
                      <span class="nav-text">Dashboard</span>
                  </a>
              </li>
+
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="nav-text">Attendance</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('Manager-attendance-create') }}">Add Attendance</a></li>
+                    <li><a href="{{ route('Manager-employee-attendance') }}">Check Attendance</a></li>
+                </ul>
+            </li>
+
              {{-- <li><a href="{{ route('manager-all-leavetype') }}" aria-expanded="false">
                      <i class="fas fa-envelope"></i>
                      <span class="nav-text">Leave Type</span>

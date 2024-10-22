@@ -60,8 +60,6 @@ class EmployeeController extends Controller
         } else {
             return redirect()->back();
         }
-
-        return view('');
     }
     public function store_employee(Request $request)
     {

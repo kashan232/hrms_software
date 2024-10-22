@@ -15,6 +15,7 @@ use App\Http\Controllers\EmployeeTaskUpdateController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HiringController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HrAndManagerAttendanceController;
 use App\Http\Controllers\HRController;
 use App\Http\Controllers\HrEmployeeController;
 use App\Http\Controllers\HRLeaveRequestController;
@@ -249,6 +250,7 @@ Route::post('/store-employee-cmr-add-salaires', [CMRController::class, 'store_em
 Route::get('/employee-cmr-add-suggestion', [CMRController::class, 'employee_cmr_add_suggestion'])->name('employee-cmr-add-suggestion');
 Route::post('/store-employee-cmr-add-suggestion', [CMRController::class, 'store_employee_cmr_add_suggestion'])->name('store-employee-cmr-add-suggestion');
 
+// Attendance routes
 Route::get('/employee-attendance-create', [EmployeeAttendanceController::class, 'employee_attendance_create'])->name('employee-attendance-create');
 Route::get('/employee-mark-attendance', [EmployeeAttendanceController::class, 'employee_mark_attendance'])->name('employee-mark-attendance');
 Route::post('/employee-store-attendance', [EmployeeAttendanceController::class, 'employee_store_attendance'])->name('employee-store-attendance');
@@ -256,6 +258,22 @@ Route::get('/all-employee-attendance', [EmployeeAttendanceController::class, 'al
 
 Route::post('/employee/attendance/in', [EmployeeAttendanceController::class, 'markIn'])->name('employee-mark-attendance-in');
 Route::post('/employee/attendance/out', [EmployeeAttendanceController::class, 'markOut'])->name('employee.attendance.out');
+
+
+// Hr Attendance route
+Route::get('/hr-attendance-create', [HrAndManagerAttendanceController::class, 'hr_attendance_create'])->name('hr-attendance-create');
+Route::post('/hr/attendance/in', [HrAndManagerAttendanceController::class, 'markIn_hr'])->name('hr-attendance-in');
+Route::post('/hr/attendance/out', [HrAndManagerAttendanceController::class, 'markOut_hr'])->name('hr.attendance.out');
+Route::get('/hr-employee-attendance', [HrAndManagerAttendanceController::class, 'hr_employee_attendance'])->name('hr-employee-attendance');
+
+
+// Manager Attendance route
+Route::get('/Manager-attendance-create', [HrAndManagerAttendanceController::class, 'Manager_attendance_create'])->name('Manager-attendance-create');
+Route::post('/Manager/attendance/in', [HrAndManagerAttendanceController::class, 'markIn_Manager'])->name('Manager-attendance-in');
+Route::post('/Manager/attendance/out', [HrAndManagerAttendanceController::class, 'markOut_Manager'])->name('Manager.attendance.out');
+Route::get('/Manager-employee-attendance', [HrAndManagerAttendanceController::class, 'Manager_employee_attendance'])->name('Manager-employee-attendance');
+
+
 
 //MyTask
 Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');

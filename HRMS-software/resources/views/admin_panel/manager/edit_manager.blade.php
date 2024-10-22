@@ -111,9 +111,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" id="addMoreLeave" class="btn btn-secondary">Add More Leave Type</button>
+                                            <button id="addMoreLeave" type="button" class="btn btn-secondary">Add More Leave Type</button>
                                         </div>
-
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
@@ -148,40 +147,50 @@
     ***********************************-->
 
 @include('admin_panel.include.footer_include')
-
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
-    document.getElementById("togglePassword").addEventListener("click", function() {
-        var passwordInput = document.getElementById("passwordInput");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
-        } else {
-            passwordInput.type = "password";
-            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
-        }
-    });
+    $(document).ready(function() {
+        // This part ensures the button click is working correctly
+        $('#addMoreLeave').on('click', function() {
+            alert('Button clicked!'); // Confirm the button was clicked
 
-    document.getElementById('addMoreLeave').addEventListener('click', function() {
-        var leaveContainer = document.getElementById('leaveContainer');
-        var leaveEntry = document.createElement('div');
-        leaveEntry.classList.add('leave-entry', 'row');
-
-        leaveEntry.innerHTML = `
-            <div class="col-md-6 mb-3">
-                <label>Leave Type</label>
-                <select name="leave_type_ids[]" class="form-control">
-                    <option value="" selected disabled>Select Leave Type</option>
-                    @foreach ($leave_types as $leave_type)
-                    <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 mb-3">
-                <label>Number Of Leaves</label>
-                <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+            var leaveContainer = $('#leaveContainer');
+            var leaveEntry = `
+            <div class="leave-entry row">
+                <div class="col-md-6 mb-3">
+                    <label>Leave Type</label>
+                    <select name="leave_type_ids[]" class="form-control">
+                        <option value="" selected disabled>Select Leave Type</option>
+                        @foreach ($leave_types as $leave_type)
+                        <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Number Of Leaves</label>
+                    <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+                </div>
             </div>
         `;
-        leaveContainer.appendChild(leaveEntry);
-    });
 
+            // Append the new leave entry to the container
+            leaveContainer.append(leaveEntry);
+        });
+
+
+
+        // Toggle password visibility
+        document.getElementById("togglePassword").addEventListener("click", function() {
+            var passwordInput = document.getElementById("passwordInput");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
+            } else {
+                passwordInput.type = "password";
+                document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
+            }
+        });
+
+
+    });
 </script>
