@@ -29,7 +29,7 @@ class QuizController extends Controller
     {
         $userId = Auth::id();
         $questions = $request->input('questions');
-    
+
         foreach ($questions as $questionData) {
             $quiz = new Quiz([
                 'admin_or_user_id' => $userId,
@@ -43,10 +43,10 @@ class QuizController extends Controller
                 'option_d' => $questionData['options'][3],
                 'right_option' => $questionData['right_option'],
             ]);
-    
+
             $quiz->save();
         }
-    
+
         return response()->json(['message' => 'Quiz saved successfully']);
     }
 
@@ -62,5 +62,41 @@ class QuizController extends Controller
         return view('admin_panel.quiz_creation.quiz_listing', [
             'quizzes' => $quizzes,
         ]);
+    }
+
+    public function editQuiz($id)
+    {
+        // Find the quiz by ID
+        $quiz = Quiz::findOrFail($id);
+
+        // Fetch all departments for dropdown
+        $departments = Department::all();
+
+        // Pass the quiz data to the view
+        return view('admin_panel.quiz_creation.quiz_edit', [
+            'quiz' => $quiz,
+            'Departments' => $departments
+        ]);
+    }
+
+    public function updateQuiz(Request $request, $id)
+    {
+        $quiz = Quiz::findOrFail($id);
+
+        // Update the quiz data
+        $quiz->department = $request->input('department');
+        $quiz->designation = $request->input('designation');
+        $quiz->job_title = $request->input('job_title');
+        $quiz->question = $request->input('questions')[0]['question'];
+        $quiz->option_a = $request->input('questions')[0]['options'][0];
+        $quiz->option_b = $request->input('questions')[0]['options'][1];
+        $quiz->option_c = $request->input('questions')[0]['options'][2];
+        $quiz->option_d = $request->input('questions')[0]['options'][3];
+        $quiz->right_option = $request->input('questions')[0]['right_option'];
+
+        $quiz->save();
+
+        return redirect()->back()->with('success', 'Quiz updated successfully');
+
     }
 }

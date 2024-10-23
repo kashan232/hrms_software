@@ -60,7 +60,7 @@ class DepartmentController extends Controller
     public function delete_department(Request $request, $id)
     {
         $Department = Department::find($id)->delete();
-        return redirect()->back()->with('delete-message', 'Designation Has Been Deleted Successsfully');
+        return redirect()->back()->with('delete-message', 'Department Has Been Deleted Successsfully');
     }
 
 }

@@ -53,8 +53,12 @@
                                             <td>{{ $quiz->right_option }}</td>
                                             <td>
                                                 <div class="button--group">
-                                                    <button type="button" class="btn btn-danger btn-sm" data-question="Are you sure to delete this Department?">
-                                                        <i class="la la-trash"></i> </button>
+                                                    <a href="{{ route('quiz.edit', $quiz->id) }}" class="btn btn-primary btn-sm">
+                                                        <i class="la la-edit"></i>
+                                                    </a>
+                                                    <!-- <button type="button" class="btn btn-danger btn-sm" data-question="Are you sure to delete this quiz?">
+                                                        <i class="la la-trash"></i>
+                                                    </button> -->
                                                 </div>
                                             </td>
                                         </tr>

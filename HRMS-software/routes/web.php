@@ -99,6 +99,8 @@ Route::post('/emp-updte-change-Password', [EmployeeController::class, 'emp_updte
 Route::get('/Quiz-creation', [QuizController::class, 'Quiz_creation'])->middleware(['auth','admin'])->name('Quiz-creation');
 Route::get('/Quiz-store', [QuizController::class, 'Quiz_store'])->middleware(['auth','admin'])->name('Quiz-store');
 Route::get('/all-quiz-creation', [QuizController::class, 'all_quiz_creation'])->middleware(['auth','admin'])->name('all-quiz-creation');
+Route::get('/quiz/edit/{id}', [QuizController::class, 'editQuiz'])->name('quiz.edit');
+Route::post('/quiz/update/{id}', [QuizController::class, 'updateQuiz'])->name('quiz.update');
 
 
 //DEpartment
@@ -319,6 +321,7 @@ Route::get('/delete-expense/{id}', [ExpenseController::class, 'delete_expense'])
 Route::get('/all-hiring', [HiringController::class, 'all_hiring'])->name('all-hiring');
 Route::get('/add-hiring', [HiringController::class, 'add_hiring'])->name('add-hiring');
 Route::post('/store-hiring', [HiringController::class, 'store_hiring'])->name('store-hiring');
+Route::put('/update-hiring', [HiringController::class, 'update_hiring'])->name('update-hiring');
 
 
 //projects

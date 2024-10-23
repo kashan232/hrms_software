@@ -26,15 +26,14 @@ class HiringController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            return view('hr_panel.hiring.add_hiring', [
-            ]);
+            return view('hr_panel.hiring.add_hiring', []);
         } else {
             return redirect()->back();
         }
     }
     public function store_hiring(Request $request)
     {
-        if (Auth::id()){
+        if (Auth::id()) {
             $userId = Auth::id();
             $userType = Auth::user()->usertype;
             // Create the employee record
@@ -57,5 +56,27 @@ class HiringController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function update_hiring(Request $request)
+    {
+        $hiring = Hiring::find($request->job_id);
+
+        if ($hiring) {
+            $hiring->date = $request->date;
+            $hiring->designation = $request->designation;
+            $hiring->job_description = $request->job_description;
+            $hiring->education = $request->education;
+            $hiring->skills = $request->skills;
+            $hiring->experience = $request->experience;
+            $hiring->status = $request->status;
+            $hiring->updated_at = Carbon::now();
+
+            $hiring->save();
+
+            return redirect()->back()->with('hiring-updated', 'Hiring updated successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Hiring not found.');
     }
 }

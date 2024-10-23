@@ -38,6 +38,12 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            @if (session()->has('delete-message'))
+                            <div class="alert alert-danger solid alert-square">
+                                <strong>Success!</strong> {{ session('delete-message') }}.
+                            </div>
+                            @endif
+
                             <div class="table-responsive">
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>

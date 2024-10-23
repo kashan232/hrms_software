@@ -27,6 +27,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sno#</th>
+                                            <th>User</th>
                                             <th>Date</th>
                                             <th>Description</th>
                                             <th>Vendor</th>
@@ -41,6 +42,7 @@
                                         @foreach ($all_expense as $expense)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $expense->usertype }}</td>
                                             <td>{{ $expense->date }}</td>
                                             <td>{{ $expense->description }}</td>
                                             <td>{{ $expense->vendor }}</td>
