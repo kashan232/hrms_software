@@ -19,14 +19,14 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('department-added'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('department-added') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('department-added') }}.
+                        </div>
                         @endif
                         @if (session()->has('department-update'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('department-update') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('department-update') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Department</h4>
@@ -56,31 +56,33 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($all_department as $department)
-                                            <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="customCheckBox2" required="">
-                                                        <label class="custom-control-label"
-                                                            for="customCheckBox2"></label>
-                                                    </div>
-                                                </td>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $department->department }}</td>
-                                                <td>
-                                                    <div class="button--group">
-                                                        <button type="button" class="btn btn-primary editdepartmentBtn"
-                                                            data-toggle="modal" data-modal_title="Edit Department"
-                                                            data-has_status="1" data-target="#editdepartment"
-                                                            data-department-id="{{ $department->id }}"
-                                                            data-department-name="{{ $department->department }}">
-                                                            <i class="la la-pencil"></i> </button>
-                                                        {{-- <button type="button"
-                                                    class="btn btn-danger" data-question="Are you sure to delete this Department?">
-                                                        <i class="la la-trash"></i>Delete </button> --}}
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="customCheckBox2" required="">
+                                                    <label class="custom-control-label"
+                                                        for="customCheckBox2"></label>
+                                                </div>
+                                            </td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $department->department }}</td>
+                                            <td>
+                                                <div class="button--group">
+                                                    <button type="button" class="btn btn-primary editdepartmentBtn"
+                                                        data-toggle="modal" data-modal_title="Edit Department"
+                                                        data-has_status="1" data-target="#editdepartment"
+                                                        data-department-id="{{ $department->id }}"
+                                                        data-department-name="{{ $department->department }}">
+                                                        <i class="la la-pencil"></i> </button>
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                        <a href="{{ route('delete-department', ['id' => $department->id]) }}" style="color: white;">
+                                                            <i class="la la-trash"></i> </a>
+                                                    </button>
+
+                                                </div>
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

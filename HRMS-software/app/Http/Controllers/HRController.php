@@ -25,7 +25,6 @@ class HRController extends Controller
         } else {
             return redirect()->back();
         }
-
     }
     public function store_hr(Request $request)
     {
@@ -96,13 +95,20 @@ class HRController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
-            // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
-            $hrdetails = Hr::findOrFail($id);
+
+            // Fetch all available leave types
             $leave_types = LeaveType::all();
 
+            // Find HR details with leave entries
+            $hrdetails = Hr::with('leaveEntries')->find($id);
+
+            // If leave entries are null, make it an empty collection
+            if (is_null($hrdetails->leaveEntries)) {
+                $hrdetails->leaveEntries = collect();
+            }
+
+            // Return view with HR details and leave types
             return view('admin_panel.HR.edit_hr', [
-                // 'all_department' => $all_department,
                 'hrdetails' => $hrdetails,
                 'leave_types' => $leave_types,
             ]);
@@ -110,6 +116,7 @@ class HRController extends Controller
             return redirect()->back();
         }
     }
+
     public function update_hr(Request $request, $id)
     {
 

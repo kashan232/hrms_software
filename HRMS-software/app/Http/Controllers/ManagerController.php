@@ -63,8 +63,8 @@ class ManagerController extends Controller
                 'usertype' => 'manager', // Set the usertype to 'employee'
             ]);
 
-             // Store multiple leave types for the employee
-             if ($request->has('leave_type_ids')) {
+            // Store multiple leave types for the employee
+            if ($request->has('leave_type_ids')) {
                 foreach ($request->leave_type_ids as $index => $leave_type_id) {
                     $leave_quota = $request->leave_quotas[$index];
                     EmployeeLeave::create([
@@ -112,12 +112,14 @@ class ManagerController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
-            $managerdetails = Manager::findOrFail($id);
             $leave_types = LeaveType::all();
+            $managerdetails = Manager::with('ManagerLeaves')->find($id);
+
+            if (is_null($managerdetails->ManagerLeaves)) {
+                $managerdetails->ManagerLeaves = collect(); // Initialize if null
+            }
 
             return view('admin_panel.manager.edit_manager', [
-                // 'all_department' => $all_department,
                 'managerdetails' => $managerdetails,
                 'leave_types' => $leave_types,
             ]);
@@ -151,8 +153,8 @@ class ManagerController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
 
-             // Handle leave types and quotas
-             if ($request->has('leave_type_ids') && $request->has('leave_quotas')) {
+            // Handle leave types and quotas
+            if ($request->has('leave_type_ids') && $request->has('leave_quotas')) {
                 // dd($request->leave_type_ids, $request->leave_quotas);
                 // Loop through the leave types and quotas
                 foreach ($request->leave_type_ids as $key => $leave_type_id) {

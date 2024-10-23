@@ -63,5 +63,11 @@ class DesignationController extends Controller
             return redirect()->back();
         }
     }
-   
+    
+    
+    public function delete_designation(Request $request, $id)
+    {
+        $Designation = Designation::find($id)->delete();
+        return redirect()->back()->with('delete-message', 'Designation Has Been Deleted Successsfully');
+    }
 }

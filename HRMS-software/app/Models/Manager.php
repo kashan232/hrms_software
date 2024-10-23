@@ -11,20 +11,12 @@ class Manager extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
-        'admin_or_user_id',
-        'first_name',
-        'last_name',
-        'designation',
-        'phone',
-        'email',
-        'joining_date',
-        'decided_salary',
-        'manager_status',
-        'address',
-        'manager_gender',
-        'user_name',
-        'password',
-        'created_by'
-    ];
+    protected $guarded = [];
+
+
+    public function ManagerLeaves()
+    {
+        return $this->hasMany(EmployeeLeave::class, 'employee_id', 'id')
+            ->where('usertype', 'manager'); // Filter by manager usertype
+    }
 }

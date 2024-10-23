@@ -105,12 +105,14 @@ Route::get('/all-quiz-creation', [QuizController::class, 'all_quiz_creation'])->
 Route::get('/department', [DepartmentController::class, 'department'])->middleware(['auth','admin'])->name('department');
 Route::post('/store-department', [DepartmentController::class, 'store_department'])->name('store-department');
 Route::post('/update-department', [DepartmentController::class, 'update_department'])->name('update-department');
+Route::get('/delete-department/{id}', [DepartmentController::class, 'delete_department'])->middleware(['auth','admin'])->name('delete-department');
 
 
 //designation
 Route::get('/designation', [DesignationController::class, 'designation'])->middleware(['auth','admin'])->name('designation');
 Route::post('/store-designation', [DesignationController::class, 'store_designation'])->name('store-designation');
 Route::post('/update-designation', [DesignationController::class, 'update_designation'])->name('update-designation');
+Route::get('/delete-designation/{id}', [DesignationController::class, 'delete_designation'])->middleware(['auth','admin'])->name('delete-designation');
 
 //HR
 Route::get('/add-hr', [HRController::class, 'add_hr'])->middleware(['auth','admin'])->name('add-hr');

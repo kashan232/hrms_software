@@ -127,11 +127,23 @@ class EmployeeController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
+
+            // Get all departments associated with the user
             $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
-            $employeedetails = Employee::findOrFail($id);
+
+            // Get employee details along with their leave entries
+            $employeedetails = Employee::with('Employeeleaves')->findOrFail($id);
+
+            // Get all managers associated with the user
             $all_managers = Manager::where('admin_or_user_id', '=', $userId)->get();
+
+            // Get all leave types
             $leave_types = LeaveType::all();
+
+            // Ensure leave entries collection is initialized
+            if (is_null($employeedetails->Employeeleaves)) {
+                $employeedetails->Employeeleaves = collect(); // Initialize if null
+            }
 
             return view('admin_panel.employees.edit-employee', [
                 'all_department' => $all_department,

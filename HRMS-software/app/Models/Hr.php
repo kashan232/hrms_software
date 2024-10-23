@@ -13,4 +13,11 @@ class Hr extends Model
 
     protected $guarded = [];
 
+    public function leaveEntries()
+    {
+        return $this->hasMany(EmployeeLeave::class, 'employee_id', 'id')
+            ->where('usertype', 'hr'); // Filter by hr usertype
+    }
+
+   
 }

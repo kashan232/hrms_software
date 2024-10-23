@@ -100,25 +100,36 @@
                                         <div class="mb-3 col-md-12">
                                             <label>Leave Types and Quotas</label>
                                             <div id="leaveContainer">
+                                                @if($hrdetails->leaveEntries->count())
+                                                @foreach ($hrdetails->leaveEntries as $leaveEntry)
                                                 <div class="leave-entry row">
                                                     <div class="col-md-6 mb-3">
                                                         <label>Leave Type</label>
                                                         <select name="leave_type_ids[]" class="form-control">
-                                                            <option value="" selected disabled>Select Leave Type</option>
+                                                            <option value="" disabled>Select Leave Type</option>
                                                             @foreach ($leave_types as $leave_type)
-                                                            <option value="{{ $leave_type->leave_type }}">{{ $leave_type->leave_type }}</option>
+                                                            <option value="{{ $leave_type->leave_type }}"
+                                                                {{ $leave_type->leave_type == $leaveEntry->leave_type_id ? 'selected' : '' }}>
+                                                                {{ $leave_type->leave_type }}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
 
                                                     <div class="col-md-6 mb-3">
                                                         <label>Number Of Leaves</label>
-                                                        <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota">
+                                                        <input type="number" name="leave_quotas[]" class="form-control" placeholder="Enter leave quota" value="{{ $leaveEntry->leave_quota }}">
                                                     </div>
                                                 </div>
+                                                @endforeach
+                                                @else
+                                                <p>No leave entries available.</p>
+                                                @endif
                                             </div>
                                             <button type="button" id="addMoreLeave" class="btn btn-secondary">Add More Leave Type</button>
                                         </div>
+
+
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

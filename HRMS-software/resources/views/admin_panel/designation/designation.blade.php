@@ -80,9 +80,10 @@
                                                             data-designation-name="{{ $designation->designation }}"
                                                             data-department-name="{{ $designation->department }}">
                                                             <i class="la la-pencil"></i> </button>
-                                                        {{-- <button type="button" class="btn btn-danger"
-                                                        data-question="Are you sure to delete this designation?">
-                                                        <i class="la la-trash"></i>Delete </button> --}}
+                                                            <button type="button" class="btn btn-danger btn-sm">
+                                                        <a href="{{ route('delete-designation', ['id' => $designation->id]) }}" style="color: white;">
+                                                            <i class="la la-trash"></i> </a>
+                                                    </button>
                                                     </div>
                                                 </td>
                                             </tr>
