@@ -73,18 +73,13 @@
                      <span class="nav-text">approve Leaves</span>
                  </a>
                  <ul aria-expanded="false">
-                     <li><a href="{{ route('admin-all-leave') }}">All Leaves</a></li>
+                     <li><a href="{{ route('leaves') }}">Leaves</a></li>
+                     <li><a href="{{ route('admin-all-leave') }}">Leave Requests</a></li>
                      <li><a href="{{ route('admin-pending-leave') }}">Pending Leaves</a></li>
                      <li><a href="{{ route('admin-approve-leave') }}">Approve Leaves</a></li>
                      <li><a href="{{ route('admin-reject-leave') }}">Reject Leaves</a></li>
                  </ul>
 
-             </li>
-             <li>
-                 <a class="has-arrow ai-icon" href="{{ route('leaves') }}" aria-expanded="false">
-                     <i class="fas fa-calendar"></i>
-                     <span class="nav-text">Leaves</span>
-                 </a>
              </li>
 
              <li>

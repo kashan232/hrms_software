@@ -52,7 +52,43 @@ class HomeController extends Controller
                     ->groupBy('date')
                     ->orderBy('date')
                     ->get();
+                // Leave counts
+                $totalLeaveCount = DB::table('leave_requests')->count();
+                $approvedLeaveCount = DB::table('leave_requests')->where('leave_approve', 'Approve')->count();
+                $pendingLeaveCount = DB::table('leave_requests')->where('leave_approve', 'Pending')->count();
+                $rejectedLeaveCount = DB::table('leave_requests')->where('leave_approve', 'Reject')->count(); // Assuming "Reject" is another status
 
+                // Count attendance for Present, Absent, and Leave
+                $presentCount = DB::table('employee_attendances')->where('employee_attendance', 'Present')->count();
+                $absentCount = DB::table('employee_attendances')->where('employee_attendance', 'Absent')->count();
+                $leaveCount = DB::table('employee_attendances')->where('employee_attendance', 'Leave')->count();
+
+                // HR & Manager Attendance
+                $hrPresentCount = DB::table('hr_mnager_attendances')->where('employee_attendance', 'Present')->count();
+                $hrAbsentCount = DB::table('hr_mnager_attendances')->where('employee_attendance', 'Absent')->count();
+
+                // Calculate total HR attendance for percentage calculation
+                $totalHRAttendance = $hrPresentCount + $hrAbsentCount;
+
+                // Calculate percentages
+                $hrPresentCountPercentage = $totalHRAttendance > 0 ? ($hrPresentCount / $totalHRAttendance) * 100 : 0;
+                $hrAbsentCountPercentage = $totalHRAttendance > 0 ? ($hrAbsentCount / $totalHRAttendance) * 100 : 0;
+
+
+                // dd($hrPresentCount,$hrAbsentCount);
+
+                // Fetch expenses and prepare data for chart
+                $expenses = Expense::select('date', DB::raw('SUM(total_paid) as total_expense'))
+                    ->groupBy('date')
+                    ->orderBy('date')
+                    ->get();
+
+
+                // Prepare data for the chart
+                $expenseLabels = $expenses->pluck('date')->toArray(); // Extract dates
+                $expenseData = $expenses->pluck('total_expense')->toArray(); // Extract total expenses
+
+                // dd($presentCount,$absentCount,$leaveCount);
                 // Fetch project data
                 $projects = Project::select('project_name', 'status', 'priority', 'budget')->get();
                 return view(
@@ -69,7 +105,21 @@ class HomeController extends Controller
                         'expenseCount' => $expenseCount,
                         'all_project' => $all_project,
                         'expenses' => $expenses,
-                        'projects' => $projects
+                        'projects' => $projects,
+                        'totalLeaveCount' => $totalLeaveCount,
+                        'approvedLeaveCount' => $approvedLeaveCount,
+                        'pendingLeaveCount' => $pendingLeaveCount,
+                        'rejectedLeaveCount' => $rejectedLeaveCount,
+                        'presentCount' => $presentCount,
+                        'absentCount' => $absentCount,
+                        'leaveCount' => $leaveCount,
+                        'hrPresentCount' => $hrPresentCount,
+                        'hrAbsentCount' => $hrAbsentCount,
+                        'expenses' => $expenses, // Raw data for displaying if needed
+                        'expenseLabels' => $expenseLabels, // For chart labels
+                        'expenseData' => $expenseData,
+                        'hrPresentCountPercentage' => $hrPresentCountPercentage, // Pass percentage to view
+                        'hrAbsentCountPercentage' => $hrAbsentCountPercentage
                     ]
                 );
             } else if ($usertype == 'employee') {

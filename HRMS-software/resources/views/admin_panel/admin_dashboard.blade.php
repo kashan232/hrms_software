@@ -100,18 +100,6 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="#">
-                        <div class="card shadow-sm">
-                            <div class="card-body text-center">
-                                <i class="fa-solid fa-clipboard-user fa-2x mb-2 text-secondary"></i>
-                                <h5 class="mb-0">Remote Employees</h5>
-                                <h3 class="mt-2">{{ $remoteEmployeeCount }}</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-sm-6 mb-3">
                     <a href="{{ route('hiring-listing') }}">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
@@ -148,31 +136,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('all-revenue') }}">
-                        <div class="card shadow-sm">
-                            <div class="card-body text-center">
-                                <i class="fas fa-user-tie fa-2x mb-2 text-success"></i>
-
-                                <h5 class="mb-0">Jobs</h5>
-                                <h3 class="mt-2">4</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('all-revenue') }}">
-                        <div class="card shadow-sm">
-                            <div class="card-body text-center">
-                                <i class="fas fa-plane-departure fa-2x mb-2 text-primary"></i>
-                                <h5 class="mb-0">Leaves</h5>
-                                <h3 class="mt-2">5</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('all-revenue') }}">
+                    <a href="{{ route('all-quiz-creation') }}">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-question fa-2x mb-2 text-dark"></i>
@@ -183,41 +147,82 @@
                         </div>
                     </a>
                 </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="{{ route('leaves') }}">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-plane-departure fa-2x mb-2 text-primary"></i>
+                                <h5 class="mb-0">Leaves</h5>
+                                <h3 class="mt-2">{{ $totalLeaveCount }}</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="{{ route('admin-approve-leave') }}">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-check fa-2x mb-2 text-success"></i>
+                                <h5 class="mb-0">Approve Leaves</h5>
+                                <h3 class="mt-2">{{ $approvedLeaveCount }}</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <a href="{{ route('admin-reject-leave') }}">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-calendar-times fa-2x mb-2 text-danger"></i>
+                                <h5 class="mb-0">Reject Leaves</h5>
+                                <h3 class="mt-2">{{ $rejectedLeaveCount }}</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
             </div>
 
             <div class="row">
-                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+                <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <a href="#">
                                 <div class="card shadow-sm">
                                     <div class="card-body">
-                                        <h5 class="card-title">Leave Status</h5>
+                                        <h5 class="card-title text-center">Leave Status</h5>
                                         <canvas id="leaveStatusChart" width="600" height="600"></canvas>
                                     </div>
                                 </div>
                             </a>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <a href="#">
                                 <div class="card shadow-sm">
                                     <div class="card-body">
-                                        <h5 class="card-title">Attendance Chart</h5>
+                                        <h5 class="card-title text-center">Attendance Chart</h5>
                                         <canvas id="attendanceChart"></canvas>
                                     </div>
                                 </div>
                             </a>
                         </div>
 
+                       
+
+
+                        
                     </div>
                 </div>
-
-                <div class="col-xl-8 col-xxl-8 col-lg-6 col-sm-6">
+<br>
+                <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Expense Overview</h5>
-                            <canvas id="expenseChart" width="400" height="400"></canvas>
+                            <canvas id="expenseChart" ></canvas>
                         </div>
                     </div>
                 </div>
@@ -245,32 +250,17 @@
 
 @include('admin_panel.include.footer_include')
 
+@include('admin_panel.include.chart')
+
 <!-- Include Chart.js and ChartDataLabels library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <script>
-    function updateTime() {
-        const now = new Date();
-        const options = {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        };
-        const date = now.toLocaleDateString('en-US', options);
-        const time = now.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        });
-
-        document.getElementById('currentDate').innerText = date;
-        document.getElementById('currentTime').innerText = time;
-    }
-
-    setInterval(updateTime, 1000);
-    updateTime();
+    // Fetch the dynamic leave data from the server (using Blade variables)
+    const approvedLeaves = {{ $approvedLeaveCount }};
+    const pendingLeaves = {{ $pendingLeaveCount }};
+    const rejectedLeaves = {{ $rejectedLeaveCount }};
 
     // Leave Status Chart
     const leaveStatusCtx = document.getElementById('leaveStatusChart').getContext('2d');
@@ -280,7 +270,7 @@
             labels: ['Approved Leaves', 'Rejected Leaves', 'Pending Leaves'],
             datasets: [{
                 label: 'Leave Status',
-                data: [70, 20, 10],
+                data: [approvedLeaves, rejectedLeaves, pendingLeaves],  // Use dynamic data here
                 backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
                 borderColor: '#fff',
                 borderWidth: 2,
@@ -314,54 +304,16 @@
         },
         plugins: [ChartDataLabels],
     });
+</script>
 
-    // Expense Chart
-    const expenseCtx = document.getElementById('expenseChart').getContext('2d');
-    const expenseChart = new Chart(expenseCtx, {
-        type: 'bar',
-        data: {
-            labels: ['2024-10-15', '2024-10-16', '2024-10-17'], // Example labels, adjust as needed
-            datasets: [{
-                label: 'Expenses',
-                data: [300, 200, 400], // Example data points, replace with actual data
-                backgroundColor: '#007bff',
-                borderColor: '#fff',
-                borderWidth: 2,
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        color: '#000'
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Expense Overview',
-                    color: '#000'
-                },
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: '#000',
-                    },
-                },
-                x: {
-                    ticks: {
-                        color: '#000',
-                    },
-                }
-            }
-        }
-    });
+<script>
 
+    const presentCount = {{ $presentCount }};
+    const absentCount = {{ $absentCount }};
+    const leaveCount = {{ $leaveCount }};
+
+    
     // attendace chart
-
     const ctx = document.getElementById('attendanceChart').getContext('2d');
     const attendanceChart = new Chart(ctx, {
         type: 'pie', // Pie chart
@@ -369,7 +321,7 @@
             labels: ['Present', 'Absent', 'Leave'],
             datasets: [{
                 label: 'Attendance Status',
-                data: [12, 3, 5], // Change these values according to your data
+                data: [presentCount, absentCount, leaveCount], // Change these values according to your data
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.6)',
                     'rgba(255, 99, 132, 0.6)',
@@ -396,4 +348,31 @@
             }
         }
     });
+</script>
+
+<script>
+    function updateTime() {
+        const now = new Date();
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        const date = now.toLocaleDateString('en-US', options);
+        const time = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+
+        document.getElementById('currentDate').innerText = date;
+        document.getElementById('currentTime').innerText = time;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Leave Status Chart
+
 </script>
