@@ -129,6 +129,10 @@ class HomeController extends Controller
                 // Count the leave requests for the logged-in employee
                 $leaves = LeaveRequest::where('Employee', $employeeName)->count();
                 $task = Task::where('task_assign_person', $employeeName)->count();
+                $name = Auth::user()->name;
+
+                $CompleteTasks = DB::table('tasks')->where('task_assign_person', '=', $name)->where('status', 'Complete')->count();
+                $IncompleteTasks = DB::table('tasks')->where('task_assign_person', '=', $name)->where('status', 'Incomplete')->count();
 
                 $emp_id = Auth()->user()->emp_id;
 
@@ -148,29 +152,82 @@ class HomeController extends Controller
                 $currentMonth = date('m');
                 $currentYear = date('Y');
 
+                $totalAttendancechart = EmployeeAttendance::where('emp_id', $emp_id)->count();
+
+                // Calculate the total presents for the current month
+                $totalPresentchart = EmployeeAttendance::where('emp_id', '=', $emp_id)
+                    ->where('employee_attendance', '=', 'Present')
+                    ->count();
+
+                $totalAbsentchart = EmployeeAttendance::where('emp_id', '=', $emp_id)
+                    ->where('employee_attendance', '=', 'Absent')
+                    ->count();
+
+                $totalLeavechart = EmployeeAttendance::where('emp_id', '=', $emp_id)
+                    ->where('employee_attendance', '=', 'Leave')
+                    ->count();
+
+
                 // Calculate the total presents for the current month
                 $totalPresent = EmployeeAttendance::where('emp_id', '=', $emp_id)
                     ->whereMonth('employee_attendance_date', '=', $currentMonth)
                     ->whereYear('employee_attendance_date', '=', $currentYear)
-                    ->where('employee_attendance', '=', 'present')
+                    ->where('employee_attendance', '=', 'Present')
                     ->count();
 
                 // Calculate the total absents for the current month
                 $totalAbsent = EmployeeAttendance::where('emp_id', '=', $emp_id)
                     ->whereMonth('employee_attendance_date', '=', $currentMonth)
                     ->whereYear('employee_attendance_date', '=', $currentYear)
-                    ->where('employee_attendance', '=', 'absent')
+                    ->where('employee_attendance', '=', 'Absent')
                     ->count();
 
                 // Calculate the total leaves for the current month
                 $totalLeave = EmployeeAttendance::where('emp_id', '=', $emp_id)
                     ->whereMonth('employee_attendance_date', '=', $currentMonth)
                     ->whereYear('employee_attendance_date', '=', $currentYear)
-                    ->where('employee_attendance', '=', 'leave')
+                    ->where('employee_attendance', '=', 'Leave')
                     ->count();
 
-                $name = Auth::user()->name;
                 $employeetasks = Task::where('task_assign_person', '=', $name)->get();
+                // 1. Average Hours
+                $averageHours = DB::table('employee_attendances')
+                    ->select(DB::raw("SEC_TO_TIME(AVG(TIME_TO_SEC(TIMEDIFF(end_time, start_time)))) AS average_hours"))
+                    ->where('emp_id', $emp_id)
+                    ->where('employee_attendance', 'Present')
+                    ->whereNotNull('start_time')
+                    ->whereNotNull('end_time')
+                    ->first();
+
+                // 2. Average Check-In
+                $averageCheckIn = DB::table('employee_attendances')
+                    ->select(DB::raw("SEC_TO_TIME(AVG(TIME_TO_SEC(start_time))) AS average_check_in"))
+                    ->where('emp_id', $emp_id)
+                    ->where('employee_attendance', 'Present')
+                    ->whereNotNull('start_time')
+                    ->first();
+
+                // 3. On-Time Arrival (before or at 9:00 AM)
+                $onTimeArrival = DB::table('employee_attendances')
+                    ->select(DB::raw("(SUM(CASE WHEN start_time <= '09:00:00' THEN 1 ELSE 0 END) / COUNT(*)) * 100 AS on_time_percentage"))
+                    ->where('emp_id', $emp_id)
+                    ->where('employee_attendance', 'Present')
+                    ->whereNotNull('start_time')
+                    ->first();
+
+                // 4. Average Check-Out
+                $averageCheckOut = DB::table('employee_attendances')
+                    ->select(DB::raw("SEC_TO_TIME(AVG(TIME_TO_SEC(end_time))) AS average_check_out"))
+                    ->where('emp_id', $emp_id)
+                    ->where('employee_attendance', 'Present')
+                    ->whereNotNull('end_time')
+                    ->first();
+
+                // Format the results
+                $formattedAverageHours = gmdate('H:i:s', strtotime($averageHours->average_hours));
+                $formattedAverageCheckIn = gmdate('H:i:s', strtotime($averageCheckIn->average_check_in));
+                $formattedAverageCheckOut = gmdate('H:i:s', strtotime($averageCheckOut->average_check_out));
+                $formattedOnTimeArrival = number_format($onTimeArrival->on_time_percentage, 1) . '%';
 
 
                 return view('employee_panel.employee_dashboard', [
@@ -188,6 +245,17 @@ class HomeController extends Controller
                     'totalAbsent' => $totalAbsent,
                     'totalLeave' => $totalLeave,
                     'employeetasks' => $employeetasks,
+                    'totalAttendancechart' => $totalAttendancechart,
+                    'totalPresentchart' => $totalPresentchart,
+                    'totalAbsentchart' => $totalAbsentchart,
+                    'totalLeavechart' => $totalLeavechart,
+                    'averageHours' => $formattedAverageHours,
+                    'averageCheckIn' => $formattedAverageCheckIn,
+                    'onTimeArrival' => $formattedOnTimeArrival,
+                    'averageCheckOut' => $formattedAverageCheckOut,
+                    'CompleteTasks' => $CompleteTasks,
+                    'IncompleteTasks' => $IncompleteTasks
+                    
                 ]);
             } else if ($usertype == 'hr') {
                 $leaves = LeaveRequest::count();
