@@ -62,13 +62,17 @@
                                             <td>
                                                 <div class="button--group">
                                                     <button type="button" class="btn btn-primary btn-sm">
-                                                        <a href="{{ route('edit-revenue', ['id' => $revenue->id]) }}"  style="color: white;">
-                                                        <i class="la la-pencil"></i> </a>
+                                                        <a href="{{ route('edit-revenue', ['id' => $revenue->id]) }}" style="color: white;">
+                                                            <i class="la la-pencil"></i> </a>
                                                     </button>
-                                                    <button type="button" class="btn btn-danger btn-sm">
-                                                        <a href="{{ route('delete-revenue', ['id' => $revenue->id]) }}"  style="color: white;">
-                                                        <i class="la la-trash"></i> </a>
-                                                    </button>
+                                                    <!-- Form for Revenue Deletion -->
+                                                    <form id="deleteForm-{{ $revenue->id }}" action="{{ route('delete-revenue', ['id' => $revenue->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE') <!-- To simulate DELETE request -->
+                                                        <button type="button" class="btn btn-danger btn-sm" title="Delete Revenue" onclick="confirmDelete({{ $revenue->id }})">
+                                                            <i class="la la-trash"></i>
+                                                        </button>
+                                                    </form>
 
                                                 </div>
                                             </td>
@@ -106,3 +110,14 @@
     ***********************************-->
 
 @include('admin_panel.include.footer_include')
+
+<script>
+    function confirmDelete(revenueId) {
+        const confirmation = confirm("Are you sure you want to delete this revenue?");
+
+        if (confirmation) {
+            // If user confirms, submit the form
+            document.getElementById('deleteForm-' + revenueId).submit();
+        }
+    }
+</script>

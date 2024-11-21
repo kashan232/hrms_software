@@ -69,10 +69,14 @@
                                                         data-designation-name="{{ $designation->designation }}"
                                                         data-department-name="{{ $designation->department }}">
                                                         <i class="la la-pencil"></i> </button>
-                                                    <button type="button" class="btn btn-danger btn-sm">
-                                                        <a href="{{ route('delete-designation', ['id' => $designation->id]) }}" style="color: white;">
-                                                            <i class="la la-trash"></i> </a>
-                                                    </button>
+                                                    <form id="deleteForm-{{ $designation->id }}" action="{{ route('delete-designation', ['id' => $designation->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE') <!-- To simulate a DELETE request -->
+
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $designation->id }})">
+                                                            <i class="la la-trash"></i> 
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -191,17 +195,23 @@
             $('#cuModal').modal('show');
         });
     });
-</script>
 
-<script>
-    // JavaScript/jQuery code to trigger modal
-    $(document).ready(function() {
+    function confirmDelete(designationId) {
+        const confirmation = confirm("Are you sure you want to delete this designation?");
+        
+        if (confirmation) {
+            document.getElementById('deleteForm-' + designationId).submit();
+        }
+    }
+
+     // JavaScript/jQuery code to trigger modal
+     $(document).ready(function() {
         $('.editdesignationBtn').click(function() {
             $('#editdesignation').modal('show');
         });
     });
-</script>
 
+</script>
 <script>
     $(document).ready(function() {
         // Attach event listener with delegation for dynamically loaded content

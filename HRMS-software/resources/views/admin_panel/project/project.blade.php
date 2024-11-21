@@ -159,18 +159,24 @@
                                             </td>
                                             <td>{{ $project->description }}</td>
                                             <td>
-                                            <span class="badge bg-{{ $project->status == 'Completed' ? 'success' : 'warning' }}">
-                        {{ $project->status }}
-                    </span>
+                                                <span class="badge bg-{{ $project->status == 'Completed' ? 'success' : 'warning' }}">
+                                                    {{ $project->status }}
+                                                </span>
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
                                                     <button type="button" class="btn btn-primary btn-sm editprojectBtn" data-project-id="{{ $project->id }}" title="Edit Project">
                                                         <i class="la la-pencil"></i>
                                                     </button>
-                                                    <a href="{{ route('delete-project', ['id' => $project->id]) }}" class="btn btn-danger btn-sm" title="Delete Project">
-                                                        <i class="la la-trash"></i>
-                                                    </a>
+
+                                                    <!-- Delete Project Button with Confirmation -->
+                                                    <form id="deleteForm-{{ $project->id }}" action="{{ route('delete-project', ['id' => $project->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE') <!-- To simulate a DELETE request -->
+                                                        <button type="button" class="btn btn-danger btn-sm" title="Delete Project" onclick="confirmDelete({{ $project->id }})">
+                                                            <i class="la la-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                             <td>
@@ -375,6 +381,13 @@
         });
     });
 
+    function confirmDelete(projectId) {
+        const confirmation = confirm("Are you sure you want to delete this project?");
+        
+        if (confirmation) {
+            document.getElementById('deleteForm-' + projectId).submit();
+        }
+    }
 
     $(document).ready(function() {
         // Attach event listener with delegation

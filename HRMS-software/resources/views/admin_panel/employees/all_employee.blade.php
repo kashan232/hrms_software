@@ -63,13 +63,16 @@
                                                     <a href="{{ route('edit-employee', ['id' => $employee->id]) }}"
                                                         class="btn btn-primary btn-sm d-flex align-items-center"
                                                         title="Edit Employee">
-                                                        <i class="la la-pencil"></i> 
+                                                        <i class="la la-pencil"></i>
                                                     </a>
-                                                    <a href="{{ route('delete-employee', ['id' => $employee->id]) }}"
-                                                        class="btn btn-danger btn-sm d-flex align-items-center"
-                                                        title="Delete Employee">
-                                                        <i class="la la-trash"></i> 
-                                                    </a>
+                                                    <form id="deleteForm-{{ $employee->id }}" action="{{ route('delete-employee', ['id' => $employee->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE') <!-- To simulate a DELETE request -->
+
+                                                        <button type="button" class="btn btn-danger btn-sm d-flex align-items-center" title="Delete Employee" onclick="confirmDelete({{ $employee->id }})">
+                                                            <i class="la la-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
 
@@ -107,3 +110,14 @@
     ***********************************-->
 
 @include('admin_panel.include.footer_include')
+
+
+<script>
+    function confirmDelete(employeeId) {
+        const confirmation = confirm("Are you sure you want to delete this employee?");
+        
+        if (confirmation) {
+            document.getElementById('deleteForm-' + employeeId).submit();
+        }
+    }
+</script>

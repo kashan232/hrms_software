@@ -66,10 +66,14 @@
                                                         data-department-id="{{ $department->id }}"
                                                         data-department-name="{{ $department->department }}">
                                                         <i class="la la-pencil"></i> </button>
-                                                    <button type="button" class="btn btn-danger btn-sm">
-                                                        <a href="{{ route('delete-department', ['id' => $department->id]) }}" style="color: white;">
-                                                            <i class="la la-trash"></i> </a>
-                                                    </button>
+                                                    <form id="deleteForm-{{ $department->id }}" action="{{ route('delete-department', ['id' => $department->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE') <!-- To send a DELETE request -->
+
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $department->id }})">
+                                                            <i class="la la-trash"></i>
+                                                        </button>
+                                                    </form>
 
                                                 </div>
                                             </td>
@@ -165,6 +169,16 @@
             $('#cuModal').modal('show');
         });
     });
+
+    function confirmDelete(departmentId) {
+        // Confirmation prompt before delete
+        const confirmation = confirm("Are you sure you want to delete this department?");
+
+        if (confirmation) {
+            // If user confirms, submit the delete form
+            document.getElementById('deleteForm-' + departmentId).submit();
+        }
+    }
 </script>
 
 <script>

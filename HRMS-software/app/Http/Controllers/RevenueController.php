@@ -101,6 +101,6 @@ class RevenueController extends Controller
     public function delete_revenue(Request $request, $id)
     {
         $delete = Revenue::find($id)->delete();
-        return redirect()->back()->with('delete-message', 'Expense Has Been Deleted Successsfully');
+        return redirect()->back()->with('delete-message', 'Revenue Has Been Deleted Successsfully');
     }
 }

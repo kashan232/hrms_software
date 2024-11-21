@@ -107,14 +107,14 @@ Route::post('/quiz/update/{id}', [QuizController::class, 'updateQuiz'])->name('q
 Route::get('/department', [DepartmentController::class, 'department'])->middleware(['auth','admin'])->name('department');
 Route::post('/store-department', [DepartmentController::class, 'store_department'])->name('store-department');
 Route::post('/update-department', [DepartmentController::class, 'update_department'])->name('update-department');
-Route::get('/delete-department/{id}', [DepartmentController::class, 'delete_department'])->middleware(['auth','admin'])->name('delete-department');
+Route::delete('/delete-department/{id}', [DepartmentController::class, 'delete_department'])->middleware(['auth','admin'])->name('delete-department');
 
 
 //designation
 Route::get('/designation', [DesignationController::class, 'designation'])->middleware(['auth','admin'])->name('designation');
 Route::post('/store-designation', [DesignationController::class, 'store_designation'])->name('store-designation');
 Route::post('/update-designation', [DesignationController::class, 'update_designation'])->name('update-designation');
-Route::get('/delete-designation/{id}', [DesignationController::class, 'delete_designation'])->middleware(['auth','admin'])->name('delete-designation');
+Route::delete('/delete-designation/{id}', [DesignationController::class, 'delete_designation'])->middleware(['auth','admin'])->name('delete-designation');
 
 //HR
 Route::get('/add-hr', [HRController::class, 'add_hr'])->middleware(['auth','admin'])->name('add-hr');
@@ -136,7 +136,7 @@ Route::get('/all-employee', [EmployeeController::class, 'all_employee'])->middle
 Route::get('/allhr-employee', [EmployeeController::class, 'allhr_employee'])->middleware(['auth','admin'])->name('allhr-employee');
 Route::get('/add-employee', [EmployeeController::class, 'add_employee'])->middleware(['auth','admin'])->name('add-employee');
 Route::post('/store-employee', [EmployeeController::class, 'store_employee'])->name('store-employee');
-Route::get('/delete-employee/{id}', [EmployeeController::class, 'delete_employee'])->middleware(['auth','admin'])->name('delete-employee');
+Route::delete('/delete-employee/{id}', [EmployeeController::class, 'delete_employee'])->middleware(['auth','admin'])->name('delete-employee');
 Route::get('/edit-employee/{id}', [EmployeeController::class, 'edit_employee'])->middleware(['auth','admin'])->name('edit-employee');
 Route::post('/update-employee/{id}', [EmployeeController::class, 'update_employee'])->name('update-employee');
 Route::get('/deleted-employee-screen', [EmployeeController::class, 'deleted_employee_screen'])->middleware(['auth','admin'])->name('deleted-employee-screen');
@@ -187,7 +187,7 @@ Route::post('/update-resignation-status', [EmployeeResignationController::class,
 Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');
 Route::post('/store-project', [ProjectController::class, 'store_project'])->name('store-project');
 Route::post('/update-project', [ProjectController::class, 'update'])->name('update-project');
-Route::get('/delete-project/{id}', [ProjectController::class, 'delete_project'])->name('delete-project');
+Route::delete('/delete-project/{id}', [ProjectController::class, 'delete_project'])->name('delete-project');
 Route::post('/update-project-status', [ProjectController::class, 'update_project_status'])->name('update-project-status');
 
 //done task list
@@ -212,7 +212,7 @@ Route::get('/add-revenue', [RevenueController::class, 'add_revenue'])->name('add
 Route::post('/store-revenue', [RevenueController::class, 'store_revenue'])->name('store-revenue');
 Route::get('/edit-revenue/{id}', [RevenueController::class, 'edit_revenue'])->name('edit-revenue');
 Route::post('/update-revenue/{id}', [RevenueController::class, 'update_revenue'])->name('update-revenue');
-Route::get('/delete-revenue/{id}', [RevenueController::class, 'delete_revenue'])->name('delete-revenue');
+Route::delete('/delete-revenue/{id}', [RevenueController::class, 'delete_revenue'])->name('delete-revenue');
 
 
 //Admin Approve Leaves
