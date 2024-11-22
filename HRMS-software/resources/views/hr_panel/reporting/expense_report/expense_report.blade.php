@@ -21,6 +21,7 @@
                             <h4 class="card-title">Expense Report</h4>
                         </div>
                         <div class="card-body">
+
                             <div class="basic-form">
                                 <form id="expense_report_hr" class="new-added-form" method="GET">
                                     @csrf
@@ -44,6 +45,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                        <button id="generatePdf" class="btn btn-dark ml-3 mb-3" style="font-size: 15px">Generate PDF</button>
+
                             <div class="table-responsive">
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>
@@ -84,29 +87,17 @@
             </div>
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">AK
-                    Technologies</a>
-                2024</p>
-        </div>
-    </div> <!--**********************************
-            Footer end
-        ***********************************-->
-
-
 </div>
 <!--**********************************
         Main wrapper end
     ***********************************-->
 
 @include('hr_panel.include.footer_include')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.27/jspdf.plugin.autotable.min.js"></script>
+
+
+
 <script>
     $(document).ready(function() {
         $('#expense_report_hr').on('submit', function(e) {
@@ -165,6 +156,68 @@
                     console.error(error);
                 }
             });
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#generatePdf').on('click', function() {
+            const {
+                jsPDF
+            } = window.jspdf;
+            const pdf = new jsPDF();
+
+            // Title and Date Range
+            pdf.setFontSize(16);
+            pdf.text('Expense Report', 105, 20, {
+                align: 'center'
+            });
+            const dateFrom = $('input[name="date_from"]').val() || 'Not Selected';
+            const dateTo = $('input[name="date_to"]').val() || 'Not Selected';
+            pdf.setFontSize(12);
+            pdf.text(`Date From: ${dateFrom}`, 14, 30);
+            pdf.text(`Date To: ${dateTo}`, 14, 40);
+
+            // Table Headers
+            const headers = [
+                ["Sno#", "Date", "Description", "Vendor", "Amount", "Tax", "Total Paid", "Status"]
+            ];
+            const data = [];
+
+            // Collect Data from Table
+            $('#expense_report_append_hr tr').each(function(index, row) {
+                const rowData = [];
+                $(row).find('td').each(function() {
+                    rowData.push($(this).text());
+                });
+                data.push(rowData);
+            });
+
+            // Table with autoTable
+            pdf.autoTable({
+                head: headers,
+                body: data,
+                startY: 50,
+                margin: {
+                    left: 14,
+                    right: 14
+                },
+            });
+
+            // Totals
+            const totalAmount = $('#totalAmount').text();
+            const totalTax = $('#totalTax').text();
+            const totalPaid = $('#totalPaid').text();
+
+            const finalY = pdf.lastAutoTable.finalY || 50; // Position after table
+            pdf.text(`Total Amount: ${totalAmount}`, 14, finalY + 10);
+            pdf.text(`Total Tax: ${totalTax}`, 14, finalY + 20);
+            pdf.text(`Total Paid: ${totalPaid}`, 14, finalY + 30);
+
+            // Save PDF
+            pdf.save('Expense_Report.pdf');
         });
     });
 </script>

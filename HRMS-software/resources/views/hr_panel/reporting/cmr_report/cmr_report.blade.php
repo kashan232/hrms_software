@@ -38,12 +38,14 @@
                                             <label>Designation</label>
                                             <select name="designation" id="designation" class="form-control"></select>
                                         </div>
+
                                         <div class="mb-3 col-md-3">
                                             <label>Employee</label>
-                                            <select name="employee" id="employee" class="form-control">
+                                            <select name="employee" id="single-select" required>
                                                 <option value="" selected disabled>Select Employee</option>
                                             </select>
                                         </div>
+
                                         <div class="mb-3 col-md-3">
                                             <label>CMR Type</label>
                                             <select id="cmrType" class="form-control">
@@ -57,7 +59,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -189,29 +190,17 @@
             </div>
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">AK
-                    Technologies</a>
-                2024</p>
-        </div>
-    </div> <!--**********************************
-            Footer end
-        ***********************************-->
-
-
 </div>
 <!--**********************************
         Main wrapper end
     ***********************************-->
 
 @include('hr_panel.include.footer_include')
+
+<script src="https://jobie.dexignzone.com/laravel/demo/vendor/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="https://jobie.dexignzone.com/laravel/demo/js/plugins-init/select2-init.js" type="text/javascript"></script>
+
+
 <script>
     $(document).ready(function() {
         $('#cmrType').on('change', function() {

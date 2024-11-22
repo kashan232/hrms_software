@@ -96,11 +96,32 @@
                                             <td>{{ $OfferLetter->salary }} </td>
                                             <td>{{ $OfferLetter->jobDescription }} </td>
                                             <td>{{ $OfferLetter->additionalNotes }} </td>
-                                            <td>
-                                                <button class="btn btn-primary action-btn" onclick="showEditModal({{ json_encode($OfferLetter) }})">Edit</button>
-                                                <button class="btn btn-danger action-btn" onclick="confirmDelete({{ $OfferLetter->id }})">Delete</button>
-                                                <button class="btn btn-info action-btn" onclick="printOfferLetter({{ json_encode($OfferLetter) }})">Print</button>
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group" aria-label="Actions" style="gap:1px;">
+                                                    <!-- Edit Button -->
+                                                    <button type="button" class="btn btn-primary btn-sm action-btn px-2 py-1 d-flex align-items-center justify-content-center"
+                                                        onclick="showEditModal({{ json_encode($OfferLetter) }})"
+                                                        title="Edit">
+                                                        <i class="la la-pencil"></i>
+                                                    </button>
+
+                                                    <!-- Delete Button -->
+                                                    <button type="button" class="btn btn-danger btn-sm action-btn px-2 py-1 d-flex align-items-center justify-content-center"
+                                                        onclick="confirmDelete({{ $OfferLetter->id }})"
+                                                        title="Delete">
+                                                        <i class="la la-trash"></i>
+                                                    </button>
+
+                                                    <!-- Print Button -->
+                                                    <button type="button" class="btn btn-info btn-sm action-btn px-2 py-1 d-flex align-items-center justify-content-center"
+                                                        onclick="printOfferLetter({{ json_encode($OfferLetter) }})"
+                                                        title="Print">
+                                                        <i class="la la-print"></i>
+                                                    </button>
+                                                </div>
                                             </td>
+
+
                                         </tr>
                                         @endforeach
                                     </tbody>

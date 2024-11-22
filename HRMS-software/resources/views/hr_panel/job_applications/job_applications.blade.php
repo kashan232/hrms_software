@@ -7,6 +7,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><span class="type"></span> <span>Application Status</span></h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
+                                <i class="las la-times"></i>
+                            </button>
                 </div>
                 <form action="{{ route('store-job-applications') }}" method="POST">
                     @csrf
@@ -75,7 +78,7 @@
                                                     @csrf
                                                     <input type="hidden" name="application_id" value="{{ $job_application->id }}">
                                                     <button type="button" class="btn btn-primary addNewButton btn-sm" data-toggle="modal" data-target="#cuModal" onclick="setApplicationId('{{ $job_application->id }}')">
-                                                        Update
+                                                    <i class="fas fa-check"></i>
                                                     </button>
                                                 </form>
                                             </td>

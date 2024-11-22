@@ -19,9 +19,9 @@
                     @method('PUT')
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Edit Employee Promotion</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
+                                <i class="las la-times"></i>
+                            </button>
                     </div>
                     <div class="modal-body">
                         <!-- Form fields -->

@@ -62,7 +62,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">User Name</label>
                                             <input type="text" name="username" class="form-control" required>
-                                        </div> 
+                                        </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Password</label>
                                             <div class="input-group">

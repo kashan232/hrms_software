@@ -11,6 +11,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class HrEmployeeController extends Controller
 {
@@ -53,6 +56,15 @@ class HrEmployeeController extends Controller
             $userId = Auth::id();
             // dd($userId);
             // Create the employee record
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|unique:hrs,email|unique:users,email',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator) // Errors will be passed
+                    ->withInput(); // Retain the old input
+            }
             $usertype = Auth()->user()->usertype;
             $employee = Employee::create([
                 'admin_or_user_id' => $userId,
