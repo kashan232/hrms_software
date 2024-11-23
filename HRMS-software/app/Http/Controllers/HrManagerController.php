@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\EmployeeLeave;
 use App\Models\LeaveType;
 use App\Models\Manager;
@@ -9,6 +10,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 class HrManagerController extends Controller
 {
@@ -17,9 +20,10 @@ class HrManagerController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             $leave_types = LeaveType::all();
-            // $all_department = Department::where('admin_or_user_id', '=', $userId)->get();
+            $all_department = Department::get();
             return view('hr_panel.manager.add_manager', [
                 'leave_types' => $leave_types,
+                'all_department' => $all_department,
             ]);
         } else {
             return redirect()->back();
@@ -32,11 +36,22 @@ class HrManagerController extends Controller
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
+            
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|unique:hrs,email|unique:users,email',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator) // Errors will be passed
+                    ->withInput(); // Retain the old input
+            }
             $managercreae = Manager::create([
                 'admin_or_user_id'    => $userId,
+                'department'          => $request->department,
+                'designation'          => $request->designation,
                 'first_name'          => $request->first_name,
                 'last_name'          => $request->last_name,
-                'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
                 'joining_date'          => $request->joining_date,
@@ -105,9 +120,12 @@ class HrManagerController extends Controller
                 $managerdetails->ManagerLeaves = collect(); // Initialize if null
             }
 
+            $all_department = Department::get();
+
             return view('hr_panel.manager.edit_manager', [
                 'managerdetails' => $managerdetails,
                 'leave_types' => $leave_types,
+                'all_department' => $all_department,
             ]);
         } else {
             return redirect()->back();
@@ -124,9 +142,10 @@ class HrManagerController extends Controller
             $userId = Auth::id();
             Manager::where('id', $id)->update([
                 'admin_or_user_id'    => $userId,
+                'department'          => $request->department,
+                'designation'          => $request->designation,
                 'first_name'          => $request->first_name,
                 'last_name'          => $request->last_name,
-                'designation'          => $request->designation,
                 'phone'          => $request->phone,
                 'email'          => $request->email,
                 'joining_date'          => $request->joining_date,

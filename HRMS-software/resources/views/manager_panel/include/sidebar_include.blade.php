@@ -12,26 +12,29 @@
              </li>
 
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                    <i class="fas fa-check-circle"></i>
-                    <span class="nav-text">Attendance</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ route('Manager-attendance-create') }}">Add Attendance</a></li>
-                    <li><a href="{{ route('Manager-employee-attendance') }}">Check Attendance</a></li>
-                </ul>
-            </li>
-
-             {{-- <li><a href="{{ route('manager-all-leavetype') }}" aria-expanded="false">
-                     <i class="fas fa-envelope"></i>
-                     <span class="nav-text">Leave Type</span>
+                     <i class="fas fa-check-circle"></i>
+                     <span class="nav-text">Attendance</span>
                  </a>
-             </li> --}}
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('Manager-attendance-create') }}">Add Attendance</a></li>
+                     <li><a href="{{ route('Manager-employee-attendance') }}">Check Attendance</a></li>
+                 </ul>
+             </li>
+
+
              <li>
-                <a href="{{ route('manager-all-leaverequest') }}" aria-expanded="false">
-                    <i class="fas fa-envelope-open"></i>
-                    <span class="nav-text">Leave Request</span>
-                </a>
-            </li>
+                 <a href="{{ route('Manager-employee-record') }}" aria-expanded="false">
+                     <i class="fas fa-solid fa-user"></i>
+                     <span class="nav-text">Employees</span>
+                 </a>
+             </li>
+
+             <li>
+                 <a href="{{ route('manager-all-leaverequest') }}" aria-expanded="false">
+                     <i class="fas fa-envelope-open"></i>
+                     <span class="nav-text">Leave Request</span>
+                 </a>
+             </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                      {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-money-bill-alt"></i>

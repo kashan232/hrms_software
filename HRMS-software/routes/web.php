@@ -283,6 +283,7 @@ Route::post('/Manager/attendance/out', [HrAndManagerAttendanceController::class,
 Route::get('/Manager-employee-attendance', [HrAndManagerAttendanceController::class, 'Manager_employee_attendance'])->name('Manager-employee-attendance');
 
 
+Route::get('/Manager-employee-record', [HrAndManagerAttendanceController::class, 'Manager_employee_record'])->name('Manager-employee-record');
 
 //MyTask
 Route::get('/mytask', [MyTaskController::class, 'mytask'])->name('mytask');

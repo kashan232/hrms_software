@@ -24,7 +24,7 @@
                         </div>
                         @endif
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">Leave Request</h4>
+                            <h4 class="card-title"> Leave Request </h4>
                             <div class="d-flex">
                                 <!-- Filter Dropdown -->
                                 <select id="leaveStatusFilter" class="form-select w-auto me-3">

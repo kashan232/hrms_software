@@ -32,8 +32,17 @@
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Designation</label>
-                                            <input type="text" name="designation" class="form-control" value="{{ $managerdetails->designation }}">
+                                            <label>Department</label>
+                                            <select name="department" id="department" class="form-control" required>
+                                                <option value="" selected disabled>Select One</option>
+                                                @foreach ($all_department as $department)
+                                                <option value="{{ $department->department }}">{{ $department->department }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <label>Designation</label>
+                                            <select name="designation" id="designation" class="form-control" required></select>
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">First Name</label>

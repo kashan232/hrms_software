@@ -106,7 +106,7 @@
 
                 <!-- Employee Card -->
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="#">
+                    <a href="{{ route('Manager-employee-record') }}">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-users fa-2x mb-2 text-warning"></i>
@@ -119,7 +119,7 @@
 
                 <!-- Remote Employee Card -->
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="#">
+                    <a href="{{ route('Manager-employee-record') }}">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-user-tie fa-2x mb-2 text-primary"></i>

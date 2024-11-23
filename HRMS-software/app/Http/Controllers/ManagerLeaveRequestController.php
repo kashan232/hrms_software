@@ -23,7 +23,7 @@ class ManagerLeaveRequestController extends Controller
             $LeaveTypes = LeaveType::all();
             $LeaveRequests = LeaveRequest::where('admin_or_user_id', '=', $userId)->get();
             $Employees = Manager::where('admin_or_user_id', '=', $userId)->whereNull('deleted_at')->get();
-            return view('manager_panel.leave_request.manager_leave_request', [
+            return view('manager_panel.leave_request.manager_all_leave_request', [
                 'LeaveTypes' => $LeaveTypes,
                 'Employees' => $Employees,
                 'LeaveRequests' => $LeaveRequests,

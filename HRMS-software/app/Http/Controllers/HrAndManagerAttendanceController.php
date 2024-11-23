@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Hr;
 use App\Models\HrMnagerAttendance;
 use App\Models\Manager;
@@ -209,6 +210,24 @@ class HrAndManagerAttendanceController extends Controller
 
             return view('manager_panel.attendance.employee_fetch_daily_attendance', [
                 'attendance_records' => $attendance_records
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function Manager_employee_record()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+           
+            $emp_id = auth()->user()->emp_id;
+
+            $all_employee = Employee::where('reporting_manager', $emp_id)->get();
+            // dd($all_employee);
+            return view('manager_panel.remote_employee.all_employee', [
+                'all_employee' => $all_employee,
             ]);
         } else {
             return redirect()->back();

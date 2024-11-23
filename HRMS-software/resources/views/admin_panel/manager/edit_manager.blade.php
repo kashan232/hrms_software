@@ -37,7 +37,7 @@
                                 <form action="{{ route('update-manager', ['id' => $managerdetails->id]) }}" method="POST">
                                     @csrf
                                     <div class="row">
-                                    <div class="mb-3 col-md-6">
+                                        <div class="mb-3 col-md-6">
                                             <label>Department</label>
                                             <select name="department" id="department" class="form-control" required>
                                                 <option value="" selected disabled>Select One</option>
@@ -163,8 +163,7 @@
 @include('admin_panel.include.footer_include')
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script>
-
-$(document).ready(function() {
+    $(document).ready(function() {
         $('select[name="department"]').on('change', function() {
             var department = $(this).val();
             if (department) {
@@ -186,7 +185,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $(document).ready(function() {
         // This part ensures the button click is working correctly
         $('#addMoreLeave').on('click', function() {
