@@ -20,6 +20,17 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">All Leaves</h4>
+
+                            <div class="d-flex">
+                                <!-- Filter Dropdown -->
+                                <select id="leaveStatusFilter" class="form-select w-auto me-3">
+                                    <option value="">All Status</option>
+                                    <option value="Approve">Approved</option>
+                                    <option value="Reject">Rejected</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -38,7 +49,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($all_leaves as $leaves)
-                                            <tr>
+                                            <tr data-status="{{ $leaves->leave_approve }}">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $leaves->Employee }}</td>
                                                 <td>{{ $leaves->department }} <br> {{ $leaves->designation }}</td>
@@ -140,4 +151,21 @@
 });
 </script>
 
+
+<script>
+    // JavaScript to filter table rows based on leave status
+    document.getElementById('leaveStatusFilter').addEventListener('change', function() {
+        const filterValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#example5 tbody tr');
+
+        rows.forEach(row => {
+            const status = row.getAttribute('data-status').toLowerCase();
+            if (!filterValue || status === filterValue) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    });
+</script>
 

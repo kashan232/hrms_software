@@ -17,15 +17,24 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Employees</h4>
-                            <div>
+
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="card-title"> Employees </h4>
+                            <div class="d-flex">
+                                <!-- Filter Dropdown -->
+                                <select id="employeeTypeFilter" class="form-select w-auto">
+                                    <option value="">All Employees</option>
+                                    <option value="Onsite">Onsite</option>
+                                    <option value="Remote">Remote</option>
+                                </select>
+                                &nbsp;
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">
                                     <a href="{{ route('add-employee') }}" style="color: white;">
                                         <i class="las la-plus"></i>Add New </a>
                                 </button>
                             </div>
                         </div>
+
                         <div class="card-body">
                             @if (session()->has('delete-message'))
                             <div class="alert alert-danger solid alert-square">
@@ -45,18 +54,20 @@
                                             <th>Joined Date</th>
                                             <th>Phone</th>
                                             <th>Department | Designation</th>
+                                            <th>Status</th>
                                             <th>Salary</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($all_employee as $employee)
-                                        <tr>
+                                        <tr data-type="{{ $employee->employee_status }}">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $employee->first_name }} {{ $employee->last_name }} <br>{{ $employee->email }} <br>{{ $employee->address }} <br>{{ $employee->employee_gender }} </td>
                                             <td>{{ $employee->joining_date }}</td>
                                             <td>{{ $employee->phone }}</td>
                                             <td>{{ $employee->department }} <br> {{ $employee->designation }}</td>
+                                            <td>{{ $employee->employee_status }}</td>
                                             <td>{{ $employee->decided_salary }}</td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-2">
@@ -115,9 +126,27 @@
 <script>
     function confirmDelete(employeeId) {
         const confirmation = confirm("Are you sure you want to delete this employee?");
-        
+
         if (confirmation) {
             document.getElementById('deleteForm-' + employeeId).submit();
         }
     }
+</script>
+
+
+<script>
+    // JavaScript to handle filtering
+    document.getElementById('employeeTypeFilter').addEventListener('change', function() {
+        const filterValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#example5 tbody tr');
+
+        rows.forEach(row => {
+            const type = row.getAttribute('data-type').toLowerCase();
+            if (!filterValue || type === filterValue) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    });
 </script>

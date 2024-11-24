@@ -43,59 +43,92 @@
 
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example5" class="display table-responsive-lg">
-                                    <thead>
-                                        <tr>
-                                            <th>Sno</th>
-                                            <th>Project Name</th>
-                                            <th>Task Category</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Emp Department</th>
-                                            <th>Emp Designation</th>
-                                            <th>Task Assign Person</th>
-                                            <th>Task Priority</th>
-                                            <th>Description</th>
-                                            <th>Completion Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="task_report_append_hr">
+                    <div class="card-body">
+    <button id="generateTaskPdf" class="btn btn-dark ml-3 mb-3" style="font-size: 15px">Generate PDF</button>
+    <div class="table-responsive">
+        <table id="example5" class="display table-responsive-lg">
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>Project Name</th>
+                    <th>Task Category</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Emp Department</th>
+                    <th>Emp Designation</th>
+                    <th>Task Assign Person</th>
+                    <th>Task Priority</th>
+                    <th>Description</th>
+                    <th>Completion Status</th>
+                </tr>
+            </thead>
+            <tbody id="task_report_append_hr">
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">AK
-                    Technologies</a>
-                2024</p>
-        </div>
-    </div> <!--**********************************
-            Footer end
-        ***********************************-->
-
-
 </div>
 <!--**********************************
         Main wrapper end
     ***********************************-->
 
 @include('manager_panel.include.footer_include')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.27/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#generateTaskPdf').on('click', function() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            // Title and Project Name
+            pdf.setFontSize(16);
+            pdf.text('Task Report', 105, 20, { align: 'center' });
+
+            const projectName = $('#project_name').val() || 'All Projects';
+            pdf.setFontSize(12);
+            pdf.text(`Project: ${projectName}`, 14, 30);
+
+            // Table Headers
+            const headers = [
+                ["Sno", "Project Name", "Task Category", "Start Date", "End Date", "Emp Department", 
+                 "Emp Designation", "Task Assign Person", "Task Priority", "Description", "Completion Status"]
+            ];
+
+            const data = [];
+
+            // Collect Data from Table
+            $('#task_report_append_hr tr').each(function(index, row) {
+                const rowData = [];
+                $(row).find('td').each(function() {
+                    rowData.push($(this).text());
+                });
+                data.push(rowData);
+            });
+
+            // Generate Table in PDF
+            pdf.autoTable({
+                head: headers,
+                body: data,
+                startY: 40,
+                margin: { left: 14, right: 14 },
+            });
+
+            // Save the PDF
+            pdf.save('Task_Report.pdf');
+        });
+    });
+</script>
+
+
 <script>
     $(document).ready(function() {
         $('#task_report_hr').on('submit', function(e) {

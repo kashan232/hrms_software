@@ -278,7 +278,7 @@ Route::get('/hr-employee-attendance', [HrAndManagerAttendanceController::class, 
 
 // Manager Attendance route
 Route::get('/Manager-attendance-create', [HrAndManagerAttendanceController::class, 'Manager_attendance_create'])->name('Manager-attendance-create');
-Route::post('/Manager/attendance/in', [HrAndManagerAttendanceController::class, 'markIn_Manager'])->name('Manager-attendance-in');
+Route::post('/Manager/attendance/in', [HrAndManagerAttendanceController::class, 'markIn_Manager'])->name('Manager-attendance-in-check');
 Route::post('/Manager/attendance/out', [HrAndManagerAttendanceController::class, 'markOut_Manager'])->name('Manager.attendance.out');
 Route::get('/Manager-employee-attendance', [HrAndManagerAttendanceController::class, 'Manager_employee_attendance'])->name('Manager-employee-attendance');
 
@@ -381,7 +381,7 @@ Route::get('/project-listing-to-manager', [ManagerProjectListingController::clas
 Route::get('/manager-task', [ManagerTaskController::class, 'manager_task'])->name('manager-task');
 Route::post('/manager-store-task', [ManagerTaskController::class, 'manager_store_task'])->name('manager-store-task');
 Route::post('/manager-update-task', [ManagerTaskController::class, 'manager_update_task'])->name('manager-update-task');
-Route::get('/delete-manager-task/{id}', [ManagerTaskController::class, 'delete_manager_task'])->name('delete-manager-task');
+Route::delete('/delete-manager-task/{id}', [ManagerTaskController::class, 'delete_manager_task'])->name('delete-manager-task');
 
 //Manager Revenue
 Route::get('/manager-all-revenue', [ManagerRevenueController::class, 'manager_all_revenue'])->name('manager-all-revenue');

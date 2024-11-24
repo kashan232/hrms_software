@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\Hr;
 use App\Models\HrMnagerAttendance;
 use App\Models\Manager;
+use App\Models\MnagerAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -127,7 +128,7 @@ class HrAndManagerAttendanceController extends Controller
             $emp_id = Auth()->user()->emp_id;
 
             // dd($employeeName,$emp_id);
-            $attendance_details = HrMnagerAttendance::where('emp_id', '=', $emp_id)->where('emp_name', '=', $employeeName)->first();
+            $attendance_details = MnagerAttendance::where('emp_id', '=', $emp_id)->where('emp_name', '=', $employeeName)->first();
             // dd($attendance_details);
             return view('manager_panel.attendance.create_attendance', [
                 'Manager' => $Manager,
@@ -141,22 +142,25 @@ class HrAndManagerAttendanceController extends Controller
 
     public function markIn_Manager(Request $request)
     {
-        $emp_id = Auth()->user()->emp_id;
-        $currentDate = $request->employee_attendance_date;
-        $currentTime = $request->start_time;
+        $emp_id = Auth()->user()->emp_id; // Get the logged-in employee ID
+        $emp_name = Auth()->user()->name; // Get the logged-in employee name
+        $currentDate = $request->employee_attendance_date; // Get the attendance date from request
+        $currentTime = $request->start_time; // Get the start time from request
+        // dd($emp_id);
         $designation = $request->designation;
-
-        // Check if attendance record already exists for today
-        $attendance = HrMnagerAttendance::where('emp_id', $emp_id)
-            ->whereDate('employee_attendance_date', $currentDate)
-            ->first();
+        // Check if attendance record already exists for the specific emp_id, emp_name, usertype, and date
+        $attendance = MnagerAttendance::where('emp_id', $emp_id)
+            ->where('emp_name', $emp_name)
+            ->where('usertype', 'Manager') // Ensure it's specifically for the Manager
+            ->whereDate('employee_attendance_date', $currentDate) // Check the date
+            ->exists(); // Use `exists()` to check if any record exists
 
         if (!$attendance) {
-            // Create attendance record and mark start time
-            HrMnagerAttendance::create([
+            // Create a new attendance record for the Manager
+            MnagerAttendance::create([
                 'usertype' => 'Manager',
                 'emp_id' => $emp_id,
-                'emp_name' => Auth()->user()->name,
+                'emp_name' => $emp_name,
                 'employee_attendance_date' => $currentDate,
                 'start_time' => $currentTime,
                 'employee_attendance' => 'Present',
@@ -166,8 +170,12 @@ class HrAndManagerAttendanceController extends Controller
             return response()->json(['success' => 'Attendance marked successfully']);
         }
 
+        // If attendance already exists for the specific emp_id, emp_name, usertype, and date, return an error
         return response()->json(['error' => 'Attendance already marked for today'], 400);
     }
+
+
+
 
 
     public function markOut_Manager(Request $request)
@@ -177,7 +185,7 @@ class HrAndManagerAttendanceController extends Controller
         $endtime = $request->end_time;
 
         // Check if attendance record exists for the employee on the given date
-        $attendance = HrMnagerAttendance::where('emp_id', $emp_id)
+        $attendance = MnagerAttendance::where('emp_id', $emp_id)
             ->whereDate('employee_attendance_date', $currentDate)
             ->first();
 
@@ -206,7 +214,7 @@ class HrAndManagerAttendanceController extends Controller
             $employeeName = auth()->user()->name;
             $emp_id = Auth()->user()->emp_id;
 
-            $attendance_records = HrMnagerAttendance::where('emp_id', $emp_id)->where('emp_name', $employeeName)->get();
+            $attendance_records = MnagerAttendance::where('emp_id', $emp_id)->where('emp_name', $employeeName)->get();
 
             return view('manager_panel.attendance.employee_fetch_daily_attendance', [
                 'attendance_records' => $attendance_records
@@ -221,7 +229,7 @@ class HrAndManagerAttendanceController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             $usertype = Auth()->user()->usertype;
-           
+
             $emp_id = auth()->user()->emp_id;
 
             $all_employee = Employee::where('reporting_manager', $emp_id)->get();

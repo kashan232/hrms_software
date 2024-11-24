@@ -128,6 +128,19 @@ class HomeController extends Controller
                     ]
                 );
             } else if ($usertype == 'employee') {
+                $emp_id = Auth()->user()->emp_id;
+                // dd($emp_id);
+                // Check if the employee's resignation status is approved
+                $employeeResignationStatus = EmployeeResignation::where('emp_id', $emp_id)->value('status');
+
+                if ($employeeResignationStatus === 'Approve') {
+                    // Logout the employee
+                    Auth::logout();
+
+                    // Redirect back to the login page with an error message
+                    return redirect()->route('login')->withErrors(['Your resignation has been approved. You can no longer access the system.']);
+                }
+
                 // Get the logged-in employee's name
                 $employeeName = auth()->user()->name;
 
@@ -139,9 +152,6 @@ class HomeController extends Controller
                 $CompleteTasks = DB::table('tasks')->where('task_assign_person', '=', $name)->where('status', 'Complete')->count();
                 $IncompleteTasks = DB::table('tasks')->where('task_assign_person', '=', $name)->where('status', 'Incomplete')->count();
 
-                $emp_id = Auth()->user()->emp_id;
-
-                // dd($userId);
                 $CRMSkills = CRMSkill::where('emp_id', '=', $emp_id)->count();
                 $CRMSalaires = CRMSalaire::where('emp_id', '=', $emp_id)->count();
                 $CRMInsurances = CRMInsurance::where('emp_id', '=', $emp_id)->count();
@@ -172,8 +182,6 @@ class HomeController extends Controller
                     ->where('employee_attendance', '=', 'Leave')
                     ->count();
 
-                // dd($totalPresentchart,$totalAbsentchart,$totalLeavechart);
-
                 // Calculate the total presents for the current month
                 $totalPresent = EmployeeAttendance::where('emp_id', '=', $emp_id)
                     ->whereMonth('employee_attendance_date', '=', $currentMonth)
@@ -196,7 +204,8 @@ class HomeController extends Controller
                     ->count();
 
                 $employeetasks = Task::where('task_assign_person', '=', $name)->get();
-                // 1. Average Hours
+
+                // Average Hours
                 $averageHours = DB::table('employee_attendances')
                     ->select(DB::raw("SEC_TO_TIME(AVG(TIME_TO_SEC(TIMEDIFF(end_time, start_time)))) AS average_hours"))
                     ->where('emp_id', $emp_id)
@@ -205,7 +214,7 @@ class HomeController extends Controller
                     ->whereNotNull('end_time')
                     ->first();
 
-                // 2. Average Check-In
+                // Average Check-In
                 $averageCheckIn = DB::table('employee_attendances')
                     ->select(DB::raw("SEC_TO_TIME(AVG(TIME_TO_SEC(start_time))) AS average_check_in"))
                     ->where('emp_id', $emp_id)
@@ -213,7 +222,7 @@ class HomeController extends Controller
                     ->whereNotNull('start_time')
                     ->first();
 
-                // 3. On-Time Arrival (before or at 9:00 AM)
+                // On-Time Arrival (before or at 9:00 AM)
                 $onTimeArrival = DB::table('employee_attendances')
                     ->select(DB::raw("(SUM(CASE WHEN start_time <= '09:00:00' THEN 1 ELSE 0 END) / COUNT(*)) * 100 AS on_time_percentage"))
                     ->where('emp_id', $emp_id)
@@ -221,7 +230,7 @@ class HomeController extends Controller
                     ->whereNotNull('start_time')
                     ->first();
 
-                // 4. Average Check-Out
+                // Average Check-Out
                 $averageCheckOut = DB::table('employee_attendances')
                     ->select(DB::raw("SEC_TO_TIME(AVG(TIME_TO_SEC(end_time))) AS average_check_out"))
                     ->where('emp_id', $emp_id)
@@ -234,7 +243,6 @@ class HomeController extends Controller
                 $formattedAverageCheckIn = gmdate('H:i:s', strtotime($averageCheckIn->average_check_in));
                 $formattedAverageCheckOut = gmdate('H:i:s', strtotime($averageCheckOut->average_check_out));
                 $formattedOnTimeArrival = number_format($onTimeArrival->on_time_percentage, 1) . '%';
-
 
                 return view('employee_panel.employee_dashboard', [
                     'leaves' => $leaves,
@@ -261,7 +269,6 @@ class HomeController extends Controller
                     'averageCheckOut' => $formattedAverageCheckOut,
                     'CompleteTasks' => $CompleteTasks,
                     'IncompleteTasks' => $IncompleteTasks
-
                 ]);
             } else if ($usertype == 'hr') {
                 $leaves = LeaveRequest::count();
@@ -348,10 +355,10 @@ class HomeController extends Controller
                 );
             } else if ($usertype == 'manager') {
                 $emp_id = auth()->user()->emp_id;
-                 $userId = Auth::id();
+                $userId = Auth::id();
 
                 // dd($emp_id);
-                
+
                 $leaves = LeaveRequest::where('usertype', '=', 'manager')->where('admin_or_user_id', '=', $userId)->count();
                 $attendances = HrMnagerAttendance::where('emp_id', '=', $emp_id)->where('job_designation', '=', 'Manager')->count();
 
@@ -381,7 +388,7 @@ class HomeController extends Controller
                     ->groupBy('status')
                     ->pluck('amount', 'status')
                     ->toArray();
-                    $all_task = Task::all();
+                $all_task = Task::all();
 
                 // Set default values in case any status is missing
                 $expenseData = array_merge(['paid' => 0, 'pending' => 0, 'rejected' => 0], $expenseData);

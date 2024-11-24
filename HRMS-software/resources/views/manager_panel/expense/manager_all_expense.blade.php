@@ -94,10 +94,6 @@
                                 <strong>Success!</strong> {{ session('delete-message') }}.
                             </div>
                             @endif
-
-                            {{-- <div class="alert alert-dark solid alert-square"><strong>Error!</strong>
-                                 You successfully read this important alert message.</div> --}}
-
                             <div class="table-responsive">
                                 <table id="example5" class="display table-responsive-lg">
                                     <thead>
@@ -128,7 +124,7 @@
                                             <td>{{ $expense->usertype }}</td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <button type="button" class="btn btn-primary btn-md editbtn"
+                                                    <button type="button" class="btn btn-primary btn-sm editbtn"
                                                         data-id="{{ $expense->id }}"
                                                         data-date="{{ $expense->date }}"
                                                         data-description="{{ $expense->description }}"
@@ -143,7 +139,7 @@
                                                     <form action="{{ route('manager-delete-expense', $expense->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-md" onclick="return confirm('Are you sure you want to delete this expense?');">
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this expense?');">
                                                             <i class="la la-trash"></i>
                                                         </button>
                                                     </form>
@@ -162,22 +158,6 @@
             </div>
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK Technologies</a>
-                2024</p>
-        </div>
-    </div> <!--**********************************
-            Footer end
-        ***********************************-->
-
-
 </div>
 <!--**********************************
         Main wrapper end

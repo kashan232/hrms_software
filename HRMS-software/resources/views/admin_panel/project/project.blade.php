@@ -93,12 +93,19 @@
                         </div>
                         @endif
 
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="card-title">Project</h4>
-                            <div>
+                            <div class="d-flex">
+                            <select id="employeeTypeFilter" class="form-select w-auto">
+                                    <option value="">All </option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Pending">Incompleted</option>
+                                </select>
+                                &nbsp;
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New Department">
                                     <i class="las la-plus"></i>Add New
                                 </button>
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -120,7 +127,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($all_project as $project)
-                                        <tr>
+                                        <tr data-type="{{ $project->status }}">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $project->project_name }} <br> {{ $project->project_deadline }} </td>
                                             <td>{{ $project->project_category }}</td>
@@ -405,6 +412,25 @@
             $('#editProjectBudget').val(project.projectBudget);
             $('#editProjectPriority').val(project.projectPriority);
             $('#editProjectDescription').val(project.projectDescription);
+        });
+    });
+</script>
+
+
+
+<script>
+    // JavaScript to handle filtering
+    document.getElementById('employeeTypeFilter').addEventListener('change', function() {
+        const filterValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#example5 tbody tr');
+
+        rows.forEach(row => {
+            const type = row.getAttribute('data-type').toLowerCase();
+            if (!filterValue || type === filterValue) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
         });
     });
 </script>

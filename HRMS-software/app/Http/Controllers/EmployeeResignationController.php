@@ -36,8 +36,11 @@ class EmployeeResignationController extends Controller
         if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             $userId = Auth::id();
+            $emp_id = Auth()->user()->emp_id;
+
             $EmployeeResignation = EmployeeResignation::create([
                 'admin_or_user_id'    => $userId,
+                'emp_id'    => $emp_id,
                 'employeeName'          => $request->employeeName,
                 'department'          => $request->department,
                 'designation'          => $request->designation,
@@ -59,7 +62,9 @@ class EmployeeResignationController extends Controller
             $userId = Auth::id();
             // dd($userId);
             $usertype = Auth()->user()->usertype;
-            $EmployeeResignations = EmployeeResignation::where('admin_or_user_id', '=', $userId)->get();
+            $emp_id = Auth()->user()->emp_id;
+
+            $EmployeeResignations = EmployeeResignation::where('emp_id', '=', $emp_id)->get();
             return view('employee_panel.resignatoin.all_resignatoin', [
                 'EmployeeResignations' => $EmployeeResignations,
             ]);

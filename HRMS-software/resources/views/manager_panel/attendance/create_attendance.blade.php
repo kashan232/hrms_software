@@ -95,7 +95,7 @@
 
             // AJAX request to mark attendance
             $.ajax({
-                url: "{{ route('Manager-attendance-in') }}",
+                url: "{{ route('Manager-attendance-in-check') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',

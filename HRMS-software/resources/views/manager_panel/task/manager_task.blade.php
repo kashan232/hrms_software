@@ -96,14 +96,19 @@
                                                         data-task-priority="{{ $task->task_priority }}"
                                                         data-description="{{ $task->description }}"
                                                         data-toggle="modal" data-target="#edittask">
-                                                        <i class="la la-pencil"></i> 
+                                                        <i class="la la-pencil"></i>
                                                     </button>
 
-                                                    <button type="button" class="btn btn-danger btn-sm" style="margin-left: 5px;">
-                                                        <a href="{{ route('delete-manager-task', ['id' => $task->id]) }}" style="color: white; text-decoration: none;">
-                                                            <i class="la la-trash"></i> 
-                                                        </a>
-                                                    </button>
+
+                                                    <form id="deleteForm-{{ $task->id }}" action="{{ route('delete-manager-task', ['id' => $task->id]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE') <!-- To send a DELETE request -->
+
+                                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $task->id }})">
+                                                            <i class="la la-trash"></i>
+                                                        </button>
+                                                    </form>
+
                                                 </div>
                                             </td>
 
@@ -127,7 +132,6 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title"><span class="type"></span> <span>Add Task</span></h5>
-                            <!-- Adjusted close button with custom styling -->
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 1rem; border:none;">
                                 <i class="las la-times"></i>
                             </button>
@@ -157,31 +161,29 @@
                                             <input type="date" name="end_date" class="form-control" required>
                                         </div>
                                     </div>
-                                    <!-- Task Assign Person Select Box -->
                                     <label>Task Assign Person</label>
                                     <select name="task_assign_person" id="taskAssignPerson" class="form-control">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($all_employee as $employee)
-                                        <option value="{{ $employee->first_name }} {{ $employee->last_name }}" data-department="{{ $employee->department }}" data-designation="{{ $employee->designation }}">
+                                        <option value="{{ $employee->first_name }} {{ $employee->last_name }}"
+                                            data-department="{{ $employee->department }}"
+                                            data-designation="{{ $employee->designation }}">
                                             {{ $employee->first_name }} {{ $employee->last_name }}
                                         </option>
                                         @endforeach
                                     </select>
-
-
-                                    <!-- Employee Department and Designation Input Fields -->
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Employee Department</label>
-                                            <input type="text" name="department" id="editDepartmentName" class="form-control" readonly>
+                                            <input type="text" name="department" id="department" class="form-control" readonly>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Designation</label>
-                                            <input type="text" name="designation" id="editDesignationname" class="form-control" readonly>
+                                            <input type="text" name="designation" id="designation" class="form-control" readonly>
                                         </div>
                                     </div>
                                     <label>Task Priority</label>
-                                    <select name="task_priority" id="" class="form-control" required>
+                                    <select name="task_priority" class="form-control" required>
                                         <option value="" selected disabled>Select One</option>
                                         <option value="Highest">Highest</option>
                                         <option value="Medium">Medium</option>
@@ -198,6 +200,7 @@
                     </div>
                 </div>
             </div>
+
 
 
             <div id="cuModaledit" class="modal fade" tabindex="-1" role="dialog">
@@ -302,39 +305,37 @@
     ***********************************-->
 
 @include('manager_panel.include.footer_include')
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const selectBox = document.getElementById('taskAssignPerson');
+        const taskAssignPerson = document.getElementById('taskAssignPerson');
+        const departmentField = document.getElementById('department');
+        const designationField = document.getElementById('designation');
 
-        // Create an input box for search
-        const searchInput = document.createElement('input');
-        searchInput.setAttribute('type', 'text');
-        searchInput.setAttribute('id', 'searchInput');
-        searchInput.classList.add('form-control');
 
-        // Insert the search input above the select box
-        selectBox.parentElement.insertBefore(searchInput, selectBox);
+        // Update department and designation on selection
+        taskAssignPerson.addEventListener('change', function() {
+            const selectedOption = taskAssignPerson.options[taskAssignPerson.selectedIndex];
 
-        // Filter the select options based on the search input
-        searchInput.addEventListener('input', function() {
-            const filter = searchInput.value.toLowerCase();
-            const options = selectBox.getElementsByTagName('option');
+            // Fetch department and designation data from the selected option
+            const department = selectedOption.getAttribute('data-department');
+            const designation = selectedOption.getAttribute('data-designation');
 
-            // Loop through all options and hide those that don't match the search term
-            Array.from(options).forEach(option => {
-                if (option.text.toLowerCase().indexOf(filter) > -1) {
-                    option.style.display = ''; // Show the option
-                } else {
-                    option.style.display = 'none'; // Hide the option
-                }
-            });
-        });
-
-        // Reset the search when the dropdown is closed (optional)
-        selectBox.addEventListener('blur', function() {
-            searchInput.value = ''; // Clear the search input when focus is lost
+            // Set the fetched data to input fields
+            departmentField.value = department || '';
+            designationField.value = designation || '';
         });
     });
+
+    function confirmDelete(taskId) {
+        // Confirmation prompt before delete
+        const confirmation = confirm("Are you sure you want to delete this Task?");
+
+        if (confirmation) {
+            // If user confirms, submit the delete form
+            document.getElementById('deleteForm-' + taskId).submit();
+        }
+    }
 
     $(document).ready(function() {
         // Fill the edit form with existing data when the edit button is clicked

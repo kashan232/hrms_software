@@ -18,9 +18,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if (session()->has('manager-added'))
+                        @if (session()->has('resignation-added'))
                         <div class="alert alert-success solid alert-square">
-                            <strong>Success!</strong> {{ session('manager-added') }}.
+                            <strong>Success!</strong> {{ session('resignation-added') }}.
                         </div>
                         @endif
                         <div class="card-header">
