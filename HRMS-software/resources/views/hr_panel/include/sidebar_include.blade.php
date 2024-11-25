@@ -77,6 +77,8 @@
                  </ul>
              </li>
 
+           
+
              <li><a class="has-arrow ai-icon" href="{{ route('hr-all-resignation') }}" aria-expanded="false">
                      <i class="fas fa-user-times"></i>
                      <span class="nav-text"> Resignation</span>
@@ -89,6 +91,17 @@
                      <span class="nav-text">Add Leave Request</span>
                  </a>
              </li>
+
+             <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                     <i class="fas fa-user-times"></i>
+                     <span class="nav-text"> Terminate Employee</span>
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('hr-emp-termination') }}">Create Employee Termination</a></li>
+                     <li><a href="{{ route('hr-emp-all-termination') }}">Terminate Employee</a></li>
+                 </ul>
+             </li>
+
              <li><a class="has-arrow ai-icon" href="{{ route('employee-cmr') }}" aria-expanded="false">
                      <i class="fas fa-boxes"></i>
                      <span class="nav-text">CMR</span>

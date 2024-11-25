@@ -47,6 +47,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportingController;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TerminationOfEmployeeController;
 use App\Models\EmployeePromotion;
 use App\Models\LeaveRequest;
 use Illuminate\Support\Facades\Route;
@@ -173,6 +174,14 @@ Route::post('/store-hr-promotion', [EmployeePromotionController::class, 'store_h
 Route::get('/hr-all-promotion', [EmployeePromotionController::class, 'hr_all_promotion'])->name('hr-all-promotion');
 Route::put('/employee-promotions/{id}', [EmployeePromotionController::class, 'update'])->name('employee-promotions.update');
 Route::delete('/employee-promotions/{id}', [EmployeePromotionController::class, 'destroy'])->name('employee-promotions.destroy');
+
+
+Route::get('/hr-emp-termination', [TerminationOfEmployeeController::class, 'hr_emp_termination'])->name('hr-emp-termination');
+Route::post('/store-hr-emp-termination', [TerminationOfEmployeeController::class, 'store_hr_emp_termination'])->name('store-hr-emp-termination');
+Route::get('/hr-emp-all-termination', [TerminationOfEmployeeController::class, 'hr_emp_all_termination'])->name('hr-emp-all-termination');
+Route::delete('/employee-terminations/{id}', [TerminationOfEmployeeController::class, 'destroy']);
+Route::put('/employee-terminations/{id}', [TerminationOfEmployeeController::class, 'update']);
+
 
 Route::get('/resignation-create', [EmployeeResignationController::class, 'resignation_create'])->name('resignation-create');
 Route::post('/store-resignation-create', [EmployeeResignationController::class, 'store_resignation_create'])->name('store-resignation-create');
