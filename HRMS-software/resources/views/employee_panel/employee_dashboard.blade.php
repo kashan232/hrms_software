@@ -80,9 +80,8 @@
                         </div>
                     </a>
                 </div>
-
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('seprate-employee-cmr') }}">
+                    <a href="{{ route('seprate-employee-cmr') }}?tab=skills">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-cogs fa-2x mb-2 text-warning"></i>
@@ -95,7 +94,7 @@
 
                 <!-- Second Card Row -->
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('seprate-employee-cmr') }}">
+                    <a href="{{ route('seprate-employee-cmr') }}?tab=insurance">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-shield-alt fa-2x mb-2 text-danger"></i>
@@ -107,7 +106,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('seprate-employee-cmr') }}">
+                    <a href="{{ route('seprate-employee-cmr') }}?tab=training">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-chalkboard-teacher fa-2x mb-2 text-secondary"></i>
@@ -119,7 +118,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('seprate-employee-cmr') }}">
+                    <a href="{{ route('seprate-employee-cmr') }}?tab=experience">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-briefcase fa-2x mb-2 text-dark"></i>
@@ -131,7 +130,7 @@
                 </div>
 
                 <div class="col-md-3 col-sm-6 mb-3">
-                    <a href="{{ route('seprate-employee-cmr') }}">
+                    <a href="{{ route('seprate-employee-cmr') }}?tab=salaries">
                         <div class="card shadow-sm">
                             <div class="card-body text-center">
                                 <i class="fas fa-money-bill-wave fa-2x mb-2 text-success"></i>
@@ -141,6 +140,7 @@
                         </div>
                     </a>
                 </div>
+
             </div>
 
             <div class="row">
@@ -246,11 +246,11 @@
 
                 <div class="col-xl-12 col-xxl-12">
                     <div class="card p-2">
-                    <div class="card-header border-0 pb-0">
+                        <div class="card-header border-0 pb-0">
                             <h3 class="text-black text-center mt-3 mb-4">Task Updates</h3>
                         </div>
                         <div class="table-responsive">
-                        <table class="table table-striped table-sm display table-responsive-lg">
+                            <table class="table table-striped table-sm display table-responsive-lg">
                                 <thead>
                                     <tr>
                                         <th>Sno</th>
@@ -322,101 +322,127 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    // Ensure the data is passed correctly
-    var attendanceData = [
-        {{ $totalPresentchart ?? 0 }},
-        {{ $totalLeavechart ?? 0 }},
-        {{ $totalAbsentchart ?? 0 }}
-    ]; // Default to 0 if the values are not set
+        // Ensure the data is passed correctly
+        var attendanceData = [{
+                {
+                    $totalPresentchart ?? 0
+                }
+            },
+            {
+                {
+                    $totalLeavechart ?? 0
+                }
+            },
+            {
+                {
+                    $totalAbsentchart ?? 0
+                }
+            }
+        ]; // Default to 0 if the values are not set
 
-    var totalAttendance = {{ $totalAttendancechart ?? 0 }}; // Total attendance count, default to 0
+        var totalAttendance = {
+            {
+                $totalAttendancechart ?? 0
+            }
+        }; // Total attendance count, default to 0
 
-    // Check for any potential errors or empty data
-    if (attendanceData.some(item => item === 0)) {
-        console.log('Error: Some attendance data is missing or not available');
-    }
+        // Check for any potential errors or empty data
+        if (attendanceData.some(item => item === 0)) {
+            console.log('Error: Some attendance data is missing or not available');
+        }
 
-    var options = {
-        chart: {
-            type: 'donut',
-            height: 400, 
-            width: '400px',
-            toolbar: { show: false }
-        },
-        series: attendanceData, // Present, Leave, Absent counts
-        labels: ['Present', 'Leave', 'Absent'],
-        colors: ['#28a745', '#ffc107', '#dc3545'],
-        plotOptions: {
-            pie: {
-                donut: {
-                    size: '60%',
-                    labels: {
-                        show: true,
-                        name: {
+        var options = {
+            chart: {
+                type: 'donut',
+                height: 400,
+                width: '400px',
+                toolbar: {
+                    show: false
+                }
+            },
+            series: attendanceData, // Present, Leave, Absent counts
+            labels: ['Present', 'Leave', 'Absent'],
+            colors: ['#28a745', '#ffc107', '#dc3545'],
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '60%',
+                        labels: {
                             show: true,
-                            fontSize: '18px',
-                            color: '#000',
-                            offsetY: -10
-                        },
-                        value: {
-                            show: true,
-                            fontSize: '24px',
-                            color: '#000',
-                            offsetY: 10,
-                            formatter: function() { return ''; }
+                            name: {
+                                show: true,
+                                fontSize: '18px',
+                                color: '#000',
+                                offsetY: -10
+                            },
+                            value: {
+                                show: true,
+                                fontSize: '24px',
+                                color: '#000',
+                                offsetY: 10,
+                                formatter: function() {
+                                    return '';
+                                }
+                            }
                         }
                     }
                 }
-            }
-        },
-        dataLabels: {
-            enabled: true,
-            formatter: function(val, opts) {
-                return opts.w.globals.series[opts.seriesIndex]; // Show counts
-            }
-        },
-        legend: {
-            position: 'bottom',
-            fontSize: '12px',
-            labels: { colors: ['#000'], width: 50 }
-        },
-        responsive: [{
-            breakpoint: 768,
-            options: {
-                chart: { height: 400, width: '300px' },
-                legend: { position: 'bottom' }
-            }
-        }]
-    };
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function(val, opts) {
+                    return opts.w.globals.series[opts.seriesIndex]; // Show counts
+                }
+            },
+            legend: {
+                position: 'bottom',
+                fontSize: '12px',
+                labels: {
+                    colors: ['#000'],
+                    width: 50
+                }
+            },
+            responsive: [{
+                breakpoint: 768,
+                options: {
+                    chart: {
+                        height: 400,
+                        width: '300px'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
 
-    var chart = new ApexCharts(document.querySelector("#attendanceDonutChart"), options);
-    chart.render();
+        var chart = new ApexCharts(document.querySelector("#attendanceDonutChart"), options);
+        chart.render();
 
-    // Add total attendance label and heading in the center
-    var totalLabel = document.createElement('div');
-    totalLabel.style.position = 'absolute';
-    totalLabel.style.left = '46%';
-    totalLabel.style.top = '46%';
-    totalLabel.style.transform = 'translate(-46%, -46%)';
-    totalLabel.style.textAlign = 'center';
-    totalLabel.style.pointerEvents = 'none';
+        // Add total attendance label and heading in the center
+        var totalLabel = document.createElement('div');
+        totalLabel.style.position = 'absolute';
+        totalLabel.style.left = '46%';
+        totalLabel.style.top = '46%';
+        totalLabel.style.transform = 'translate(-46%, -46%)';
+        totalLabel.style.textAlign = 'center';
+        totalLabel.style.pointerEvents = 'none';
 
-    var heading = document.createElement('div');
-    heading.style.fontSize = '20px';
-    heading.style.color = '#000';
-    heading.innerHTML = 'Total Attendance';
+        var heading = document.createElement('div');
+        heading.style.fontSize = '20px';
+        heading.style.color = '#000';
+        heading.innerHTML = 'Total Attendance';
 
-    var totalCount = document.createElement('div');
-    totalCount.style.fontSize = '22px';
-    totalCount.style.color = '#000';
-    totalCount.innerHTML = totalAttendance;
+        var totalCount = document.createElement('div');
+        totalCount.style.fontSize = '22px';
+        totalCount.style.color = '#000';
+        totalCount.innerHTML = totalAttendance;
 
-    totalLabel.appendChild(heading);
-    totalLabel.appendChild(totalCount);
+        totalLabel.appendChild(heading);
+        totalLabel.appendChild(totalCount);
 
-    document.querySelector('#attendanceDonutChart').appendChild(totalLabel);
-});
-
+        document.querySelector('#attendanceDonutChart').appendChild(totalLabel);
+    });
 </script>
 
 

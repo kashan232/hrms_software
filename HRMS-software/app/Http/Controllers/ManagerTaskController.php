@@ -33,6 +33,29 @@ class ManagerTaskController extends Controller
             return redirect()->back();
         }
     }
+
+    public function manager_add_task()
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $all_project = Project::all();
+            $emp_id = auth()->user()->emp_id;
+            $all_employee = Employee::where('reporting_manager', $emp_id)->get();
+            $all_task = Task::where('admin_or_user_id', $userId)->get();
+            $all_department = Department::all();
+            $all_designation = Designation::all();
+            return view('manager_panel.task.manager_add_task', [
+                'all_project' => $all_project,
+                'all_employee' => $all_employee,
+                'all_task' => $all_task,
+                'all_department' => $all_department,
+                'all_designation' => $all_designation,
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
     public function manager_store_task(Request $request)
     {
         if (Auth::check()) {

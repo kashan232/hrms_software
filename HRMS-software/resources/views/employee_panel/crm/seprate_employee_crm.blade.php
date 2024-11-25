@@ -24,26 +24,28 @@
                         <div class="card-body">
                             <ul class="nav nav-pills mb-4 light">
                                 <li class="nav-item">
-                                    <a href="#skills-tab" class="nav-link active" data-bs-toggle="tab" aria-expanded="false">Skills</a>
+                                    <a href="{{ route('seprate-employee-cmr') }}?tab=skills" class="nav-link {{ $activeTab == 'skills' ? 'active' : '' }}" data-bs-toggle="tab">Skills</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#insurance-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="false">Insurance</a>
+                                    <a href="{{ route('seprate-employee-cmr') }}?tab=insurance" class="nav-link {{ $activeTab == 'insurance' ? 'active' : '' }}" data-bs-toggle="tab">Insurance</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#training-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Training</a>
+                                    <a href="{{ route('seprate-employee-cmr') }}?tab=training" class="nav-link {{ $activeTab == 'training' ? 'active' : '' }}" data-bs-toggle="tab">Training</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#experience-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Experience</a>
+                                    <a href="{{ route('seprate-employee-cmr') }}?tab=experience" class="nav-link {{ $activeTab == 'experience' ? 'active' : '' }}" data-bs-toggle="tab">Experience</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#salaries-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Salaries</a>
+                                    <a href="{{ route('seprate-employee-cmr') }}?tab=salaries" class="nav-link {{ $activeTab == 'salaries' ? 'active' : '' }}" data-bs-toggle="tab">Salaries</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#suggestions-tab" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Suggestions</a>
+                                    <a href="{{ route('seprate-employee-cmr') }}?tab=suggestions" class="nav-link {{ $activeTab == 'suggestions' ? 'active' : '' }}" data-bs-toggle="tab">Suggestions</a>
                                 </li>
                             </ul>
+
+
                             <div class="tab-content">
-                                <div id="skills-tab" class="tab-pane active">
+                                <div class="tab-pane fade {{ $activeTab == 'skills' ? 'show active' : '' }}" id="skills-tab">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-header">
@@ -80,7 +82,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="insurance-tab" class="tab-pane">
+                                <div class="tab-pane fade {{ $activeTab == 'insurance' ? 'show active' : '' }}" id="insurance-tab">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-header">
@@ -117,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="training-tab" class="tab-pane">
+                                <div class="tab-pane fade {{ $activeTab == 'training' ? 'show active' : '' }}" id="training-tab">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-header">
@@ -155,7 +157,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="experience-tab" class="tab-pane">
+                                <div class="tab-pane fade {{ $activeTab == 'experience' ? 'show active' : '' }}" id="experience-tab">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-header">
@@ -194,12 +196,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="salaries-tab" class="tab-pane">
+                                <div class="tab-pane fade {{ $activeTab == 'salaries' ? 'show active' : '' }}" id="salaries-tab">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-header">
                                                 <h4 class="card-title">Salaries</h4>
-                                                
+
                                             </div>
                                             <div class="table-responsive">
                                                 <table id="example5" class="display table-responsive-lg">
@@ -232,7 +234,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="suggestions-tab" class="tab-pane">
+                                <div class="tab-pane fade {{ $activeTab == 'suggestions' ? 'show active' : '' }}" id="suggestions-tab">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card-header">

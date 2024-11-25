@@ -388,6 +388,8 @@ Route::get('/project-listing-to-manager', [ManagerProjectListingController::clas
 
 //Manager Task
 Route::get('/manager-task', [ManagerTaskController::class, 'manager_task'])->name('manager-task');
+Route::get('/manager-add-task', [ManagerTaskController::class, 'manager_add_task'])->name('manager-add-task');
+
 Route::post('/manager-store-task', [ManagerTaskController::class, 'manager_store_task'])->name('manager-store-task');
 Route::post('/manager-update-task', [ManagerTaskController::class, 'manager_update_task'])->name('manager-update-task');
 Route::delete('/delete-manager-task/{id}', [ManagerTaskController::class, 'delete_manager_task'])->name('delete-manager-task');

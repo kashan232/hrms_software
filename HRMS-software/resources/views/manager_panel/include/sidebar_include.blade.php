@@ -47,7 +47,6 @@
 
              </li>
              <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
                      <i class="fas fa-graduation-cap"></i>
                      <span class="nav-text">Jobs</span>
                  </a>
@@ -63,12 +62,22 @@
                      <span class="nav-text">Projects</span>
                  </a>
              </li>
+
              <li><a class="has-arrow ai-icon" href="{{ route('manager-task') }}" aria-expanded="false">
-                     {{-- <i class="flaticon-381-controls-3"></i> --}}
-                     <i class="fas fa-tasks"></i>
-                     <span class="nav-text">Add Task</span>
+                     <i class="fas fa-graduation-cap"></i>
+                     <span class="nav-text">Task</span>
                  </a>
              </li>
+
+             <!-- <li class="has-menu"><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+
+                 </a>
+                 <ul aria-expanded="false">
+                     <li><a href="{{ route('manager-add-task') }}">Create Task</a></li>
+                     <li><a href="{{ route('manager-task') }}">All Task</a></li>
+                 </ul>
+             </li> -->
+
 
              <li class="has-menu">
                  <a class="has-arrow ai-icon" href="#" aria-expanded="false">
