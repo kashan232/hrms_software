@@ -25,7 +25,16 @@
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Leave Request</h4>
-                            <div>
+
+                            <div class="d-flex">
+                                <!-- Filter Dropdown -->
+                                <select id="leaveStatusFilter" class="form-select w-auto me-3">
+                                    <option value="">All Status</option>
+                                    <option value="Approve">Approved</option>
+                                    <option value="Reject">Rejected</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New Department">
                                     <i class="las la-plus"></i>Add New
                                 </button>
@@ -46,7 +55,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($LeaveRequests as $LeaveRequest)
-                                        <tr>
+                                        <tr data-status="{{ $LeaveRequest->leave_approve }}">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $LeaveRequest->leave_type }}</td>
                                             <td>{{ $LeaveRequest->leave_from_date }} <br>
@@ -277,36 +286,42 @@
         $('#department').val(department);
         $('#designation').val(designation);
     });
+
+    // JavaScript to filter table rows based on leave status
+    document.getElementById('leaveStatusFilter').addEventListener('change', function() {
+        const filterValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#example5 tbody tr');
+
+        rows.forEach(row => {
+            const status = row.getAttribute('data-status').toLowerCase();
+            if (!filterValue || status === filterValue) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    });
+
 </script>
 
 <script>
     $(document).ready(function() {
-        // Add event listener for when the leave type changes
         $('select[name="leave_type"]').on('change', function() {
-            let leaveType = $(this).val(); // Get the selected leave type
-
-            // Alert the selected leave type for debugging/checking
+            let leaveType = $(this).val(); 
             alert('Selected Leave Type: ' + leaveType);
-
-            // Check if a leave type is selected
             if (leaveType) {
-                // Make an AJAX request to get the leave balance for the selected leave type
                 $.ajax({
-                    url: '{{ route("get-leave-balance") }}', // Adjust the route to your correct route
+                    url: '{{ route("get-leave-balance") }}', 
                     type: 'GET',
                     data: {
                         leave_type: leaveType,
-                        emp_id: '{{ $employee_details->id }}' // Send employee ID
+                        emp_id: '{{ $employee_details->id }}' 
                     },
                     success: function(response) {
-                        // Display the leave balance in an alert for further checking/debugging
                         alert('Available Leave Balance: ' + response.leave_balance);
-
-                        // Optionally update the leave balance input or any other UI element
                         $('#leaveBalance').val(response.leave_balance);
                     },
                     error: function(xhr, status, error) {
-                        // If there's an error, alert the error message
                         alert('Error fetching leave balance: ' + xhr.responseText);
                     }
                 });
