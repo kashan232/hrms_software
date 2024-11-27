@@ -30,7 +30,10 @@ use App\Models\EmployeePromotion;
 use App\Models\EmployeeResignation;
 use App\Models\HrMnagerAttendance;
 use App\Models\Manager;
+use App\Models\MnagerAttendance;
 use App\Models\OfferLetter;
+use Artisan;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -140,6 +143,15 @@ class HomeController extends Controller
                     // Redirect back to the login page with an error message
                     return redirect()->route('login')->withErrors(['Your resignation has been approved. You can no longer access the system.']);
                 }
+
+                // dd($emp_id);
+
+                $currentDate = date('Y-m-d');
+
+                // Check if today's attendance exists
+                $attendanceExists = EmployeeAttendance::where('emp_id', $emp_id)
+                    ->where('employee_attendance_date', $currentDate)
+                    ->exists();
 
                 // Get the logged-in employee's name
                 $employeeName = auth()->user()->name;
@@ -268,7 +280,9 @@ class HomeController extends Controller
                     'onTimeArrival' => $formattedOnTimeArrival,
                     'averageCheckOut' => $formattedAverageCheckOut,
                     'CompleteTasks' => $CompleteTasks,
-                    'IncompleteTasks' => $IncompleteTasks
+                    'IncompleteTasks' => $IncompleteTasks,
+                    'attendanceExists' => $attendanceExists
+
                 ]);
             } else if ($usertype == 'hr') {
                 $leaves = LeaveRequest::count();
@@ -328,7 +342,15 @@ class HomeController extends Controller
                         return $attendance->start_time <= '09:00:00'; // Adjust this time based on your on-time definition
                     })->count(),
                 ];
+                $currentDate = date('Y-m-d');
+                $emp_id = auth()->user()->emp_id;
 
+                // Check if today's attendance exists
+                $attendanceExists = HrMnagerAttendance::where('emp_id', $emp_id)
+                    ->where('employee_attendance_date', $currentDate)
+                    ->exists();
+
+                // dd($attendanceExists);
                 return view(
                     'hr_panel.hr_dashboard',
                     [
@@ -350,7 +372,8 @@ class HomeController extends Controller
                         'EmployeeResignations' => $EmployeeResignations,
                         'EmployeePromotions' => $EmployeePromotions,
                         'OfferLetters' => $OfferLetters,
-                        'all_managercounts' => $all_managercounts
+                        'all_managercounts' => $all_managercounts,
+                        'attendanceExists' => $attendanceExists
                     ]
                 );
             } else if ($usertype == 'manager') {
@@ -358,6 +381,13 @@ class HomeController extends Controller
                 $userId = Auth::id();
 
                 // dd($emp_id);
+
+                $currentDate = date('Y-m-d');
+
+                // Check if today's attendance exists
+                $attendanceExists = MnagerAttendance::where('emp_id', $emp_id)
+                    ->where('employee_attendance_date', $currentDate)
+                    ->exists();
 
                 $leaves = LeaveRequest::where('usertype', '=', 'manager')->where('admin_or_user_id', '=', $userId)->count();
                 $attendances = HrMnagerAttendance::where('emp_id', '=', $emp_id)->where('job_designation', '=', 'Manager')->count();
@@ -412,6 +442,7 @@ class HomeController extends Controller
                         'expenseData' => $expenseData,
                         'all_project_detais' => $all_project_detais,
                         'all_task' => $all_task,
+                        'attendanceExists' => $attendanceExists,
                     ]
                 );
             }
@@ -471,5 +502,33 @@ class HomeController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+
+    public function markAbsent(Request $request)
+    {
+        // Run the Artisan command when button is clicked
+        Artisan::call('attendance:mark-absent');
+
+        // Redirect back with success message
+        return redirect()->back()->with('status', 'Absent attendance marked successfully.');
+    }
+
+    public function markAbsentManager(Request $request)
+    {
+        // Artisan command ko call karein
+        Artisan::call('attendance:mark-absent-manager');
+
+        // Success message ke sath return karein
+        return redirect()->back()->with('status', 'Manager Absent attendance marked successfully.');
+    }
+
+    public function markAbsentManager(Request $request)
+    {
+        // Artisan command ko call karein
+        Artisan::call('attendance:mark-absent-manager');
+
+        // Success message ke sath return karein
+        return redirect()->back()->with('status', 'Manager Absent attendance marked successfully.');
     }
 }

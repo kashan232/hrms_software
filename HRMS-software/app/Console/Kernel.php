@@ -7,21 +7,17 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
-    protected function schedule(Schedule $schedule): void
+
+    protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Schedule the commands to run daily at 11:59 PM
+        $schedule->command('attendance:mark-absent')->dailyAt('23:59');
+        $schedule->command('attendance:mark-absent-manager')->dailyAt('23:59');
+        $schedule->command('attendance:mark-absent-employee')->dailyAt('23:59');
     }
 
-    /**
-     * Register the commands for the application.
-     */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
-
-        require base_path('routes/console.php');
+        $this->load(__DIR__ . '/Commands');
     }
 }

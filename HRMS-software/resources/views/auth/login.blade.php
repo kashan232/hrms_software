@@ -164,6 +164,7 @@
         }
     </style>
     <div class="wrapper">
+        <h2> Login</h2>
         @if ($errors->any())
         <div class="alert alert-danger">
             @foreach ($errors->all() as $error)
@@ -171,7 +172,6 @@
             @endforeach
         </div>
         @endif
-        <h2> Login</h2>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="input-box">
@@ -183,6 +183,16 @@
                 <x-input-label for="password" />
                 <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="Password" required autocomplete="current-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+            <div>
+                <a href="{{ route('password.request') }}" style="font-size: 14px;
+    line-height: 1.4;
+    color: #555555;
+    text-decoration:none;
+    text-align:center;
+    ">
+                    Forgot Password?
+                </a>
             </div>
             <div class="input-box button">
                 <input type="Submit" value="Login">

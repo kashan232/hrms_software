@@ -16,6 +16,39 @@
         <div class="container-fluid">
 
             <div class="row">
+                @if(!$attendanceExists)
+                <div class="modal fade" id="attendanceAlert" tabindex="-1" aria-labelledby="attendanceAlertLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title d-flex align-items-center text-white" id="attendanceAlertLabel">
+                                    <i class="bi bi-exclamation-circle me-2"></i> Attendance Required
+                                </h5>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p class="text-danger fs-5">
+                                    <i class="bi bi-clock-history"></i>
+                                    Please mark your attendance for today first!
+                                </p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <a href="{{ route('Manager-attendance-create') }}" class="btn btn-danger d-flex align-items-center">
+                                    <i class="bi bi-pencil-square me-2"></i> Mark Attendance
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    // Auto-show the modal
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var myModal = new bootstrap.Modal(document.getElementById('attendanceAlert'));
+                        myModal.show();
+                    });
+                </script>
+                @endif
+
                 <div class="d-flex flex-wrap mb-4 row">
                     <div class="col-xl-4 col-lg-4 mb-2">
                         <h2 class="text-black  font-w600 mb-1">Welcome Back, Manager: <strong>{{ Auth::user()->name }}</strong></h2> <!-- Use h2 for bigger font and bold employee name -->
@@ -184,44 +217,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($all_project_detais as $project)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $project->usertype }}</td>
-                                            <td>{{ $project->project_name }}</td>
-                                            <td>{{ $project->project_category }}</td>
-                                            <td>{{ $project->project_start_date }} <br>{{ $project->project_end_date }}</td>
-                                            <td>
-                                                {{ $project->priority }}
-                                                @php
-                                                    $progress = 0;
-                                                    $color = '';
-                                                    switch($project->priority) {
-                                                        case 'Highest':
-                                                            $progress = 100;
-                                                            $color = 'bg-success';
-                                                            break;
-                                                        case 'Medium':
-                                                            $progress = 75;
-                                                            $color = 'bg-info';
-                                                            break;
-                                                        case 'Low':
-                                                            $progress = 50;
-                                                            $color = 'bg-warning';
-                                                            break;
-                                                        case 'Lowest':
-                                                            $progress = 25;
-                                                            $color = 'bg-danger';
-                                                            break;
-                                                    }
-                                                @endphp
-                                                <div class="progress" style="height: 20px;">
-                                                    <div class="progress-bar {{ $color }}" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <span>{{ $progress }}%</span>
-                                            </td>
-                                            <td>{{ $project->description }}</td>
-                                            <td>
+                                    @foreach ($all_project_detais as $project)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $project->usertype }}</td>
+                                        <td>{{ $project->project_name }}</td>
+                                        <td>{{ $project->project_category }}</td>
+                                        <td>{{ $project->project_start_date }} <br>{{ $project->project_end_date }}</td>
+                                        <td>
+                                            {{ $project->priority }}
+                                            @php
+                                            $progress = 0;
+                                            $color = '';
+                                            switch($project->priority) {
+                                            case 'Highest':
+                                            $progress = 100;
+                                            $color = 'bg-success';
+                                            break;
+                                            case 'Medium':
+                                            $progress = 75;
+                                            $color = 'bg-info';
+                                            break;
+                                            case 'Low':
+                                            $progress = 50;
+                                            $color = 'bg-warning';
+                                            break;
+                                            case 'Lowest':
+                                            $progress = 25;
+                                            $color = 'bg-danger';
+                                            break;
+                                            }
+                                            @endphp
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar {{ $color }}" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <span>{{ $progress }}%</span>
+                                        </td>
+                                        <td>{{ $project->description }}</td>
+                                        <td>
                                             @if ($project->status == 'Pending')
                                             <span class="leave-icon">⏳</span>
                                             @elseif ($project->status == 'Completed')
@@ -229,9 +262,9 @@
                                             @elseif ($project->status == 'Reject')
                                             <span class="leave-icon">❌</span>
                                             @endif
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -241,7 +274,7 @@
 
             <div class="row">
 
-            <div class="col-xl-12 col-xxl-12">
+                <div class="col-xl-12 col-xxl-12">
                     <div class="card p-3">
                         <h5 class="card-title text-center">Task Status</h5>
                         <div class="table-responsive">
@@ -265,7 +298,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $task->project_name }}</td>
                                         <td>{{ $task->task_category }}</td>
-                                        <td>{{ $task->department }}  </td>
+                                        <td>{{ $task->department }} </td>
                                         <td>{{ $task->designation }} </td>
                                         <td>{{ $task->task_assign_person }}</td>
                                         <td>{{ $task->task_priority }}</td>
@@ -318,9 +351,21 @@
 <script>
     // Dynamic data from the backend with fallback values to avoid NaN
     var leaveData = {
-        approved: {{ $leaveApproved ?? 0 }},
-        pending: {{ $leavePending ?? 0 }},
-        rejected: {{ $leaveReject ?? 0 }}
+        approved: {
+            {
+                $leaveApproved ?? 0
+            }
+        },
+        pending: {
+            {
+                $leavePending ?? 0
+            }
+        },
+        rejected: {
+            {
+                $leaveReject ?? 0
+            }
+        }
     };
 
     // Create ApexCharts donut chart
@@ -337,7 +382,7 @@
         },
         dataLabels: {
             enabled: true,
-            formatter: function (val, opts) {
+            formatter: function(val, opts) {
                 const total = leaveData.approved + leaveData.pending + leaveData.rejected || 1; // Avoid division by zero
                 const count = opts.w.config.series[opts.seriesIndex];
                 const percentage = ((count / total) * 100).toFixed(2);
@@ -349,7 +394,7 @@
         },
         tooltip: {
             y: {
-                formatter: function (val) {
+                formatter: function(val) {
                     const total = leaveData.approved + leaveData.pending + leaveData.rejected || 1; // Avoid division by zero
                     const percentage = ((val / total) * 100).toFixed(2);
                     return val + ' (' + percentage + '%)';

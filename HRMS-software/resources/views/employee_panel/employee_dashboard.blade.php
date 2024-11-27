@@ -22,6 +22,40 @@
         <!-- row -->
         <div class="container-fluid">
             <div class="row">
+
+            @if(!$attendanceExists)
+                <div class="modal fade" id="attendanceAlert" tabindex="-1" aria-labelledby="attendanceAlertLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title d-flex align-items-center text-white" id="attendanceAlertLabel">
+                                    <i class="bi bi-exclamation-circle me-2"></i> Attendance Required
+                                </h5>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p class="text-danger fs-5">
+                                    <i class="bi bi-clock-history"></i>
+                                    Please mark your attendance for today first!
+                                </p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <a href="{{ route('employee-attendance-create') }}" class="btn btn-danger d-flex align-items-center">
+                                    <i class="bi bi-pencil-square me-2"></i> Mark Attendance
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    // Auto-show the modal
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var myModal = new bootstrap.Modal(document.getElementById('attendanceAlert'));
+                        myModal.show();
+                    });
+                </script>
+                @endif
+
                 <div class="d-flex flex-wrap mb-4 row">
                     <div class="col-xl-3 col-lg-4 mb-2">
                         <h2 class="text-black  font-w600 mb-1">Welcome Back, <strong>{{ Auth::user()->name }}</strong></h2> <!-- Use h2 for bigger font and bold employee name -->

@@ -15,8 +15,32 @@
         <!-- row -->
         <div class="container-fluid">
 
+
             <div class="row">
                 <div class="d-flex flex-wrap mb-4 row">
+                    <form action="{{ route('admin.mark-absent') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Mark Absent HRs</button>
+                    </form>
+
+                    <!-- Mark Absent for Managers -->
+                    <form action="{{ route('admin.mark-absent-manager') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-warning">Mark Absent Managers</button>
+                    </form>
+
+
+                    <!-- Mark Absent for Employees -->
+                    <form action="{{ route('admin.mark-absent-employee') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-info">Mark Absent Employees</button>
+                    </form>
+                    <!-- Display success message if the command was successful -->
+                    @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                    @endif
                     <div class="col-xl-4 col-lg-4 mb-2">
                         <h2 class="text-black  font-w600 mb-1">Welcome : <strong>{{ Auth::user()->name }}</strong></h2> <!-- Use h2 for bigger font and bold employee name -->
                     </div>
@@ -211,18 +235,18 @@
                             </a>
                         </div>
 
-                       
 
 
-                        
+
+
                     </div>
                 </div>
-<br>
+                <br>
                 <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">Expense Overview</h5>
-                            <canvas id="expenseChart" ></canvas>
+                            <canvas id="expenseChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -258,9 +282,21 @@
 
 <script>
     // Fetch the dynamic leave data from the server (using Blade variables)
-    const approvedLeaves = {{ $approvedLeaveCount }};
-    const pendingLeaves = {{ $pendingLeaveCount }};
-    const rejectedLeaves = {{ $rejectedLeaveCount }};
+    const approvedLeaves = {
+        {
+            $approvedLeaveCount
+        }
+    };
+    const pendingLeaves = {
+        {
+            $pendingLeaveCount
+        }
+    };
+    const rejectedLeaves = {
+        {
+            $rejectedLeaveCount
+        }
+    };
 
     // Leave Status Chart
     const leaveStatusCtx = document.getElementById('leaveStatusChart').getContext('2d');
@@ -270,7 +306,7 @@
             labels: ['Approved Leaves', 'Rejected Leaves', 'Pending Leaves'],
             datasets: [{
                 label: 'Leave Status',
-                data: [approvedLeaves, rejectedLeaves, pendingLeaves],  // Use dynamic data here
+                data: [approvedLeaves, rejectedLeaves, pendingLeaves], // Use dynamic data here
                 backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
                 borderColor: '#fff',
                 borderWidth: 2,
@@ -307,12 +343,23 @@
 </script>
 
 <script>
+    const presentCount = {
+        {
+            $presentCount
+        }
+    };
+    const absentCount = {
+        {
+            $absentCount
+        }
+    };
+    const leaveCount = {
+        {
+            $leaveCount
+        }
+    };
 
-    const presentCount = {{ $presentCount }};
-    const absentCount = {{ $absentCount }};
-    const leaveCount = {{ $leaveCount }};
 
-    
     // attendace chart
     const ctx = document.getElementById('attendanceChart').getContext('2d');
     const attendanceChart = new Chart(ctx, {
@@ -374,5 +421,4 @@
     updateTime();
 
     // Leave Status Chart
-
 </script>

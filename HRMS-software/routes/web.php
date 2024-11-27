@@ -76,6 +76,13 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('home');
 Route::get('/admin-dashboard', [HomeController::class, 'adminpage'])->middleware(['auth','admin'])->name('admin-dashboard');
 
+Route::post('/admin/mark-absent', [HomeController::class, 'markAbsent'])->name('admin.mark-absent');
+// Mark Absent Manager
+Route::post('/mark-absent-manager', [HomeController::class, 'markAbsentManager'])->name('admin.mark-absent-manager');
+
+// Mark Absent Employee
+Route::post('/mark-absent-employee', [HomeController::class, 'markAbsentEmployee'])->name('admin.mark-absent-employee');
+
 // // make Admin
 // Route::get('/add-admin', [HRController::class, 'add_admin'])->middleware(['auth','admin'])->name('add-admin');
 // Route::post('/store-admin', [HRController::class, 'store_admin'])->name('store-admin');
