@@ -7,6 +7,7 @@ use App\Models\EmployeeLeave;
 use App\Models\LeaveRequest;
 use App\Models\LeaveType;
 use App\Models\Manager;
+use App\Models\MnagerAttendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -115,4 +116,51 @@ class ManagerLeaveRequestController extends Controller
     //         return redirect()->back();
     //     }
     // }
+
+    public function mark_leave_mngr(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'leave_id' => 'required|exists:leave_requests,id',
+        ]);
+
+        // Find the leave request
+        $leaveRequest = LeaveRequest::find($request->leave_id);
+
+        // Ensure the leave is approved
+        if ($leaveRequest->leave_approve !== 'Approve') {
+            return response()->json(['message' => 'Only approved leaves can be marked!'], 400);
+        }
+
+        // Get authenticated HR details
+        $hr_id = Auth::user()->emp_id;
+        $name = Auth::user()->name;
+
+        // Retrieve HR details
+        $Managerdetails = Manager::where('id', $hr_id)->first();
+
+        if (!$Managerdetails) {
+            return response()->json(['message' => 'Manager details not found!'], 404);
+        }
+
+        // Mark the leave in the HR attendance table
+        MnagerAttendance::updateOrCreate(
+            [
+                'employee_attendance_date' => $leaveRequest->leave_from_date, // Attendance date from leave request
+                'department' => $Managerdetails->department, // HR's department
+                'job_designation' => $Managerdetails->designation, // HR's designation
+            ],
+            [
+                'usertype' => 'Manager', // HR type
+                'emp_id' => $hr_id, // HR ID from authentication
+                'emp_name' => $name, // HR name from authentication
+                'employee_attendance' => 'Leave', // Marking attendance as "Leave"
+                'start_time' => null, // No start time for leave
+                'end_time' => null, // No end time for leave
+            ]
+        );
+
+        // Return success response
+        return response()->json(['message' => 'Leave successfully marked!']);
+    }
 }

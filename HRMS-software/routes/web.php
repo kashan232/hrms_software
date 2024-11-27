@@ -255,6 +255,7 @@ Route::post('/seprate-store-employee-cmr-add-suggestion', [CMRController::class,
 // Employee LeaveRequest
 Route::get('/all-leaverequest', [LeaveRequestController::class, 'all_leaverequest'])->name('all-leaverequest');
 Route::post('/store-leaverequest', [LeaveRequestController::class, 'store_leaverequest'])->name('store-leaverequest');
+Route::post('/mark-leave-emp', [LeaveRequestController::class, 'mark_leave_emp'])->name('mark-leave-emp');
 
 Route::get('/get-leave-balance', [LeaveRequestController::class, 'getLeaveBalance'])->name('get-leave-balance');
 Route::get('/get-leave-balance-hr', [LeaveRequestController::class, 'get_leave_balance_hr'])->name('get-leave-balance-hr');
@@ -331,6 +332,7 @@ Route::post('/update-leave-approve', [HRLeavesController::class,'updateLeaveAppr
 // HR leave request
 Route::get('/hr-all-leaverequest', [HRLeaveRequestController::class, 'hr_all_leaverequest'])->name('hr-all-leaverequest');
 Route::post('/hr-store-leaverequest', [HRLeaveRequestController::class, 'hr_store_leaverequest'])->name('hr-store-leaverequest');
+Route::post('/mark-leave', [HRLeaveRequestController::class, 'markLeave'])->name('leave.mark');
 
 //HR Expense
 Route::get('/all-expense', [ExpenseController::class, 'all_expense'])->name('all-expense');
@@ -376,6 +378,7 @@ Route::post('/manager-update-leavetype', [ManagerLeaveTypeController::class, 'ma
 // Employee LeaveRequest
 Route::get('/manager-all-leaverequest', [ManagerLeaveRequestController::class, 'manager_all_leaverequest'])->name('manager-all-leaverequest');
 Route::post('/manager-store-leaverequest', [ManagerLeaveRequestController::class, 'manager_store_leaverequest'])->name('manager-store-leaverequest');
+Route::post('/mark-leave-mngr', [ManagerLeaveRequestController::class, 'mark_leave_mngr'])->name('mark-leave-mngr');
 
 //Manager Expense
 Route::get('/manager-all-expense', [ManagerExpenseController::class, 'manager_all_expense'])->name('manager-all-expense');

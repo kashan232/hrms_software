@@ -51,6 +51,7 @@
                                             <th>Start Time | End Time</th>
                                             <th>Reason</th>
                                             <th>Status</th>
+                                            <th>Action</th> <!-- New Action Column -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,6 +85,13 @@
                                                 @else
                                                 <button type="button" class="btn btn-primary">
                                                     Pending
+                                                </button>
+                                                @endif
+                                            </td>
+                                            <td> <!-- Action Column -->
+                                                @if ($LeaveRequest->leave_approve == 'Approve')
+                                                <button type="button" class="btn btn-info mark-leave" data-id="{{ $LeaveRequest->id }}">
+                                                    Mark Leave
                                                 </button>
                                                 @endif
                                             </td>
@@ -330,6 +338,30 @@
             }
         });
     });
+
+    $(document).on('click', '.mark-leave', function() {
+        const leaveId = $(this).data('id');
+
+        // Confirm action
+        if (confirm('Are you sure you want to mark this leave?')) {
+            $.ajax({
+                url: '/mark-leave-emp', // Backend route to mark leave
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Laravel CSRF token
+                    leave_id: leaveId,
+                },
+                success: function(response) {
+                    alert(response.message); // Display success message
+                    location.reload(); // Reload page to reflect changes
+                },
+                error: function(error) {
+                    alert('Something went wrong. Please try again.');
+                },
+            });
+        }
+    });
+
 </script>
 
 

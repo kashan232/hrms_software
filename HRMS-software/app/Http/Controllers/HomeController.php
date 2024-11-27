@@ -523,7 +523,7 @@ class HomeController extends Controller
         return redirect()->back()->with('status', 'Manager Absent attendance marked successfully.');
     }
 
-    public function markAbsentManager(Request $request)
+    public function markAbsentEmployee(Request $request)
     {
         // Artisan command ko call karein
         Artisan::call('attendance:mark-absent-manager');

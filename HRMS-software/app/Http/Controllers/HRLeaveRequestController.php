@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmployeeLeave;
 use App\Models\Hr;
+use App\Models\HrMnagerAttendance;
 use App\Models\LeaveRequest;
 use App\Models\LeaveType;
 use App\Models\Manager;
@@ -39,6 +40,7 @@ class HRLeaveRequestController extends Controller
             $userId = Auth::id(); // Get the authenticated user's ID
             $userType = Auth::user()->usertype; // Get user type
             $hr_id = Auth::user()->emp_id; // Get HR employee ID
+            $name = Auth::user()->name; // Get HR employee ID
 
             // Find the HR record
             $employee = Hr::find($hr_id);
@@ -92,5 +94,52 @@ class HRLeaveRequestController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function markLeave(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'leave_id' => 'required|exists:leave_requests,id',
+        ]);
+
+        // Find the leave request
+        $leaveRequest = LeaveRequest::find($request->leave_id);
+
+        // Ensure the leave is approved
+        if ($leaveRequest->leave_approve !== 'Approve') {
+            return response()->json(['message' => 'Only approved leaves can be marked!'], 400);
+        }
+
+        // Get authenticated HR details
+        $hr_id = Auth::user()->emp_id;
+        $name = Auth::user()->name;
+
+        // Retrieve HR details
+        $hrDetails = Hr::where('id', $hr_id)->first();
+
+        if (!$hrDetails) {
+            return response()->json(['message' => 'HR details not found!'], 404);
+        }
+
+        // Mark the leave in the HR attendance table
+        HrMnagerAttendance::updateOrCreate(
+            [
+                'employee_attendance_date' => $leaveRequest->leave_from_date, // Attendance date from leave request
+                'department' => $hrDetails->department, // HR's department
+                'job_designation' => $hrDetails->designation, // HR's designation
+            ],
+            [
+                'usertype' => 'HR', // HR type
+                'emp_id' => $hr_id, // HR ID from authentication
+                'emp_name' => $name, // HR name from authentication
+                'employee_attendance' => 'Leave', // Marking attendance as "Leave"
+                'start_time' => null, // No start time for leave
+                'end_time' => null, // No end time for leave
+            ]
+        );
+
+        // Return success response
+        return response()->json(['message' => 'Leave successfully marked!']);
     }
 }

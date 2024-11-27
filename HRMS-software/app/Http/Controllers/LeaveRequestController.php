@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\EmployeeAttendance;
 use App\Models\EmployeeLeave;
 use App\Models\LeaveRequest;
 use App\Models\LeaveType;
@@ -92,6 +93,52 @@ class LeaveRequestController extends Controller
         }
     }
 
+
+    public function mark_leave_emp(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'leave_id' => 'required|exists:leave_requests,id',
+        ]);
+
+        // Find the leave request
+        $leaveRequest = LeaveRequest::find($request->leave_id);
+
+        // Ensure the leave is approved
+        if ($leaveRequest->leave_approve !== 'Approve') {
+            return response()->json(['message' => 'Only approved leaves can be marked!'], 400);
+        }
+
+        // Get authenticated HR details
+        $hr_id = Auth::user()->emp_id;
+        $name = Auth::user()->name;
+
+        // Retrieve HR details
+        $Employeedetails = Employee::where('id', $hr_id)->first();
+
+        if (!$Employeedetails) {
+            return response()->json(['message' => 'Employee details not found!'], 404);
+        }
+
+        // Mark the leave in the HR attendance table
+        EmployeeAttendance::updateOrCreate(
+            [
+                'employee_attendance_date' => $leaveRequest->leave_from_date, // Attendance date from leave request
+                'department' => $Employeedetails->department, // HR's department
+                'job_designation' => $Employeedetails->designation, // HR's designation
+            ],
+            [
+                'emp_id' => $hr_id, // HR ID from authentication
+                'emp_name' => $name, // HR name from authentication
+                'employee_attendance' => 'Leave', // Marking attendance as "Leave"
+                'start_time' => null, // No start time for leave
+                'end_time' => null, // No end time for leave
+            ]
+        );
+
+        // Return success response
+        return response()->json(['message' => 'Leave successfully marked!']);
+    }
 
     public function getLeaveBalance(Request $request)
     {

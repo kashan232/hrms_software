@@ -18,32 +18,16 @@
 
             <div class="row">
                 <div class="d-flex flex-wrap mb-4 row">
-                    <form action="{{ route('admin.mark-absent') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Mark Absent HRs</button>
-                    </form>
 
-                    <!-- Mark Absent for Managers -->
-                    <form action="{{ route('admin.mark-absent-manager') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-warning">Mark Absent Managers</button>
-                    </form>
-
-
-                    <!-- Mark Absent for Employees -->
-                    <form action="{{ route('admin.mark-absent-employee') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-info">Mark Absent Employees</button>
-                    </form>
-                    <!-- Display success message if the command was successful -->
-                    @if(session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                    @endif
                     <div class="col-xl-4 col-lg-4 mb-2">
                         <h2 class="text-black  font-w600 mb-1">Welcome : <strong>{{ Auth::user()->name }}</strong></h2> <!-- Use h2 for bigger font and bold employee name -->
                     </div>
+
+                    @if(session('status'))
+                    <div class="alert alert-success mt-3">
+                        {{ session('status') }}
+                    </div>
+                    @endif
                     <!-- class="card" style="width: auto; border: 1px solid #007bff;" -->
                     <div class="col-xl-8 col-lg-8 d-flex justify-content-end align-items-center">
                         <div class="ms-3"> <!-- Margin start for spacing -->
@@ -61,6 +45,38 @@
                 </div>
             </div>
 
+
+            <div class="row">
+                <!-- Mark Absent HRs -->
+                <div class="col-md-4 mb-3">
+                    <form action="{{ route('admin.mark-absent') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-block">
+                            Mark Absent HRs
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Mark Absent Managers -->
+                <div class="col-md-4 mb-3">
+                    <form action="{{ route('admin.mark-absent-manager') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-warning btn-block">
+                            Mark Absent Managers
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Mark Absent Employees -->
+                <div class="col-md-4 mb-3">
+                    <form action="{{ route('admin.mark-absent-employee') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-info btn-block">
+                            Mark Absent Employees
+                        </button>
+                    </form>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3 col-sm-6 mb-3">
