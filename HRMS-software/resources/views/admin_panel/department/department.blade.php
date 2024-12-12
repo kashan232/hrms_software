@@ -60,7 +60,7 @@
                                             <td>{{ $department->department }}</td>
                                             <td>
                                                 <div class="button--group">
-                                                    <button type="button" class="btn btn-primary editdepartmentBtn"
+                                                    <button type="button" class="btn btn-primary btn-sm editdepartmentBtn"
                                                         data-toggle="modal" data-modal_title="Edit Department"
                                                         data-has_status="1" data-target="#editdepartment"
                                                         data-department-id="{{ $department->id }}"

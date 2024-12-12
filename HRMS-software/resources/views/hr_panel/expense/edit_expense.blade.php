@@ -19,9 +19,9 @@
                 <div class="col-12">
                     <div class="card">
                         @if (session()->has('expense-updt'))
-                            <div class="alert alert-success solid alert-square">
-                                <strong>Success!</strong> {{ session('expense-updt') }}.
-                            </div>
+                        <div class="alert alert-success solid alert-square">
+                            <strong>Success!</strong> {{ session('expense-updt') }}.
+                        </div>
                         @endif
                         <div class="card-header">
                             <h4 class="card-title">Edit Expense</h4>
@@ -33,7 +33,7 @@
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Date</label>
-                                            <input type="date" name="date" class="form-control" value="{{ $expense->date }}" >
+                                            <input type="date" name="date" class="form-control" value="{{ $expense->date }}">
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Description</label>
@@ -45,16 +45,16 @@
                                         </div>
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Amount</label>
-                                            <input type="text" name="amount" class="form-control" value="{{ $expense->amount }}">
+                                            <input type="number" id="amount" name="amount" class="form-control" value="{{ $expense->amount }}" step="0.01" required>
                                         </div>
-                                        
+
                                         <div class="mb-3 col-md-6">
                                             <label>Tax</label>
-                                            <input type="text" name="tax" class="form-control" value="{{ $expense->tax }}">
+                                            <input type="number" id="tax" name="tax" class="form-control" value="{{ $expense->tax }}" step="0.01" required>
                                         </div>
                                         <div class="mb-3 col-md-6">
-                                            <label>Total paid</label>
-                                            <input type="text" name="total_paid" class="form-control" value="{{ $expense->total_paid }}">
+                                            <label>Total Paid</label>
+                                            <input type="number" id="total_paid" name="total_paid" class="form-control" value="{{ $expense->total_paid }}" step="0.01" readonly>
                                         </div>
 
                                         <div class="mb-3 col-md-6">
@@ -72,22 +72,6 @@
             </div>
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK
-                    Technologies</a>
-                2024</p>
-        </div>
-    </div> <!--**********************************
-            Footer end
-        ***********************************-->
-
 
 </div>
 <!--**********************************
@@ -96,6 +80,23 @@
 
 @include('hr_panel.include.footer_include')
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const amountInput = document.getElementById("amount");
+        const taxInput = document.getElementById("tax");
+        const totalPaidInput = document.getElementById("total_paid");
+
+        function calculateTotal() {
+            const amount = parseInt(amountInput.value) || 0;
+            const tax = parseInt(taxInput.value) || 0;
+            totalPaidInput.value = amount + tax;
+        }
+
+        // Add event listeners
+        amountInput.addEventListener("input", calculateTotal);
+        taxInput.addEventListener("input", calculateTotal);
+    });
+
+
     $(document).ready(function() {
         $('select[name="department"]').on('change', function() {
             var department = $(this).val();
@@ -103,7 +104,9 @@
                 $.ajax({
                     url: '{{ route("get-designations") }}',
                     type: 'GET',
-                    data: { department: department },
+                    data: {
+                        department: department
+                    },
                     success: function(data) {
                         $('select[name="designation"]').empty();
                         $.each(data, function(key, value) {
@@ -119,13 +122,13 @@
 </script>
 <script>
     document.getElementById("togglePassword").addEventListener("click", function() {
-    var passwordInput = document.getElementById("passwordInput");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
-    } else {
-        passwordInput.type = "password";
-        document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
-    }
-});
+        var passwordInput = document.getElementById("passwordInput");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye"></i>';
+        } else {
+            passwordInput.type = "password";
+            document.getElementById("togglePassword").innerHTML = '<i class="bi bi-eye-slash"></i>';
+        }
+    });
 </script>

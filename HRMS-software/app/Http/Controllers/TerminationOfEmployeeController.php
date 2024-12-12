@@ -75,7 +75,8 @@ class TerminationOfEmployeeController extends Controller
         $termination->final_comments = $request->final_comments;
         $termination->save();
 
-        return response()->json(['message' => 'Termination updated successfully']);
+        return redirect()->back()->with('message', 'Termination updated successfully');
+
     }
 
     public function destroy($id)

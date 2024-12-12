@@ -136,6 +136,17 @@ class HomeController extends Controller
                 // Check if the employee's resignation status is approved
                 $employeeResignationStatus = EmployeeResignation::where('emp_id', $emp_id)->value('status');
 
+                // Check if the employee account is deleted
+                $employee = Employee::where('id', $emp_id)->first();
+
+                if (!$employee || $employee->deleted_at !== null) {
+                    // Logout the employee
+                    Auth::logout();
+
+                    // Redirect back to login with an error message
+                    return redirect()->route('login')->withErrors(['Your account has been deleted. You can no longer access the system.']);
+                }
+
                 if ($employeeResignationStatus === 'Approve') {
                     // Logout the employee
                     Auth::logout();

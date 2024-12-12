@@ -62,7 +62,7 @@
                                             <td>
                                                 <div class="button--group">
                                                     <button type="button"
-                                                        class="btn btn-primary editdesignationBtn"
+                                                        class="btn btn-primary btn-sm editdesignationBtn"
                                                         data-toggle="modal" data-modal_title="Edit designation"
                                                         data-has_status="1" data-target="#editdesignation"
                                                         data-designation-id="{{ $designation->id }}"

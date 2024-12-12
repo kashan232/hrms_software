@@ -26,6 +26,7 @@
                                     <option value="">All Employees</option>
                                     <option value="Onsite">Onsite</option>
                                     <option value="Remote">Remote</option>
+                                    <option value="Hybrid">Hybrid</option>
                                 </select>
                                 &nbsp;
                                 <button id="addNewButton" type="button" class="btn btn-primary" data-modal_title="Add New designation">

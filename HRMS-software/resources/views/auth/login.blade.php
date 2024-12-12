@@ -177,12 +177,10 @@
             <div class="input-box">
                 <x-input-label for="email" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
             <div class="input-box">
                 <x-input-label for="password" />
                 <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="Password" required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
             <div>
                 <a href="{{ route('password.request') }}" style="font-size: 14px;

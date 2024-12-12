@@ -33,13 +33,13 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="candidateName">Candidate Name</label>
-                                            <select id="candidateName" class="form-control" name="candidateName" required onchange="updateCandidateName()">
+                                            <select id="candidateName" class="form-control" name="candidateName" onchange="syncInputWithSelect()">
                                                 <option value="">Select Candidate</option>
                                                 @foreach ($hiredCandidates as $candidate)
                                                 <option value="{{ $candidate->first_name }} {{ $candidate->last_name }}">{{ $candidate->first_name }} {{ $candidate->last_name }}</option>
                                                 @endforeach
                                             </select>
-                                            <input type="text" class="form-control" id="candidateNameInput" name="candidateNameInput" placeholder="Or type candidate's name" required oninput="updateCandidateName()">
+                                            <input type="text" class="form-control mt-2" id="candidateNameInput" name="candidateNameInput" placeholder="Or type candidate's name" oninput="clearSelect()">
                                         </div>
                                         <div class="form-group">
                                             <label for="jobTitle">Job Title</label>
@@ -146,16 +146,21 @@
         }
     });
 
-    function updateCandidateName() {
+    function syncInputWithSelect() {
         const selectElement = document.getElementById('candidateName');
         const inputElement = document.getElementById('candidateNameInput');
 
-        // If a candidate is selected from the dropdown, update the input field
         if (selectElement.value) {
             inputElement.value = selectElement.value;
-        } else {
-            // If nothing is selected, keep the input field value as is
-            inputElement.value = '';
+        }
+    }
+
+    function clearSelect() {
+        const selectElement = document.getElementById('candidateName');
+        const inputElement = document.getElementById('candidateNameInput');
+
+        if (inputElement.value.trim()) {
+            selectElement.value = "";
         }
     }
 </script>
