@@ -96,7 +96,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="card-title">Project</h4>
                             <div class="d-flex">
-                            <select id="employeeTypeFilter" class="form-select w-auto">
+                                <select id="employeeTypeFilter" class="form-select w-auto">
                                     <option value="">All </option>
                                     <option value="Completed">Completed</option>
                                     <option value="Pending">Incompleted</option>
@@ -172,7 +172,17 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-primary btn-sm editprojectBtn" data-project-id="{{ $project->id }}" title="Edit Project">
+                                                    <button type="button" class="btn btn-primary btn-sm editprojectBtn"
+                                                        data-project-id="{{ $project->id }}"
+                                                        data-project-name="{{ $project->project_name }}"
+                                                        data-project-deadline="{{ $project->project_deadline }}"
+                                                        data-project-category="{{ $project->project_category }}"
+                                                        data-project-start-date="{{ $project->project_start_date }}"
+                                                        data-project-end-date="{{ $project->project_end_date }}"
+                                                        data-project-budget="{{ $project->budget }}"
+                                                        data-project-priority="{{ $project->priority }}"
+                                                        data-project-description="{{ $project->description }}"
+                                                        title="Edit Project">
                                                         <i class="la la-pencil"></i>
                                                     </button>
 
@@ -390,19 +400,18 @@
 
     function confirmDelete(projectId) {
         const confirmation = confirm("Are you sure you want to delete this project?");
-        
+
         if (confirmation) {
             document.getElementById('deleteForm-' + projectId).submit();
         }
     }
 
     $(document).ready(function() {
-        // Attach event listener with delegation
         $(document).on('click', '.editprojectBtn', function() {
-            // Show the edit modal
-            $('#cuModaledit').modal('show');
-            var project = $(this).data();
+            // Extract project data
+            const project = $(this).data();
 
+            // Populate the form fields
             $('#editProjectId').val(project.projectId);
             $('#editProjectName').val(project.projectName);
             $('#editProjectDeadline').val(project.projectDeadline);
@@ -412,6 +421,9 @@
             $('#editProjectBudget').val(project.projectBudget);
             $('#editProjectPriority').val(project.projectPriority);
             $('#editProjectDescription').val(project.projectDescription);
+
+            // Show the modal
+            $('#cuModaledit').modal('show');
         });
     });
 </script>
