@@ -316,7 +316,6 @@
     $(document).ready(function() {
         $('select[name="leave_type"]').on('change', function() {
             let leaveType = $(this).val(); 
-            alert('Selected Leave Type: ' + leaveType);
             if (leaveType) {
                 $.ajax({
                     url: '{{ route("get-leave-balance") }}', 
@@ -326,7 +325,6 @@
                         emp_id: '{{ $employee_details->id }}' 
                     },
                     success: function(response) {
-                        alert('Available Leave Balance: ' + response.leave_balance);
                         $('#leaveBalance').val(response.leave_balance);
                     },
                     error: function(xhr, status, error) {

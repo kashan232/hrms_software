@@ -21,8 +21,8 @@ class CMRController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             $emp_id = Auth()->user()->emp_id;
-            $activeTab = request()->get('tab', 'skills');
 
+            $activeTab = request()->get('tab', 'skills');
             // dd($userId);
             $CRMSkills = CRMSkill::where('emp_id', '=', $emp_id)->get();
             $CRMSalaires = CRMSalaire::where('emp_id', '=', $emp_id)->get();

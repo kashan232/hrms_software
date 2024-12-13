@@ -66,7 +66,12 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label>Status</label>
-                                            <input type="text" name="status" class="form-control">
+                                            <Select name="status" class="form-control" required>
+                                                <option value="Onsite">Onsite</option>
+                                                <option value="Remote">Remote</option>
+                                                <option value="Hybrid">Hybrid</option>
+                                            </Select>
+
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>

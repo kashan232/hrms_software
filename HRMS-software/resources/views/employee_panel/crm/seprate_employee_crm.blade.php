@@ -24,22 +24,22 @@
                         <div class="card-body">
                             <ul class="nav nav-pills mb-4 light">
                                 <li class="nav-item">
-                                    <a href="{{ route('seprate-employee-cmr') }}?tab=skills" class="nav-link {{ $activeTab == 'skills' ? 'active' : '' }}" data-bs-toggle="tab">Skills</a>
+                                    <a href="#skills-tab" class="nav-link {{ $activeTab == 'skills' ? 'active' : '' }}" data-bs-toggle="tab">Skills</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('seprate-employee-cmr') }}?tab=insurance" class="nav-link {{ $activeTab == 'insurance' ? 'active' : '' }}" data-bs-toggle="tab">Insurance</a>
+                                    <a href="#insurance-tab" class="nav-link {{ $activeTab == 'insurance' ? 'active' : '' }}" data-bs-toggle="tab">Insurance</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('seprate-employee-cmr') }}?tab=training" class="nav-link {{ $activeTab == 'training' ? 'active' : '' }}" data-bs-toggle="tab">Training</a>
+                                    <a href="#training-tab" class="nav-link {{ $activeTab == 'training' ? 'active' : '' }}" data-bs-toggle="tab">Training</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('seprate-employee-cmr') }}?tab=experience" class="nav-link {{ $activeTab == 'experience' ? 'active' : '' }}" data-bs-toggle="tab">Experience</a>
+                                    <a href="#experience-tab" class="nav-link {{ $activeTab == 'experience' ? 'active' : '' }}" data-bs-toggle="tab">Experience</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('seprate-employee-cmr') }}?tab=salaries" class="nav-link {{ $activeTab == 'salaries' ? 'active' : '' }}" data-bs-toggle="tab">Salaries</a>
+                                    <a href="#salaries-tab" class="nav-link {{ $activeTab == 'salaries' ? 'active' : '' }}" data-bs-toggle="tab">Salaries</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('seprate-employee-cmr') }}?tab=suggestions" class="nav-link {{ $activeTab == 'suggestions' ? 'active' : '' }}" data-bs-toggle="tab">Suggestions</a>
+                                    <a href="#suggestions-tab" class="nav-link {{ $activeTab == 'suggestions' ? 'active' : '' }}" data-bs-toggle="tab">Suggestions</a>
                                 </li>
                             </ul>
 
@@ -290,26 +290,14 @@
     <!--**********************************
             Content body end
         ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    {{-- <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK Technologies</a>
-                2024</p>
-        </div>
-    </div>
-     <!--********************************** --}}
-    {{-- Footer end
-        ***********************************--> --}}
-
-
 </div>
 <!--**********************************
         Main wrapper end
     ***********************************-->
 
 @include('employee_panel.include.footer_include')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     // JavaScript/jQuery code to trigger modal
     $(document).ready(function() {
