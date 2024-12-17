@@ -22,12 +22,25 @@ class ManagerHiringController extends Controller
             return redirect()->back();
         }
     }
+    public function update_hiring(Request $request)
+    {
+        $hiring = Hiring::find($request->id);
+        $hiring->update($request->all());
+
+        return redirect()->back()->with('message', 'Hiring updated successfully!');
+    }
+
+    public function delete_hiring(Request $request, $id)
+    {
+        $delete = Hiring::find($id)->delete();
+        return redirect()->back()->with('delete-message', 'Hiring Has Been Deleted Successsfully');
+    }
+    
     public function manager_add_hiring()
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            return view('manager_panel.hiring.manager_add_hiring', [
-            ]);
+            return view('manager_panel.hiring.manager_add_hiring', []);
         } else {
             return redirect()->back();
         }
@@ -36,7 +49,7 @@ class ManagerHiringController extends Controller
     }
     public function manager_store_hiring(Request $request)
     {
-        if (Auth::id()){
+        if (Auth::id()) {
             $userId = Auth::id();
             $userType = Auth::user()->usertype;
             // Create the employee record

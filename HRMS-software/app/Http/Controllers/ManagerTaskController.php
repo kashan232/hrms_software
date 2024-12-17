@@ -16,8 +16,8 @@ class ManagerTaskController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            $all_project = Project::all();
             $emp_id = auth()->user()->emp_id;
+            $all_project = Project::where('asign_managers', '=', $emp_id)->get();
             $all_employee = Employee::where('reporting_manager', $emp_id)->get();
             $all_task = Task::where('admin_or_user_id', $userId)->get();
             $all_department = Department::all();

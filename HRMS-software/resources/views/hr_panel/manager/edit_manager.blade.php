@@ -157,6 +157,29 @@
 @include('hr_panel.include.footer_include')
 <script>
     $(document).ready(function() {
+        $('select[name="department"]').on('change', function() {
+            var department = $(this).val();
+            if (department) {
+                $.ajax({
+                    url: '{{ route("get-designations") }}',
+                    type: 'GET',
+                    data: {
+                        department: department
+                    },
+                    success: function(data) {
+                        $('select[name="designation"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="designation"]').empty();
+            }
+        });
+    });
+
+    $(document).ready(function() {
         // This part ensures the button click is working correctly
         $('#addMoreLeave').on('click', function() {
             alert('Button clicked!'); // Confirm the button was clicked

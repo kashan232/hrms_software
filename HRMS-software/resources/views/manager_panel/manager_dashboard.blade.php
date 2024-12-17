@@ -207,6 +207,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sno</th>
+                                        <th>Department<br> Designation <br>Managers </th>
                                         <th>By</th>
                                         <th> Name</th>
                                         <th> Category</th>
@@ -220,6 +221,15 @@
                                     @foreach ($all_project_detais as $project)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            {{ $project->department }} <br>
+                                            {{ $project->designation }} <br>
+                                            @if($project->manager)
+                                            {{ $project->manager->first_name }} {{ $project->manager->last_name }}
+                                            @else
+                                            Not Assigned
+                                            @endif
+                                        </td>
                                         <td>{{ $project->usertype }}</td>
                                         <td>{{ $project->project_name }}</td>
                                         <td>{{ $project->project_category }}</td>

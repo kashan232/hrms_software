@@ -11,20 +11,11 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [
-        'admin_or_user_id',
-        'usertype',
-        'user_name',
-        'project_name',
-        'project_deadline',
-        'project_category',
-        'project_start_date',
-        'project_end_date',
-        'budget',
-        'priority',
-        'description',
-        'status',
-        'is_completed'
-        
-    ];
+    protected $guarded = [];
+   
+    public function manager()
+    {
+        return $this->belongsTo(Manager::class, 'asign_managers', 'id');
+    }
+    
 }

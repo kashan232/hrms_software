@@ -19,4 +19,10 @@ class Manager extends Model
         return $this->hasMany(EmployeeLeave::class, 'employee_id', 'id')
             ->where('usertype', 'manager'); // Filter by manager usertype
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'asign_managers', 'id');
+    }
+    
 }

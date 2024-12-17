@@ -421,9 +421,9 @@ class HomeController extends Controller
                 $hiringCount = Hiring::where('admin_or_user_id', '=', $userId)->count();
                 $revenueCount = Revenue::count();
                 $expenseCount = Expense::where('userId', '=', $emp_id)->count();
-                $all_project = Project::count();
-                $all_project_detais = Project::all();
-
+                $all_project = Project::where('asign_managers', '=', $emp_id)->count();
+                $all_project_detais = Project::where('asign_managers', '=', $emp_id)->get();
+                // dd($all_project_detais);
                 $expenseData = Expense::where('usertype', 'manager')
                     ->selectRaw('status, SUM(total_paid) as amount')
                     ->groupBy('status')

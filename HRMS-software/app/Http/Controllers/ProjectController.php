@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\Manager;
 use App\Models\Project;
 use App\Models\Task;
 use Carbon\Carbon;
@@ -15,14 +17,41 @@ class ProjectController extends Controller
         if (Auth::id()) {
             $userId = Auth::id();
             // dd($userId);
+            $departments = Department::where('admin_or_user_id', '=', $userId)->get();
+
             $all_project = Project::where('admin_or_user_id', '=', $userId)->get();
             return view('admin_panel.project.project', [
                 'all_project' => $all_project,
+                'departments' => $departments,
             ]);
         } else {
             return redirect()->back();
         }
     }
+
+    public function get_managers(Request $request)
+    {
+        if (Auth::id()) {
+            $userId = Auth::id();
+            $usertype = Auth()->user()->usertype;
+            $useremail = Auth()->user()->email;
+            $designation = $request->designation;
+            $department = $request->department;
+
+            $Managers = Manager::where('department', $department)
+                ->where('designation', $designation)
+                ->get(['id', 'first_name', 'last_name'])
+                ->mapWithKeys(function ($Managers) {
+                    return [$Managers->id => $Managers->first_name . ' ' . $Managers->last_name];
+                });
+
+            return response()->json($Managers);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+
     public function store_project(Request $request)
     {
         if (Auth::id()) {
@@ -41,6 +70,9 @@ class ProjectController extends Controller
                 'project_end_date'    => $request->project_end_date,
                 'budget'              => $request->budget,
                 'priority'            => $request->priority,
+                'department'            => $request->department,
+                'designation'            => $request->designation,
+                'asign_managers'            => $request->asign_managers,
                 'description'         => $request->description,
                 'status'              => 'Pending', // Set status as Pending by default
                 'created_at'          => now(),
@@ -62,6 +94,9 @@ class ProjectController extends Controller
         $project->project_end_date = $request->project_end_date;
         $project->budget = $request->budget;
         $project->priority = $request->priority;
+        $project->department = $request->department;
+        $project->designation = $request->designation;
+        $project->asign_managers = $request->asign_managers;
         $project->description = $request->description;
         $project->save();
 

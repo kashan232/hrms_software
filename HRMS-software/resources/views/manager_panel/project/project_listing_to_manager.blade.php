@@ -6,7 +6,7 @@
 
     @include('manager_panel.include.navbar_include')
 
-   
+
     @include('manager_panel.include.sidebar_include')
     <!--**********************************
             Content body start
@@ -14,7 +14,7 @@
     <div class="content-body ">
         <!-- row -->
         <div class="container">
-           
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -27,6 +27,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sno</th>
+                                            <th>Department<br> Designation <br>Managers </th>
                                             <th>Assigned By</th>
                                             <th>Project</th>
                                             <th>Category</th>
@@ -40,6 +41,15 @@
                                         @foreach ($all_project as $project)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                {{ $project->department }} <br>
+                                                {{ $project->designation }} <br>
+                                                @if($project->manager)
+                                                {{ $project->manager->first_name }} {{ $project->manager->last_name }}
+                                                @else
+                                                Not Assigned
+                                                @endif
+                                            </td>
                                             <td>{{ $project->usertype }} <br>{{ $project->user_name }}</td>
                                             <td>{{ $project->project_name }}</td>
                                             <td>{{ $project->project_category }}</td>
@@ -47,26 +57,26 @@
                                             <td>
                                                 {{ $project->priority }}
                                                 @php
-                                                    $progress = 0;
-                                                    $color = '';
-                                                    switch($project->priority) {
-                                                        case 'Highest':
-                                                            $progress = 100;
-                                                            $color = 'bg-success';
-                                                            break;
-                                                        case 'Medium':
-                                                            $progress = 75;
-                                                            $color = 'bg-info';
-                                                            break;
-                                                        case 'Low':
-                                                            $progress = 50;
-                                                            $color = 'bg-warning';
-                                                            break;
-                                                        case 'Lowest':
-                                                            $progress = 25;
-                                                            $color = 'bg-danger';
-                                                            break;
-                                                    }
+                                                $progress = 0;
+                                                $color = '';
+                                                switch($project->priority) {
+                                                case 'Highest':
+                                                $progress = 100;
+                                                $color = 'bg-success';
+                                                break;
+                                                case 'Medium':
+                                                $progress = 75;
+                                                $color = 'bg-info';
+                                                break;
+                                                case 'Low':
+                                                $progress = 50;
+                                                $color = 'bg-warning';
+                                                break;
+                                                case 'Lowest':
+                                                $progress = 25;
+                                                $color = 'bg-danger';
+                                                break;
+                                                }
                                                 @endphp
                                                 <div class="progress" style="height: 20px;">
                                                     <div class="progress-bar {{ $color }}" role="progressbar" style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -86,11 +96,11 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
-             <!--Create Modal -->
-             <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
+            <!--Create Modal -->
+            <div id="cuModal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -137,7 +147,7 @@
                                     <label>Description</label>
                                     <textarea name="description" class="form-control" required></textarea>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -147,7 +157,7 @@
             </div>
 
             <!--Edit Modal -->
-            <div  id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel" aria-hidden="true">
+            <div id="editbtn" class="modal fade" tabindex="-1" aria-labelledby="editdepartmentLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -188,7 +198,7 @@
         </div>
     </div>
      <!--********************************** --}}
-            {{-- Footer end
+    {{-- Footer end
         ***********************************--> --}}
 
 
@@ -200,8 +210,8 @@
 @include('manager_panel.include.footer_include')
 <script>
     // JavaScript/jQuery code to trigger modal
-    $(document).ready(function(){
-        $('#addNewButton').click(function(){
+    $(document).ready(function() {
+        $('#addNewButton').click(function() {
             $('#cuModal').modal('show');
         });
     });
@@ -209,8 +219,8 @@
 
 <script>
     // JavaScript/jQuery code to trigger modal
-    $(document).ready(function(){
-        $('.editdepartmentBtn').click(function(){
+    $(document).ready(function() {
+        $('.editdepartmentBtn').click(function() {
             $('#editbtn').modal('show');
         });
     });
@@ -218,16 +228,14 @@
 
 <script>
     $(document).ready(function() {
-    // Edit category button click event
-    $('.editdepartmentBtn').click(function() {
-        // Extract department ID and name from data attributes
-        var departmentId = $(this).data('department-id');
-        var departmentName = $(this).data('department-name');
-        // Set the extracted values in the modal fields
-        $('#editdepartmentId').val(departmentId);
-        $('#editdepartmentName').val(departmentName);
+        // Edit category button click event
+        $('.editdepartmentBtn').click(function() {
+            // Extract department ID and name from data attributes
+            var departmentId = $(this).data('department-id');
+            var departmentName = $(this).data('department-name');
+            // Set the extracted values in the modal fields
+            $('#editdepartmentId').val(departmentId);
+            $('#editdepartmentName').val(departmentName);
+        });
     });
-});
 </script>
-
-

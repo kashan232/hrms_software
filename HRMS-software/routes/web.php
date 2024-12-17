@@ -201,6 +201,8 @@ Route::post('/update-resignation-status', [EmployeeResignationController::class,
 
 //Project
 Route::get('/project', [ProjectController::class, 'project'])->middleware(['auth','admin'])->name('project');
+Route::get('/get-managers', [ProjectController::class, 'get_managers'])->name('get-managers');
+
 Route::post('/store-project', [ProjectController::class, 'store_project'])->name('store-project');
 Route::post('/update-project', [ProjectController::class, 'update'])->name('update-project');
 Route::delete('/delete-project/{id}', [ProjectController::class, 'delete_project'])->name('delete-project');
@@ -391,6 +393,10 @@ Route::delete('/manager-delete-expense/{id}', [ManagerExpenseController::class, 
 Route::get('/manager-all-hiring', [ManagerHiringController::class, 'manager_all_hiring'])->name('manager-all-hiring');
 Route::get('/manager-add-hiring', [ManagerHiringController::class, 'manager_add_hiring'])->name('manager-add-hiring');
 Route::post('/manager-store-hiring', [ManagerHiringController::class, 'manager_store_hiring'])->name('manager-store-hiring');
+Route::get('/manager-all-hiring', [ManagerHiringController::class, 'manager_all_hiring'])->name('manager-all-hiring');
+Route::post('/update-hiring', [ManagerHiringController::class, 'update_hiring'])->name('update-hiring');
+Route::delete('/delete-hiring/{id}', [ManagerHiringController::class, 'delete_hiring'])->name('delete-hiring');
+
 
 
 //Manager projects LIsting

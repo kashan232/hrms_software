@@ -163,27 +163,56 @@ class EmployeeAttendanceController extends Controller
     public function all_employee_attendance(Request $request)
     {
         if (Auth::id()) {
+            $emp_id = Auth::user()->emp_id;
+            $employeeName = Auth::user()->name;
 
-            // dd($dept_name,$designation,$attendance_date);
-            $userId = Auth::id();
-            $usertype = Auth()->user()->usertype;
-            $useremail = Auth()->user()->email;
+            // Fetch employee attendance records with relevant fields
+            $attendance_records = EmployeeAttendance::where('emp_id', $emp_id)
+                ->where('emp_name', $employeeName)
+                ->get(['department', 'job_designation', 'start_time', 'end_time', 'emp_name', 'employee_attendance_date as employee_attendance_date', 'employee_attendance as employee_attendance'])
+                ->toArray();
 
-            $employeeName = auth()->user()->name;
-            $emp_id = Auth()->user()->emp_id;
+            // Determine current month range
+            $startOfMonth = Carbon::now()->startOfMonth();
+            $endOfMonth = Carbon::now()->endOfMonth();
 
-            $attendance_records = EmployeeAttendance::where('emp_id', $emp_id)->where('emp_name', $employeeName)->get();
+            $fullMonthAttendance = [];
 
-            // dd($attendance_records);
+            for ($date = $startOfMonth; $date <= $endOfMonth; $date->addDay()) {
+                if ($date->isSunday()) {
+                    continue;
+                }
 
-            // dd($attendance_records);
+                $dateString = $date->format('Y-m-d');
+                $status = 'Absent';
+
+                foreach ($attendance_records as $record) {
+                    if ($record['employee_attendance_date'] === $dateString) {
+                        $status = $record['employee_attendance'];
+                        break;
+                    }
+                }
+
+                $fullMonthAttendance[] = [
+                    'date' => $dateString,
+                    'department' => $record['department'] ?? '-',
+                    'job_designation' => $record['job_designation'] ?? '-',
+                    'start_time' => $record['start_time'] ?? '-',
+                    'end_time' => $record['end_time'] ?? '-',
+                    'emp_name' => $record['emp_name'] ?? $employeeName,
+                    'employee_attendance_date' => $dateString,
+                    'employee_attendance' => $status
+                ];
+            }
+
             return view('employee_panel.attendance.employee_fetch_daily_attendance', [
-                'attendance_records' => $attendance_records
+                'attendance_records' => $fullMonthAttendance
             ]);
         } else {
             return redirect()->back();
         }
     }
+
 
     public function markIn(Request $request)
     {
@@ -239,5 +268,4 @@ class EmployeeAttendanceController extends Controller
         ]);
         return response()->json(['success' => 'Attendance marked out successfully']);
     }
-
 }

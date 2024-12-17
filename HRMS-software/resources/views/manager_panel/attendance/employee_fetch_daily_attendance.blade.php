@@ -94,23 +94,24 @@
                                     @else
                                     @foreach ($attendance_records as $attendance_record)
                                     <tr>
-                                        <td>{{ $loop->iteration}}</td>
-                                        <td>{{ $attendance_record->job_designation}}</td>
-                                        <td>{{ $attendance_record->start_time}}</td>
-                                        <td>{{ $attendance_record->end_time}}</td>
-                                        <td>{{ $attendance_record->emp_name}}</td>
-                                        <td>{{ $attendance_record->employee_attendance_date}}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $attendance_record['department'] }} <br> {{ $attendance_record['job_designation'] }}</td>
+                                        <td>{{ $attendance_record['employee_attendance'] == 'Absent' ? '-' : $attendance_record['start_time'] }}</td>
+                                        <td>{{ $attendance_record['employee_attendance'] == 'Absent' ? '-' : $attendance_record['end_time'] }}</td>
+                                        <td>{{ $attendance_record['emp_name'] }}</td>
+                                        <td>{{ $attendance_record['employee_attendance_date'] }}</td>
                                         <td>
-                                            @if ($attendance_record->employee_attendance == 'Present')
-                                            <button class="btn btn-success">{{ $attendance_record->employee_attendance }}</button>
-                                            @elseif ($attendance_record->employee_attendance == 'Absent')
-                                            <button class="btn btn-danger">{{ $attendance_record->employee_attendance }}</button>
-                                            @elseif ($attendance_record->employee_attendance == 'Leave')
-                                            <button class="btn btn-warning">{{ $attendance_record->employee_attendance }}</button>
+                                            @if ($attendance_record['employee_attendance'] == 'Present')
+                                            <button class="btn btn-success">{{ $attendance_record['employee_attendance'] }}</button>
+                                            @elseif ($attendance_record['employee_attendance'] == 'Absent')
+                                            <button class="btn btn-danger">{{ $attendance_record['employee_attendance'] }}</button>
+                                            @elseif ($attendance_record['employee_attendance'] == 'Leave')
+                                            <button class="btn btn-warning">{{ $attendance_record['employee_attendance'] }}</button>
                                             @endif
                                         </td>
                                     </tr>
                                     @endforeach
+
                                     @endif
                                     </tbody>
                                     </table>

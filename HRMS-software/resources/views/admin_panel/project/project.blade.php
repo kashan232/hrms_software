@@ -114,6 +114,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sno</th>
+                                            <th>Department<br> Designation <br>Managers </th>
                                             <th>Project Name <br> Deadline </th>
                                             <th>Project Category</th>
                                             <th>Start Date <br> End Date</th>
@@ -129,6 +130,16 @@
                                         @foreach ($all_project as $project)
                                         <tr data-type="{{ $project->status }}">
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                {{ $project->department }} <br>
+                                                {{ $project->designation }} <br>
+                                                @if($project->manager)
+                                                {{ $project->manager->first_name }} {{ $project->manager->last_name }}
+                                                @else
+                                                Not Assigned
+                                                @endif
+                                            </td>
+
                                             <td>{{ $project->project_name }} <br> {{ $project->project_deadline }} </td>
                                             <td>{{ $project->project_category }}</td>
                                             <td>{{ $project->project_start_date }}
@@ -225,26 +236,30 @@
                                 <i class="las la-times"></i>
                             </button>
                         </div>
-                        <form action="{{ route('store-project') }}" method="POST">
+                        <form action="{{ route('store-project') }}" method="POST" id="projectForm">
                             @csrf
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Project Name</label>
                                     <input type="text" name="project_name" class="form-control" required>
+
                                     <label>Project Deadline</label>
                                     <input type="date" name="project_deadline" class="form-control" required>
+
                                     <label>Project Category</label>
                                     <input type="text" name="project_category" class="form-control" required>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Project Start Date</label>
-                                            <input type="date" name="project_start_date" class="form-control" required>
+                                            <input type="date" name="project_start_date" id="project_start_date" class="form-control" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Project End Date</label>
-                                            <input type="date" name="project_end_date" class="form-control" required>
+                                            <input type="date" name="project_end_date" id="project_end_date" class="form-control" required>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Budget</label>
@@ -252,7 +267,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label>Priority</label>
-                                            <select name="priority" id="" class="form-control" required>
+                                            <select name="priority" class="form-control" required>
                                                 <option value="" selected disabled>Select One</option>
                                                 <option value="Highest">Highest</option>
                                                 <option value="Medium">Medium</option>
@@ -261,14 +276,41 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Asign Department</label>
+                                            <select name="department" id="department" class="form-control" required>
+                                                <option value="" selected disabled>Select One</option>
+                                                @foreach ($departments as $department)
+                                                <option value="{{ $department->department }}">{{ $department->department }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Designation</label>
+                                            <select name="designation" id="designation" class="form-control" required></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 col-md-12">
+                                        <label>Managers</label>
+                                        <select name="asign_managers" class="form-control" required>
+                                            <option value="" selected disabled>Select Managers</option>
+                                        </select>
+                                    </div>
+
+
                                     <label>Description</label>
                                     <textarea name="description" class="form-control" required></textarea>
                                 </div>
                             </div>
+
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -319,6 +361,31 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Asign Department</label>
+                                            <select name="department" id="department" class="form-control" required>
+                                                <option value="" selected disabled>Select One</option>
+                                                @foreach ($departments as $department)
+                                                <option value="{{ $department->department }}">{{ $department->department }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Designation</label>
+                                            <select name="designation" id="designation" class="form-control" required></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 col-md-12">
+                                        <label>Managers</label>
+                                        <select name="asign_managers" class="form-control" required>
+                                            <option value="" selected disabled>Select Managers</option>
+                                        </select>
+                                    </div>
+
+
                                     <label>Description</label>
                                     <textarea name="description" id="editProjectDescription" class="form-control" required></textarea>
                                 </div>
@@ -334,23 +401,6 @@
 
         </div>
     </div>
-    <!--**********************************
-            Content body end
-        ***********************************-->
-    <!--**********************************
-            Footer start
-        ***********************************-->
-    {{-- <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">AK Technologies</a>
-                2024</p>
-        </div>
-    </div>
-     <!--********************************** --}}
-    {{-- Footer end
-        ***********************************--> --}}
-
-
 </div>
 <!--**********************************
         Main wrapper end
@@ -359,6 +409,71 @@
 @include('admin_panel.include.footer_include')
 
 <script>
+    $(document).ready(function() {
+        // Handle department change for both modals
+        $('body').on('change', 'select[name="department"]', function() {
+            var department = $(this).val();
+            var modal = $(this).closest('.modal'); // Target specific modal
+            if (department) {
+                $.ajax({
+                    url: '{{ route("get-designations") }}',
+                    type: 'GET',
+                    data: {
+                        department: department
+                    },
+                    success: function(data) {
+                        modal.find('select[name="designation"]').empty()
+                            .append('<option value="" selected disabled>Select Designation</option>');
+                        $.each(data, function(key, value) {
+                            modal.find('select[name="designation"]').append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                modal.find('select[name="designation"]').empty();
+            }
+        });
+
+        // Handle designation change for both modals
+        $('body').on('change', 'select[name="designation"]', function() {
+            var designation = $(this).val();
+            var modal = $(this).closest('.modal'); // Target specific modal
+            var department = modal.find('select[name="department"]').val();
+
+            if (designation && department) {
+                $.ajax({
+                    url: '{{ route("get-managers") }}',
+                    type: 'GET',
+                    data: {
+                        designation: designation,
+                        department: department
+                    },
+                    success: function(data) {
+                        modal.find('select[name="asign_managers"]').empty()
+                            .append('<option value="" selected disabled>Select Managers</option>');
+                        $.each(data, function(key, value) {
+                            modal.find('select[name="asign_managers"]').append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                modal.find('select[name="asign_managers"]').empty();
+            }
+        });
+    });
+
+
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
+        const startDate = new Date(document.getElementById('project_start_date').value);
+        const endDate = new Date(document.getElementById('project_end_date').value);
+
+        if (endDate < startDate) {
+            e.preventDefault();
+            alert("Project End Date cannot be before the Start Date.");
+        }
+    });
+
+
     $(document).ready(function() {
         $('.project-status-toggle').on('change', function() {
             var projectId = $(this).data('project-id');

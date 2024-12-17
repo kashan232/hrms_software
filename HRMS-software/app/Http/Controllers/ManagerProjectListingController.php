@@ -12,8 +12,8 @@ class ManagerProjectListingController extends Controller
     {
         if (Auth::id()) {
             $userId = Auth::id();
-            // dd($userId);
-            $all_project = Project::all();
+            $emp_id = auth()->user()->emp_id;
+            $all_project = Project::where('asign_managers', '=', $emp_id)->get();
             return view('manager_panel.project.project_listing_to_manager', [
                 'all_project' => $all_project,
             ]);
