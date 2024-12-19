@@ -143,7 +143,9 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-clock me-2" style="font-size: 16px;"></i> <!-- Smaller clock icon -->
-                                <div id="currentTime" class="fs-14"></div> <!-- Current time with smaller font -->
+                                <div id="currentTime" class="fs-14"></div> &nbsp; <!-- Current time with smaller font -->
+                                <a href="{{ route('job-page') }}" target="_blank" class="btn btn-primary ">Job Portal</a>
+
                             </div>
                         </div>
                     </div>

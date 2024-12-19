@@ -48,34 +48,34 @@
 
             <div class="row">
                 <!-- Mark Absent HRs -->
-                <div class="col-md-4 mb-3">
+                <!-- <div class="col-md-4 mb-3">
                     <form action="{{ route('admin.mark-absent') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-block">
                             Mark Absent HRs
                         </button>
                     </form>
-                </div>
+                </div> -->
 
                 <!-- Mark Absent Managers -->
-                <div class="col-md-4 mb-3">
+                <!-- <div class="col-md-4 mb-3">
                     <form action="{{ route('admin.mark-absent-manager') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-warning btn-block">
                             Mark Absent Managers
                         </button>
                     </form>
-                </div>
+                </div> -->
 
                 <!-- Mark Absent Employees -->
-                <div class="col-md-4 mb-3">
+                <!-- <div class="col-md-4 mb-3">
                     <form action="{{ route('admin.mark-absent-employee') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-info btn-block">
                             Mark Absent Employees
                         </button>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <div class="row">

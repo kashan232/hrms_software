@@ -166,43 +166,45 @@ class EmployeeAttendanceController extends Controller
             $emp_id = Auth::user()->emp_id;
             $employeeName = Auth::user()->name;
 
-            // Fetch employee attendance records with relevant fields
+            // Fetch employee attendance records
             $attendance_records = EmployeeAttendance::where('emp_id', $emp_id)
                 ->where('emp_name', $employeeName)
-                ->get(['department', 'job_designation', 'start_time', 'end_time', 'emp_name', 'employee_attendance_date as employee_attendance_date', 'employee_attendance as employee_attendance'])
+                ->get(['department', 'job_designation', 'start_time', 'end_time', 'emp_name', 'employee_attendance_date', 'employee_attendance'])
                 ->toArray();
 
-            // Determine current month range
+            // Define month range
             $startOfMonth = Carbon::now()->startOfMonth();
             $endOfMonth = Carbon::now()->endOfMonth();
+            $currentDate = Carbon::now();
 
             $fullMonthAttendance = [];
 
             for ($date = $startOfMonth; $date <= $endOfMonth; $date->addDay()) {
-                if ($date->isSunday()) {
-                    continue;
+                if ($date->isSunday() || $date > $currentDate) {
+                    continue; // Skip Sundays and future dates
                 }
 
                 $dateString = $date->format('Y-m-d');
                 $status = 'Absent';
+                $recordData = [
+                    'department' => '-',
+                    'job_designation' => '-',
+                    'start_time' => '-',
+                    'end_time' => '-',
+                    'emp_name' => $employeeName,
+                    'employee_attendance_date' => $dateString,
+                    'employee_attendance' => $status,
+                ];
 
                 foreach ($attendance_records as $record) {
                     if ($record['employee_attendance_date'] === $dateString) {
+                        $recordData = $record;
                         $status = $record['employee_attendance'];
                         break;
                     }
                 }
 
-                $fullMonthAttendance[] = [
-                    'date' => $dateString,
-                    'department' => $record['department'] ?? '-',
-                    'job_designation' => $record['job_designation'] ?? '-',
-                    'start_time' => $record['start_time'] ?? '-',
-                    'end_time' => $record['end_time'] ?? '-',
-                    'emp_name' => $record['emp_name'] ?? $employeeName,
-                    'employee_attendance_date' => $dateString,
-                    'employee_attendance' => $status
-                ];
+                $fullMonthAttendance[] = array_merge($recordData, ['employee_attendance' => $status]);
             }
 
             return view('employee_panel.attendance.employee_fetch_daily_attendance', [
